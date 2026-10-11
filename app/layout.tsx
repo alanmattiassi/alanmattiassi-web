@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import VisualInspector from "@/components/VisualInspector";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://alanmattiassi.com"),
@@ -89,6 +90,7 @@ export default function RootLayout({
             <main className="flex-grow">{children}</main>
             <Footer />
             <VisualInspector />
+            <Analytics />
           </LanguageProvider>
         </ThemeProvider>
       </body>
