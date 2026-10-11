@@ -1,0 +1,118 @@
+import React from "react";
+import Link from "next/link";
+import PathFinder from "@/components/PathFinder";
+import {
+  Compass,
+  GraduationCap,
+  Briefcase,
+  Dice5,
+  PlayCircle,
+  Sparkles,
+  ArrowRight,
+  BookOpen,
+} from "lucide-react";
+
+export const metadata = {
+  title: "Scegli la tua formazione – Alan Mattiassi, PhD",
+  description:
+    "Trova il percorso formativo sulla psicologia del gioco più adatto al tuo profilo: docenti, aziende, game designer e corsi gratuiti.",
+};
+
+export default function ScegliFormazionePage() {
+  return (
+    <div className="py-12 sm:py-20 space-y-20">
+      {/* 1. Header Hero */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-8 text-center space-y-5">
+        <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-400/30 text-sky-400 text-xs font-semibold uppercase tracking-wider">
+          <Compass className="w-3.5 h-3.5" />
+          <span>PERCORSI FORMATIVI &bull; ORIENTAMENTO &bull; COMMUNITY</span>
+        </div>
+
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
+          Scegli la tua Formazione
+        </h1>
+
+        <p className="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-teal-300 to-emerald-400">
+          Ad ogni ruolo professionale, il suo percorso ideale
+        </p>
+
+        <p className="text-slate-300 text-base sm:text-lg max-w-3xl mx-auto leading-relaxed">
+          Che tu sia un insegnante in cerca di metodi didattici attivi, un HR manager che vuole potenziare
+          il proprio team, o un game designer che vuole perfezionare l&apos;esperienza psicologica del giocatore,
+          ho strutturato percorsi su misura per te.
+        </p>
+      </section>
+
+      {/* 2. PathFinder Component */}
+      <PathFinder />
+
+      {/* 3. Deep Dive Comparison Cards */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-8 space-y-8">
+        <div className="text-center space-y-2">
+          <h2 className="text-3xl font-extrabold text-white">
+            Confronta i Percorsi
+          </h2>
+          <p className="text-slate-400 text-sm">
+            Tutti i corsi combinano fondamenti teorici, sperimentazione sul campo e debriefing professionale.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="p-7 rounded-2xl bg-[#0d1424] border border-slate-800 space-y-4 flex flex-col justify-between">
+            <div className="space-y-3">
+              <span className="text-xs font-bold text-sky-400 uppercase tracking-wider">Scuola</span>
+              <h3 className="text-xl font-bold text-white">Game-Based Learning (GBL-02)</h3>
+              <p className="text-xs text-slate-400">Target: Docenti scuola primaria, secondaria e università</p>
+              <p className="text-sm text-slate-300 leading-relaxed">
+                Focus su progettazione didattica inclusiva (UGDL), gestione dell&apos;errore come leva di apprendimento,
+                riduzione del carico cognitivo estraneo e conduzione del debriefing curricolare.
+              </p>
+            </div>
+            <Link
+              href="/docenti"
+              className="text-xs font-semibold text-sky-400 hover:text-sky-300 inline-flex items-center space-x-1"
+            >
+              <span>Vedi programma completo Docenti →</span>
+            </Link>
+          </div>
+
+          <div className="p-7 rounded-2xl bg-[#0d1424] border border-slate-800 space-y-4 flex flex-col justify-between">
+            <div className="space-y-3">
+              <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider">Aziende</span>
+              <h3 className="text-xl font-bold text-white">Leadership &amp; Gamification (GBL-01)</h3>
+              <p className="text-xs text-slate-400">Target: HR Director, C-Level, Team Leader, Manager</p>
+              <p className="text-sm text-slate-300 leading-relaxed">
+                Focus su dinamiche relazionali nei team, superamento dei silos comunicativi, decision making
+                in condizioni di incertezza e progettazione di sistemi di motivazione interna.
+              </p>
+            </div>
+            <Link
+              href="/aziende-corporate"
+              className="text-xs font-semibold text-emerald-400 hover:text-emerald-300 inline-flex items-center space-x-1"
+            >
+              <span>Vedi programma completo Aziende →</span>
+            </Link>
+          </div>
+
+          <div className="p-7 rounded-2xl bg-[#0d1424] border border-slate-800 space-y-4 flex flex-col justify-between">
+            <div className="space-y-3">
+              <span className="text-xs font-bold text-purple-400 uppercase tracking-wider">Game Design</span>
+              <h3 className="text-xl font-bold text-white">Psicologia del Giocatore (GBL-03)</h3>
+              <p className="text-xs text-slate-400">Target: Autori di giochi, sviluppatori, editori</p>
+              <p className="text-sm text-slate-300 leading-relaxed">
+                Focus su leve motivazionali (scala PMPVG), ergonomia cognitiva, playtesting comportamentale,
+                game feel e serious games per l&apos;impatto sociale e la salute.
+              </p>
+            </div>
+            <Link
+              href="/ricerca-consulenza"
+              className="text-xs font-semibold text-purple-400 hover:text-purple-300 inline-flex items-center space-x-1"
+            >
+              <span>Vedi programma Game Design →</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}

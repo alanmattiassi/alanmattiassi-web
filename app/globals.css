@@ -1,0 +1,505 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   MULTI-THEME DESIGN SYSTEM (4 VARIANTI)
+   1. dark-neon (attuale)
+   2. dark-elegant (executive minimal, senza neon)
+   3. light-clean (accademica, chiara pura)
+   4. light-vibrant (gameful, chiara con accenti colorati)
+   ========================================================================== */
+
+:root,
+html[data-theme="dark-neon"] {
+  color-scheme: dark;
+  --bg-canvas: #090d16;
+  --bg-surface: #0d1322;
+  --bg-card: #0f172a;
+  --bg-card-hover: #1e293b;
+  --bg-card-subtle: #0b1120;
+  --nav-top-bg: #070b14;
+  --nav-bg: rgba(9, 13, 22, 0.92);
+  --nav-border: rgba(51, 65, 85, 0.6);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-subtle: #64748b;
+  --text-nav-link: #cbd5e1;
+  --border-color: rgba(51, 65, 85, 0.6);
+  --border-strong: rgba(56, 189, 248, 0.3);
+  --accent-primary: #38bdf8;
+  --accent-secondary: #34d399;
+  --badge-bg: rgba(15, 23, 42, 0.8);
+  --badge-text: #94a3b8;
+  --badge-border: rgba(51, 65, 85, 0.8);
+  --btn-secondary-bg: #1e293b;
+  --btn-secondary-text: #e2e8f0;
+  --btn-secondary-border: rgba(51, 65, 85, 0.8);
+  --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  --ambient-display: block;
+  --scrollbar-track: #090d16;
+  --scrollbar-thumb: #1e293b;
+
+  /* Pillars (Ambiti): Scuola (Blu), Aziende (Verde), Game-Design (Viola) */
+  --pillar-scuola: #38bdf8;
+  --pillar-scuola-bg: rgba(56, 189, 248, 0.12);
+  --pillar-scuola-border: rgba(56, 189, 248, 0.3);
+  --pillar-aziende: #34d399;
+  --pillar-aziende-bg: rgba(52, 211, 153, 0.12);
+  --pillar-aziende-border: rgba(52, 211, 153, 0.3);
+  --pillar-gamedesign: #c084fc;
+  --pillar-gamedesign-bg: rgba(192, 132, 252, 0.12);
+  --pillar-gamedesign-border: rgba(192, 132, 252, 0.3);
+}
+
+/* 2. Scura Elegante (Minimal, matte, accenti oro/champagne, zero neon) */
+html[data-theme="dark-elegant"] {
+  color-scheme: dark;
+  --bg-canvas: #0e0f14;
+  --bg-surface: #14151d;
+  --bg-card: #161722;
+  --bg-card-hover: #1f2130;
+  --bg-card-subtle: #11121a;
+  --nav-top-bg: #0b0c11;
+  --nav-bg: rgba(14, 15, 20, 0.94);
+  --nav-border: rgba(39, 40, 52, 0.8);
+  --text-main: #f4f4f6;
+  --text-muted: #a0a0ab;
+  --text-subtle: #71717a;
+  --text-nav-link: #d4d4d8;
+  --border-color: #272834;
+  --border-strong: #3f3f50;
+  --accent-primary: #d4af37;
+  --accent-secondary: #c5a059;
+  --badge-bg: #1a1b26;
+  --badge-text: #d4af37;
+  --badge-border: rgba(212, 175, 55, 0.25);
+  --btn-secondary-bg: #1a1b26;
+  --btn-secondary-text: #f4f4f6;
+  --btn-secondary-border: #3f3f50;
+  --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+  --ambient-display: none;
+  --scrollbar-track: #0e0f14;
+  --scrollbar-thumb: #272834;
+
+  /* Pillars (Ambiti): Scuola (Blu), Aziende (Verde), Game-Design (Viola) */
+  --pillar-scuola: #60a5fa;
+  --pillar-scuola-bg: rgba(96, 165, 250, 0.1);
+  --pillar-scuola-border: rgba(96, 165, 250, 0.25);
+  --pillar-aziende: #34d399;
+  --pillar-aziende-bg: rgba(52, 211, 153, 0.1);
+  --pillar-aziende-border: rgba(52, 211, 153, 0.25);
+  --pillar-gamedesign: #c084fc;
+  --pillar-gamedesign-bg: rgba(192, 132, 252, 0.1);
+  --pillar-gamedesign-border: rgba(192, 132, 252, 0.25);
+}
+
+/* 3. Chiara (Accademica, pulita, alto contrasto) */
+html[data-theme="light-clean"] {
+  color-scheme: light;
+  --bg-canvas: #f8fafc;
+  --bg-surface: #f1f5f9;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f8fafc;
+  --bg-card-subtle: #f8fafc;
+  --nav-top-bg: #f1f5f9;
+  --nav-bg: rgba(255, 255, 255, 0.95);
+  --nav-border: rgba(226, 232, 240, 0.9);
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --text-subtle: #64748b;
+  --text-nav-link: #1e293b;
+  --border-color: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --accent-primary: #0284c7;
+  --accent-secondary: #059669;
+  --badge-bg: #f1f5f9;
+  --badge-text: #0f172a;
+  --badge-border: #cbd5e1;
+  --btn-secondary-bg: #ffffff;
+  --btn-secondary-text: #0f172a;
+  --btn-secondary-border: #cbd5e1;
+  --card-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+  --ambient-display: none;
+  --scrollbar-track: #f8fafc;
+  --scrollbar-thumb: #cbd5e1;
+
+  /* Pillars (Ambiti): Scuola (Blu), Aziende (Verde), Game-Design (Viola) */
+  --pillar-scuola: #0284c7;
+  --pillar-scuola-bg: rgba(2, 132, 199, 0.08);
+  --pillar-scuola-border: rgba(2, 132, 199, 0.25);
+  --pillar-aziende: #059669;
+  --pillar-aziende-bg: rgba(5, 150, 105, 0.08);
+  --pillar-aziende-border: rgba(5, 150, 105, 0.25);
+  --pillar-gamedesign: #9333ea;
+  --pillar-gamedesign-bg: rgba(147, 51, 234, 0.08);
+  --pillar-gamedesign-border: rgba(147, 51, 234, 0.25);
+}
+
+/* 4. Chiara Vivace (Gameful Learning, accenti colorati e caldi) */
+html[data-theme="light-vibrant"] {
+  color-scheme: light;
+  --bg-canvas: #faf8f5;
+  --bg-surface: #f3efe6;
+  --bg-card: #ffffff;
+  --bg-card-hover: #fdfcfb;
+  --bg-card-subtle: #f7f4ed;
+  --nav-top-bg: #f3efe6;
+  --nav-bg: rgba(250, 248, 245, 0.95);
+  --nav-border: rgba(233, 227, 216, 0.9);
+  --text-main: #18181b;
+  --text-muted: #52525b;
+  --text-subtle: #71717a;
+  --text-nav-link: #18181b;
+  --border-color: #e9e3d8;
+  --border-strong: #d8cebf;
+  --accent-primary: #7c3aed;
+  --accent-secondary: #db2777;
+  --badge-bg: rgba(124, 58, 237, 0.08);
+  --badge-text: #7c3aed;
+  --badge-border: rgba(124, 58, 237, 0.25);
+  --btn-secondary-bg: #ffffff;
+  --btn-secondary-text: #18181b;
+  --btn-secondary-border: #d8cebf;
+  --card-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.07);
+  --ambient-display: block;
+  --scrollbar-track: #faf8f5;
+  --scrollbar-thumb: #d8cebf;
+
+  /* Pillars (Ambiti): Scuola (Blu), Aziende (Verde), Game-Design (Viola) */
+  --pillar-scuola: #2563eb;
+  --pillar-scuola-bg: rgba(37, 99, 235, 0.1);
+  --pillar-scuola-border: rgba(37, 99, 235, 0.25);
+  --pillar-aziende: #059669;
+  --pillar-aziende-bg: rgba(5, 150, 105, 0.1);
+  --pillar-aziende-border: rgba(5, 150, 105, 0.25);
+  --pillar-gamedesign: #7c3aed;
+  --pillar-gamedesign-bg: rgba(124, 58, 237, 0.1);
+  --pillar-gamedesign-border: rgba(124, 58, 237, 0.25);
+}
+
+/* Base HTML & Body Settings */
+html {
+  scroll-behavior: smooth;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+body {
+  color: var(--text-main);
+  background: var(--bg-canvas);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-strong);
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--card-shadow);
+}
+
+.glass-panel-glow {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--card-shadow);
+}
+
+/* ==========================================================================
+   THEME ADAPTATION ENGINE
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   A) Scura Elegante: toni oro satinato / champagne, zero neon
+   -------------------------------------------------------------------------- */
+html[data-theme="dark-elegant"] [class*="blur-[130px]"],
+html[data-theme="dark-elegant"] [class*="blur-[110px]"],
+html[data-theme="dark-elegant"] [class*="blur-[120px]"] {
+  display: none !important;
+}
+
+html[data-theme="dark-elegant"] [class*="bg-[#090d16]"],
+html[data-theme="dark-elegant"] [class*="bg-[#070b14]"] {
+  background-color: var(--bg-canvas) !important;
+}
+
+html[data-theme="dark-elegant"] [class*="bg-[#0d1424]"],
+html[data-theme="dark-elegant"] [class*="bg-[#080d18]"],
+html[data-theme="dark-elegant"] [class*="bg-slate-900"],
+html[data-theme="dark-elegant"] [class*="bg-slate-950"] {
+  background-color: var(--bg-card) !important;
+}
+
+html[data-theme="dark-elegant"] [class*="border-slate-800"],
+html[data-theme="dark-elegant"] [class*="border-slate-700"] {
+  border-color: var(--border-color) !important;
+}
+
+/* Eliminazione neon cyan/emerald in dark-elegant -> Oro Caldo */
+html[data-theme="dark-elegant"] .text-sky-400,
+html[data-theme="dark-elegant"] .text-sky-300,
+html[data-theme="dark-elegant"] .text-emerald-400,
+html[data-theme="dark-elegant"] .text-emerald-300 {
+  color: #d4af37 !important;
+}
+
+html[data-theme="dark-elegant"] .bg-sky-500\/10,
+html[data-theme="dark-elegant"] .bg-sky-500\/20,
+html[data-theme="dark-elegant"] .bg-emerald-500\/10,
+html[data-theme="dark-elegant"] .bg-emerald-500\/20,
+html[data-theme="dark-elegant"] .bg-emerald-950\/60 {
+  background-color: rgba(212, 175, 55, 0.1) !important;
+}
+
+html[data-theme="dark-elegant"] .border-sky-500\/30,
+html[data-theme="dark-elegant"] .border-sky-400\/30,
+html[data-theme="dark-elegant"] .border-sky-500\/40,
+html[data-theme="dark-elegant"] .border-emerald-500\/30,
+html[data-theme="dark-elegant"] .border-emerald-500\/50,
+html[data-theme="dark-elegant"] .border-emerald-800\/60 {
+  border-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+/* Badge di categoria delle card in dark-elegant */
+html[data-theme="dark-elegant"] span[class*="bg-slate-800"] {
+  background-color: var(--badge-bg) !important;
+  color: var(--badge-text) !important;
+  border-color: var(--badge-border) !important;
+}
+
+/* Hero Title sottotitolo in dark-elegant */
+html[data-theme="dark-elegant"] [class*="from-sky-400 via-teal-300 to-emerald-400"] {
+  background-image: linear-gradient(135deg, #f4f4f6 0%, #e2d4a8 40%, #d4af37 100%) !important;
+  -webkit-background-clip: text !important;
+  color: transparent !important;
+}
+
+/* --------------------------------------------------------------------------
+   B) Modalità Chiare (light-clean & light-vibrant)
+   -------------------------------------------------------------------------- */
+html[data-theme^="light-"] body {
+  background-color: var(--bg-canvas) !important;
+  color: var(--text-main) !important;
+}
+
+/* 1. Sfondi sezioni che avevano colori scuri hardcoded */
+html[data-theme^="light-"] section,
+html[data-theme^="light-"] [class*="bg-[#090d16]"],
+html[data-theme^="light-"] [class*="bg-[#070b14]"],
+html[data-theme^="light-"] [class*="bg-[#050811]"],
+html[data-theme^="light-"] [class*="bg-[#03060c]"],
+html[data-theme^="light-"] [class*="from-[#090d16]"] {
+  background-color: var(--bg-canvas) !important;
+  background-image: none !important;
+}
+
+/* 2. Card, tabelle, riquadri e contenitori: diventano bianchi/chiari */
+html[data-theme^="light-"] [class*="bg-[#0d1424]"],
+html[data-theme^="light-"] [class*="bg-[#080d18]"],
+html[data-theme^="light-"] [class*="bg-slate-900"],
+html[data-theme^="light-"] [class*="bg-slate-950"],
+html[data-theme^="light-"] [class*="from-slate-900"],
+html[data-theme^="light-"] .glass-panel,
+html[data-theme^="light-"] .glass-panel-glow {
+  background-color: var(--bg-card) !important;
+  background-image: none !important;
+  box-shadow: var(--card-shadow) !important;
+}
+
+/* Header tabelle e righe */
+html[data-theme^="light-"] tr[class*="bg-[#080d18]"],
+html[data-theme^="light-"] thead[class*="bg-[#080d18]"] {
+  background-color: var(--bg-surface) !important;
+}
+
+/* Protezione didascalie sovrapposte alle foto (devono restare scure semitrasparenti con testo bianco) */
+html[data-theme^="light-"] .relative.rounded-3xl [class*="bg-slate-900/90"],
+html[data-theme^="light-"] .relative.rounded-3xl [class*="bg-slate-950/80"] {
+  background-color: rgba(15, 23, 42, 0.85) !important;
+}
+html[data-theme^="light-"] .relative.rounded-3xl [class*="bg-slate-900/90"] *,
+html[data-theme^="light-"] .relative.rounded-3xl [class*="bg-slate-950/80"] * {
+  color: #f8fafc !important;
+}
+
+/* 3. Bordi in modalità chiara */
+html[data-theme^="light-"] [class*="border-slate-800"],
+html[data-theme^="light-"] [class*="border-slate-700"],
+html[data-theme^="light-"] [class*="border-slate-900"],
+html[data-theme^="light-"] [class*="divide-slate-800"] {
+  border-color: var(--border-color) !important;
+}
+
+/* 4. Testo principale e secondario */
+html[data-theme^="light-"] h1,
+html[data-theme^="light-"] h2,
+html[data-theme^="light-"] h3,
+html[data-theme^="light-"] h4,
+html[data-theme^="light-"] .text-white,
+html[data-theme^="light-"] .text-slate-100,
+html[data-theme^="light-"] .text-slate-200 {
+  color: var(--text-main) !important;
+}
+
+html[data-theme^="light-"] p,
+html[data-theme^="light-"] .text-slate-300,
+html[data-theme^="light-"] .text-slate-400 {
+  color: var(--text-muted) !important;
+}
+
+html[data-theme^="light-"] .text-slate-500 {
+  color: var(--text-subtle) !important;
+}
+
+/* 5. Pulsanti secondari (es. "Scopri il Framework", "About me // Chi sono", "Richiedi una consulenza") */
+html[data-theme^="light-"] a[class*="bg-slate-800"],
+html[data-theme^="light-"] a[class*="bg-slate-850"],
+html[data-theme^="light-"] a[class*="bg-slate-900"],
+html[data-theme^="light-"] button[class*="bg-slate-800"],
+html[data-theme^="light-"] button[class*="bg-slate-850"],
+html[data-theme^="light-"] button[class*="bg-slate-900"] {
+  background-color: var(--btn-secondary-bg) !important;
+  color: var(--btn-secondary-text) !important;
+  border-color: var(--btn-secondary-border) !important;
+}
+
+html[data-theme^="light-"] a[class*="bg-slate-800"]:hover,
+html[data-theme^="light-"] a[class*="bg-slate-850"]:hover,
+html[data-theme^="light-"] a[class*="bg-slate-900"]:hover {
+  background-color: var(--bg-surface) !important;
+}
+
+/* 6. Badge di categoria all'interno delle card */
+html[data-theme^="light-"] span[class*="bg-slate-800"],
+html[data-theme^="light-"] span[class*="bg-slate-900"],
+html[data-theme^="light-"] span[class*="bg-slate-950"],
+html[data-theme^="light-"] span[class*="bg-emerald-950"] {
+  background-color: var(--badge-bg) !important;
+  color: var(--badge-text) !important;
+  border-color: var(--badge-border) !important;
+}
+
+/* 7. Hover su card */
+html[data-theme^="light-"] [class*="hover:bg-slate-800"]:hover,
+html[data-theme^="light-"] [class*="hover:bg-slate-900"]:hover {
+  background-color: var(--bg-surface) !important;
+}
+
+/* 8. Input, textarea, select */
+html[data-theme^="light-"] input,
+html[data-theme^="light-"] textarea,
+html[data-theme^="light-"] select {
+  background-color: #ffffff !important;
+  color: var(--text-main) !important;
+  border-color: var(--border-color) !important;
+}
+html[data-theme^="light-"] input::placeholder,
+html[data-theme^="light-"] textarea::placeholder {
+  color: var(--text-subtle) !important;
+}
+
+/* --------------------------------------------------------------------------
+   C) Specifico: Chiara Accademica (light-clean)
+   -------------------------------------------------------------------------- */
+html[data-theme="light-clean"] [class*="blur-[130px]"],
+html[data-theme="light-clean"] [class*="blur-[110px]"],
+html[data-theme="light-clean"] [class*="blur-[120px]"] {
+  display: none !important;
+}
+
+html[data-theme="light-clean"] [class*="from-sky-400 via-teal-300 to-emerald-400"] {
+  background-image: linear-gradient(135deg, #0284c7 0%, #0d9488 50%, #059669 100%) !important;
+  -webkit-background-clip: text !important;
+  color: transparent !important;
+}
+
+html[data-theme="light-clean"] .text-sky-400 {
+  color: #0284c7 !important;
+}
+
+html[data-theme="light-clean"] .bg-sky-500\/10 {
+  background-color: rgba(2, 132, 199, 0.08) !important;
+  border-color: rgba(2, 132, 199, 0.25) !important;
+}
+
+/* --------------------------------------------------------------------------
+   D) Specifico: Chiara Vivace (light-vibrant)
+   -------------------------------------------------------------------------- */
+html[data-theme="light-vibrant"] [class*="blur-[130px]"],
+html[data-theme="light-vibrant"] [class*="blur-[110px]"] {
+  display: block !important;
+  opacity: 0.18 !important;
+  background-color: #a855f7 !important;
+}
+
+html[data-theme="light-vibrant"] [class*="from-sky-400 via-teal-300 to-emerald-400"] {
+  background-image: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #db2777 100%) !important;
+  -webkit-background-clip: text !important;
+  color: transparent !important;
+}
+
+html[data-theme="light-vibrant"] .text-sky-400 {
+  color: #7c3aed !important;
+}
+
+html[data-theme="light-vibrant"] .bg-sky-500\/10 {
+  background-color: rgba(124, 58, 237, 0.08) !important;
+  border-color: rgba(124, 58, 237, 0.25) !important;
+  color: #7c3aed !important;
+}
+
+html[data-theme="light-vibrant"] .hover\:border-sky-500\/50:hover,
+html[data-theme="light-vibrant"] .hover\:border-emerald-500\/50:hover {
+  border-color: rgba(124, 58, 237, 0.5) !important;
+  box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.1) !important;
+}
+
+html[data-theme="light-vibrant"] span[class*="bg-slate-800"],
+html[data-theme="light-vibrant"] span[class*="bg-slate-900"],
+html[data-theme="light-vibrant"] span[class*="bg-emerald-950"] {
+  background-color: rgba(124, 58, 237, 0.08) !important;
+  color: #6d28d9 !important;
+  border-color: rgba(124, 58, 237, 0.25) !important;
+}
+
+/* --------------------------------------------------------------------------
+   E) Logo Dinamico Bianco / Nero per il Brand (AM)
+   -------------------------------------------------------------------------- */
+.theme-logo-white {
+  display: block !important;
+}
+.theme-logo-black {
+  display: none !important;
+}
+
+html[data-theme="light-clean"] .theme-logo-white,
+html[data-theme="light-vibrant"] .theme-logo-white,
+html.light .theme-logo-white {
+  display: none !important;
+}
+
+html[data-theme="light-clean"] .theme-logo-black,
+html[data-theme="light-vibrant"] .theme-logo-black,
+html.light .theme-logo-black {
+  display: block !important;
+}
+
