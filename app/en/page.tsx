@@ -5,6 +5,7 @@ import StatRibbon from "@/components/StatRibbon";
 import ServiceCard from "@/components/ServiceCard";
 import PathFinder from "@/components/PathFinder";
 import PublicationsSection from "@/components/PublicationsSection";
+import PressSection from "@/components/PressSection";
 import PartnersGrid from "@/components/PartnersGrid";
 import ContactSection from "@/components/ContactSection";
 import { services } from "@/data/services";
@@ -174,7 +175,10 @@ export default function EnglishHomePage() {
       {/* 6. Publications & Scientific Research */}
       <PublicationsSection />
 
-      {/* 7. Clients & Partners Grid */}
+      {/* 7. Press Review & Media Coverage */}
+      <PressSection variant="preview" />
+
+      {/* 8. Clients & Partners Grid */}
       <PartnersGrid />
 
       {/* 8. Contact & Discovery Call */}

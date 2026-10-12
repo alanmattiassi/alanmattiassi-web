@@ -1,0 +1,62 @@
+name: Sync Rassegna Stampa
+
+on:
+  schedule:
+    # Esegue ogni lunedì mattina alle 07:00 UTC (ore 08:00 / 09:00 italiane)
+    - cron: '0 7 * * 1'
+  workflow_dispatch: # Permette di avviare il controllo manualmente con un clic da GitHub Web o Mobile
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  check-press-mentions:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Esegui scanner rassegna stampa
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GOOGLE_ALERTS_RSS_URLS: ${{ secrets.GOOGLE_ALERTS_RSS_URLS }}
+        run: |
+          python scripts/fetch_press_mentions.py
+
+      - name: Verifica se sono state trovate novità
+        id: check_news
+        run: |
+          if [ -f "PR_SUMMARY.md" ]; then
+            echo "has_news=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_news=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Crea Pull Request per approvazione da smartphone
+        if: steps.check_news.outputs.has_news == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BRANCH_NAME="press-update-${{ github.run_number }}"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git checkout -b "$BRANCH_NAME"
+          git add data/press.ts
+          git commit -m "📰 Rassegna stampa: nuove menzioni web rilevate"
+          git push origin "$BRANCH_NAME"
+          
+          gh pr create \
+            --base main \
+            --head "$BRANCH_NAME" \
+            --title "📰 Rassegna Stampa: Nuove menzioni rilevate" \
+            --body-file PR_SUMMARY.md

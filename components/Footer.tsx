@@ -150,6 +150,14 @@ export default function Footer() {
             </li>
             <li>
               <Link
+                href={isEn ? "/en/rassegna-stampa" : "/rassegna-stampa"}
+                className="hover:text-[var(--accent-primary)] transition-colors"
+              >
+                {isEn ? "Press & Media Review" : "Rassegna Stampa & Media"}
+              </Link>
+            </li>
+            <li>
+              <Link
                 href={isEn ? "/en/topics-temi" : "/topics-temi"}
                 className="hover:text-[var(--accent-primary)] transition-colors"
               >

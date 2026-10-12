@@ -188,6 +188,15 @@ export default function Navbar() {
             </NextLink>
 
             <NextLink
+              href={isEn ? "/en/rassegna-stampa" : "/rassegna-stampa"}
+              className={`px-3 py-1.5 rounded-lg transition-colors text-[var(--text-nav-link)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-hover)] ${
+                pathname === (isEn ? "/en/rassegna-stampa" : "/rassegna-stampa") ? "text-[var(--accent-primary)] bg-[var(--bg-card-hover)] font-semibold" : ""
+              }`}
+            >
+              {isEn ? "Press" : "Stampa"}
+            </NextLink>
+
+            <NextLink
               href={isEn ? "/en/blog" : "/blog"}
               className={`px-3 py-1.5 rounded-lg transition-colors text-[var(--text-nav-link)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-hover)] ${
                 pathname === (isEn ? "/en/blog" : "/blog") ? "text-[var(--accent-primary)] bg-[var(--bg-card-hover)] font-semibold" : ""
@@ -288,6 +297,12 @@ export default function Navbar() {
                 className="px-3 py-2.5 rounded-lg text-[var(--text-main)] hover:bg-[var(--bg-card-hover)] hover:text-[var(--accent-primary)] transition-colors"
               >
                 {isEn ? "Talks & Keynotes" : "Talks // Interventi"}
+              </NextLink>
+              <NextLink
+                href={isEn ? "/en/rassegna-stampa" : "/rassegna-stampa"}
+                className="px-3 py-2.5 rounded-lg text-[var(--text-main)] hover:bg-[var(--bg-card-hover)] hover:text-[var(--accent-primary)] transition-colors"
+              >
+                {isEn ? "Press & Media Review" : "Rassegna Stampa & Media"}
               </NextLink>
               <NextLink
                 href={isEn ? "/en/topics-temi" : "/topics-temi"}
