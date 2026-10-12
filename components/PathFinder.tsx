@@ -64,7 +64,7 @@ export default function PathFinder() {
             <span>{isEn ? "TAILORED PATHWAYS" : "PERCORSI SU MISURA"}</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-main)] tracking-tight">
-            {isEn ? "A Dedicated Path for Every Professional Profile" : "Ad ogni professionalità, il suo percorso"}
+            {isEn ? "A Dedicated Path for Every Professional Profile" : "Ad ogni professionalità, un percorso dedicato"}
           </h2>
           <p className="text-[var(--text-muted)] text-sm sm:text-base leading-relaxed">
             {isEn
