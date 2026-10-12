@@ -21,6 +21,16 @@ export interface ThemeOption {
 
 export const THEME_OPTIONS: ThemeOption[] = [
   {
+    id: "light-clean",
+    name: "chiara",
+    nameEn: "clear",
+    tagline: "Accademica & Essenziale: sfondo bianco e massima leggibilità",
+    taglineEn: "Academic & Essential: crisp white and optimal clarity",
+    category: "light",
+    badgeColor: "bg-slate-200 text-slate-800 border-slate-300",
+    dotColor: "#0284c7",
+  },
+  {
     id: "dark-neon",
     name: "neon",
     nameEn: "neon",
@@ -39,16 +49,6 @@ export const THEME_OPTIONS: ThemeOption[] = [
     category: "dark",
     badgeColor: "bg-amber-500/10 text-amber-300 border-amber-500/30",
     dotColor: "#d4af37",
-  },
-  {
-    id: "light-clean",
-    name: "chiara",
-    nameEn: "clear",
-    tagline: "Accademica & Essenziale: sfondo bianco e massima leggibilità",
-    taglineEn: "Academic & Essential: crisp white and optimal clarity",
-    category: "light",
-    badgeColor: "bg-slate-200 text-slate-800 border-slate-300",
-    dotColor: "#0284c7",
   },
   {
     id: "light-vibrant",
@@ -73,7 +73,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 const STORAGE_KEY = "am_theme";
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<ThemeMode>("dark-neon");
+  const [theme, setThemeState] = useState<ThemeMode>("light-clean");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -81,17 +81,17 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       const saved = localStorage.getItem(STORAGE_KEY) as ThemeMode | null;
       if (
         saved &&
-        ["dark-neon", "dark-elegant", "light-clean", "light-vibrant"].includes(
+        ["light-clean", "dark-neon", "dark-elegant", "light-vibrant"].includes(
           saved
         )
       ) {
         setThemeState(saved);
         applyTheme(saved);
       } else {
-        applyTheme("dark-neon");
+        applyTheme("light-clean");
       }
     } catch {
-      applyTheme("dark-neon");
+      applyTheme("light-clean");
     }
     setMounted(true);
   }, []);

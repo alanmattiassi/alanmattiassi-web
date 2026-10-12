@@ -3,7 +3,7 @@ export interface PressItem {
   data: string; // YYYY-MM-DD
   anno: number;
   titolo: string;
-  testata: string; // Es. "RaiNews", "ANCI FVG", "La Repubblica", "Speck&Tech"
+  testata: string; // Es. "La Stampa", "Hogrefe", "Il Resto del Carlino", "RaiNews"
   url: string;
   estratto: string; // Breve sintesi o estratto curato
   tipologia: "articolo" | "intervista" | "podcast" | "video" | "menzione";
@@ -13,7 +13,7 @@ export interface PressItem {
 
 export const pressItems: PressItem[] = [
   {
-    id: "PRESS-00",
+    id: "PRESS-01",
     data: "2026-09-15",
     anno: 2026,
     titolo: "Che cos'è il gioco: il profilo psicologico delle attività mentali comuni",
@@ -25,7 +25,54 @@ export const pressItems: PressItem[] = [
     highlight: true,
   },
   {
-    id: "PRESS-01",
+    id: "PRESS-02",
+    data: "2026-09-01",
+    anno: 2026,
+    titolo: "Questioni e Idee in Psicologia: Speciale Psicologia del Gioco",
+    testata: "Hogrefe - Qi n. 122",
+    url: "https://www.hogrefe.com/it/qi/2026/numero-122-settembre-2026",
+    estratto: "Approfondimento con Alan Mattiassi, curatore del volume 'Psicologia del gioco. Fondamenti teorici e applicazioni' (Hogrefe, 2026), sulla ridefinizione scientifica dell'attività ludica e dei suoi risvolti applicativi.",
+    tipologia: "articolo",
+    tag: "Psicologia del Gioco",
+    highlight: true,
+  },
+  {
+    id: "PRESS-03",
+    data: "2026-06-12",
+    anno: 2026,
+    titolo: "Creator, intelligenza artificiale e gaming: a San Daniele torna il Dixit Festival",
+    testata: "UdineToday",
+    url: "https://www.udinetoday.it/eventi/cultura/dixit-festival-comunicazione-digitale-san-daniele-12-14-giugno-2026.html",
+    estratto: "Tavola rotonda serale sul futuro del digitale e del gaming nei mondi virtuali: confronto tra la creator Francydreams e lo psicologo del gioco Alan Mattiassi sulle nuove generazioni.",
+    tipologia: "articolo",
+    tag: "Gaming & Creator",
+  },
+  {
+    id: "PRESS-04",
+    data: "2026-01-06",
+    anno: 2026,
+    titolo: "I Lego diventano smart: potranno parlare e muoversi interagendo con altri mattoncini",
+    testata: "La Stampa",
+    url: "https://www.lastampa.it/economia/2026/01/06/news/i_lego_diventano_smart_come_funziona_smart_play_e_smarttag-15457397/",
+    estratto: "Intervista per La Stampa su smart toys e tecnologia ludica: «Non è possibile dire a priori se una tecnologia renderà il gioco migliore: dipende da come si preservano autonomia, immaginazione e agency del giocatore».",
+    tipologia: "intervista",
+    tag: "Smart Play & Gaming",
+    highlight: true,
+  },
+  {
+    id: "PRESS-05",
+    data: "2025-10-15",
+    anno: 2025,
+    titolo: "Alla Rocca dei Bentivoglio si parla di gioco d'azzardo e didattica ludica",
+    testata: "Il Resto del Carlino",
+    url: "https://www.ilrestodelcarlino.it/bologna/cronaca/alla-rocca-dei-bentivoglio-si-parla-di-gioco-dazzardo-a7bbd9ad",
+    estratto: "Incontro pubblico sul contrasto al gioco d'azzardo patologico: Alan Mattiassi e Simone Bonetti illustrano la psicologia delle decisioni e il gioco come potente strumento educativo di prevenzione.",
+    tipologia: "articolo",
+    tag: "Prevenzione & Decisioni",
+    highlight: true,
+  },
+  {
+    id: "PRESS-06",
     data: "2025-07-31",
     anno: 2025,
     titolo: "Registrazione talk su Free to Choose: Game-Based Learning & Scelte Consapevoli",
@@ -34,10 +81,9 @@ export const pressItems: PressItem[] = [
     estratto: "Intervento e approfondimento video sulle dinamiche del Game-Based Learning applicate al progetto europeo Free to Choose per contrastare gli stereotipi di genere nelle scelte formative.",
     tipologia: "video",
     tag: "Game-Based Learning",
-    highlight: true,
   },
   {
-    id: "PRESS-02",
+    id: "PRESS-07",
     data: "2025-05-28",
     anno: 2025,
     titolo: "Game Experience: Giornata di formazione su Applied Games e Psicologia del Gioco",
@@ -46,10 +92,42 @@ export const pressItems: PressItem[] = [
     estratto: "Presentazione e reportage sul laboratorio torinese dedicato all'utilizzo del gioco come strumento psicologico per educatori, formatori e professionisti della cooperazione sociale.",
     tipologia: "articolo",
     tag: "Applied Games",
-    highlight: true,
   },
   {
-    id: "PRESS-03",
+    id: "PRESS-08",
+    data: "2024-11-10",
+    anno: 2024,
+    titolo: "Corso gratuito per autori di GDR: Basi di psicologia per il Design di giochi di ruolo",
+    testata: "Lo Spazio Bianco",
+    url: "https://www.lospaziobianco.it/lonework/corso-gratuito-per-autori-di-gdr/",
+    estratto: "Modulo formativo per autori e game designer: Alan Mattiassi illustra le basi psicologiche, cognitive ed emotive per progettare esperienze di gioco di ruolo coinvolgenti e significative.",
+    tipologia: "articolo",
+    tag: "GDR & Game Design",
+  },
+  {
+    id: "PRESS-09",
+    data: "2024-05-18",
+    anno: 2024,
+    titolo: "La Psicologia del gioco: Talk con Alan Mattiassi su benessere e organizzazioni",
+    testata: "YouTube",
+    url: "https://www.youtube.com/watch?v=5KT4f9LChZo",
+    estratto: "Video intervista approfondita sulle potenzialità che il gioco mette a disposizione sia in ambito aziendale (clima e motivazione) che per il proprio benessere personale.",
+    tipologia: "video",
+    tag: "Benessere Organizzativo",
+  },
+  {
+    id: "PRESS-10",
+    data: "2024-03-20",
+    anno: 2024,
+    titolo: "Un gioco per sradicare gli stereotipi di genere: il metodo del Game Science Research Center",
+    testata: "imagazine.it",
+    url: "https://imagazine.it/un-gioco-per-sradicare-gli-stereotipi-di-genere/",
+    estratto: "Approfondimento sull'applicazione della game science all'inclusione e alle pari opportunità attraverso il serious game europeo Free to Choose.",
+    tipologia: "articolo",
+    tag: "Game Science & Inclusione",
+  },
+  {
+    id: "PRESS-11",
     data: "2021-02-15",
     anno: 2021,
     titolo: "Pordenone Città Futura: il percorso sulle pari opportunità e l'Urban Game",
@@ -58,10 +136,9 @@ export const pressItems: PressItem[] = [
     estratto: "Servizio e approfondimento sull'iniziativa di foresight strategico e Urban Gaming / LARP per la cittadinanza attiva e la parità di genere condotta con il Comune di Pordenone.",
     tipologia: "articolo",
     tag: "Urban Game & Foresight",
-    highlight: true,
   },
   {
-    id: "PRESS-04",
+    id: "PRESS-12",
     data: "2021-02-12",
     anno: 2021,
     titolo: "Città del futuro a misura d'uomo e di donna: il report e il metodo ludico",

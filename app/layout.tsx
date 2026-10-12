@@ -59,7 +59,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="it" data-theme="dark-neon" className="dark" suppressHydrationWarning>
+    <html lang="it" data-theme="light-clean" className="light" suppressHydrationWarning>
       <head>
         {/* Anti-flicker theme hydration script */}
         <script
@@ -68,7 +68,7 @@ export default function RootLayout({
               (function() {
                 try {
                   var saved = localStorage.getItem('am_theme');
-                  var theme = saved || 'dark-neon';
+                  var theme = saved || 'light-clean';
                   document.documentElement.setAttribute('data-theme', theme);
                   if (theme.startsWith('dark')) {
                     document.documentElement.classList.add('dark');

@@ -103,17 +103,24 @@ export default function ThemeSwitcher({
           onClick={() => setIsOpen(!isOpen)}
           type="button"
           title={isEn ? `Theme: ${currentDisplayName}` : `Tema: ${currentDisplayName}`}
-          className="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg border border-[var(--border-color)] bg-[var(--bg-card-subtle)] hover:bg-[var(--bg-card)] text-[var(--text-nav-link)] text-xs font-medium transition-all shadow-sm"
+          aria-label={isEn ? `Theme: ${currentDisplayName}` : `Tema: ${currentDisplayName}`}
+          className={`flex items-center justify-center rounded-lg border text-xs font-medium transition-all shadow-sm ${
+            isOpen
+              ? "px-2.5 py-1.5 space-x-1.5 border-[var(--accent-primary)] bg-[var(--bg-card)] text-[var(--text-main)] ring-1 ring-[var(--accent-primary)]"
+              : "p-2 border-[var(--border-color)] bg-[var(--bg-card-subtle)] hover:bg-[var(--bg-card)] text-[var(--text-nav-link)]"
+          }`}
           aria-expanded={isOpen}
           aria-haspopup="true"
         >
-          {getThemeIcon(theme, "w-3.5 h-3.5")}
-          <span className="inline text-[11px]">{currentDisplayName}</span>
-          <ChevronDown
-            className={`w-3 h-3 text-[var(--text-subtle)] transition-transform ${
-              isOpen ? "rotate-180" : ""
-            }`}
-          />
+          {getThemeIcon(theme, "w-4 h-4")}
+          {isOpen && (
+            <>
+              <span className="inline text-[11px] font-medium">{currentDisplayName}</span>
+              <ChevronDown
+                className="w-3 h-3 text-[var(--text-subtle)] transition-transform rotate-180"
+              />
+            </>
+          )}
         </button>
 
         {isOpen && (
@@ -168,18 +175,25 @@ export default function ThemeSwitcher({
       <button
         onClick={() => setIsOpen(!isOpen)}
         type="button"
-        className="flex items-center space-x-1.5 px-2.5 py-0.5 rounded-md border border-[var(--border-color)] bg-[var(--bg-card-subtle)] hover:bg-[var(--bg-card)] text-[var(--text-muted)] hover:text-[var(--text-main)] text-xs transition-colors"
+        className={`flex items-center justify-center rounded-md border text-xs transition-colors ${
+          isOpen
+            ? "px-2 py-0.5 space-x-1.5 border-[var(--border-strong)] bg-[var(--bg-card)] text-[var(--text-main)] ring-1 ring-[var(--accent-primary)]"
+            : "p-1.5 border-[var(--border-color)] bg-[var(--bg-card-subtle)] hover:bg-[var(--bg-card)] text-[var(--text-muted)] hover:text-[var(--text-main)]"
+        }`}
         aria-expanded={isOpen}
         aria-haspopup="true"
         title={isEn ? "Change website theme" : "Cambia tema del sito"}
+        aria-label={isEn ? `Theme: ${currentDisplayName}` : `Tema: ${currentDisplayName}`}
       >
-        {getThemeIcon(theme, "w-3 h-3")}
-        <span className="text-[11px] font-medium">{currentDisplayName}</span>
-        <ChevronDown
-          className={`w-2.5 h-2.5 text-[var(--text-subtle)] transition-transform ${
-            isOpen ? "rotate-180" : ""
-          }`}
-        />
+        {getThemeIcon(theme, "w-3.5 h-3.5")}
+        {isOpen && (
+          <>
+            <span className="text-[11px] font-medium">{currentDisplayName}</span>
+            <ChevronDown
+              className="w-2.5 h-2.5 text-[var(--text-subtle)] transition-transform rotate-180"
+            />
+          </>
+        )}
       </button>
 
       {isOpen && (
