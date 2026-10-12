@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Sparkles, Award, PlayCircle } from "lucide-react";
+import { ArrowRight, Sparkles, PlayCircle } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { useLanguage } from "./LanguageProvider";
 
@@ -151,16 +151,7 @@ export default function HeroSection() {
                 </div>
               </div>
 
-              {/* Floating Badge Bottom Left: IMT Lucca */}
-              <div className="absolute -bottom-4 -left-2 sm:-left-4 bg-[var(--bg-card)] backdrop-blur-md border border-[var(--border-color)] rounded-2xl p-3 shadow-xl flex items-center space-x-2.5">
-                <div className="w-8 h-8 rounded-lg bg-[var(--bg-card-subtle)] border border-[var(--border-color)] flex items-center justify-center text-[var(--accent-primary)]">
-                  <Award className="w-4 h-4" />
-                </div>
-                <div>
-                  <div className="text-[11px] font-bold text-[var(--text-main)] leading-tight">Principal Investigator</div>
-                  <div className="text-[10px] text-[var(--text-muted)]">GAME Science Research Center</div>
-                </div>
-              </div>
+
             </div>
           </div>
         </div>
