@@ -77,10 +77,10 @@ export default function EnglishFrameworkPage() {
           <Link
             href="/framework-psicologia-del-gioco"
             className="inline-flex items-center space-x-2.5 px-4 py-3.5 rounded-xl font-medium text-xs sm:text-sm text-[var(--text-muted)] hover:text-[var(--text-main)] bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[var(--accent-primary)] transition-all group shadow-sm"
-            title="Leggi in Italiano (IT)"
+            title="Leggi in Italiano (ITA)"
           >
             <ItFlag className="w-5 h-3.5 rounded-[2px] shadow-sm flex-shrink-0" />
-            <span className="font-bold text-[var(--text-main)]">IT</span>
+            <span className="font-bold text-[var(--text-main)]">ITA</span>
             <span className="text-[var(--border-strong)] opacity-60">|</span>
             <span>Versione in Italiano</span>
             <ArrowRight className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />

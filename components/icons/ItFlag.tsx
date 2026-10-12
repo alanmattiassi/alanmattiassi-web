@@ -6,7 +6,7 @@ export default function ItFlag({ className = "w-5 h-3.5" }: { className?: string
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 60 40"
       className={className}
-      aria-label="Bandiera Italiana (IT)"
+      aria-label="Bandiera Italiana (ITA)"
     >
       <clipPath id="it-flag-round">
         <rect width="60" height="40" rx="3" />

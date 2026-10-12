@@ -55,10 +55,13 @@ export default function EnglishAboutPage() {
           </Link>
           <Link
             href="/about"
-            className="inline-flex items-center space-x-2 px-4 py-3 rounded-xl font-medium text-xs sm:text-sm text-[var(--text-muted)] hover:text-[var(--text-main)] bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[var(--accent-primary)] transition-all"
+            className="inline-flex items-center space-x-2 px-4 py-3 rounded-xl font-medium text-xs sm:text-sm text-[var(--text-muted)] hover:text-[var(--text-main)] bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[var(--accent-primary)] transition-all group"
           >
-            <ItFlag className="w-4 h-3 rounded-[2px]" />
+            <ItFlag className="w-5 h-3.5 rounded-[2px]" />
+            <span className="font-bold text-[var(--text-main)]">ITA</span>
+            <span className="text-[var(--border-strong)] opacity-60">|</span>
             <span>Versione in Italiano</span>
+            <ArrowRight className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
           </Link>
         </div>
       </section>

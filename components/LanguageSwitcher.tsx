@@ -36,7 +36,7 @@ export default function LanguageSwitcher({
             }`}
           >
             <ItFlag className="w-4 h-3 rounded-[2px] shadow-sm flex-shrink-0" />
-            <span>Italiano (IT)</span>
+            <span>Italiano (ITA)</span>
           </button>
 
           <button
@@ -67,14 +67,14 @@ export default function LanguageSwitcher({
         type="button"
         onClick={() => switchLanguage("it")}
         title="Passa all'italiano"
-        className={`flex items-center space-x-1 px-2 py-1 rounded-md transition-all ${
+        className={`flex items-center justify-center space-x-1 px-2 py-1 min-w-[52px] rounded-md transition-all ${
           lang === "it"
             ? "bg-[var(--bg-card)] text-[var(--text-main)] font-bold shadow-xs border border-[var(--border-strong)]"
             : "text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-hover)] font-medium"
         }`}
       >
         <ItFlag className="w-3.5 h-2.5 rounded-[1px] shadow-xs flex-shrink-0" />
-        <span className="text-[11px] tracking-wider">IT</span>
+        <span className="text-[11px] tracking-wider">ITA</span>
       </button>
 
       <span className="text-[var(--border-color)] px-0.5 select-none opacity-40">|</span>
@@ -83,7 +83,7 @@ export default function LanguageSwitcher({
         type="button"
         onClick={() => switchLanguage("en")}
         title="Switch to English"
-        className={`flex items-center space-x-1 px-2 py-1 rounded-md transition-all ${
+        className={`flex items-center justify-center space-x-1 px-2 py-1 min-w-[52px] rounded-md transition-all ${
           lang === "en"
             ? "bg-[var(--bg-card)] text-[var(--text-main)] font-bold shadow-xs border border-[var(--border-strong)]"
             : "text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-hover)] font-medium"
