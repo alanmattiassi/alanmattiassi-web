@@ -39,7 +39,7 @@ export default function StatRibbon() {
   ];
 
   return (
-    <section className="relative z-20 -mt-8 sm:-mt-12 max-w-7xl mx-auto px-4 sm:px-8">
+    <section id="impatto" className="relative z-20 -mt-8 sm:-mt-12 max-w-7xl mx-auto px-4 sm:px-8">
       <div className="rounded-2xl border border-[var(--border-color)] bg-[var(--bg-card)] backdrop-blur-xl shadow-2xl p-6 sm:p-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 divide-y sm:divide-y-0 sm:divide-x divide-[var(--border-color)]">
           {stats.map((stat, idx) => {

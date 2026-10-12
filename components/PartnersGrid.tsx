@@ -27,7 +27,7 @@ export default function PartnersGrid() {
   });
 
   return (
-    <section className="py-20 bg-[var(--bg-canvas)] relative transition-colors">
+    <section id="partner" className="py-20 bg-[var(--bg-canvas)] relative transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-12">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
