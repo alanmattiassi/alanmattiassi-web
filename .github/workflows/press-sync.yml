@@ -4,7 +4,13 @@ on:
   schedule:
     # Esegue ogni lunedì mattina alle 07:00 UTC (ore 08:00 / 09:00 italiane)
     - cron: '0 7 * * 1'
-  workflow_dispatch: # Permette di avviare il controllo manualmente con un clic da GitHub Web o Mobile
+  workflow_dispatch:
+    inputs:
+      manual_url:
+        description: 'URL articolo/notizia da aggiungere (lascia vuoto per ricerca automatica)'
+        required: false
+        type: string
+        default: ''
 
 permissions:
   contents: write
@@ -29,6 +35,7 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GOOGLE_ALERTS_RSS_URLS: ${{ secrets.GOOGLE_ALERTS_RSS_URLS }}
+          MANUAL_URL: ${{ inputs.manual_url }}
         run: |
           python scripts/fetch_press_mentions.py
 

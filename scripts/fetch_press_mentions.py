@@ -147,6 +147,39 @@ def fetch_rss_entries(feeds):
 
     return entries
 
+def fetch_single_url_entry(url: str):
+    """Scarica e parsa metadati da una pagina web specifica (es. Hogrefe, blog, testata)."""
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    }
+    try:
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            html = resp.read().decode("utf-8", errors="ignore")
+        
+        # Estrai og:title o title
+        title_match = re.search(r'<meta property="og:title" content="([^"]+)"', html) or re.search(r'<title>([^<]+)</title>', html)
+        title = clean_html(title_match.group(1)) if title_match else url
+        
+        # Estrai og:description o description
+        desc_match = re.search(r'<meta property="og:description" content="([^"]+)"', html) or re.search(r'<meta name="description" content="([^"]+)"', html)
+        desc = clean_html(desc_match.group(1)) if desc_match else ""
+        
+        # Estrai nome sito / fonte
+        site_match = re.search(r'<meta property="og:site_name" content="([^"]+)"', html)
+        source = clean_html(site_match.group(1)) if site_match else urllib.parse.urlparse(url).netloc
+        
+        return [{
+            "title": title,
+            "link": url,
+            "summary": desc,
+            "pub_date": datetime.now().strftime("%Y-%m-%d"),
+            "source": source
+        }]
+    except Exception as e:
+        print(f"⚠️ Errore caricamento URL singolo {url}: {e}", file=sys.stderr)
+        return []
+
 def analyze_with_gemini(entry, api_key: str):
     """
     Interroga l'API di Gemini per verificare la rilevanza ed estrarre i campi strutturati.
@@ -219,17 +252,25 @@ def main():
     existing_urls, existing_ids, raw_press_content = load_existing_urls_and_items(DATA_FILE)
     print(f"📚 Notizie attualmente in catalogo: {len(existing_urls)}")
 
-    # 2. Configura i feed da interrogare
-    custom_alerts = os.environ.get("GOOGLE_ALERTS_RSS_URLS", "").strip()
-    feeds_to_check = list(DEFAULT_RSS_FEEDS)
-    if custom_alerts:
-        for url in custom_alerts.split(","):
-            if url.strip():
-                feeds_to_check.append(url.strip())
+    # 2. Configura i feed da interrogare o URL manuale
+    manual_url = os.environ.get("MANUAL_URL", "").strip()
+    if len(sys.argv) > 1 and sys.argv[1].startswith("http"):
+        manual_url = sys.argv[1].strip()
 
-    # 3. Scarica tutte le voci
-    entries = fetch_rss_entries(feeds_to_check)
-    print(f"🌐 Voci rilevate dai feed RSS: {len(entries)}")
+    if manual_url:
+        print(f"🎯 Modalità URL diretto: analisi di {manual_url}")
+        entries = fetch_single_url_entry(manual_url)
+    else:
+        custom_alerts = os.environ.get("GOOGLE_ALERTS_RSS_URLS", "").strip()
+        feeds_to_check = list(DEFAULT_RSS_FEEDS)
+        if custom_alerts:
+            for url in custom_alerts.split(","):
+                if url.strip():
+                    feeds_to_check.append(url.strip())
+
+        # 3. Scarica tutte le voci
+        entries = fetch_rss_entries(feeds_to_check)
+        print(f"🌐 Voci rilevate dai feed RSS: {len(entries)}")
 
     gemini_key = os.environ.get("GEMINI_API_KEY", "").strip()
     new_approved_items = []

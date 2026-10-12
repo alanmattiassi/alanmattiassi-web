@@ -13,6 +13,18 @@ export interface PressItem {
 
 export const pressItems: PressItem[] = [
   {
+    id: "PRESS-00",
+    data: "2026-09-15",
+    anno: 2026,
+    titolo: "Che cos'è il gioco: il profilo psicologico delle attività mentali comuni",
+    testata: "Hogrefe Magazine",
+    url: "https://www.hogrefe.com/it/magazine/che-cose-il-gioco",
+    estratto: "Un'analisi approfondita sul core di componenti psicologiche (cognitive, motivazionali ed emotive) che si attivano nei comportamenti ludici. Tratto dal volume 'Psicologia del gioco. Fondamenti teorici e applicazioni'.",
+    tipologia: "articolo",
+    tag: "Psicologia del Gioco",
+    highlight: true,
+  },
+  {
     id: "PRESS-01",
     data: "2025-07-31",
     anno: 2025,
