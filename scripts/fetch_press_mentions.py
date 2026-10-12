@@ -261,16 +261,31 @@ def main():
         print(f"🎯 Modalità URL diretto: analisi di {manual_url}")
         entries = fetch_single_url_entry(manual_url)
     else:
-        custom_alerts = os.environ.get("GOOGLE_ALERTS_RSS_URLS", "").strip()
         feeds_to_check = list(DEFAULT_RSS_FEEDS)
-        if custom_alerts:
-            for url in custom_alerts.split(","):
-                if url.strip():
-                    feeds_to_check.append(url.strip())
+
+        # Raccoglie tutti i feed configurati (ITA, ENG e generici)
+        alert_env_vars = [
+            "GOOGLE_ALERTS_RSS_URLS_ITA",
+            "GOOGLE_ALERTS_RSS_URLS_ENG",
+            "GOOGLE_ALERTS_RSS_URLS",
+        ]
+        custom_urls = []
+        for var_name in alert_env_vars:
+            val = os.environ.get(var_name, "").strip()
+            if val:
+                print(f"📡 Rilevato feed personalizzato da secret '{var_name}'")
+                for u in re.split(r"[,\n]+", val):
+                    u_clean = u.strip()
+                    if u_clean and u_clean not in custom_urls:
+                        custom_urls.append(u_clean)
+
+        if custom_urls:
+            feeds_to_check.extend(custom_urls)
+            print(f"📡 Feed Google Alerts attivi: {len(custom_urls)}")
 
         # 3. Scarica tutte le voci
         entries = fetch_rss_entries(feeds_to_check)
-        print(f"🌐 Voci rilevate dai feed RSS: {len(entries)}")
+        print(f"🌐 Voci totali rilevate dai feed RSS: {len(entries)}")
 
     gemini_key = os.environ.get("GEMINI_API_KEY", "").strip()
     new_approved_items = []

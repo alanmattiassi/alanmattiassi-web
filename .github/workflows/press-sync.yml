@@ -35,6 +35,8 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GOOGLE_ALERTS_RSS_URLS: ${{ secrets.GOOGLE_ALERTS_RSS_URLS }}
+          GOOGLE_ALERTS_RSS_URLS_ITA: ${{ secrets.GOOGLE_ALERTS_RSS_URLS_ITA }}
+          GOOGLE_ALERTS_RSS_URLS_ENG: ${{ secrets.GOOGLE_ALERTS_RSS_URLS_ENG }}
           MANUAL_URL: ${{ inputs.manual_url }}
         run: |
           python scripts/fetch_press_mentions.py

@@ -32,18 +32,13 @@ L'AI di Gemini filtra i falsi positivi, ripulisce i titoli ed estrae un riassunt
 
 ---
 
-## 3. (Opzionale) Aggiungere un feed Google Alerts personalizzato
+## 3. Feed Google Alerts personalizzati (Italiano e Inglese)
 
-Lo scanner già interroga i feed pubblici di Google News su `"Alan Mattiassi"`. Se desideri aggiungere un feed dedicato da Google Alerts:
-1. Vai su [google.it/alerts](https://www.google.it/alerts).
-2. Crea un avviso cercando: `"Alan Mattiassi"`.
-3. Clicca su **Mostra opzioni**:
-   - Invia a: seleziona **Feed RSS** (anziché Email).
-4. Clicca su **Crea avviso**.
-5. Fai clic destro sull'icona RSS accanto all'avviso creato e copia l'indirizzo del link (es. `https://www.google.it/alerts/feeds/...`).
-6. Su GitHub, in **Settings** → **Secrets and variables** → **Actions**, aggiungi un nuovo Secret:
-   - **Name**: `GOOGLE_ALERTS_RSS_URLS`
-   - **Secret**: *l'URL del tuo feed RSS appena copiato*
+Lo scanner ora supporta direttamente i tuoi feed dedicati per l'italiano e per l'inglese nei Secrets di GitHub:
+- **`GOOGLE_ALERTS_RSS_URLS_ITA`**: URL del feed RSS di Google Alerts per le ricerche in lingua italiana.
+- **`GOOGLE_ALERTS_RSS_URLS_ENG`**: URL del feed RSS di Google Alerts per le ricerche in lingua inglese.
+
+Lo script combina automaticamente entrambi i flussi di notizie, li deduplica e applica l'analisi semantica con Gemini.
 
 ---
 
