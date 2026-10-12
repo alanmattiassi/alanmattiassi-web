@@ -148,7 +148,7 @@ export default function PathFinder() {
 
           <div className="flex-shrink-0 flex items-center space-x-3">
             <a
-              href="https://www.youtube.com/@gameinsightsAM"
+              href="https://www.youtube.com/playlist?list=PLCiGJGDiXfMY0wCIYjjR4dNB0IaW-Aavx"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 px-6 py-3 rounded-xl font-bold text-sm text-slate-950 bg-amber-400 hover:bg-amber-300 shadow-lg shadow-amber-500/20 transition-all hover:scale-105"

@@ -99,7 +99,7 @@ export default function HeroSection() {
               </Link>
 
               <a
-                href="https://www.youtube.com/@gameinsightsAM"
+                href="https://www.youtube.com/playlist?list=PLCiGJGDiXfMY0wCIYjjR4dNB0IaW-Aavx"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center space-x-2 px-4 py-3 rounded-xl font-medium text-xs sm:text-sm text-amber-500 dark:text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 transition-all"
