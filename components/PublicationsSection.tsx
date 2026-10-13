@@ -115,6 +115,21 @@ export default function PublicationsSection() {
           </div>
         )}
 
+        {/* Selected Preview Publications Header */}
+        <div className="pt-6 border-t border-[var(--border-color)] space-y-2">
+          <div className="inline-flex items-center space-x-2 px-2.5 py-1 rounded-full bg-[var(--badge-bg)] border border-[var(--badge-border)] text-[var(--accent-primary)] text-xs font-bold uppercase tracking-wider">
+            <span>{isEn ? "CURATED SELECTION" : "SELEZIONE CURATA"}</span>
+          </div>
+          <h3 className="text-xl sm:text-2xl font-extrabold text-[var(--text-main)] tracking-tight">
+            {isEn ? "Selection of the most relevant papers" : "Selezione dei paper più rilevanti"}
+          </h3>
+          <p className="text-xs sm:text-sm text-[var(--text-muted)]">
+            {isEn
+              ? "A preview of key peer-reviewed articles and scientific contributions."
+              : "Una selezione dei contributi e articoli peer-reviewed più significativi."}
+          </p>
+        </div>
+
         {/* Selected Preview Publications Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {previewPubs.map((pub) => (
