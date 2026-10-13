@@ -26,6 +26,7 @@ export const metadata = {
 
 export default function FrameworkPage() {
   const paperDoi = "https://doi.org/10.1037/cep0000413";
+  const paperPublisherUrl = "https://psycnet.apa.org/doiLanding?doi=10.1037/cep0000413";
   const paperPdf = "/images/Redefining_the_Psychology_of_Games_Mattiassi_Accepted_Manuscript-1.pdf";
 
   return (
@@ -307,13 +308,13 @@ export default function FrameworkPage() {
             </a>
 
             <a
-              href={paperDoi}
+              href={paperPublisherUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-6 py-3.5 rounded-xl font-semibold text-sm text-[var(--btn-secondary-text)] bg-[var(--btn-secondary-bg)] hover:bg-[var(--bg-surface)] border border-[var(--btn-secondary-border)] transition-all text-center"
             >
               <ExternalLink className="w-4 h-4" />
-              <span>Scheda DOI Ufficiale (APA)</span>
+              <span>Leggi l&apos;Articolo Originale (APA PsycNet)</span>
             </a>
           </div>
 

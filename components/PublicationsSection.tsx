@@ -1,66 +1,23 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React from "react";
 import Link from "next/link";
 import {
-  FileText,
   Download,
   ExternalLink,
-  Search,
   Sparkles,
   BookMarked,
-  Filter,
   BookOpen,
   ArrowRight,
 } from "lucide-react";
-import { publications, Publication } from "@/data/publications";
+import { publications } from "@/data/publications";
 import { useLanguage } from "./LanguageProvider";
 
 export default function PublicationsSection() {
   const { isEn } = useLanguage();
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [searchQuery, setSearchQuery] = useState<string>("");
-
-  const categories = [
-    { id: "all", label: isEn ? "All Publications" : "Tutte le pubblicazioni" },
-    { id: "journal", label: isEn ? "Journal Articles (Peer-Reviewed)" : "Articoli su Rivista (Peer-Reviewed)" },
-    { id: "tools", label: isEn ? "Scales & Models (mcSQ / PMPVG)" : "Scale & Modelli (mcSQ / PMPVG)" },
-    { id: "data", label: isEn ? "Datasets & Global Reports" : "Dataset & Report Internazionali" },
-  ];
-
-  const filteredPubs = useMemo(() => {
-    return publications.filter((pub) => {
-      // Category filter
-      let matchesCat = true;
-      if (selectedCategory === "journal") {
-        matchesCat =
-          pub.tipologia.toLowerCase().includes("journal") ||
-          pub.tipologia.toLowerCase().includes("peer-reviewed");
-      } else if (selectedCategory === "tools") {
-        matchesCat =
-          (pub.area_tematica?.toLowerCase().includes("pmpvg") ?? false) ||
-          (pub.area_tematica?.toLowerCase().includes("mcsq") ?? false) ||
-          pub.titolo.toLowerCase().includes("motivations") ||
-          pub.titolo.toLowerCase().includes("scale");
-      } else if (selectedCategory === "data") {
-        matchesCat =
-          pub.tipologia.toLowerCase().includes("data") ||
-          (pub.area_tematica?.toLowerCase().includes("globali") ?? false);
-      }
-
-      // Search filter
-      const matchesSearch =
-        searchQuery === "" ||
-        pub.titolo.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        pub.autori.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        pub.sede_editoriale.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (pub.area_tematica?.toLowerCase().includes(searchQuery.toLowerCase()) ?? false);
-
-      return matchesCat && matchesSearch;
-    });
-  }, [selectedCategory, searchQuery]);
 
   const highlightPub = publications.find((p) => p.highlight) || publications[0];
+  const previewPubs = publications.filter((p) => p.in_anteprima);
 
   return (
     <section id="pubblicazioni" className="py-20 bg-[var(--bg-canvas)] relative transition-colors">
@@ -142,15 +99,15 @@ export default function PublicationsSection() {
                     <span>{isEn ? "Download PDF" : "Scarica PDF"}</span>
                   </a>
                 )}
-                {highlightPub.doi_link && highlightPub.doi_link !== "-" && (
+                {(highlightPub.publisher_url || (highlightPub.doi_link && highlightPub.doi_link !== "-")) && (
                   <a
-                    href={highlightPub.doi_link}
+                    href={highlightPub.publisher_url || highlightPub.doi_link}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center space-x-2 px-5 py-3 rounded-xl font-semibold text-sm text-[var(--btn-secondary-text)] bg-[var(--btn-secondary-bg)] hover:bg-[var(--bg-surface)] border border-[var(--btn-secondary-border)] transition-all text-center"
                   >
                     <ExternalLink className="w-4 h-4" />
-                    <span>{isEn ? "Official DOI Page" : "Consulta DOI Ufficiale"}</span>
+                    <span>{isEn ? "Read" : "Leggi"}</span>
                   </a>
                 )}
               </div>
@@ -158,41 +115,9 @@ export default function PublicationsSection() {
           </div>
         )}
 
-        {/* Filter and Search Controls */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-4 border-t border-[var(--border-color)]">
-          {/* Category Tabs */}
-          <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setSelectedCategory(cat.id)}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                  selectedCategory === cat.id
-                    ? "bg-[var(--accent-primary)] text-white shadow-md"
-                    : "bg-[var(--bg-card)] text-[var(--text-muted)] hover:text-[var(--text-main)] border border-[var(--border-color)] hover:border-[var(--border-strong)]"
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Search Input */}
-          <div className="relative w-full md:w-72">
-            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-subtle)]" />
-            <input
-              type="text"
-              placeholder={isEn ? "Search by title, author, topic..." : "Cerca per titolo, autore, tema..."}
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 rounded-xl text-xs bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-main)] placeholder-[var(--text-subtle)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors"
-            />
-          </div>
-        </div>
-
-        {/* Publication Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
-          {filteredPubs.slice(0, 10).map((pub) => (
+        {/* Selected Preview Publications Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {previewPubs.map((pub) => (
             <div
               key={pub.id}
               className="p-5 rounded-xl bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[var(--border-strong)] transition-all flex flex-col justify-between group space-y-3"
@@ -223,21 +148,21 @@ export default function PublicationsSection() {
               {/* Bottom links */}
               <div className="pt-2 border-t border-[var(--border-color)] flex items-center justify-between text-xs">
                 {pub.area_tematica ? (
-                  <span className="text-[10px] text-[var(--text-subtle)] font-medium">
+                  <span className="text-[10px] text-[var(--text-subtle)] font-medium truncate max-w-[65%]">
                     {pub.area_tematica}
                   </span>
                 ) : (
                   <span></span>
                 )}
 
-                {pub.doi_link && pub.doi_link !== "-" ? (
+                {(pub.publisher_url || (pub.doi_link && pub.doi_link !== "-")) ? (
                   <a
-                    href={pub.doi_link}
+                    href={pub.publisher_url || pub.doi_link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[var(--accent-primary)] hover:underline font-medium inline-flex items-center space-x-1"
+                    className="text-[var(--accent-primary)] hover:underline font-semibold inline-flex items-center space-x-1"
                   >
-                    <span>DOI</span>
+                    <span>{isEn ? "Read" : "Leggi"}</span>
                     <ExternalLink className="w-3 h-3" />
                   </a>
                 ) : (
