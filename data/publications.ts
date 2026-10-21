@@ -16,6 +16,20 @@ export interface Publication {
 
 export const publications: Publication[] = [
   {
+    "id": "PUB-BOOK-2026",
+    "anno": 2026,
+    "autori": "Mattiassi, A. (a cura di)",
+    "titolo": "Psicologia del gioco. Fondamenti teorici e applicazioni",
+    "sede_editoriale": "Hogrefe Editore (Firenze) — Collana Manuali di psicologia",
+    "volume_issue_pp": "ISBN: 979-12-81075-46-7, pp. 1-248",
+    "doi_link": "https://www.hogrefe.it",
+    "publisher_url": "/libro-psicologia-del-gioco",
+    "tipologia": "Libro / Manuale Accademico (Curatela & Autore di 5 capitoli)",
+    "area_tematica": "Psicologia del Gioco, Game-Based Learning & Gamification",
+    "highlight": false,
+    "in_anteprima": true
+  },
+  {
     "id": "PUB-00",
     "anno": 2026,
     "autori": "Mattiassi, A. D. A.",

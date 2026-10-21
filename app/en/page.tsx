@@ -8,6 +8,7 @@ import PublicationsSection from "@/components/PublicationsSection";
 import PressSection from "@/components/PressSection";
 import PartnersGrid from "@/components/PartnersGrid";
 import ContactSection from "@/components/ContactSection";
+import BookSpotlightSection from "@/components/BookSpotlightSection";
 import { services } from "@/data/services";
 import {
   GraduationCap,
@@ -33,6 +34,9 @@ export default function EnglishHomePage() {
 
       {/* 2. Impact Stat Ribbon */}
       <StatRibbon />
+
+      {/* 2.5 Book Spotlight Announcement */}
+      <BookSpotlightSection />
 
       {/* 3. Areas of Intervention (3 Pillars: Blue, Green, Purple) */}
       <section id="ambiti" className="py-24 bg-[var(--bg-canvas)] relative transition-colors">

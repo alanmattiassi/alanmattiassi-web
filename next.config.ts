@@ -7,6 +7,25 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   outputFileTracingRoot: path.join(__dirname),
+  async redirects() {
+    return [
+      {
+        source: "/libro",
+        destination: "/libro-psicologia-del-gioco",
+        permanent: true,
+      },
+      {
+        source: "/book",
+        destination: "/en/libro-psicologia-del-gioco",
+        permanent: true,
+      },
+      {
+        source: "/en/book",
+        destination: "/en/libro-psicologia-del-gioco",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

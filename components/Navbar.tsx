@@ -179,6 +179,22 @@ export default function Navbar() {
             </NextLink>
 
             <NextLink
+              href={isEn ? "/en/libro-psicologia-del-gioco" : "/libro-psicologia-del-gioco"}
+              className={`px-3 py-1.5 rounded-lg transition-colors text-[var(--text-nav-link)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-hover)] ${
+                pathname === (isEn ? "/en/libro-psicologia-del-gioco" : "/libro-psicologia-del-gioco")
+                  ? "text-[var(--accent-primary)] bg-[var(--bg-card-hover)] font-semibold"
+                  : ""
+              }`}
+            >
+              <span className="inline-flex items-center space-x-1.5">
+                <span>{isEn ? "Book" : "Libro"}</span>
+                <span className="text-[9px] font-extrabold px-1.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
+                  {isEn ? "2026" : "Novità"}
+                </span>
+              </span>
+            </NextLink>
+
+            <NextLink
               href={isEn ? "/en/talks-interventi" : "/talks-interventi"}
               className={`px-3 py-1.5 rounded-lg transition-colors text-[var(--text-nav-link)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-hover)] ${
                 pathname === (isEn ? "/en/talks-interventi" : "/talks-interventi") ? "text-[var(--accent-primary)] bg-[var(--bg-card-hover)] font-semibold" : ""
@@ -247,6 +263,15 @@ export default function Navbar() {
                 className="px-3 py-2.5 rounded-lg text-[var(--text-main)] hover:bg-[var(--bg-card-hover)] hover:text-[var(--accent-primary)] transition-colors"
               >
                 {isEn ? "About me // Bio" : "Chi sono // About me"}
+              </NextLink>
+              <NextLink
+                href={isEn ? "/en/libro-psicologia-del-gioco" : "/libro-psicologia-del-gioco"}
+                className="px-3 py-2.5 rounded-lg text-emerald-600 dark:text-emerald-400 font-bold hover:bg-[var(--bg-card-hover)] transition-colors flex items-center justify-between"
+              >
+                <span>{isEn ? "📖 New Book: Psychology of Games" : "📖 Nuovo Libro: Psicologia del gioco"}</span>
+                <span className="text-[10px] uppercase px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30">
+                  {isEn ? "2026" : "Novità"}
+                </span>
               </NextLink>
               <NextLink
                 href={isEn ? "/en/docenti" : "/docenti"}

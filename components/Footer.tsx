@@ -126,6 +126,14 @@ export default function Footer() {
           <ul className="space-y-2 text-xs sm:text-sm text-[var(--text-muted)]">
             <li>
               <Link
+                href={isEn ? "/en/libro-psicologia-del-gioco" : "/libro-psicologia-del-gioco"}
+                className="hover:text-[var(--accent-primary)] transition-colors font-semibold text-emerald-600 dark:text-emerald-400 flex items-center space-x-1"
+              >
+                <span>{isEn ? "Book: Psychology of Games (Hogrefe)" : "Libro: Psicologia del Gioco (Hogrefe)"}</span>
+              </Link>
+            </li>
+            <li>
+              <Link
                 href={isEn ? "/en/research-ricerca" : "/research-ricerca"}
                 className="hover:text-[var(--accent-primary)] transition-colors"
               >

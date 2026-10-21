@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Sparkles, PlayCircle } from "lucide-react";
+import { ArrowRight, Sparkles, PlayCircle, BookOpen } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { useLanguage } from "./LanguageProvider";
 
@@ -35,14 +35,28 @@ export default function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Left Column: Copy & CTAs (7 cols) */}
           <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-            {/* Top Eyebrow Badge */}
-            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[var(--badge-bg)] border border-[var(--badge-border)] text-[var(--accent-primary)] text-xs font-semibold tracking-wider uppercase">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>
-                {isEn
-                  ? "Evidence-Based Research • Training • Consulting"
-                  : "Ricerca Evidence-Based • Formazione • Consulenza"}
-              </span>
+            {/* Top Eyebrow Badges */}
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
+              <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[var(--badge-bg)] border border-[var(--badge-border)] text-[var(--accent-primary)] text-xs font-semibold tracking-wider uppercase">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>
+                  {isEn
+                    ? "Evidence-Based Research • Training • Consulting"
+                    : "Ricerca Evidence-Based • Formazione • Consulenza"}
+                </span>
+              </div>
+
+              <Link
+                href={isEn ? "/en/libro-psicologia-del-gioco" : "/libro-psicologia-del-gioco"}
+                className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/35 text-emerald-600 dark:text-emerald-300 text-xs font-bold tracking-wide transition-all group shadow-sm hover:scale-105"
+              >
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span>
+                  {isEn
+                    ? "New Book (2026): Psychology of Games (Hogrefe) →"
+                    : "Nuovo libro (2026): «Psicologia del gioco» →"}
+                </span>
+              </Link>
             </div>
 
             {/* Main Title & Roles */}
@@ -96,6 +110,14 @@ export default function HeroSection() {
                 className="inline-flex items-center space-x-2 px-5 py-3.5 rounded-xl font-medium text-sm sm:text-base text-[var(--btn-secondary-text)] bg-[var(--btn-secondary-bg)] hover:bg-[var(--bg-surface)] border border-[var(--btn-secondary-border)] transition-all"
               >
                 <span>{isEn ? "About me // Bio" : "About me // Chi sono"}</span>
+              </Link>
+
+              <Link
+                href={isEn ? "/en/libro-psicologia-del-gioco" : "/libro-psicologia-del-gioco"}
+                className="inline-flex items-center space-x-2 px-5 py-3.5 rounded-xl font-bold text-sm sm:text-base text-[var(--text-main)] bg-[var(--bg-card)] hover:bg-[var(--bg-card-hover)] border border-[var(--accent-primary)]/40 hover:border-[var(--accent-primary)] transition-all shadow-md group"
+              >
+                <BookOpen className="w-4 h-4 text-[var(--accent-primary)] group-hover:scale-110 transition-transform" />
+                <span>{isEn ? "The Book (2026)" : "Il Libro (2026)"}</span>
               </Link>
 
               <a

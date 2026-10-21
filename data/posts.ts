@@ -11,6 +11,16 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    "slug": "in-libreria-psicologia-del-gioco-fondamenti-teorici-e-applicazioni",
+    "url": "https://alanmattiassi.com/libro-psicologia-del-gioco",
+    "year": 2026,
+    "month": 10,
+    "date": "2026-10-21",
+    "title": "In libreria: «Psicologia del gioco. Fondamenti teorici e applicazioni» (Hogrefe Editore)",
+    "summary": "Dal 21 ottobre 2026 è disponibile in tutte le librerie il nuovo volume a cura di Alan Mattiassi, con 5 capitoli firmati come autore. Un'opera a molte mani con colleghi psicologi per unire tutto ciò che è stato detto sul gioco dalla psicologia e creare finalmente un terreno comune da cui partire.",
+    "content": "Dal 21 ottobre 2026 è in vendita il nuovo manuale «Psicologia del gioco. Fondamenti teorici e applicazioni», a cura di Alan Mattiassi, edito da Hogrefe Editore nella prestigiosa collana Manuali di psicologia (ISBN: 979-12-81075-46-7).\n\nL'opera nasce dal desiderio di creare un terreno comune all'interno della ricerca scientifica sul gioco, superando le frammentazioni tra le varie anime della psicologia: cognitiva, neuroscientifica, evoluzionistica, sociale, clinica, educativa e delle organizzazioni.\n\nAll'interno del volume, Alan Mattiassi ha curato l'intera opera e scritto 5 capitoli come autore:\n- Cap. 1: Cos'è il gioco (Alan Mattiassi)\n- Cap. 2: Il gioco come apprendimento (Alan Mattiassi)\n- Cap. 3: Motivazione al gioco (Vittorio Guerrieri e Alan Mattiassi)\n- Cap. 12: Game-based learning (Alan Mattiassi)\n- Cap. 13: Gamification (Alan Mattiassi, Mirko Duradoni, G. Andrea Mancini e Arianna Girard)\n\nIl libro è già disponibile per l'acquisto sui principali store online:\n- Amazon.it\n- Libreria Universitaria\n- La Feltrinelli\n\nVisita la pagina dedicata per consultare l'indice completo dei 13 capitoli, le biografie degli autori e tutti i dettagli: /libro-psicologia-del-gioco"
+  },
+  {
     "slug": "report-pordenone-citta-futura",
     "url": "https://alanmattiassi.com/2025/11/11/report-pordenone-citta-futura/",
     "year": 2025,
