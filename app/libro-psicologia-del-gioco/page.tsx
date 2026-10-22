@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  BookOpen,
   ShoppingBag,
   ExternalLink,
   Copy,
@@ -12,14 +11,12 @@ import {
   Sparkles,
   Users,
   Award,
-  Bookmark,
   Layers,
   Brain,
   GraduationCap,
   Briefcase,
   ChevronDown,
   ChevronUp,
-  Share2,
   Calendar,
   Barcode,
   Building2,
@@ -310,132 +307,7 @@ export default function LibroPsicologiaDelGiocoPage() {
           </div>
         </section>
 
-        {/* 3. The 5 Chapters Authored by Alan Mattiassi */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-8 space-y-10">
-          <div className="text-center max-w-3xl mx-auto space-y-3">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[var(--badge-bg)] border border-[var(--badge-border)] text-[var(--accent-primary)] text-xs font-semibold uppercase tracking-wider">
-              <Bookmark className="w-3.5 h-3.5" />
-              <span>I CONTRIBUTI DI ALAN MATTIASSI</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-main)] tracking-tight">
-              I 5 Capitoli Scritti da Alan Mattiassi
-            </h2>
-            <p className="text-[var(--text-muted)] text-sm sm:text-base leading-relaxed">
-              Oltre alla curatela e al coordinamento scientifico dell&apos;intera opera, Alan Mattiassi ha firmato 5 capitoli cardine che gettano le basi epistemologiche e applicative della disciplina:
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Chapter 1 */}
-            <div className="rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[var(--accent-primary)] p-6 space-y-4 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-[var(--badge-bg)] text-[var(--accent-primary)]">
-                    Capitolo 1 &bull; p. 1
-                  </span>
-                  <span className="text-xs text-[var(--text-subtle)] font-medium">Autore Singolo</span>
-                </div>
-                <h3 className="text-xl font-bold text-[var(--text-main)]">
-                  Cos’è il gioco
-                </h3>
-                <p className="text-xs text-[var(--text-muted)] leading-relaxed">
-                  Dalla meta-analisi di Stenros all&apos;individuazione del <strong>core psicologico del gioco</strong>: regole come rappresentazioni simboliche multiple, alterazione del ruolo sociale, organizzazione della performance attorno all&apos;<strong>obiettivo lusorio</strong> (Bernard Suits), monitoraggio metacognitivo, libertà decisionale e il cerchio magico di Huizinga.
-                </p>
-              </div>
-              <div className="pt-3 border-t border-[var(--border-color)] text-xs font-semibold text-[var(--accent-primary)]">
-                Fondamenti Epistemologici
-              </div>
-            </div>
-
-            {/* Chapter 2 */}
-            <div className="rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[var(--accent-primary)] p-6 space-y-4 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-[var(--badge-bg)] text-[var(--accent-primary)]">
-                    Capitolo 2 &bull; p. 20
-                  </span>
-                  <span className="text-xs text-[var(--text-subtle)] font-medium">Autore Singolo</span>
-                </div>
-                <h3 className="text-xl font-bold text-[var(--text-main)]">
-                  Il gioco come apprendimento
-                </h3>
-                <p className="text-xs text-[var(--text-muted)] leading-relaxed">
-                  Perché il gioco genera conoscenza: attribuzione di responsabilità e pensiero controfattuale (Kahneman &amp; Tversky), <strong>senso di agency</strong> e ragionamento induttivo, sicurezza psicologica, valore informativo del fallimento e i cicli di apprendimento di Pivec, Kearney e Kolb.
-                </p>
-              </div>
-              <div className="pt-3 border-t border-[var(--border-color)] text-xs font-semibold text-[var(--accent-primary)]">
-                Psicologia Cognitiva &amp; Agency
-              </div>
-            </div>
-
-            {/* Chapter 3 */}
-            <div className="rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[var(--accent-primary)] p-6 space-y-4 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-[var(--badge-bg)] text-[var(--accent-primary)]">
-                    Capitolo 3 &bull; p. 31
-                  </span>
-                  <span className="text-xs text-[var(--text-subtle)] font-medium">con Vittorio Guerrieri</span>
-                </div>
-                <h3 className="text-xl font-bold text-[var(--text-main)]">
-                  Motivazione al gioco
-                </h3>
-                <p className="text-xs text-[var(--text-muted)] leading-relaxed">
-                  Teorie della motivazione (Atkinson, SDT di Ryan &amp; Deci, Weiner). Dalla scala <strong>PMPVGs</strong> a 12 fattori per i videogiochi (Gursesli et al., 2024) alla tassonomia <strong>TGMI</strong> per i giochi da tavolo con 6 estensioni originali (Identificazione, FOMO, Social manipulation, Nostalgia, Possessione, Pressione dei pari) e linee guida operative di conduzione.
-                </p>
-              </div>
-              <div className="pt-3 border-t border-[var(--border-color)] text-xs font-semibold text-[var(--accent-primary)]">
-                Motivazione, PMPVG &amp; TGMI
-              </div>
-            </div>
-
-            {/* Chapter 12 */}
-            <div className="rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[var(--accent-primary)] p-6 space-y-4 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-[var(--badge-bg)] text-[var(--accent-primary)]">
-                    Capitolo 12 &bull; p. 171
-                  </span>
-                  <span className="text-xs text-[var(--text-subtle)] font-medium">Autore Singolo</span>
-                </div>
-                <h3 className="text-xl font-bold text-[var(--text-main)]">
-                  Game-based learning
-                </h3>
-                <p className="text-xs text-[var(--text-muted)] leading-relaxed">
-                  Giocare apprendendo vs giocare per apprendere. Evitare l&apos;attitudine boomerang nella persuasione. I 4 canali di veicolazione: mera esposizione, dichiarativo esplicito, metaforico (Lakoff) e <strong>retorica procedurale</strong> (Bogost). Il ruolo insostituibile del <strong>debriefing</strong> per la risignificazione e la trasferibilità delle competenze.
-                </p>
-              </div>
-              <div className="pt-3 border-t border-[var(--border-color)] text-xs font-semibold text-[var(--accent-primary)]">
-                Didattica, Retorica &amp; Debriefing
-              </div>
-            </div>
-
-            {/* Chapter 13 */}
-            <div className="rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[var(--accent-primary)] p-6 space-y-4 shadow-sm hover:shadow-md transition-all flex flex-col justify-between md:col-span-2 lg:col-span-2">
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-[var(--badge-bg)] text-[var(--accent-primary)]">
-                    Capitolo 13 &bull; p. 183
-                  </span>
-                  <span className="text-xs text-[var(--text-subtle)] font-medium">
-                    con M. Duradoni, G.A. Mancini e A. Girard
-                  </span>
-                </div>
-                <h3 className="text-xl font-bold text-[var(--text-main)]">
-                  Gamification
-                </h3>
-                <p className="text-xs text-[var(--text-muted)] leading-relaxed">
-                  Il continuum di <em>gamefulness</em>. Come la gamification rende ergonomica l&apos;azione collettiva riducendo il costo psicologico della cooperazione e superando l&apos;effetto Ringelmann e il free-riding. Progettazione player-centric per aziende e HR lungo i 4 livelli di Kirkpatrick. Analisi delle derive e criticità: la trappola della <em>pointsification</em>, i <em>dark design patterns</em>, l&apos;inflazione motivazionale e la perdita di senso.
-                </p>
-              </div>
-              <div className="pt-3 border-t border-[var(--border-color)] text-xs font-semibold text-[var(--accent-primary)]">
-                Azione Collettiva, HR Design &amp; Criticità
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 4. Complete Interactive Table of Contents */}
+        {/* 2. Complete Interactive Table of Contents */}
         <section id="indice" className="max-w-5xl mx-auto px-4 sm:px-8 space-y-10">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[var(--badge-bg)] border border-[var(--badge-border)] text-[var(--accent-secondary)] text-xs font-semibold uppercase tracking-wider">

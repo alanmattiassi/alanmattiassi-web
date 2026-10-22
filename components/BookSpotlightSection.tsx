@@ -71,7 +71,7 @@ export default function BookSpotlightSection() {
                 <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                   <span>
-                    {isEn ? "NEW BOOK IN BOOKSTORES • OCT 21, 2026" : "NUOVO LIBRO IN COMMERCIO • 21 OTTOBRE 2026"}
+                    {isEn ? "NEW BOOK • OCT 21, 2026" : "NUOVO LIBRO • 21 OTTOBRE 2026"}
                   </span>
                 </span>
                 <span className="text-xs text-[var(--text-subtle)] font-medium hidden sm:inline">
@@ -98,11 +98,11 @@ export default function BookSpotlightSection() {
               <p className="text-sm sm:text-base text-[var(--text-muted)] leading-relaxed">
                 {isEn ? (
                   <>
-                    Released on <strong>October 21, 2026</strong>: the first comprehensive manual in Italy uniting what psychological science has discovered about games. An ambitious multi-authored work bringing together leading psychologists and researchers to create a common epistemological foundation. <strong>Alan Mattiassi authored 5 key chapters</strong> on game epistemology, learning mechanisms, motivational architectures, Game-Based Learning, and gamification.
+                    Released on <strong>October 21, 2026</strong>: the first comprehensive manual in Italy uniting what psychological science has discovered about games. An ambitious multi-authored work bringing together leading psychologists and researchers to create a common epistemological foundation.
                   </>
                 ) : (
                   <>
-                    Dal <strong>21 ottobre 2026</strong> è disponibile in tutte le librerie il manuale che unisce per la prima volta tutto ciò che la psicologia ha esplorato sul gioco. Un&apos;opera a molte mani con tanti colleghi psicologi e docenti universitari per creare finalmente un <strong>terreno comune da cui partire</strong>. <strong>Alan Mattiassi firma 5 capitoli come autore</strong> (Cos&apos;è il gioco, Il gioco come apprendimento, Motivazione al gioco, Game-based learning, Gamification).
+                    Dal <strong>21 ottobre 2026</strong> è disponibile in tutte le librerie il manuale che unisce per la prima volta tutto ciò che la psicologia ha esplorato sul gioco. Un&apos;opera a molte mani con tanti colleghi psicologi e docenti universitari per creare finalmente un <strong>terreno comune da cui partire</strong>.
                   </>
                 )}
               </p>
@@ -112,7 +112,7 @@ export default function BookSpotlightSection() {
                 <div className="flex items-center space-x-2.5 p-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-color)]">
                   <BookmarkCheck className="w-4 h-4 text-[var(--accent-primary)] flex-shrink-0" />
                   <span className="text-xs font-semibold text-[var(--text-main)]">
-                    {isEn ? "5 Chapters Authored" : "5 Capitoli d'Autore"}
+                    {isEn ? "Collaborative Work" : "Opera a Più Mani"}
                   </span>
                 </div>
                 <div className="flex items-center space-x-2.5 p-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-color)]">

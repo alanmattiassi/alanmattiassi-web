@@ -95,40 +95,46 @@ export default function HeroSection() {
               )}
             </p>
 
-            {/* Action Buttons */}
-            <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4">
-              <Link
-                href={isEn ? "/en/hire-me-lavora-con-me" : "/hire-me-lavora-con-me"}
-                className={`inline-flex items-center space-x-2 px-6 py-3.5 rounded-xl text-sm sm:text-base hover:scale-[1.02] active:scale-[0.98] transition-all ${getCtaBtnClasses()}`}
-              >
-                <span>{isEn ? "Discover what I can do for you" : "Scopri cosa posso fare per te"}</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+            {/* Action Buttons: Distributed in two rows */}
+            <div className="pt-2 space-y-3">
+              {/* Row 1: Primary Discovery CTAs */}
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4">
+                <Link
+                  href={isEn ? "/en/hire-me-lavora-con-me" : "/hire-me-lavora-con-me"}
+                  className={`inline-flex items-center space-x-2 px-6 py-3.5 rounded-xl text-sm sm:text-base hover:scale-[1.02] active:scale-[0.98] transition-all ${getCtaBtnClasses()}`}
+                >
+                  <span>{isEn ? "Discover what I can do for you" : "Scopri cosa posso fare per te"}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
 
-              <Link
-                href={isEn ? "/en/about" : "/about"}
-                className="inline-flex items-center space-x-2 px-5 py-3.5 rounded-xl font-medium text-sm sm:text-base text-[var(--btn-secondary-text)] bg-[var(--btn-secondary-bg)] hover:bg-[var(--bg-surface)] border border-[var(--btn-secondary-border)] transition-all"
-              >
-                <span>{isEn ? "About me // Bio" : "About me // Chi sono"}</span>
-              </Link>
+                <Link
+                  href={isEn ? "/en/about" : "/about"}
+                  className="inline-flex items-center space-x-2 px-5 py-3.5 rounded-xl font-medium text-sm sm:text-base text-[var(--btn-secondary-text)] bg-[var(--btn-secondary-bg)] hover:bg-[var(--bg-surface)] border border-[var(--btn-secondary-border)] hover:scale-[1.02] transition-all"
+                >
+                  <span>{isEn ? "About me // Bio" : "About me // chi sono"}</span>
+                </Link>
+              </div>
 
-              <Link
-                href={isEn ? "/en/libro-psicologia-del-gioco" : "/libro-psicologia-del-gioco"}
-                className="inline-flex items-center space-x-2 px-5 py-3.5 rounded-xl font-bold text-sm sm:text-base text-[var(--text-main)] bg-[var(--bg-card)] hover:bg-[var(--bg-card-hover)] border border-[var(--accent-primary)]/40 hover:border-[var(--accent-primary)] transition-all shadow-md group"
-              >
-                <BookOpen className="w-4 h-4 text-[var(--accent-primary)] group-hover:scale-110 transition-transform" />
-                <span>{isEn ? "The Book (2026)" : "Il Libro (2026)"}</span>
-              </Link>
+              {/* Row 2: Book & Free Video Course */}
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4">
+                <Link
+                  href={isEn ? "/en/libro-psicologia-del-gioco" : "/libro-psicologia-del-gioco"}
+                  className="inline-flex items-center space-x-2 px-5 py-3 rounded-xl font-bold text-sm text-[var(--text-main)] bg-[var(--bg-card)] hover:bg-[var(--bg-card-hover)] border border-[var(--accent-primary)]/40 hover:border-[var(--accent-primary)] transition-all shadow-sm hover:scale-[1.02] group"
+                >
+                  <BookOpen className="w-4 h-4 text-[var(--accent-primary)] group-hover:scale-110 transition-transform" />
+                  <span>{isEn ? 'Book "Psychology of Games"' : 'Libro "Psicologia del gioco"'}</span>
+                </Link>
 
-              <a
-                href="https://www.youtube.com/playlist?list=PLCiGJGDiXfMY0wCIYjjR4dNB0IaW-Aavx"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center space-x-2 px-4 py-3 rounded-xl font-medium text-xs sm:text-sm text-amber-500 dark:text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 transition-all"
-              >
-                <PlayCircle className="w-4 h-4 text-amber-500 dark:text-amber-400" />
-                <span>{isEn ? "Free Video Course (3h 30m)" : "Corso Gratuito (3h 30m)"}</span>
-              </a>
+                <a
+                  href="https://www.youtube.com/playlist?list=PLCiGJGDiXfMY0wCIYjjR4dNB0IaW-Aavx"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center space-x-2 px-4 py-3 rounded-xl font-medium text-xs sm:text-sm text-amber-500 dark:text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 hover:scale-[1.02] transition-all"
+                >
+                  <PlayCircle className="w-4 h-4 text-amber-500 dark:text-amber-400" />
+                  <span>{isEn ? "Free Video Course (3h 30m)" : "Corso Gratuito (3h 30m)"}</span>
+                </a>
+              </div>
             </div>
           </div>
 
