@@ -9,12 +9,14 @@ import {
   CheckCircle,
   HelpCircle,
   Sparkles,
+  Loader2,
 } from "lucide-react";
 import { useLanguage } from "./LanguageProvider";
 
 export default function ContactSection() {
   const { isEn } = useLanguage();
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -23,21 +25,46 @@ export default function ContactSection() {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Generate mailto link as reliable offline-safe submission
-    const subject = encodeURIComponent(
-      isEn
-        ? `Contact request from ${formData.name} (${formData.organization || "Individual"}) - ${formData.service}`
-        : `Richiesta contatto da ${formData.name} (${formData.organization || "Privato"}) - ${formData.service}`
-    );
-    const body = encodeURIComponent(
-      isEn
-        ? `Name: ${formData.name}\nEmail: ${formData.email}\nOrganization: ${formData.organization}\nArea: ${formData.service}\n\nMessage:\n${formData.message}`
-        : `Nome: ${formData.name}\nEmail: ${formData.email}\nOrganizzazione: ${formData.organization}\nArea di interesse: ${formData.service}\n\nMessaggio:\n${formData.message}`
-    );
-    window.location.href = `mailto:alan.mattiassi@gmail.com?subject=${subject}&body=${body}`;
-    setFormSubmitted(true);
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          _subject: isEn
+            ? `New Contact Request: ${formData.name} (${formData.organization || "Individual"})`
+            : `Nuova richiesta di contatto: ${formData.name} (${formData.organization || "Privato"})`,
+          Name: formData.name,
+          Email: formData.email,
+          Organization: formData.organization || "-",
+          ServiceArea: formData.service,
+          Message: formData.message,
+          Date: new Date().toLocaleString("it-IT", { timeZone: "Europe/Rome" }),
+        }),
+      });
+
+      if (!response.ok) throw new Error("Errore inoltro API");
+      setFormSubmitted(true);
+    } catch {
+      // Fallback mailto per non perdere mai il contatto
+      const subject = encodeURIComponent(
+        isEn
+          ? `Contact request from ${formData.name} (${formData.organization || "Individual"}) - ${formData.service}`
+          : `Richiesta contatto da ${formData.name} (${formData.organization || "Privato"}) - ${formData.service}`
+      );
+      const body = encodeURIComponent(
+        isEn
+          ? `Name: ${formData.name}\nEmail: ${formData.email}\nOrganization: ${formData.organization}\nArea: ${formData.service}\n\nMessage:\n${formData.message}`
+          : `Nome: ${formData.name}\nEmail: ${formData.email}\nOrganizzazione: ${formData.organization}\nArea di interesse: ${formData.service}\n\nMessaggio:\n${formData.message}`
+      );
+      window.location.href = `mailto:alan.mattiassi@gmail.com?subject=${subject}&body=${body}`;
+      setFormSubmitted(true);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -246,10 +273,20 @@ export default function ContactSection() {
 
                 <button
                   type="submit"
-                  className="w-full inline-flex items-center justify-center space-x-2 px-6 py-3.5 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 shadow-lg shadow-sky-500/25 transition-all"
+                  disabled={isSubmitting}
+                  className="w-full inline-flex items-center justify-center space-x-2 px-6 py-3.5 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 disabled:opacity-60 shadow-lg shadow-sky-500/25 transition-all"
                 >
-                  <Send className="w-4 h-4" />
-                  <span>{isEn ? "Send Contact Request" : "Invia Richiesta di Contatto"}</span>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>{isEn ? "Sending..." : "Invio in corso..."}</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4" />
+                      <span>{isEn ? "Send Contact Request" : "Invia Richiesta di Contatto"}</span>
+                    </>
+                  )}
                 </button>
               </form>
             )}

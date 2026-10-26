@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Sparkles,
   Calendar,
@@ -24,6 +25,7 @@ import {
   HelpCircle,
 } from "lucide-react";
 import CourseCandidacyForm from "@/components/CourseCandidacyForm";
+import CourseTimelineExpandable from "@/components/CourseTimelineExpandable";
 
 export const metadata = {
   title: "Progettare Giochi che Insegnano – Laboratorio di Psicologia del Gioco | Alan Mattiassi, PhD",
@@ -84,21 +86,21 @@ export default function ProgettareGiochiCheInsegnanoPage() {
           </div>
 
           <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl p-4 shadow-sm hover:border-[var(--border-strong)] transition-all">
+            <div className="flex items-center space-x-2 text-purple-500 dark:text-purple-400 text-xs font-semibold mb-1">
+              <BookOpen className="w-4 h-4" />
+              <span>+ MATERIALE</span>
+            </div>
+            <div className="text-[var(--text-main)] font-bold text-sm">Per approfondire</div>
+            <div className="text-[var(--text-muted)] text-xs mt-0.5">Tra un incontro e l&apos;altro</div>
+          </div>
+
+          <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl p-4 shadow-sm hover:border-[var(--border-strong)] transition-all">
             <div className="flex items-center space-x-2 text-amber-500 dark:text-amber-400 text-xs font-semibold mb-1">
               <Hammer className="w-4 h-4" />
               <span>1 SETTIMANA</span>
             </div>
-            <div className="text-[var(--text-main)] font-bold text-sm">Per avanzare lo step</div>
-            <div className="text-[var(--text-muted)] text-xs mt-0.5">Sul tuo progetto reale</div>
-          </div>
-
-          <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl p-4 shadow-sm hover:border-[var(--border-strong)] transition-all">
-            <div className="flex items-center space-x-2 text-purple-500 dark:text-purple-400 text-xs font-semibold mb-1">
-              <Award className="w-4 h-4" />
-              <span>VALUTAZIONE</span>
-            </div>
-            <div className="text-[var(--text-main)] font-bold text-sm">Certificato di Eccellenza</div>
-            <div className="text-[var(--text-muted)] text-xs mt-0.5">Per progetti validati</div>
+            <div className="text-[var(--text-main)] font-bold text-sm">Per avanzare di uno step</div>
+            <div className="text-[var(--text-muted)] text-xs mt-0.5">Nel tuo progetto reale</div>
           </div>
         </div>
 
@@ -133,7 +135,8 @@ export default function ProgettareGiochiCheInsegnanoPage() {
           <p className="text-[var(--text-muted)] text-sm sm:text-base leading-relaxed">
             Spesso nei corsi sul gioco si commettono due errori opposti: perdersi in rassegne interminabili
             senza strumenti pratici, oppure iniziare subito a inventare dadi e carte prima ancora di capire
-            l&apos;obiettivo psicologico dell&apos;apprendimento.
+            l&apos;obiettivo psicologico dell&apos;apprendimento. Ho commesso entrambi gli errori e ho capito
+            che nessuna delle due formule poteva funzionare.
           </p>
         </div>
 
@@ -163,7 +166,7 @@ export default function ProgettareGiochiCheInsegnanoPage() {
               <h3 className="font-bold text-xl text-[var(--text-main)]">Studio Asincrono Guidato</h3>
               <p className="text-[var(--text-muted)] text-sm leading-relaxed">
                 Tra un incontro e l&apos;altro hai a disposizione video mirati di approfondimento e schede operative
-                strutturate per compilare i parametri del tuo contesto e i tuoi cicli di gioco.
+                strutturate per compilare i parametri del tuo contesto e sviluppare il tuo gioco.
               </p>
             </div>
             <div className="text-xs text-emerald-500 dark:text-emerald-400 font-semibold flex items-center space-x-1.5 pt-3 border-t border-[var(--border-color)]">
@@ -217,183 +220,70 @@ export default function ProgettareGiochiCheInsegnanoPage() {
           </p>
         </div>
 
-        <div className="space-y-4">
-          {/* Modulo 1 */}
-          <div className="bg-[var(--bg-card)] rounded-2xl p-6 border border-[var(--border-color)] hover:border-[var(--border-strong)] transition-all flex flex-col md:flex-row gap-5 items-start">
-            <div className="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-400/30 flex items-center justify-center font-bold text-[var(--accent-primary)] text-lg shrink-0">
-              1/7
+        <CourseTimelineExpandable />
+      </section>
+
+      {/* 4. A CHI SI RIVOLGE */}
+      <section id="target" className="max-w-5xl mx-auto px-4 sm:px-8 space-y-12">
+        <div className="text-center max-w-2xl mx-auto space-y-3">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[var(--badge-bg)] border border-[var(--badge-border)] text-[var(--accent-primary)] text-xs font-semibold uppercase tracking-wider">
+            <span>PROFILI DESTINATARI</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-main)] tracking-tight">
+            A chi è rivolto il laboratorio
+          </h2>
+          <p className="text-[var(--text-muted)] text-sm sm:text-base leading-relaxed">
+            Il percorso è concepito per chi intende utilizzare il gioco come metodo didattico rigoroso nel proprio ambito professionale.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] p-6 sm:p-7 space-y-4 hover:border-[var(--border-strong)] transition-all">
+            <div className="w-12 h-12 rounded-xl bg-sky-500/10 text-[var(--accent-primary)] flex items-center justify-center">
+              <School className="w-6 h-6" />
             </div>
-            <div className="space-y-2 flex-grow">
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <h3 className="font-bold text-lg text-[var(--text-main)]">Analisi del Contesto</h3>
-                <span className="text-xs px-2.5 py-0.5 rounded-full bg-[var(--bg-surface)] text-[var(--text-muted)] font-mono border border-[var(--border-color)]">
-                  Scheda 1: Limiti &amp; Barriere
-                </span>
-              </div>
-              <p className="text-[var(--text-muted)] text-sm leading-relaxed">
-                Mappare il mondo in cui il progetto vivrà. Distinguere tra <strong>vincoli forti</strong> (parametri strategici come tempi, spazi e budget), <strong>barriere insormontabili</strong> (rischi etici, legali, cognitivi) e <strong>limiti strutturali</strong> del setting.
-              </p>
-              <div className="text-xs text-[var(--text-subtle)] italic">
-                Domanda cardine: &ldquo;Cosa è davvero progettabile e cosa devo accettare come dato di realtà?&rdquo;
-              </div>
-            </div>
+            <h3 className="font-bold text-lg text-[var(--text-main)]">Docenti &amp; Insegnanti</h3>
+            <p className="text-[var(--text-muted)] text-sm leading-relaxed">
+              Dalla scuola primaria alla secondaria e all&apos;università: per progettare attività curricolari fondate su meccaniche ludiche concrete, con parametri di valutazione verificabili.
+            </p>
           </div>
 
-          {/* Modulo 2 */}
-          <div className="bg-[var(--bg-card)] rounded-2xl p-6 border border-[var(--border-color)] hover:border-[var(--border-strong)] transition-all flex flex-col md:flex-row gap-5 items-start">
-            <div className="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-400/30 flex items-center justify-center font-bold text-[var(--accent-primary)] text-lg shrink-0">
-              2/7
+          <div className="rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] p-6 sm:p-7 space-y-4 hover:border-[var(--border-strong)] transition-all">
+            <div className="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-500 dark:text-emerald-400 flex items-center justify-center">
+              <Briefcase className="w-6 h-6" />
             </div>
-            <div className="space-y-2 flex-grow">
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <h3 className="font-bold text-lg text-[var(--text-main)]">Obiettivo Formativo &amp; Effetti Controfattuali</h3>
-                <span className="text-xs px-2.5 py-0.5 rounded-full bg-[var(--bg-surface)] text-[var(--text-muted)] font-mono border border-[var(--border-color)]">
-                  Scheda 2: Baseline &amp; Indicatori
-                </span>
-              </div>
-              <p className="text-[var(--text-muted)] text-sm leading-relaxed">
-                Definire con rigore il cambiamento desiderato: da quale <strong>baseline</strong> si parte? Quale <strong>indicatore empirico</strong> posso osservare per verificare l&apos;avvenuto cambiamento? Analisi del senso controfattuale e dei sunk cost nella didattica.
-              </p>
-              <div className="text-xs text-[var(--text-subtle)] italic">
-                Domanda cardine: &ldquo;Come riconosco che il cambiamento cognitivo è realmente avvenuto?&rdquo;
-              </div>
-            </div>
+            <h3 className="font-bold text-lg text-[var(--text-main)]">Formatori Aziendali &amp; HR</h3>
+            <p className="text-[var(--text-muted)] text-sm leading-relaxed">
+              Consulenti, coach e formatori organizzativi: per creare workshop esperienziali su leadership, problem-solving e negoziazione che superino l&apos;approccio superficiale della gamification a punti.
+            </p>
           </div>
 
-          {/* Modulo 3 */}
-          <div className="bg-[var(--bg-card)] rounded-2xl p-6 border border-[var(--border-color)] hover:border-[var(--border-strong)] transition-all flex flex-col md:flex-row gap-5 items-start">
-            <div className="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-400/30 flex items-center justify-center font-bold text-[var(--accent-primary)] text-lg shrink-0">
-              3/7
+          <div className="rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] p-6 sm:p-7 space-y-4 hover:border-[var(--border-strong)] transition-all">
+            <div className="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-500 dark:text-purple-400 flex items-center justify-center">
+              <HeartHandshake className="w-6 h-6" />
             </div>
-            <div className="space-y-2 flex-grow">
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <h3 className="font-bold text-lg text-[var(--text-main)]">Il Processo Cognitivo: Dalla Baseline ai Desiderata</h3>
-                <span className="text-xs px-2.5 py-0.5 rounded-full bg-[var(--bg-surface)] text-[var(--text-muted)] font-mono border border-[var(--border-color)]">
-                  Processi Psicologici
-                </span>
-              </div>
-              <p className="text-[var(--text-muted)] text-sm leading-relaxed">
-                Quale sequenza mentale porta l&apos;allievo dallo stato attuale al traguardo? Monitoraggio metacognitivo, attribuzione di cause, gestione del fallimento protetto, assimilazione, accomodamento e ristrutturazione concettuale.
-              </p>
-              <div className="text-xs text-[var(--text-subtle)] italic">
-                Domanda cardine: &ldquo;Quali processi interni al discente devono essere attivati per produrre il salto?&rdquo;
-              </div>
-            </div>
-          </div>
-
-          {/* Modulo 4 */}
-          <div className="bg-[var(--bg-card)] rounded-2xl p-6 border border-emerald-500/30 hover:border-emerald-500/50 transition-all flex flex-col md:flex-row gap-5 items-start">
-            <div className="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-400/30 flex items-center justify-center font-bold text-emerald-500 dark:text-emerald-400 text-lg shrink-0">
-              4/7
-            </div>
-            <div className="space-y-2 flex-grow">
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <h3 className="font-bold text-lg text-[var(--text-main)]">Come si Impara nel Gioco: Il Game Loop</h3>
-                <span className="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 font-mono border border-emerald-500/30">
-                  Scheda 4: Feedback Loop
-                </span>
-              </div>
-              <p className="text-[var(--text-muted)] text-sm leading-relaxed">
-                Inizio della progettazione ludica: <em>1. Formulazione di un&apos;ipotesi testabile &rarr; 2. Il gioco restituisce un feedback immediato &rarr; 3. Il giocatore osserva, interpreta e integra nella propria teoria</em>. Allineamento tra rinforzo e obiettivi.
-              </p>
-              <div className="text-xs text-[var(--text-subtle)] italic">
-                Domanda cardine: &ldquo;Qual è la minima sequenza di azioni capace di generare il feedback desiderato?&rdquo;
-              </div>
-            </div>
-          </div>
-
-          {/* Modulo 5 */}
-          <div className="bg-[var(--bg-card)] rounded-2xl p-6 border border-emerald-500/30 hover:border-emerald-500/50 transition-all flex flex-col md:flex-row gap-5 items-start">
-            <div className="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-400/30 flex items-center justify-center font-bold text-emerald-500 dark:text-emerald-400 text-lg shrink-0">
-              5/7
-            </div>
-            <div className="space-y-2 flex-grow">
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <h3 className="font-bold text-lg text-[var(--text-main)]">Dal Singolo Loop al Gioco Intero: L&apos;Obiettivo Lusorio</h3>
-                <span className="text-xs px-2.5 py-0.5 rounded-full bg-[var(--bg-surface)] text-[var(--text-muted)] font-mono border border-[var(--border-color)]">
-                  Teoria del Gioco (Suits)
-                </span>
-              </div>
-              <p className="text-[var(--text-muted)] text-sm leading-relaxed">
-                Espandere i loop in un sistema organico. Definizione dell&apos;<strong>obiettivo lusorio</strong>: lo scopo interno alle regole che orienta ogni azione e attribuisce senso all&apos;esperienza. Come riconoscere ed evitare gli errori fatali dei serious game.
-              </p>
-              <div className="text-xs text-[var(--text-subtle)] italic">
-                Domanda cardine: &ldquo;Cosa motiva il giocatore a perseguire il traguardo accettando i limiti delle regole?&rdquo;
-              </div>
-            </div>
-          </div>
-
-          {/* Modulo 6 */}
-          <div className="bg-[var(--bg-card)] rounded-2xl p-6 border border-[var(--border-color)] hover:border-[var(--border-strong)] transition-all flex flex-col md:flex-row gap-5 items-start">
-            <div className="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-400/30 flex items-center justify-center font-bold text-purple-500 dark:text-purple-400 text-lg shrink-0">
-              6/7
-            </div>
-            <div className="space-y-2 flex-grow">
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <h3 className="font-bold text-lg text-[var(--text-main)]">Debriefing &amp; Valutazione dell&apos;Apprendimento</h3>
-                <span className="text-xs px-2.5 py-0.5 rounded-full bg-[var(--bg-surface)] text-[var(--text-muted)] font-mono border border-[var(--border-color)]">
-                  Rielaborazione
-                </span>
-              </div>
-              <p className="text-[var(--text-muted)] text-sm leading-relaxed">
-                L&apos;apprendimento si consolida nella rielaborazione post-gioco. Modalità maieutica, ostetrica e guidata.
-                Fasi strutturate (emozioni, analisi fattuale, trasferimento alla realtà) e mappatura di chi valuta (docente, pari, autovalutazione).
-              </p>
-              <div className="text-xs text-[var(--text-subtle)] italic">
-                Domanda cardine: &ldquo;Come estraiamo valore cognitivo e comportamentale da quanto accaduto al tavolo?&rdquo;
-              </div>
-            </div>
-          </div>
-
-          {/* Modulo 7 */}
-          <div className="bg-[var(--bg-card)] rounded-2xl p-6 border border-amber-500/30 hover:border-amber-500/50 transition-all flex flex-col md:flex-row gap-5 items-start">
-            <div className="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-400/30 flex items-center justify-center font-bold text-amber-500 dark:text-amber-400 text-lg shrink-0">
-              7/7
-            </div>
-            <div className="space-y-2 flex-grow">
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <h3 className="font-bold text-lg text-[var(--text-main)]">Pitch Finale, Playtest &amp; Restituzione</h3>
-                <span className="text-xs px-2.5 py-0.5 rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-300 font-mono border border-amber-500/30">
-                  Certificati di Eccellenza
-                </span>
-              </div>
-              <p className="text-[var(--text-muted)] text-sm leading-relaxed">
-                Sessione finale di restituzione: presentazione del prototipo funzionante, sessione di playtest con revisione critica tra pari e validazione metodologica con Alan Mattiassi. Conferimento dei Certificati di Eccellenza ai progetti completati con rigore.
-              </p>
-              <div className="text-xs text-amber-500 dark:text-amber-300 italic">
-                Traguardo: Uscire dall&apos;aula con un prototipo testato, documentato e pronto per la tua classe o azienda.
-              </div>
-            </div>
+            <h3 className="font-bold text-lg text-[var(--text-main)]">Educatori &amp; Pedagogisti</h3>
+            <p className="text-[var(--text-muted)] text-sm leading-relaxed">
+              Professionisti dell&apos;educazione e del terzo settore: per utilizzare il gioco come spazio strutturato di regolazione emotiva, relazione tra pari e superamento delle barriere comportamentali.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* 4. ALBO DEI CERTIFICATI DI ECCELLENZA (MODALITÀ A) */}
-      <section id="albo-eccellenza" className="max-w-5xl mx-auto px-4 sm:px-8 space-y-12">
+      {/* 5. PROGETTI DEI PARTECIPANTI (SOCIAL PROOF) */}
+      <section id="progetti-corsisti" className="max-w-5xl mx-auto px-4 sm:px-8 space-y-12">
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-400/30 text-amber-500 dark:text-amber-400 text-xs font-semibold uppercase tracking-wider">
-            <Award className="w-3.5 h-3.5" />
-            <span>RICONOSCIMENTI DI MERITO</span>
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[var(--badge-bg)] border border-[var(--badge-border)] text-[var(--accent-primary)] text-xs font-semibold uppercase tracking-wider">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>PROGETTI &amp; TESTIMONIANZE</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-main)] tracking-tight">
-            Albo dei Certificati di Eccellenza
+            Cosa realizzano i partecipanti
           </h2>
           <p className="text-[var(--text-muted)] text-sm sm:text-base leading-relaxed">
-            Il <strong>Certificato di Eccellenza</strong> non è un attestato di presenza. Viene conferito solo
-            ai discenti che completano l&apos;intero iter metodologico e presentano un progetto ludico-didattico
-            rigorosamente validato sul piano degli obiettivi, dei feedback e del debriefing.
+            Alcuni dei progetti più significativi sviluppati e validati durante il laboratorio:
+            soluzioni concrete per la scuola, la formazione aziendale e i contesti educativi.
           </p>
-
-          {/* Coorti Selector */}
-          <div className="flex items-center justify-center space-x-3 pt-4">
-            <span className="px-4 py-2 rounded-xl bg-[var(--accent-primary)]/15 border border-[var(--accent-primary)]/40 text-[var(--accent-primary)] text-xs font-bold uppercase tracking-wider flex items-center space-x-2">
-              <span className="w-2 h-2 rounded-full bg-[var(--accent-primary)] animate-pulse" />
-              <span>Coorte 1 (Inaugurale)</span>
-            </span>
-            <span className="px-4 py-2 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-color)] text-[var(--text-subtle)] text-xs font-medium">
-              Coorte 2 (In partenza)
-            </span>
-          </div>
         </div>
 
         {/* Case Study Cards (Modalità A) */}
@@ -416,7 +306,7 @@ export default function ProgettareGiochiCheInsegnanoPage() {
 
                 <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-400/40 text-amber-500 dark:text-amber-400 text-xs font-semibold">
                   <Medal className="w-3.5 h-3.5" />
-                  <span>Certificato di Eccellenza &bull; Coorte 1</span>
+                  <span>Progetto Validato con Eccellenza</span>
                 </div>
 
                 <div className="text-xs text-[var(--text-muted)] bg-[var(--bg-surface)] p-3 rounded-xl border border-[var(--border-color)] space-y-1">
@@ -471,7 +361,7 @@ export default function ProgettareGiochiCheInsegnanoPage() {
 
                 <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-400/40 text-amber-500 dark:text-amber-400 text-xs font-semibold">
                   <Medal className="w-3.5 h-3.5" />
-                  <span>Certificato di Eccellenza &bull; Coorte 1</span>
+                  <span>Progetto Validato con Eccellenza</span>
                 </div>
 
                 <div className="text-xs text-[var(--text-muted)] bg-[var(--bg-surface)] p-3 rounded-xl border border-[var(--border-color)] space-y-1">
@@ -526,7 +416,7 @@ export default function ProgettareGiochiCheInsegnanoPage() {
 
                 <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-400/40 text-amber-500 dark:text-amber-400 text-xs font-semibold">
                   <Medal className="w-3.5 h-3.5" />
-                  <span>Certificato di Eccellenza &bull; Coorte 1</span>
+                  <span>Progetto Validato con Eccellenza</span>
                 </div>
 
                 <div className="text-xs text-[var(--text-muted)] bg-[var(--bg-surface)] p-3 rounded-xl border border-[var(--border-color)] space-y-1">
@@ -565,62 +455,40 @@ export default function ProgettareGiochiCheInsegnanoPage() {
           </article>
 
         </div>
-      </section>
 
-      {/* 5. A CHI SI RIVOLGE */}
-      <section id="target" className="max-w-5xl mx-auto px-4 sm:px-8 space-y-12">
-        <div className="text-center max-w-2xl mx-auto space-y-3">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[var(--badge-bg)] border border-[var(--badge-border)] text-[var(--accent-primary)] text-xs font-semibold uppercase tracking-wider">
-            <span>PROFILI DESTINATARI</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-main)] tracking-tight">
-            A chi è rivolto il laboratorio
-          </h2>
-          <p className="text-[var(--text-muted)] text-sm sm:text-base leading-relaxed">
-            Il percorso è concepito per chi intende utilizzare il gioco come metodo didattico rigoroso nel proprio ambito professionale.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] p-6 sm:p-7 space-y-4 hover:border-[var(--border-strong)] transition-all">
-            <div className="w-12 h-12 rounded-xl bg-sky-500/10 text-[var(--accent-primary)] flex items-center justify-center">
-              <School className="w-6 h-6" />
-            </div>
-            <h3 className="font-bold text-lg text-[var(--text-main)]">Docenti &amp; Insegnanti</h3>
-            <p className="text-[var(--text-muted)] text-sm leading-relaxed">
-              Dalla scuola primaria alla secondaria e all&apos;università: per progettare attività curricolari fondate su meccaniche ludiche concrete, con parametri di valutazione verificabili.
+        {/* Callout Albo Ufficiale & Verifica Certificati */}
+        <div className="rounded-2xl p-6 bg-[var(--bg-card)] border border-[var(--border-color)] text-center sm:flex sm:items-center sm:justify-between sm:text-left gap-6 shadow-sm">
+          <div className="space-y-1">
+            <h4 className="font-bold text-base text-[var(--text-main)] flex items-center justify-center sm:justify-start gap-2">
+              <Award className="w-4 h-4 text-amber-500" />
+              Albo Ufficiale dei Corsisti &amp; Verifica Certificati
+            </h4>
+            <p className="text-xs text-[var(--text-muted)] leading-relaxed max-w-xl">
+              Consulta il registro pubblico di tutti i partecipanti e verifica l&apos;autenticità dei titoli rilasciati da Alan Mattiassi, distinguendo i Certificati di Eccellenza dagli Attestati di Partecipazione.
             </p>
           </div>
-
-          <div className="rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] p-6 sm:p-7 space-y-4 hover:border-[var(--border-strong)] transition-all">
-            <div className="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-500 dark:text-emerald-400 flex items-center justify-center">
-              <Briefcase className="w-6 h-6" />
-            </div>
-            <h3 className="font-bold text-lg text-[var(--text-main)]">Formatori Aziendali &amp; HR</h3>
-            <p className="text-[var(--text-muted)] text-sm leading-relaxed">
-              Consulenti, coach e formatori organizzativi: per creare workshop esperienziali su leadership, problem-solving e negoziazione che superino l&apos;approccio superficiale della gamification a punti.
-            </p>
-          </div>
-
-          <div className="rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] p-6 sm:p-7 space-y-4 hover:border-[var(--border-strong)] transition-all">
-            <div className="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-500 dark:text-purple-400 flex items-center justify-center">
-              <HeartHandshake className="w-6 h-6" />
-            </div>
-            <h3 className="font-bold text-lg text-[var(--text-main)]">Educatori &amp; Pedagogisti</h3>
-            <p className="text-[var(--text-muted)] text-sm leading-relaxed">
-              Professionisti dell&apos;educazione e del terzo settore: per utilizzare il gioco come spazio strutturato di regolazione emotiva, relazione tra pari e superamento delle barriere comportamentali.
-            </p>
-          </div>
+          <Link
+            href="/albo-certificati"
+            className="mt-4 sm:mt-0 inline-flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[var(--bg-surface)] hover:bg-[var(--badge-bg)] text-[var(--text-main)] border border-[var(--border-color)] hover:border-[var(--accent-primary)] transition-all shrink-0"
+          >
+            <span>Consulta l&apos;Albo e Verifica</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
         </div>
       </section>
 
       {/* 6. IL DOCENTE */}
       <section className="max-w-4xl mx-auto px-4 sm:px-8">
         <div className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border-color)] p-6 sm:p-10 flex flex-col sm:flex-row gap-8 items-center text-left">
-          <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl bg-gradient-to-tr from-sky-500 to-emerald-400 p-1 shrink-0 shadow-xl">
-            <div className="w-full h-full rounded-2xl bg-[var(--bg-surface)] flex flex-col items-center justify-center text-center p-3">
-              <span className="font-extrabold text-[var(--text-main)] text-2xl">AM</span>
-              <span className="text-[11px] text-[var(--accent-primary)] font-mono mt-0.5">PhD Psychology</span>
+          <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl overflow-hidden border-2 border-[var(--border-color)] p-1 bg-[var(--bg-surface)] shrink-0 shadow-xl">
+            <div className="relative w-full h-full rounded-xl overflow-hidden bg-slate-900">
+              <Image
+                src="/images/profiloam.jpg"
+                alt="Alan Mattiassi, PhD - Psicologo del Gioco"
+                fill
+                sizes="(max-width: 640px) 112px, 144px"
+                className="object-cover object-top"
+              />
             </div>
           </div>
           <div className="space-y-3">

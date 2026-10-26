@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { Send, CheckCircle2, Sparkles, Calendar, Clock, ShieldCheck } from "lucide-react";
+import { Send, CheckCircle2, Sparkles, Calendar, Clock, ShieldCheck, Loader2 } from "lucide-react";
 
 export default function MasterclassPriorityForm() {
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -13,23 +14,45 @@ export default function MasterclassPriorityForm() {
     projectIdea: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    const subject = encodeURIComponent(
-      `Candidatura Priority List Masterclass Psicologia del Gioco - ${formData.name}`
-    );
-    const body = encodeURIComponent(
-      `Nome e Cognome: ${formData.name}\n` +
-      `Email: ${formData.email}\n` +
-      `Ruolo / Professione: ${formData.role}\n` +
-      `Periodo preferito: ${formData.preferredDate}\n\n` +
-      `Progetto / Idea da portare la domenica:\n${formData.projectIdea || "Nessun progetto specificato al momento."}\n`
-    );
+    setIsSubmitting(true);
 
-    // Open mailto to guarantee zero dropped leads
-    window.location.href = `mailto:alan.mattiassi@gmail.com?subject=${subject}&body=${body}`;
-    setFormSubmitted(true);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          _subject: `Nuova Iscrizione Priority List Masterclass: ${formData.name}`,
+          Corso: "Masterclass Psicologia del Gioco",
+          "Nome e Cognome": formData.name,
+          Email: formData.email,
+          "Ruolo / Professione": formData.role,
+          "Periodo Preferito": formData.preferredDate,
+          "Idea di Progetto": formData.projectIdea || "Nessun progetto specificato al momento",
+          "Data Iscrizione": new Date().toLocaleString("it-IT", { timeZone: "Europe/Rome" }),
+        }),
+      });
+
+      if (!response.ok) throw new Error("Errore invio");
+      setFormSubmitted(true);
+    } catch {
+      // Fallback mailto
+      const subject = encodeURIComponent(
+        `Candidatura Priority List Masterclass Psicologia del Gioco - ${formData.name}`
+      );
+      const body = encodeURIComponent(
+        `Nome e Cognome: ${formData.name}\n` +
+        `Email: ${formData.email}\n` +
+        `Ruolo / Professione: ${formData.role}\n` +
+        `Periodo preferito: ${formData.preferredDate}\n\n` +
+        `Progetto / Idea da portare la domenica:\n${formData.projectIdea || "Nessun progetto specificato al momento."}\n`
+      );
+      window.location.href = `mailto:alan.mattiassi@gmail.com?subject=${subject}&body=${body}`;
+      setFormSubmitted(true);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -173,10 +196,20 @@ export default function MasterclassPriorityForm() {
 
           <button
             type="submit"
-            className="w-full py-4 px-6 rounded-xl font-bold text-sm sm:text-base text-white bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 hover:from-emerald-400 hover:to-teal-400 shadow-xl shadow-emerald-500/25 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center space-x-2"
+            disabled={isSubmitting}
+            className="w-full py-4 px-6 rounded-xl font-bold text-sm sm:text-base text-white bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 hover:from-emerald-400 hover:to-teal-400 disabled:opacity-60 shadow-xl shadow-emerald-500/25 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center space-x-2"
           >
-            <Send className="w-4 h-4" />
-            <span>Unisciti alla Priority List (Posti Scontati a 490€) →</span>
+            {isSubmitting ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin" />
+                <span>Invio in corso...</span>
+              </>
+            ) : (
+              <>
+                <Send className="w-4 h-4" />
+                <span>Unisciti alla Priority List (Posti Scontati a 490€) →</span>
+              </>
+            )}
           </button>
 
           <div className="flex items-center justify-center space-x-4 text-xs text-[var(--text-subtle)] pt-1">

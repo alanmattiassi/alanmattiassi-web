@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { Send, CheckCircle2, Sparkles, ShieldCheck } from "lucide-react";
+import { Send, CheckCircle2, ShieldCheck, Loader2, AlertCircle } from "lucide-react";
 
 export default function CourseCandidacyForm() {
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
@@ -13,24 +15,51 @@ export default function CourseCandidacyForm() {
     projectIdea: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setErrorMessage(null);
 
     const fullName = `${formData.name} ${formData.surname}`.trim();
-    const subject = encodeURIComponent(
-      `Candidatura Corso Progettare Giochi che Insegnano - ${fullName}`
-    );
-    const body = encodeURIComponent(
-      `CANDIDATURA CORSO: PROGETTARE GIOCHI CHE INSEGNANO\n\n` +
-      `Nome e Cognome: ${fullName}\n` +
-      `Indirizzo Email: ${formData.email}\n` +
-      `Ambito / Profilo Professionale: ${formData.role}\n\n` +
-      `Idea o Progetto da sviluppare durante il corso:\n${formData.projectIdea || "Nessun progetto specifico ancora definito (orientamento aperto)."}\n`
-    );
 
-    // Open mailto fallback to prevent dropped leads
-    window.location.href = `mailto:alan.mattiassi@gmail.com?subject=${subject}&body=${body}`;
-    setFormSubmitted(true);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          _subject: `Nuova Candidatura Corso: ${fullName}`,
+          Corso: "Progettare Giochi che Insegnano – Laboratorio di Psicologia del Gioco",
+          "Nome e Cognome": fullName,
+          Email: formData.email,
+          "Profilo Professionale": formData.role,
+          "Idea di Progetto": formData.projectIdea || "Nessun progetto specifico indicato al momento (orientamento aperto)",
+          "Data Candidatura": new Date().toLocaleString("it-IT", { timeZone: "Europe/Rome" }),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Impossibile recapitare il messaggio automaticamente.");
+      }
+
+      setFormSubmitted(true);
+    } catch (err: unknown) {
+      console.warn("Invio API fallito, attivazione fallback mailto:", err);
+      // Fallback: apri client email se la rete o l'API non risponde
+      const subject = encodeURIComponent(`Candidatura Corso Progettare Giochi che Insegnano - ${fullName}`);
+      const body = encodeURIComponent(
+        `CANDIDATURA CORSO: PROGETTARE GIOCHI CHE INSEGNANO\n\n` +
+        `Nome e Cognome: ${fullName}\n` +
+        `Email: ${formData.email}\n` +
+        `Ruolo: ${formData.role}\n\n` +
+        `Idea di Progetto:\n${formData.projectIdea || "Nessun progetto specifico ancora definito."}\n`
+      );
+      window.location.href = `mailto:alan.mattiassi@gmail.com?subject=${subject}&body=${body}`;
+      setFormSubmitted(true);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -49,12 +78,20 @@ export default function CourseCandidacyForm() {
           <p className="text-[var(--text-muted)] text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
             Abbiamo registrato la tua richiesta per la prossima edizione di{" "}
             <strong className="text-[var(--text-main)]">«Progettare Giochi che Insegnano»</strong>.
-            Riceverai una conferma via email con i dettagli logistici, il calendario degli incontri
-            e l&apos;accesso prioritario alla selezione a numero chiuso.
+            I dettagli sono stati inviati direttamente ad Alan Mattiassi, PhD. Riceverai un&apos;email di riscontro con il calendario e le modalità di partecipazione.
           </p>
           <div className="pt-4">
             <button
-              onClick={() => setFormSubmitted(false)}
+              onClick={() => {
+                setFormSubmitted(false);
+                setFormData({
+                  name: "",
+                  surname: "",
+                  email: "",
+                  role: "Docente / Insegnante",
+                  projectIdea: "",
+                });
+              }}
               className="text-xs text-[var(--text-muted)] underline hover:text-[var(--text-main)] transition-colors"
             >
               Invia un&apos;altra candidatura
@@ -63,6 +100,13 @@ export default function CourseCandidacyForm() {
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-5 relative z-10">
+          {errorMessage && (
+            <div className="p-3.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-500 text-xs flex items-center space-x-2">
+              <AlertCircle className="w-4 h-4 shrink-0" />
+              <span>{errorMessage}</span>
+            </div>
+          )}
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label htmlFor="name" className="block text-xs font-semibold text-[var(--text-main)] mb-1.5">
@@ -147,10 +191,20 @@ export default function CourseCandidacyForm() {
           <div className="pt-2">
             <button
               type="submit"
-              className="w-full py-4 rounded-xl font-bold text-sm text-slate-950 bg-emerald-500 hover:bg-emerald-400 shadow-xl shadow-emerald-500/25 hover:shadow-emerald-400/40 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center space-x-2"
+              disabled={isSubmitting}
+              className="w-full py-4 rounded-xl font-bold text-sm text-slate-950 bg-emerald-500 hover:bg-emerald-400 disabled:opacity-60 shadow-xl shadow-emerald-500/25 hover:shadow-emerald-400/40 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center space-x-2"
             >
-              <span>Candidati per la prossima edizione</span>
-              <Send className="w-4 h-4" />
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <span>Invio candidatura in corso...</span>
+                </>
+              ) : (
+                <>
+                  <span>Candidati per la prossima edizione</span>
+                  <Send className="w-4 h-4" />
+                </>
+              )}
             </button>
           </div>
 
