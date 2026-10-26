@@ -20,26 +20,47 @@ export default function MasterclassPriorityForm() {
     setIsSubmitting(true);
     setErrorMessage(null);
 
+    const payload = {
+      _subject: `Nuova Iscrizione Priority List Masterclass: ${formData.name}`,
+      Corso: "Masterclass Psicologia del Gioco",
+      "Nome e Cognome": formData.name,
+      Email: formData.email,
+      "Ruolo / Professione": formData.role,
+      "Periodo Preferito": formData.preferredDate,
+      "Idea di Progetto": formData.projectIdea || "Nessun progetto specificato al momento",
+      "Data Iscrizione": new Date().toLocaleString("it-IT", { timeZone: "Europe/Rome" }),
+    };
+
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          _subject: `Nuova Iscrizione Priority List Masterclass: ${formData.name}`,
-          Corso: "Masterclass Psicologia del Gioco",
-          "Nome e Cognome": formData.name,
-          Email: formData.email,
-          "Ruolo / Professione": formData.role,
-          "Periodo Preferito": formData.preferredDate,
-          "Idea di Progetto": formData.projectIdea || "Nessun progetto specificato al momento",
-          "Data Iscrizione": new Date().toLocaleString("it-IT", { timeZone: "Europe/Rome" }),
-        }),
+        body: JSON.stringify(payload),
       });
 
-      if (!response.ok) throw new Error("Errore invio");
-      setFormSubmitted(true);
-    } catch (err: unknown) {
-      console.error("Invio Priority List fallito:", err);
+      if (response.ok) {
+        setFormSubmitted(true);
+        return;
+      }
+      throw new Error("API interna non raggiungibile, attivo fallback");
+    } catch {
+      try {
+        const fallbackRes = await fetch(
+          "https://script.google.com/macros/s/AKfycbwr2Oi1CZBxFYH0kcS-N9NI8txLO1AOomBAS-Ih9Ij2OEkyyPxGBHvDtN8rhWOhB8zn/exec",
+          {
+            method: "POST",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify(payload),
+          }
+        );
+        if (fallbackRes.ok) {
+          setFormSubmitted(true);
+          return;
+        }
+      } catch (err: unknown) {
+        console.error("Invio Priority List fallito:", err);
+      }
+
       setErrorMessage(
         "Si è verificato un errore temporaneo durante l'invio. Riprova tra poco oppure scrivi direttamente ad alan.mattiassi@gmail.com."
       );

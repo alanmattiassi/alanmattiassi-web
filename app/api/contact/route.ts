@@ -1,49 +1,40 @@
 import { NextResponse } from "next/server";
 
+const GOOGLE_SCRIPT_URL =
+  process.env.GOOGLE_SCRIPT_CONTACT_URL ||
+  "https://script.google.com/macros/s/AKfycbwr2Oi1CZBxFYH0kcS-N9NI8txLO1AOomBAS-Ih9Ij2OEkyyPxGBHvDtN8rhWOhB8zn/exec";
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
 
     const payload = {
       _subject: body._subject || "Nuova richiesta dal sito alanmattiassi.com",
-      _template: "table",
-      _captcha: "false",
       ...body,
+      Data: new Date().toLocaleString("it-IT", { timeZone: "Europe/Rome" }),
     };
 
-    const response = await fetch("https://formsubmit.co/ajax/alan.mattiassi@gmail.com", {
+    const response = await fetch(GOOGLE_SCRIPT_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json",
-        Origin: "https://www.alanmattiassi.com",
-        Referer: "https://www.alanmattiassi.com/",
-        "User-Agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
       },
       body: JSON.stringify(payload),
+      redirect: "follow",
     });
 
-    const result = await response.json().catch(() => ({}));
-
-    // Se FormSubmit risponde 200 (incluso quando richiede l'attivazione iniziale 1-click via email), consideriamo la richiesta acquisita
-    const isSuccess =
-      response.ok &&
-      (result?.success === "true" ||
-        result?.success === true ||
-        (typeof result?.message === "string" && result.message.includes("Activation")));
-
-    if (!isSuccess && !response.ok) {
-      console.warn("FormSubmit risposta non OK:", response.status, result);
+    if (!response.ok) {
+      const errorText = await response.text().catch(() => "");
+      console.error("Errore risposta Google Script:", response.status, errorText);
       return NextResponse.json(
-        { error: "Errore durante l'inoltro a FormSubmit", details: result },
+        { error: "Errore durante l'inoltro della richiesta", details: errorText },
         { status: 502 }
       );
     }
 
     return NextResponse.json({
       success: true,
-      message: "Messaggio inoltrato correttamente ad alan.mattiassi@gmail.com",
+      message: "Messaggio inviato correttamente ad alan.mattiassi@gmail.com",
     });
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Errore sconosciuto";

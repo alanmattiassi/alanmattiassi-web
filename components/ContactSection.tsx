@@ -31,27 +31,48 @@ export default function ContactSection() {
     setIsSubmitting(true);
     setErrorMessage(null);
 
+    const payload = {
+      _subject: isEn
+        ? `New Contact Request: ${formData.name} (${formData.organization || "Individual"})`
+        : `Nuova richiesta di contatto: ${formData.name} (${formData.organization || "Privato"})`,
+      Name: formData.name,
+      Email: formData.email,
+      Organization: formData.organization || "-",
+      ServiceArea: formData.service,
+      Message: formData.message,
+      Date: new Date().toLocaleString("it-IT", { timeZone: "Europe/Rome" }),
+    };
+
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          _subject: isEn
-            ? `New Contact Request: ${formData.name} (${formData.organization || "Individual"})`
-            : `Nuova richiesta di contatto: ${formData.name} (${formData.organization || "Privato"})`,
-          Name: formData.name,
-          Email: formData.email,
-          Organization: formData.organization || "-",
-          ServiceArea: formData.service,
-          Message: formData.message,
-          Date: new Date().toLocaleString("it-IT", { timeZone: "Europe/Rome" }),
-        }),
+        body: JSON.stringify(payload),
       });
 
-      if (!response.ok) throw new Error("Errore inoltro API");
-      setFormSubmitted(true);
-    } catch (err: unknown) {
-      console.error("Invio richiesta contatto fallito:", err);
+      if (response.ok) {
+        setFormSubmitted(true);
+        return;
+      }
+      throw new Error("API interna non raggiungibile, attivo fallback");
+    } catch {
+      try {
+        const fallbackRes = await fetch(
+          "https://script.google.com/macros/s/AKfycbwr2Oi1CZBxFYH0kcS-N9NI8txLO1AOomBAS-Ih9Ij2OEkyyPxGBHvDtN8rhWOhB8zn/exec",
+          {
+            method: "POST",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify(payload),
+          }
+        );
+        if (fallbackRes.ok) {
+          setFormSubmitted(true);
+          return;
+        }
+      } catch (err: unknown) {
+        console.error("Invio richiesta contatto fallito:", err);
+      }
+
       setErrorMessage(
         isEn
           ? "A temporary error occurred while sending your request. Please try again or write directly to alan.mattiassi@gmail.com."

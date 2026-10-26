@@ -21,31 +21,46 @@ export default function CourseCandidacyForm() {
     setErrorMessage(null);
 
     const fullName = `${formData.name} ${formData.surname}`.trim();
+    const payload = {
+      _subject: `Nuova Candidatura Corso: ${fullName}`,
+      Corso: "Progettare Giochi che Insegnano – Laboratorio di Psicologia del Gioco",
+      "Nome e Cognome": fullName,
+      Email: formData.email,
+      "Profilo Professionale": formData.role,
+      "Idea di Progetto": formData.projectIdea || "Nessun progetto specifico indicato al momento (orientamento aperto)",
+      "Data Candidatura": new Date().toLocaleString("it-IT", { timeZone: "Europe/Rome" }),
+    };
 
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          _subject: `Nuova Candidatura Corso: ${fullName}`,
-          Corso: "Progettare Giochi che Insegnano – Laboratorio di Psicologia del Gioco",
-          "Nome e Cognome": fullName,
-          Email: formData.email,
-          "Profilo Professionale": formData.role,
-          "Idea di Progetto": formData.projectIdea || "Nessun progetto specifico indicato al momento (orientamento aperto)",
-          "Data Candidatura": new Date().toLocaleString("it-IT", { timeZone: "Europe/Rome" }),
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
 
-      if (!response.ok) {
-        throw new Error("Impossibile recapitare il messaggio automaticamente.");
+      if (response.ok) {
+        setFormSubmitted(true);
+        return;
+      }
+      throw new Error("API interna non disponibile, provo fallback");
+    } catch {
+      try {
+        const fallbackRes = await fetch(
+          "https://script.google.com/macros/s/AKfycbwr2Oi1CZBxFYH0kcS-N9NI8txLO1AOomBAS-Ih9Ij2OEkyyPxGBHvDtN8rhWOhB8zn/exec",
+          {
+            method: "POST",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify(payload),
+          }
+        );
+        if (fallbackRes.ok) {
+          setFormSubmitted(true);
+          return;
+        }
+      } catch (err: unknown) {
+        console.error("Invio candidatura fallito:", err);
       }
 
-      setFormSubmitted(true);
-    } catch (err: unknown) {
-      console.error("Invio candidatura fallito:", err);
       setErrorMessage(
         "Si è verificato un problema di connessione. Riprova tra qualche istante oppure scrivi direttamente ad alan.mattiassi@gmail.com."
       );
