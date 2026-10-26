@@ -17,6 +17,7 @@ export default function ContactSection() {
   const { isEn } = useLanguage();
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -28,6 +29,7 @@ export default function ContactSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setErrorMessage(null);
 
     try {
       const response = await fetch("/api/contact", {
@@ -48,20 +50,13 @@ export default function ContactSection() {
 
       if (!response.ok) throw new Error("Errore inoltro API");
       setFormSubmitted(true);
-    } catch {
-      // Fallback mailto per non perdere mai il contatto
-      const subject = encodeURIComponent(
+    } catch (err: unknown) {
+      console.error("Invio richiesta contatto fallito:", err);
+      setErrorMessage(
         isEn
-          ? `Contact request from ${formData.name} (${formData.organization || "Individual"}) - ${formData.service}`
-          : `Richiesta contatto da ${formData.name} (${formData.organization || "Privato"}) - ${formData.service}`
+          ? "A temporary error occurred while sending your request. Please try again or write directly to alan.mattiassi@gmail.com."
+          : "Si è verificato un errore temporaneo durante l'invio. Riprova tra poco oppure scrivi direttamente ad alan.mattiassi@gmail.com."
       );
-      const body = encodeURIComponent(
-        isEn
-          ? `Name: ${formData.name}\nEmail: ${formData.email}\nOrganization: ${formData.organization}\nArea: ${formData.service}\n\nMessage:\n${formData.message}`
-          : `Nome: ${formData.name}\nEmail: ${formData.email}\nOrganizzazione: ${formData.organization}\nArea di interesse: ${formData.service}\n\nMessaggio:\n${formData.message}`
-      );
-      window.location.href = `mailto:alan.mattiassi@gmail.com?subject=${subject}&body=${body}`;
-      setFormSubmitted(true);
     } finally {
       setIsSubmitting(false);
     }
@@ -177,6 +172,11 @@ export default function ContactSection() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
+                {errorMessage && (
+                  <div className="p-3.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-500 text-xs">
+                    {errorMessage}
+                  </div>
+                )}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-medium text-[var(--text-main)] mb-1">

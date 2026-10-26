@@ -45,18 +45,10 @@ export default function CourseCandidacyForm() {
 
       setFormSubmitted(true);
     } catch (err: unknown) {
-      console.warn("Invio API fallito, attivazione fallback mailto:", err);
-      // Fallback: apri client email se la rete o l'API non risponde
-      const subject = encodeURIComponent(`Candidatura Corso Progettare Giochi che Insegnano - ${fullName}`);
-      const body = encodeURIComponent(
-        `CANDIDATURA CORSO: PROGETTARE GIOCHI CHE INSEGNANO\n\n` +
-        `Nome e Cognome: ${fullName}\n` +
-        `Email: ${formData.email}\n` +
-        `Ruolo: ${formData.role}\n\n` +
-        `Idea di Progetto:\n${formData.projectIdea || "Nessun progetto specifico ancora definito."}\n`
+      console.error("Invio candidatura fallito:", err);
+      setErrorMessage(
+        "Si è verificato un problema di connessione. Riprova tra qualche istante oppure scrivi direttamente ad alan.mattiassi@gmail.com."
       );
-      window.location.href = `mailto:alan.mattiassi@gmail.com?subject=${subject}&body=${body}`;
-      setFormSubmitted(true);
     } finally {
       setIsSubmitting(false);
     }

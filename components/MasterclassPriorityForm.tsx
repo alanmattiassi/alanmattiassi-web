@@ -6,6 +6,7 @@ import { Send, CheckCircle2, Sparkles, Calendar, Clock, ShieldCheck, Loader2 } f
 export default function MasterclassPriorityForm() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -17,6 +18,7 @@ export default function MasterclassPriorityForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setErrorMessage(null);
 
     try {
       const response = await fetch("/api/contact", {
@@ -36,20 +38,11 @@ export default function MasterclassPriorityForm() {
 
       if (!response.ok) throw new Error("Errore invio");
       setFormSubmitted(true);
-    } catch {
-      // Fallback mailto
-      const subject = encodeURIComponent(
-        `Candidatura Priority List Masterclass Psicologia del Gioco - ${formData.name}`
+    } catch (err: unknown) {
+      console.error("Invio Priority List fallito:", err);
+      setErrorMessage(
+        "Si è verificato un errore temporaneo durante l'invio. Riprova tra poco oppure scrivi direttamente ad alan.mattiassi@gmail.com."
       );
-      const body = encodeURIComponent(
-        `Nome e Cognome: ${formData.name}\n` +
-        `Email: ${formData.email}\n` +
-        `Ruolo / Professione: ${formData.role}\n` +
-        `Periodo preferito: ${formData.preferredDate}\n\n` +
-        `Progetto / Idea da portare la domenica:\n${formData.projectIdea || "Nessun progetto specificato al momento."}\n`
-      );
-      window.location.href = `mailto:alan.mattiassi@gmail.com?subject=${subject}&body=${body}`;
-      setFormSubmitted(true);
     } finally {
       setIsSubmitting(false);
     }
@@ -100,6 +93,12 @@ export default function MasterclassPriorityForm() {
               <strong className="text-[var(--text-main)]">490€ + IVA</strong> (invece di 750€). Nessun vincolo di acquisto.
             </p>
           </div>
+
+          {errorMessage && (
+            <div className="p-3.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-500 text-xs">
+              {errorMessage}
+            </div>
+          )}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1.5">
