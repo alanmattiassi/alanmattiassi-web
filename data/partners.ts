@@ -43,6 +43,12 @@ export const partners: Partner[] = [
     "description": "Dipartimento di Psicologia e progetti di ricerca applicata"
   },
   {
+    "name": "CREA-AN",
+    "category": "Atenei & Ricerca",
+    "logo": "/images/crea-an.png",
+    "description": "Centro di ricerca Alimenti e Nutrizione per lo studio dell'alimentazione e serious games nutrizionali"
+  },
+  {
     "name": "Future Education Modena (FEM)",
     "category": "Education & Scuole",
     "logo": "/images/fem-logo.jpg",
@@ -97,6 +103,12 @@ export const partners: Partner[] = [
     "description": "Workshop di team building e leadership strategica basata sul gioco"
   },
   {
+    "name": "SurgeSquare",
+    "category": "Aziende & Consulenza",
+    "logo": "/images/surgesquare.png",
+    "description": "Soluzioni digitali e consulenza strategica per il settore medtech e sanitario"
+  },
+  {
     "name": "Tambù",
     "category": "Game Industry",
     "logo": "/images/tambu.jpg",
@@ -105,7 +117,7 @@ export const partners: Partner[] = [
   {
     "name": "Medipass",
     "category": "Sanità & Health",
-    "logo": "/images/medipass_logo.jpeg",
+    "logo": "/images/medipass.png",
     "description": "Formazione manageriale e dinamiche di gruppo in ambito sanitario"
   },
   {
@@ -125,6 +137,12 @@ export const partners: Partner[] = [
     "category": "Enti & Terzo Settore",
     "logo": "/images/cooperativa-itaca.png",
     "description": "Formazione specialistica per educatori su game-based learning e prevenzione (Free to Choose)"
+  },
+  {
+    "name": "LegaCoop FVG",
+    "category": "Enti & Terzo Settore",
+    "logo": "/images/legacoop-fvg.png",
+    "description": "Promozione della cooperazione, formazione ed innovazione nei modelli d'impresa sociale"
   },
   {
     "name": "Cooperativa Sociale Il Piccolo Principe",
