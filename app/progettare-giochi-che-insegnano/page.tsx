@@ -296,24 +296,29 @@ export default function ProgettareGiochiCheInsegnanoPage() {
               
               {/* Sinistra: Foto in grande con AM Gold in alto a destra, Nome e Ruolo sotto */}
               <div className="md:col-span-5 lg:col-span-4 flex flex-col items-center md:items-start text-center md:text-left space-y-4">
-                <div className="relative w-full max-w-[280px] md:max-w-none aspect-[4/5] rounded-2xl overflow-hidden shadow-lg border border-[var(--border-color)]">
-                  <Image
-                    src="/images/testimonials/elena-valenti.jpg"
-                    alt="Prof.ssa Elena Valenti"
-                    fill
-                    sizes="(max-width: 768px) 280px, 320px"
-                    className="object-cover object-top"
-                  />
+                <div className="relative w-full max-w-[280px] md:max-w-none">
+                  {/* Foto con bordo e angoli arrotondati */}
+                  <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden shadow-lg border border-[var(--border-color)]">
+                    <Image
+                      src="/images/testimonials/elena-valenti.jpg"
+                      alt="Prof.ssa Elena Valenti"
+                      fill
+                      sizes="(max-width: 768px) 280px, 320px"
+                      className="object-cover object-top"
+                    />
+                  </div>
+                  {/* Logo AM Gold molto più grande e sovraimposto, che esce dai confini della foto nello spazio bianco */}
                   <div
-                    className="absolute -top-2.5 -right-2.5 w-9 h-9 sm:w-10 sm:h-10 z-20 drop-shadow-lg pointer-events-none"
-                    title="Sigillo AM Gold"
+                    className="absolute -top-5 -right-5 sm:-top-6 sm:-right-6 md:-top-7 md:-right-7 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 z-30 drop-shadow-2xl pointer-events-none"
+                    title="Sigillo AM Gold Eccellenza"
                   >
                     <Image
                       src="/images/AMgold.png"
                       alt="Sigillo AM Gold"
-                      width={40}
-                      height={40}
-                      className="w-full h-full object-contain"
+                      width={112}
+                      height={112}
+                      className="w-full h-full object-contain filter drop-shadow-xl"
+                      priority
                     />
                   </div>
                 </div>
@@ -355,24 +360,29 @@ export default function ProgettareGiochiCheInsegnanoPage() {
               
               {/* Sinistra: Foto in grande con AM Gold in alto a destra, Nome e Ruolo sotto */}
               <div className="md:col-span-5 lg:col-span-4 flex flex-col items-center md:items-start text-center md:text-left space-y-4">
-                <div className="relative w-full max-w-[280px] md:max-w-none aspect-[4/5] rounded-2xl overflow-hidden shadow-lg border border-[var(--border-color)]">
-                  <Image
-                    src="/images/testimonials/marco-de-angelis.jpg"
-                    alt="Dott. Marco De Angelis"
-                    fill
-                    sizes="(max-width: 768px) 280px, 320px"
-                    className="object-cover object-top"
-                  />
+                <div className="relative w-full max-w-[280px] md:max-w-none">
+                  {/* Foto con bordo e angoli arrotondati */}
+                  <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden shadow-lg border border-[var(--border-color)]">
+                    <Image
+                      src="/images/testimonials/marco-de-angelis.jpg"
+                      alt="Dott. Marco De Angelis"
+                      fill
+                      sizes="(max-width: 768px) 280px, 320px"
+                      className="object-cover object-top"
+                    />
+                  </div>
+                  {/* Logo AM Gold molto più grande e sovraimposto, che esce dai confini della foto nello spazio bianco */}
                   <div
-                    className="absolute -top-2.5 -right-2.5 w-9 h-9 sm:w-10 sm:h-10 z-20 drop-shadow-lg pointer-events-none"
-                    title="Sigillo AM Gold"
+                    className="absolute -top-5 -right-5 sm:-top-6 sm:-right-6 md:-top-7 md:-right-7 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 z-30 drop-shadow-2xl pointer-events-none"
+                    title="Sigillo AM Gold Eccellenza"
                   >
                     <Image
                       src="/images/AMgold.png"
                       alt="Sigillo AM Gold"
-                      width={40}
-                      height={40}
-                      className="w-full h-full object-contain"
+                      width={112}
+                      height={112}
+                      className="w-full h-full object-contain filter drop-shadow-xl"
+                      priority
                     />
                   </div>
                 </div>
@@ -414,24 +424,29 @@ export default function ProgettareGiochiCheInsegnanoPage() {
               
               {/* Sinistra: Foto in grande con AM Gold in alto a destra, Nome e Ruolo sotto */}
               <div className="md:col-span-5 lg:col-span-4 flex flex-col items-center md:items-start text-center md:text-left space-y-4">
-                <div className="relative w-full max-w-[280px] md:max-w-none aspect-[4/5] rounded-2xl overflow-hidden shadow-lg border border-[var(--border-color)]">
-                  <Image
-                    src="/images/testimonials/sara-moretti.jpg"
-                    alt="Dott.ssa Sara Moretti"
-                    fill
-                    sizes="(max-width: 768px) 280px, 320px"
-                    className="object-cover object-top"
-                  />
+                <div className="relative w-full max-w-[280px] md:max-w-none">
+                  {/* Foto con bordo e angoli arrotondati */}
+                  <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden shadow-lg border border-[var(--border-color)]">
+                    <Image
+                      src="/images/testimonials/sara-moretti.jpg"
+                      alt="Dott.ssa Sara Moretti"
+                      fill
+                      sizes="(max-width: 768px) 280px, 320px"
+                      className="object-cover object-top"
+                    />
+                  </div>
+                  {/* Logo AM Gold molto più grande e sovraimposto, che esce dai confini della foto nello spazio bianco */}
                   <div
-                    className="absolute -top-2.5 -right-2.5 w-9 h-9 sm:w-10 sm:h-10 z-20 drop-shadow-lg pointer-events-none"
-                    title="Sigillo AM Gold"
+                    className="absolute -top-5 -right-5 sm:-top-6 sm:-right-6 md:-top-7 md:-right-7 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 z-30 drop-shadow-2xl pointer-events-none"
+                    title="Sigillo AM Gold Eccellenza"
                   >
                     <Image
                       src="/images/AMgold.png"
                       alt="Sigillo AM Gold"
-                      width={40}
-                      height={40}
-                      className="w-full h-full object-contain"
+                      width={112}
+                      height={112}
+                      className="w-full h-full object-contain filter drop-shadow-xl"
+                      priority
                     />
                   </div>
                 </div>

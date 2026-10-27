@@ -277,15 +277,15 @@ export default function CertificatesRegistryClient() {
                         </div>
                         {isEccellenza && (
                           <div
-                            className="absolute -top-2.5 -right-2.5 w-7 h-7 sm:w-8 sm:h-8 z-10 drop-shadow-md pointer-events-none"
+                            className="absolute -top-3.5 -right-3.5 w-9 h-9 sm:w-10 sm:h-10 z-20 drop-shadow-xl pointer-events-none transition-transform hover:scale-110"
                             title="Certificato di Eccellenza con Sigillo AM Gold"
                           >
                             <Image
                               src="/images/AMgold.png"
                               alt="Sigillo AM Gold Eccellenza"
-                              width={32}
-                              height={32}
-                              className="w-full h-full object-contain"
+                              width={40}
+                              height={40}
+                              className="w-full h-full object-contain filter drop-shadow-md"
                             />
                           </div>
                         )}
