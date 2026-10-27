@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   Sparkles,
+  Quote,
   Calendar,
   Clock,
   Hammer,
@@ -287,198 +288,182 @@ export default function ProgettareGiochiCheInsegnanoPage() {
         </div>
 
         {/* Case Study Cards (Modalità A) */}
-        <div className="space-y-6">
+        <div className="space-y-8">
           
-          {/* Studente 1: Didattica & Scuola */}
-          <article className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border-color)] p-6 sm:p-8 shadow-xl hover:border-amber-400/40 transition-all">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-              <div className="lg:col-span-4 space-y-4 border-b lg:border-b-0 lg:border-r border-[var(--border-color)] pb-6 lg:pb-0 lg:pr-6">
-                <div className="flex items-center space-x-4">
-                  <div className="relative shrink-0">
-                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-400/20 to-teal-400/20 border border-[var(--accent-primary)]/30 flex items-center justify-center font-bold text-[var(--accent-primary)] text-xl shrink-0">
-                      EV
-                    </div>
-                    <div
-                      className="absolute -top-2.5 -right-2.5 w-7 h-7 z-10 drop-shadow-md pointer-events-none"
-                      title="Progetto Validato con Eccellenza - Sigillo AM Gold"
-                    >
-                      <Image
-                        src="/images/AMgold.png"
-                        alt="Sigillo AM Gold Eccellenza"
-                        width={28}
-                        height={28}
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-base text-[var(--text-main)]">Prof.ssa Elena Valenti</h3>
-                    <p className="text-xs text-[var(--text-muted)]">Docente di Lettere &amp; Ref. Didattica</p>
-                    <p className="text-[11px] text-[var(--text-subtle)]">Scuola Secondaria di II Grado</p>
+          {/* Studente 1: Didattica & Scuola - Elena Valenti */}
+          <article className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border-color)] p-6 sm:p-8 md:p-10 shadow-xl hover:border-amber-400/40 transition-all">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+              
+              {/* Sinistra: Foto in grande con AM Gold in alto a destra, Nome e Ruolo sotto */}
+              <div className="md:col-span-5 lg:col-span-4 flex flex-col items-center md:items-start text-center md:text-left space-y-4">
+                <div className="relative w-full max-w-[280px] md:max-w-none aspect-[4/5] rounded-2xl overflow-hidden shadow-lg border border-[var(--border-color)]">
+                  <Image
+                    src="/images/testimonials/elena-valenti.jpg"
+                    alt="Prof.ssa Elena Valenti"
+                    fill
+                    sizes="(max-width: 768px) 280px, 320px"
+                    className="object-cover object-top"
+                  />
+                  <div
+                    className="absolute -top-2.5 -right-2.5 w-9 h-9 sm:w-10 sm:h-10 z-20 drop-shadow-lg pointer-events-none"
+                    title="Sigillo AM Gold"
+                  >
+                    <Image
+                      src="/images/AMgold.png"
+                      alt="Sigillo AM Gold"
+                      width={40}
+                      height={40}
+                      className="w-full h-full object-contain"
+                    />
                   </div>
                 </div>
 
-                <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-400/40 text-amber-500 dark:text-amber-400 text-xs font-semibold">
-                  <Medal className="w-3.5 h-3.5" />
-                  <span>Progetto Validato con Eccellenza</span>
-                </div>
-
-                <div className="text-xs text-[var(--text-muted)] bg-[var(--bg-surface)] p-3 rounded-xl border border-[var(--border-color)] space-y-1">
-                  <span className="font-semibold text-[var(--text-main)] block">Contesto di applicazione:</span>
-                  <span>Classe IV Liceo (24 studenti) — Didattica della storia antica e dei conflitti istituzionali.</span>
+                <div className="space-y-1">
+                  <h3 className="font-bold text-lg sm:text-xl text-[var(--text-main)]">
+                    Prof.ssa Elena Valenti
+                  </h3>
+                  <p className="text-xs sm:text-sm font-medium text-[var(--accent-primary)]">
+                    Docente di Lettere &amp; Referente Didattica
+                  </p>
+                  <p className="text-xs text-[var(--text-subtle)]">
+                    Scuola Secondaria di II Grado
+                  </p>
                 </div>
               </div>
 
-              <div className="lg:col-span-8 space-y-4">
-                <div>
-                  <div className="text-xs font-semibold text-[var(--accent-primary)] uppercase tracking-wider font-mono mb-1">
-                    Progetto Validato
-                  </div>
-                  <h4 className="font-bold text-xl text-[var(--text-main)] mb-2">
-                    &laquo;Res Publica: Il Dilemma dei Gracchi&raquo;
-                  </h4>
-                  <div className="text-sm text-[var(--text-muted)] space-y-2 leading-relaxed">
-                    <p>
-                      <strong>Obiettivo Formativo:</strong> Comprendere le dinamiche sistemiche che innescano la crisi delle istituzioni repubblicane romane, superando l&apos;approccio nozionistico.
-                    </p>
-                    <p>
-                      <strong>Architettura del Gioco:</strong> Game loop a informazione parziale con ruoli asimmetrici (tribuni vs senatori). Il feedback del gioco rende visibile come il blocco del consenso conduca alla polarizzazione violenta.
-                    </p>
-                  </div>
+              {/* Destra: Quote in parole sue */}
+              <div className="md:col-span-7 lg:col-span-8 flex flex-col justify-center space-y-4 md:border-l md:border-[var(--border-color)] md:pl-8 lg:pl-10">
+                <div className="text-amber-500/70 dark:text-amber-400/70">
+                  <Quote className="w-10 h-10 opacity-60" />
                 </div>
-
-                <div className="bg-[var(--bg-card-subtle)] border-l-4 border-amber-400 rounded-r-2xl p-4 text-xs sm:text-sm text-[var(--text-muted)] italic">
-                  <div className="text-[11px] font-bold text-amber-500 dark:text-amber-400 not-italic uppercase tracking-wider mb-1 flex items-center space-x-1.5">
-                    <MessageSquare className="w-3.5 h-3.5" />
-                    <span>Restituzione di Alan Mattiassi, PhD:</span>
-                  </div>
-                  &ldquo;Un&apos;applicazione magistrale della retorica procedurale. Elena non ha costruito un quiz travestito da gioco: ha creato un modello dinamico in cui le regole costringono gli allievi a sperimentare i vincoli decisionali del periodo storico. Il debriefing a tre fasi è impeccabile.&rdquo;
-                </div>
+                <blockquote className="text-sm sm:text-base md:text-lg text-[var(--text-main)] leading-relaxed italic space-y-3">
+                  <p>
+                    &ldquo;Prima di partecipare al laboratorio pensavo al gioco in classe soprattutto come a un momento ricreativo o a un quiz per ripassare le nozioni. Nel corso con Alan ho capito come tradurre i vincoli storici e decisionali in regole vive.
+                  </p>
+                  <p>
+                    Con il mio gioco <strong>«Res Publica: Il Dilemma dei Gracchi»</strong> i miei studenti di IV liceo non hanno semplicemente &lsquo;ripassato&rsquo; la storia romana: hanno provato in prima persona la frustrazione dei vincoli istituzionali e la polarizzazione politica che porta al blocco della repubblica. Il momento del debriefing guidato ha aperto una discussione critica e spontanea che non avevo mai visto in anni di insegnamento tradizionale.&rdquo;
+                  </p>
+                </blockquote>
               </div>
+
             </div>
           </article>
 
-          {/* Studente 2: Formazione Aziendale / HR */}
-          <article className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border-color)] p-6 sm:p-8 shadow-xl hover:border-amber-400/40 transition-all">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-              <div className="lg:col-span-4 space-y-4 border-b lg:border-b-0 lg:border-r border-[var(--border-color)] pb-6 lg:pb-0 lg:pr-6">
-                <div className="flex items-center space-x-4">
-                  <div className="relative shrink-0">
-                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400/20 to-sky-400/20 border border-emerald-400/30 flex items-center justify-center font-bold text-emerald-500 dark:text-emerald-400 text-xl shrink-0">
-                      MD
-                    </div>
-                    <div
-                      className="absolute -top-2.5 -right-2.5 w-7 h-7 z-10 drop-shadow-md pointer-events-none"
-                      title="Progetto Validato con Eccellenza - Sigillo AM Gold"
-                    >
-                      <Image
-                        src="/images/AMgold.png"
-                        alt="Sigillo AM Gold Eccellenza"
-                        width={28}
-                        height={28}
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-base text-[var(--text-main)]">Dott. Marco De Angelis</h3>
-                    <p className="text-xs text-[var(--text-muted)]">Senior HR Trainer &amp; Coach</p>
-                    <p className="text-[11px] text-[var(--text-subtle)]">Consulenza Aziendale &amp; Formazione</p>
+          {/* Studente 2: Formazione Aziendale / HR - Marco De Angelis */}
+          <article className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border-color)] p-6 sm:p-8 md:p-10 shadow-xl hover:border-amber-400/40 transition-all">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+              
+              {/* Sinistra: Foto in grande con AM Gold in alto a destra, Nome e Ruolo sotto */}
+              <div className="md:col-span-5 lg:col-span-4 flex flex-col items-center md:items-start text-center md:text-left space-y-4">
+                <div className="relative w-full max-w-[280px] md:max-w-none aspect-[4/5] rounded-2xl overflow-hidden shadow-lg border border-[var(--border-color)]">
+                  <Image
+                    src="/images/testimonials/marco-de-angelis.jpg"
+                    alt="Dott. Marco De Angelis"
+                    fill
+                    sizes="(max-width: 768px) 280px, 320px"
+                    className="object-cover object-top"
+                  />
+                  <div
+                    className="absolute -top-2.5 -right-2.5 w-9 h-9 sm:w-10 sm:h-10 z-20 drop-shadow-lg pointer-events-none"
+                    title="Sigillo AM Gold"
+                  >
+                    <Image
+                      src="/images/AMgold.png"
+                      alt="Sigillo AM Gold"
+                      width={40}
+                      height={40}
+                      className="w-full h-full object-contain"
+                    />
                   </div>
                 </div>
 
-                <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-400/40 text-amber-500 dark:text-amber-400 text-xs font-semibold">
-                  <Medal className="w-3.5 h-3.5" />
-                  <span>Progetto Validato con Eccellenza</span>
-                </div>
-
-                <div className="text-xs text-[var(--text-muted)] bg-[var(--bg-surface)] p-3 rounded-xl border border-[var(--border-color)] space-y-1">
-                  <span className="font-semibold text-[var(--text-main)] block">Contesto di applicazione:</span>
-                  <span>Onboarding manageriale e team di sviluppo interfunzionali (16 partecipanti).</span>
+                <div className="space-y-1">
+                  <h3 className="font-bold text-lg sm:text-xl text-[var(--text-main)]">
+                    Dott. Marco De Angelis
+                  </h3>
+                  <p className="text-xs sm:text-sm font-medium text-emerald-500 dark:text-emerald-400">
+                    Senior HR Trainer &amp; Coach
+                  </p>
+                  <p className="text-xs text-[var(--text-subtle)]">
+                    Consulenza Aziendale &amp; Formazione
+                  </p>
                 </div>
               </div>
 
-              <div className="lg:col-span-8 space-y-4">
-                <div>
-                  <div className="text-xs font-semibold text-emerald-500 dark:text-emerald-400 uppercase tracking-wider font-mono mb-1">
-                    Progetto Validato
-                  </div>
-                  <h4 className="font-bold text-xl text-[var(--text-main)] mb-2">
-                    &laquo;CrossTalk: Il Paradosso della Consegna&raquo;
-                  </h4>
-                  <div className="text-sm text-[var(--text-muted)] space-y-2 leading-relaxed">
-                    <p>
-                      <strong>Obiettivo Formativo:</strong> Disinnescare il fenomeno del <em>social loafing</em> (disimpegno di gruppo) e potenziare la responsabilità individuale nella gestione delle dipendenze operative.
-                    </p>
-                    <p>
-                      <strong>Architettura del Gioco:</strong> Cooperazione vincolata da colli di bottiglia asimmetrici. L&apos;<strong>obiettivo lusorio</strong> costringe a rinegoziare continuamente le risorse senza accentrare il controllo.
-                    </p>
-                  </div>
+              {/* Destra: Quote in parole sue */}
+              <div className="md:col-span-7 lg:col-span-8 flex flex-col justify-center space-y-4 md:border-l md:border-[var(--border-color)] md:pl-8 lg:pl-10">
+                <div className="text-amber-500/70 dark:text-amber-400/70">
+                  <Quote className="w-10 h-10 opacity-60" />
                 </div>
-
-                <div className="bg-[var(--bg-card-subtle)] border-l-4 border-amber-400 rounded-r-2xl p-4 text-xs sm:text-sm text-[var(--text-muted)] italic">
-                  <div className="text-[11px] font-bold text-amber-500 dark:text-amber-400 not-italic uppercase tracking-wider mb-1 flex items-center space-x-1.5">
-                    <MessageSquare className="w-3.5 h-3.5" />
-                    <span>Restituzione di Alan Mattiassi, PhD:</span>
-                  </div>
-                  &ldquo;Straordinario lavoro sulla misurabilità degli indicatori comportamentali. Marco ha definito con lucidità cosa osservare al tavolo prima ancora di concepire le carte di gioco, traducendo una criticità aziendale complessa in un&apos;esperienza formativa misurabile.&rdquo;
-                </div>
+                <blockquote className="text-sm sm:text-base md:text-lg text-[var(--text-main)] leading-relaxed italic space-y-3">
+                  <p>
+                    &ldquo;In azienda tutti parlano di gamification, ma quasi sempre si finisce per attaccare punti e classifiche superficiali su processi noiosi. Il laboratorio di Alan ha ribaltato completamente la mia prospettiva: abbiamo lavorato sui processi cognitivi reali e sulla cooperazione vincolata.
+                  </p>
+                  <p>
+                    Il gioco <strong>«CrossTalk: Il Paradosso della Consegna»</strong>, che ho ideato durante il percorso, ha permesso ai team manageriali di toccare con mano le dinamiche di disimpegno e le strozzature operative tra reparti. I partecipanti escono dalla sessione non solo motivati, ma con una consapevolezza immediata e misurabile dei propri schemi decisionali al tavolo.&rdquo;
+                  </p>
+                </blockquote>
               </div>
+
             </div>
           </article>
 
-          {/* Studente 3: Terzo Settore / Pedagogia */}
-          <article className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border-color)] p-6 sm:p-8 shadow-xl hover:border-amber-400/40 transition-all">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-              <div className="lg:col-span-4 space-y-4 border-b lg:border-b-0 lg:border-r border-[var(--border-color)] pb-6 lg:pb-0 lg:pr-6">
-                <div className="flex items-center space-x-4">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-400/20 to-sky-400/20 border border-purple-400/30 flex items-center justify-center font-bold text-purple-500 dark:text-purple-400 text-xl shrink-0">
-                    SM
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-base text-[var(--text-main)]">Dott.ssa Sara Moretti</h3>
-                    <p className="text-xs text-[var(--text-muted)]">Pedagogista &amp; Coord. Servizi</p>
-                    <p className="text-[11px] text-[var(--text-subtle)]">Terzo Settore &amp; Servizi Minori</p>
+          {/* Studente 3: Terzo Settore / Pedagogia - Sara Moretti */}
+          <article className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border-color)] p-6 sm:p-8 md:p-10 shadow-xl hover:border-amber-400/40 transition-all">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+              
+              {/* Sinistra: Foto in grande con AM Gold in alto a destra, Nome e Ruolo sotto */}
+              <div className="md:col-span-5 lg:col-span-4 flex flex-col items-center md:items-start text-center md:text-left space-y-4">
+                <div className="relative w-full max-w-[280px] md:max-w-none aspect-[4/5] rounded-2xl overflow-hidden shadow-lg border border-[var(--border-color)]">
+                  <Image
+                    src="/images/testimonials/sara-moretti.jpg"
+                    alt="Dott.ssa Sara Moretti"
+                    fill
+                    sizes="(max-width: 768px) 280px, 320px"
+                    className="object-cover object-top"
+                  />
+                  <div
+                    className="absolute -top-2.5 -right-2.5 w-9 h-9 sm:w-10 sm:h-10 z-20 drop-shadow-lg pointer-events-none"
+                    title="Sigillo AM Gold"
+                  >
+                    <Image
+                      src="/images/AMgold.png"
+                      alt="Sigillo AM Gold"
+                      width={40}
+                      height={40}
+                      className="w-full h-full object-contain"
+                    />
                   </div>
                 </div>
 
-                <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-400/40 text-amber-500 dark:text-amber-400 text-xs font-semibold">
-                  <Medal className="w-3.5 h-3.5" />
-                  <span>Progetto Validato con Eccellenza</span>
-                </div>
-
-                <div className="text-xs text-[var(--text-muted)] bg-[var(--bg-surface)] p-3 rounded-xl border border-[var(--border-color)] space-y-1">
-                  <span className="font-semibold text-[var(--text-main)] block">Contesto di applicazione:</span>
-                  <span>Laboratori pomeridiani per minori 9-13 anni con difficoltà di autoregolazione emotiva.</span>
+                <div className="space-y-1">
+                  <h3 className="font-bold text-lg sm:text-xl text-[var(--text-main)]">
+                    Dott.ssa Sara Moretti
+                  </h3>
+                  <p className="text-xs sm:text-sm font-medium text-purple-500 dark:text-purple-400">
+                    Pedagogista &amp; Coordinatrice Servizi
+                  </p>
+                  <p className="text-xs text-[var(--text-subtle)]">
+                    Terzo Settore &amp; Servizi Minori
+                  </p>
                 </div>
               </div>
 
-              <div className="lg:col-span-8 space-y-4">
-                <div>
-                  <div className="text-xs font-semibold text-purple-500 dark:text-purple-400 uppercase tracking-wider font-mono mb-1">
-                    Progetto Validato
-                  </div>
-                  <h4 className="font-bold text-xl text-[var(--text-main)] mb-2">
-                    &laquo;La Rotta delle Emozioni&raquo;
-                  </h4>
-                  <div className="text-sm text-[var(--text-muted)] space-y-2 leading-relaxed">
-                    <p>
-                      <strong>Obiettivo Formativo:</strong> Sviluppare il monitoraggio metacognitivo e l&apos;attribuzione causale non difensiva di fronte all&apos;errore e agli imprevisti.
-                    </p>
-                    <p>
-                      <strong>Architettura del Gioco:</strong> Ciclo iterativo a tappe con carte imprevisto e token &ldquo;rivelazione&rdquo;. Protocollo di debriefing maieutico in 3 fasi integrato direttamente nella plancia.
-                    </p>
-                  </div>
+              {/* Destra: Quote in parole sue */}
+              <div className="md:col-span-7 lg:col-span-8 flex flex-col justify-center space-y-4 md:border-l md:border-[var(--border-color)] md:pl-8 lg:pl-10">
+                <div className="text-amber-500/70 dark:text-amber-400/70">
+                  <Quote className="w-10 h-10 opacity-60" />
                 </div>
-
-                <div className="bg-[var(--bg-card-subtle)] border-l-4 border-amber-400 rounded-r-2xl p-4 text-xs sm:text-sm text-[var(--text-muted)] italic">
-                  <div className="text-[11px] font-bold text-amber-500 dark:text-amber-400 not-italic uppercase tracking-wider mb-1 flex items-center space-x-1.5">
-                    <MessageSquare className="w-3.5 h-3.5" />
-                    <span>Restituzione di Alan Mattiassi, PhD:</span>
-                  </div>
-                  &ldquo;Un perfetto equilibrio tra le barriere invalicabili del setting pedagogico e la libertà di sperimentazione protetta dal cerchio magico del gioco. Sara ha dimostrato come la psicologia cognitiva del gioco possa supportare la crescita emotiva senza mai risultare moralistica.&rdquo;
-                </div>
+                <blockquote className="text-sm sm:text-base md:text-lg text-[var(--text-main)] leading-relaxed italic space-y-3">
+                  <p>
+                    &ldquo;Lavorando con minori tra i 9 e i 13 anni con difficoltà di autoregolazione, il rischio più grande è proporre attività che suonino forzatamente pedagogiche o moralistiche. Grazie al metodo appreso nel laboratorio, ho strutturato <strong>«La Rotta delle Emozioni»</strong> creando uno spazio protetto in cui l&apos;errore non è un fallimento morale ma un dato di gioco da analizzare senza difese.
+                  </p>
+                  <p>
+                    Il protocollo di debriefing maieutico che abbiamo perfezionato durante il corso è diventato un punto di riferimento per tutta la nostra équipe educativa, permettendoci di collegare quanto vissuto al tavolo alla realtà quotidiana dei ragazzi.&rdquo;
+                  </p>
+                </blockquote>
               </div>
+
             </div>
           </article>
 
