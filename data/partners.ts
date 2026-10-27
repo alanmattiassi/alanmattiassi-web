@@ -19,6 +19,12 @@ export const partners: Partner[] = [
     "description": "Docenze universitarie (Scienze e Tecnologie Multimediali) e tesi di laurea"
   },
   {
+    "name": "Università di Padova",
+    "category": "Atenei & Ricerca",
+    "logo": "/images/universita-padova.png",
+    "description": "Collaborazioni seminariali, divulgazione scientifica e ricerca sui processi decisionali nel gioco"
+  },
+  {
     "name": "Università degli Studi di Firenze",
     "category": "Atenei & Ricerca",
     "logo": "/images/unifi.png",
@@ -49,22 +55,28 @@ export const partners: Partner[] = [
     "description": "Corsi e masterclass certificate sul valore educativo e cognitivo del gioco"
   },
   {
+    "name": "IRES FVG",
+    "category": "Education & Scuole",
+    "logo": "/images/ires-fvg.png",
+    "description": "Progettazione formativa, percorsi di sviluppo professionale e apprendimento permanente"
+  },
+  {
+    "name": "Redrim",
+    "category": "Aziende & Consulenza",
+    "logo": "/images/redrim.png",
+    "description": "Co-progettazione di strumenti ludici decisionali (Desido) e innovazione organizzativa"
+  },
+  {
+    "name": "TECH4I",
+    "category": "Aziende & Consulenza",
+    "logo": "/images/tech4i.png",
+    "description": "Hub di innovazione tecnologica, trasformazione digitale e supporto all'ecosistema imprenditoriale"
+  },
+  {
     "name": "Drimlab",
     "category": "Aziende & Consulenza",
     "logo": "/images/drimlab-logo_1683128418.jpg",
     "description": "Advisory scientifico continuativo su psicologia del gioco e behavioral dynamics"
-  },
-  {
-    "name": "OIKOS ETS",
-    "category": "Enti & Terzo Settore",
-    "logo": "/images/logo_oikos-1.png",
-    "description": "Formazione specialistica su gioco, interculturalità e mediazione"
-  },
-  {
-    "name": "Medipass",
-    "category": "Sanità & Health",
-    "logo": "/images/medipass_logo.jpeg",
-    "description": "Formazione manageriale e dinamiche di gruppo in ambito sanitario"
   },
   {
     "name": "Willeasy",
@@ -73,16 +85,28 @@ export const partners: Partner[] = [
     "description": "Consulenza strategica su usabilità inclusiva ed engagement"
   },
   {
-    "name": "Cooperativa Sociale Il Piccolo Principe",
-    "category": "Enti & Terzo Settore",
-    "logo": "/images/piccoloprincipe.png",
-    "description": "Percorsi educativi territoriali e inclusione attraverso il gioco da tavolo"
+    "name": "Creaa",
+    "category": "Aziende & Consulenza",
+    "logo": "/images/creaa.png",
+    "description": "Comunicazione scientifica strategica e laboratori di co-design"
   },
   {
-    "name": "Comune di Pordenone",
-    "category": "Istituzioni Pubbliche",
-    "logo": "/images/comune-pn.jpeg",
-    "description": "Progetto Pordenone Città Futura e progettazione partecipata"
+    "name": "TimeNet",
+    "category": "Aziende & Consulenza",
+    "logo": "/images/timenet.jpeg",
+    "description": "Workshop di team building e leadership strategica basata sul gioco"
+  },
+  {
+    "name": "Tambù",
+    "category": "Game Industry",
+    "logo": "/images/tambu.jpg",
+    "description": "Analisi psicologica di game design e playtesting"
+  },
+  {
+    "name": "Medipass",
+    "category": "Sanità & Health",
+    "logo": "/images/medipass_logo.jpeg",
+    "description": "Formazione manageriale e dinamiche di gruppo in ambito sanitario"
   },
   {
     "name": "ASUGI",
@@ -97,27 +121,51 @@ export const partners: Partner[] = [
     "description": "Interventi formativi e benessere organizzativo"
   },
   {
+    "name": "Cooperativa Itaca Soc.coop.soc.onlus",
+    "category": "Enti & Terzo Settore",
+    "logo": "/images/cooperativa-itaca.png",
+    "description": "Formazione specialistica per educatori su game-based learning e prevenzione (Free to Choose)"
+  },
+  {
+    "name": "Cooperativa Sociale Il Piccolo Principe",
+    "category": "Enti & Terzo Settore",
+    "logo": "/images/piccoloprincipe.png",
+    "description": "Percorsi educativi territoriali e inclusione attraverso il gioco da tavolo"
+  },
+  {
+    "name": "IO CI VADO APS",
+    "category": "Enti & Terzo Settore",
+    "logo": "/images/io-ci-vado.png",
+    "description": "Inclusione sociale, accessibilità universale e progetti di mobilità per persone con disabilità"
+  },
+  {
+    "name": "F.Lu.S. FORO LUDICO SPILIMBERGHESE APS",
+    "category": "Enti & Terzo Settore",
+    "logo": "/images/flus-spilimbergo.png",
+    "description": "Promozione della cultura ludica, gestione della ludoteca permanente e animazione comunitaria"
+  },
+  {
+    "name": "OIKOS ETS",
+    "category": "Enti & Terzo Settore",
+    "logo": "/images/logo_oikos-1.png",
+    "description": "Formazione specialistica su gioco, interculturalità e mediazione"
+  },
+  {
     "name": "AVIS",
     "category": "Enti & Terzo Settore",
     "logo": "/images/avis.png",
     "description": "Progetti di sensibilizzazione e gamification associativa"
   },
   {
-    "name": "Creaa",
-    "category": "Aziende & Consulenza",
-    "logo": "/images/creaa.png",
-    "description": "Comunicazione scientifica strategica e laboratori di co-design"
+    "name": "Comune di Spilimbergo",
+    "category": "Istituzioni Pubbliche",
+    "logo": "/images/comune-spilimbergo.png",
+    "description": "Iniziative di co-progettazione territoriale, politiche giovanili e promozione culturale"
   },
   {
-    "name": "Tambù",
-    "category": "Game Industry",
-    "logo": "/images/tambu.jpg",
-    "description": "Analisi psicologica di game design e playtesting"
-  },
-  {
-    "name": "TimeNet",
-    "category": "Aziende & Consulenza",
-    "logo": "/images/timenet.jpeg",
-    "description": "Workshop di team building e leadership strategica basata sul gioco"
+    "name": "Comune di Pordenone",
+    "category": "Istituzioni Pubbliche",
+    "logo": "/images/comune-pn.jpeg",
+    "description": "Progetto Pordenone Città Futura e progettazione partecipata"
   }
 ];

@@ -21,7 +21,14 @@ export default function PartnersGrid() {
   const filtered = partners.filter((p) => {
     if (activeFilter === "all") return true;
     if (activeFilter === "Sanità & Health") {
-      return p.category === "Sanità & Health" || p.category === "Enti & Terzo Settore";
+      return (
+        p.category === "Sanità & Health" ||
+        p.category === "Enti & Terzo Settore" ||
+        p.category === "Istituzioni Pubbliche"
+      );
+    }
+    if (activeFilter === "Aziende & Consulenza") {
+      return p.category === "Aziende & Consulenza" || p.category === "Game Industry";
     }
     return p.category === activeFilter;
   });
@@ -67,6 +74,7 @@ export default function PartnersGrid() {
           {filtered.map((partner, idx) => (
             <div
               key={idx}
+              title={partner.description ? `${partner.name} — ${partner.description}` : partner.name}
               className="group p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[var(--border-strong)] transition-all flex flex-col items-center text-center justify-between space-y-3"
             >
               <div className="w-16 h-16 sm:w-20 sm:h-20 relative flex items-center justify-center p-2 rounded-lg bg-[var(--bg-card-subtle)] border border-[var(--border-color)] group-hover:scale-105 transition-transform">
