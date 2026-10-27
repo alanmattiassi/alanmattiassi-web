@@ -294,8 +294,22 @@ export default function ProgettareGiochiCheInsegnanoPage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
               <div className="lg:col-span-4 space-y-4 border-b lg:border-b-0 lg:border-r border-[var(--border-color)] pb-6 lg:pb-0 lg:pr-6">
                 <div className="flex items-center space-x-4">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-400/20 to-teal-400/20 border border-[var(--accent-primary)]/30 flex items-center justify-center font-bold text-[var(--accent-primary)] text-xl shrink-0">
-                    EV
+                  <div className="relative shrink-0">
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-400/20 to-teal-400/20 border border-[var(--accent-primary)]/30 flex items-center justify-center font-bold text-[var(--accent-primary)] text-xl shrink-0">
+                      EV
+                    </div>
+                    <div
+                      className="absolute -top-2.5 -right-2.5 w-7 h-7 z-10 drop-shadow-md pointer-events-none"
+                      title="Progetto Validato con Eccellenza - Sigillo AM Gold"
+                    >
+                      <Image
+                        src="/images/AMgold.png"
+                        alt="Sigillo AM Gold Eccellenza"
+                        width={28}
+                        height={28}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
                   </div>
                   <div>
                     <h3 className="font-bold text-base text-[var(--text-main)]">Prof.ssa Elena Valenti</h3>
@@ -349,8 +363,22 @@ export default function ProgettareGiochiCheInsegnanoPage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
               <div className="lg:col-span-4 space-y-4 border-b lg:border-b-0 lg:border-r border-[var(--border-color)] pb-6 lg:pb-0 lg:pr-6">
                 <div className="flex items-center space-x-4">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400/20 to-sky-400/20 border border-emerald-400/30 flex items-center justify-center font-bold text-emerald-500 dark:text-emerald-400 text-xl shrink-0">
-                    MD
+                  <div className="relative shrink-0">
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400/20 to-sky-400/20 border border-emerald-400/30 flex items-center justify-center font-bold text-emerald-500 dark:text-emerald-400 text-xl shrink-0">
+                      MD
+                    </div>
+                    <div
+                      className="absolute -top-2.5 -right-2.5 w-7 h-7 z-10 drop-shadow-md pointer-events-none"
+                      title="Progetto Validato con Eccellenza - Sigillo AM Gold"
+                    >
+                      <Image
+                        src="/images/AMgold.png"
+                        alt="Sigillo AM Gold Eccellenza"
+                        width={28}
+                        height={28}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
                   </div>
                   <div>
                     <h3 className="font-bold text-base text-[var(--text-main)]">Dott. Marco De Angelis</h3>

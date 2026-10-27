@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import {
   Award,
@@ -91,7 +92,7 @@ export default function CertificatesRegistryClient() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="bg-[var(--bg-card)] border border-amber-400/30 rounded-2xl p-5 sm:p-6 space-y-3">
           <div className="flex items-center space-x-2 text-amber-500 dark:text-amber-400 text-xs font-bold uppercase tracking-wider">
-            <Medal className="w-4 h-4" />
+            <Image src="/images/AMgold.png" alt="Sigillo AM Gold" width={20} height={20} className="w-5 h-5 object-contain shrink-0" />
             <span>Certificato di Eccellenza</span>
           </div>
           <h3 className="font-bold text-base text-[var(--text-main)]">
@@ -212,7 +213,7 @@ export default function CertificatesRegistryClient() {
             <div>
               Tipologia:{" "}
               {verifiedCert.type === "eccellenza" ? (
-                <span className="font-bold text-amber-500 dark:text-amber-400">Certificato di Eccellenza (Progetto Validato)</span>
+                <span className="inline-flex items-center space-x-1.5 font-bold text-amber-500 dark:text-amber-400"><Image src="/images/AMgold.png" alt="AM Gold" width={18} height={18} className="w-4 h-4 object-contain" /><span>Certificato di Eccellenza (Progetto Validato)</span></span>
               ) : (
                 <span className="font-bold text-sky-500">Attestato di Partecipazione</span>
               )}
@@ -260,18 +261,34 @@ export default function CertificatesRegistryClient() {
                 >
                   <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
                     <div className="flex items-start space-x-3.5">
-                      <div
-                        className={`w-12 h-12 rounded-xl flex items-center justify-center font-bold text-base shrink-0 border ${
-                          isEccellenza
-                            ? "bg-amber-500/10 border-amber-400/30 text-amber-500 dark:text-amber-400"
-                            : "bg-sky-500/10 border-sky-400/30 text-[var(--accent-primary)]"
-                        }`}
-                      >
-                        {cert.recipient
-                          .split(" ")
-                          .slice(-2)
-                          .map((n) => n[0])
-                          .join("")}
+                      <div className="relative shrink-0">
+                        <div
+                          className={`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center font-bold text-base shrink-0 border overflow-hidden ${
+                            isEccellenza
+                              ? "bg-amber-500/10 border-amber-400/40 text-amber-500 dark:text-amber-400 shadow-sm"
+                              : "bg-sky-500/10 border-sky-400/30 text-[var(--accent-primary)]"
+                          }`}
+                        >
+                          {cert.recipient
+                            .split(" ")
+                            .slice(-2)
+                            .map((n) => n[0])
+                            .join("")}
+                        </div>
+                        {isEccellenza && (
+                          <div
+                            className="absolute -top-2.5 -right-2.5 w-7 h-7 sm:w-8 sm:h-8 z-10 drop-shadow-md pointer-events-none"
+                            title="Certificato di Eccellenza con Sigillo AM Gold"
+                          >
+                            <Image
+                              src="/images/AMgold.png"
+                              alt="Sigillo AM Gold Eccellenza"
+                              width={32}
+                              height={32}
+                              className="w-full h-full object-contain"
+                            />
+                          </div>
+                        )}
                       </div>
 
                       <div className="space-y-1">
