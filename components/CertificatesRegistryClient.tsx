@@ -92,7 +92,7 @@ export default function CertificatesRegistryClient() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="bg-[var(--bg-card)] border border-amber-400/30 rounded-2xl p-5 sm:p-6 space-y-3">
           <div className="flex items-center space-x-2 text-amber-500 dark:text-amber-400 text-xs font-bold uppercase tracking-wider">
-            <Image src="/images/AMgold.png" alt="Sigillo AM Gold" width={20} height={20} className="w-5 h-5 object-contain shrink-0" />
+            <Image src="/images/AMcoin.png" alt="Sigillo AM Coin" width={20} height={20} className="w-5 h-5 object-contain shrink-0" />
             <span>Certificato di Eccellenza</span>
           </div>
           <h3 className="font-bold text-base text-[var(--text-main)]">
@@ -213,7 +213,7 @@ export default function CertificatesRegistryClient() {
             <div>
               Tipologia:{" "}
               {verifiedCert.type === "eccellenza" ? (
-                <span className="inline-flex items-center space-x-1.5 font-bold text-amber-500 dark:text-amber-400"><Image src="/images/AMgold.png" alt="AM Gold" width={18} height={18} className="w-4 h-4 object-contain" /><span>Certificato di Eccellenza (Progetto Validato)</span></span>
+                <span className="inline-flex items-center space-x-1.5 font-bold text-amber-500 dark:text-amber-400"><Image src="/images/AMcoin.png" alt="AM Coin" width={18} height={18} className="w-4 h-4 object-contain" /><span>Certificato di Eccellenza (Progetto Validato)</span></span>
               ) : (
                 <span className="font-bold text-sky-500">Attestato di Partecipazione</span>
               )}
@@ -278,11 +278,11 @@ export default function CertificatesRegistryClient() {
                         {isEccellenza && (
                           <div
                             className="absolute -top-3.5 -right-3.5 w-9 h-9 sm:w-10 sm:h-10 z-20 drop-shadow-xl pointer-events-none transition-transform hover:scale-110"
-                            title="Certificato di Eccellenza con Sigillo AM Gold"
+                            title="Certificato di Eccellenza con Sigillo AM Coin"
                           >
                             <Image
-                              src="/images/AMgold.png"
-                              alt="Sigillo AM Gold Eccellenza"
+                              src="/images/AMcoin.png"
+                              alt="Sigillo AM Coin Eccellenza"
                               width={40}
                               height={40}
                               className="w-full h-full object-contain filter drop-shadow-md"

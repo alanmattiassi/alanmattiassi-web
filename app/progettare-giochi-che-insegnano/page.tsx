@@ -294,7 +294,7 @@ export default function ProgettareGiochiCheInsegnanoPage() {
           <article className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border-color)] p-6 sm:p-8 md:p-10 shadow-xl hover:border-amber-400/40 transition-all">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
               
-              {/* Sinistra: Foto in grande con AM Gold in alto a destra, Nome e Ruolo sotto */}
+              {/* Sinistra: Foto in grande con AM Coin in alto a destra, Nome e Ruolo sotto */}
               <div className="md:col-span-5 lg:col-span-4 flex flex-col items-center md:items-start text-center md:text-left space-y-4">
                 <div className="relative w-full max-w-[280px] md:max-w-none">
                   {/* Foto con bordo e angoli arrotondati */}
@@ -307,14 +307,14 @@ export default function ProgettareGiochiCheInsegnanoPage() {
                       className="object-cover object-top"
                     />
                   </div>
-                  {/* Logo AM Gold molto più grande e sovraimposto, che esce dai confini della foto nello spazio bianco */}
+                  {/* Logo AM Coin molto più grande e sovraimposto, che esce dai confini della foto nello spazio bianco */}
                   <div
                     className="absolute -top-5 -right-5 sm:-top-6 sm:-right-6 md:-top-7 md:-right-7 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 z-30 drop-shadow-2xl pointer-events-none"
-                    title="Sigillo AM Gold Eccellenza"
+                    title="Sigillo AM Coin Eccellenza"
                   >
                     <Image
-                      src="/images/AMgold.png"
-                      alt="Sigillo AM Gold"
+                      src="/images/AMcoin.png"
+                      alt="Sigillo AM Coin"
                       width={112}
                       height={112}
                       className="w-full h-full object-contain filter drop-shadow-xl"
@@ -358,7 +358,7 @@ export default function ProgettareGiochiCheInsegnanoPage() {
           <article className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border-color)] p-6 sm:p-8 md:p-10 shadow-xl hover:border-amber-400/40 transition-all">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
               
-              {/* Sinistra: Foto in grande con AM Gold in alto a destra, Nome e Ruolo sotto */}
+              {/* Sinistra: Foto in grande con AM Coin in alto a destra, Nome e Ruolo sotto */}
               <div className="md:col-span-5 lg:col-span-4 flex flex-col items-center md:items-start text-center md:text-left space-y-4">
                 <div className="relative w-full max-w-[280px] md:max-w-none">
                   {/* Foto con bordo e angoli arrotondati */}
@@ -371,14 +371,14 @@ export default function ProgettareGiochiCheInsegnanoPage() {
                       className="object-cover object-top"
                     />
                   </div>
-                  {/* Logo AM Gold molto più grande e sovraimposto, che esce dai confini della foto nello spazio bianco */}
+                  {/* Logo AM Coin molto più grande e sovraimposto, che esce dai confini della foto nello spazio bianco */}
                   <div
                     className="absolute -top-5 -right-5 sm:-top-6 sm:-right-6 md:-top-7 md:-right-7 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 z-30 drop-shadow-2xl pointer-events-none"
-                    title="Sigillo AM Gold Eccellenza"
+                    title="Sigillo AM Coin Eccellenza"
                   >
                     <Image
-                      src="/images/AMgold.png"
-                      alt="Sigillo AM Gold"
+                      src="/images/AMcoin.png"
+                      alt="Sigillo AM Coin"
                       width={112}
                       height={112}
                       className="w-full h-full object-contain filter drop-shadow-xl"
@@ -422,7 +422,7 @@ export default function ProgettareGiochiCheInsegnanoPage() {
           <article className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border-color)] p-6 sm:p-8 md:p-10 shadow-xl hover:border-amber-400/40 transition-all">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
               
-              {/* Sinistra: Foto in grande con AM Gold in alto a destra, Nome e Ruolo sotto */}
+              {/* Sinistra: Foto in grande con AM Coin in alto a destra, Nome e Ruolo sotto */}
               <div className="md:col-span-5 lg:col-span-4 flex flex-col items-center md:items-start text-center md:text-left space-y-4">
                 <div className="relative w-full max-w-[280px] md:max-w-none">
                   {/* Foto con bordo e angoli arrotondati */}
@@ -435,14 +435,14 @@ export default function ProgettareGiochiCheInsegnanoPage() {
                       className="object-cover object-top"
                     />
                   </div>
-                  {/* Logo AM Gold molto più grande e sovraimposto, che esce dai confini della foto nello spazio bianco */}
+                  {/* Logo AM Coin molto più grande e sovraimposto, che esce dai confini della foto nello spazio bianco */}
                   <div
                     className="absolute -top-5 -right-5 sm:-top-6 sm:-right-6 md:-top-7 md:-right-7 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 z-30 drop-shadow-2xl pointer-events-none"
-                    title="Sigillo AM Gold Eccellenza"
+                    title="Sigillo AM Coin Eccellenza"
                   >
                     <Image
-                      src="/images/AMgold.png"
-                      alt="Sigillo AM Gold"
+                      src="/images/AMcoin.png"
+                      alt="Sigillo AM Coin"
                       width={112}
                       height={112}
                       className="w-full h-full object-contain filter drop-shadow-xl"
