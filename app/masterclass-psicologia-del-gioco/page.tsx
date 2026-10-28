@@ -340,8 +340,8 @@ export default function MasterclassPage() {
                 <li className="flex items-start space-x-2.5">
                   <CheckCircle2 className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
                   <span>
-                    <strong className="text-[var(--text-main)]">Decision-Making &amp; Bias:</strong> Pensieri lenti e veloci
-                    (Kahneman: System 1 &amp; System 2), euristiche e percezione del rischio.
+                    <strong className="text-[var(--text-main)]">Decision-Making &amp; Bias:</strong> Pensieri lenti e veloci,
+                    euristiche, bias cognitivi e percezione del rischio.
                   </span>
                 </li>
                 <li className="flex items-start space-x-2.5">
