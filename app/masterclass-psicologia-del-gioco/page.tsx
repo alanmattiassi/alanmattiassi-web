@@ -148,7 +148,7 @@ export default function MasterclassPage() {
             href="#programma"
             className="px-5 py-4 rounded-xl font-medium text-sm text-[var(--text-main)] bg-[var(--bg-surface)] border border-[var(--border-color)] hover:border-[var(--border-strong)] transition-all"
           >
-            🧭 Esplora il Programma Completo ↓
+            🧭 Esplora il Programma Provvisorio ↓
           </a>
         </div>
 
@@ -314,7 +314,7 @@ export default function MasterclassPage() {
       <section id="programma" className="max-w-5xl mx-auto px-4 sm:px-8 space-y-12">
         <div className="text-center space-y-2 max-w-3xl mx-auto">
           <div className="text-xs font-bold text-sky-400 uppercase tracking-wider">
-            IL PROGRAMMA COMPLETO DEL WEEKEND
+            IL PROGRAMMA PROVVISORIO DEL WEEKEND
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-main)]">
             Due Giornate Intensive
