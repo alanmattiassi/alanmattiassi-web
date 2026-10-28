@@ -209,12 +209,12 @@ export default function MasterclassPage() {
         </div>
 
         {/* Questa formazione NON è il classico corso */}
-        <div className="space-y-4">
-          <h2 className="text-xl sm:text-2xl font-bold text-[var(--text-main)] text-left">
+        <div className="text-center space-y-4 max-w-2xl mx-auto pt-2">
+          <h2 className="text-xl sm:text-2xl font-bold text-[var(--text-main)] text-center">
             Questa formazione <span className="text-rose-500 dark:text-rose-400 font-black">NON</span> è il classico corso:
           </h2>
 
-          <ul className="space-y-2.5 sm:space-y-3 text-sm sm:text-base leading-relaxed text-[var(--text-muted)]">
+          <ul className="inline-flex flex-col space-y-2.5 sm:space-y-3 text-sm sm:text-base leading-relaxed text-[var(--text-muted)] text-left">
             <li className="flex items-start space-x-3">
               <span className="w-5 h-5 rounded-full bg-rose-500/10 text-rose-500 dark:text-rose-400 flex items-center justify-center shrink-0 mt-0.5">
                 <X className="w-3.5 h-3.5 stroke-[2.5]" />
