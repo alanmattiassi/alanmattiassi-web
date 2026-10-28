@@ -165,16 +165,46 @@ export default function MasterclassPage() {
           <div className="w-14 h-14 rounded-2xl bg-sky-500/10 border border-sky-400/30 text-sky-400 flex items-center justify-center shrink-0">
             <BookOpen className="w-7 h-7" />
           </div>
-          <div className="space-y-1.5 text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
+          <div className="space-y-2.5 text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
             <div className="font-bold text-[var(--text-main)] text-base flex items-center space-x-2">
               <span>La Prima Formazione Integrata con il Manuale &ldquo;Psicologia del Gioco&rdquo; (Hogrefe)</span>
             </div>
             <p>
-              Questa Masterclass nasce in stretta sinergia con la pubblicazione della teoria unificante della psicologia del gioco
-              (pubblicata su <em>Canadian Journal of Experimental Psychology / APA</em>) e con l&apos;uscita del volume di riferimento
-              collettivo edito da <strong>Hogrefe</strong>. L&apos;obiettivo è{" "}
+              Questa Masterclass nasce in stretta sinergia con la pubblicazione della{" "}
+              <Link
+                href="/framework-psicologia-del-gioco"
+                className="text-sky-600 dark:text-sky-400 font-semibold underline underline-offset-2 hover:opacity-80 transition-opacity"
+              >
+                teoria unificante della psicologia del gioco
+              </Link>{" "}
+              (pubblicata su <em>Canadian Journal of Experimental Psychology / APA</em>) e con l&apos;uscita del{" "}
+              <Link
+                href="/libro-psicologia-del-gioco"
+                className="text-sky-600 dark:text-sky-400 font-semibold underline underline-offset-2 hover:opacity-80 transition-opacity"
+              >
+                volume di riferimento collettivo
+              </Link>{" "}
+              edito da <strong>Hogrefe</strong>. L&apos;obiettivo è{" "}
               <strong>trasferire la capacità di progettare architetture mentali ed esperienziali basate su evidenze scientifiche</strong>.
             </p>
+
+            <div className="pt-1 flex flex-wrap items-center gap-3 text-xs font-semibold">
+              <Link
+                href="/libro-psicologia-del-gioco"
+                className="inline-flex items-center space-x-1.5 text-sky-600 dark:text-sky-400 hover:underline"
+              >
+                <span>Scheda del Libro &ldquo;Psicologia del Gioco&rdquo;</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+              <span className="text-[var(--text-subtle)]">&bull;</span>
+              <Link
+                href="/framework-psicologia-del-gioco"
+                className="inline-flex items-center space-x-1.5 text-sky-600 dark:text-sky-400 hover:underline"
+              >
+                <span>Il Paper sul Framework Teorico</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
           </div>
         </div>
 
