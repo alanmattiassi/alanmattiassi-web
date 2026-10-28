@@ -386,7 +386,7 @@ export default function MasterclassPage() {
                   <p>
                     Lavoro a tavoli tematici. Porti il tuo workshop aziendale, prototipo di gioco,
                     attività di team building o unità GBL: analizziamo i loop di gioco,
-                    rimuoviamo i messaggi parassiti e tariamo il carico cognitivo.
+                    rimuoviamo i messaggi parassiti, tariamo il carico cognitivo e progettiamo il debriefing.
                   </p>
                 </div>
 
