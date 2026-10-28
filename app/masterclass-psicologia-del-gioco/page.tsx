@@ -19,6 +19,7 @@ import {
   HelpCircle,
   Award,
   X,
+  Building2,
 } from "lucide-react";
 import MasterclassPriorityForm from "@/components/MasterclassPriorityForm";
 
@@ -517,6 +518,25 @@ export default function MasterclassPage() {
               <p className="text-xs text-slate-400 mt-3 leading-relaxed">
                 Tariffa standard a completamento aula (fino al limite massimo di 18 persone). Deducibile come formazione professionale.
               </p>
+            </div>
+          </div>
+
+          {/* Box B2B / Sponsor / Partnership */}
+          <div className="mt-8 p-6 sm:p-7 rounded-2xl bg-slate-900/90 border border-sky-500/30 text-left space-y-3 relative overflow-hidden">
+            <div className="flex items-center space-x-2 text-sky-400 font-bold text-sm sm:text-base">
+              <Building2 className="w-5 h-5 shrink-0" />
+              <span>Sei un&apos;azienda, un polo di innovazione o un team L&amp;D?</span>
+            </div>
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              Sono disponibili <strong>pacchetti team B2B dedicati</strong> (iscrizione agevolata per 2 o più colleghi con fatturazione aziendale) e un numero limitato di <strong>slot di Partnership &amp; Sponsorship</strong> per legare il vostro brand all&apos;evento, finanziare borse di studio per talenti e portare una sfida reale del vostro contesto nel laboratorio di co-design della domenica.
+            </p>
+            <div className="pt-1">
+              <a
+                href="mailto:alan.mattiassi@gmail.com?subject=Partnership%20Aziendale%20Masterclass"
+                className="inline-flex items-center space-x-1.5 text-xs sm:text-sm font-semibold text-sky-400 hover:text-sky-300 underline underline-offset-4 transition-colors"
+              >
+                <span>Richiedi i dettagli per aziende e partnership &rarr;</span>
+              </a>
             </div>
           </div>
         </div>

@@ -161,6 +161,7 @@ export default function MasterclassPriorityForm() {
               className="w-full px-4 py-3 rounded-xl bg-[var(--bg-canvas)] border border-[var(--border-color)] text-[var(--text-main)] text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all"
             >
               <option value="Formatore / Facilitatore / HR">Formatore / Facilitatore aziendale / HR Specialist</option>
+              <option value="Azienda / HR & L&D / Partner">Azienda / Referente Risorse Umane &amp; L&amp;D / Potenziale Partner</option>
               <option value="Game Designer / Autore">Game Designer / Autore di giochi (analogici o digitali)</option>
               <option value="Consulente di Direzione / Coach">Consulente Organizzativo / Coach</option>
               <option value="Psicologo / Psicoterapeuta">Psicologo / Psicoterapeuta / Clinico</option>
@@ -239,6 +240,16 @@ export default function MasterclassPriorityForm() {
             </span>
             <span>&bull;</span>
             <span>No spam</span>
+          </div>
+
+          <div className="pt-3 text-center text-xs text-[var(--text-muted)] border-t border-[var(--border-color)]">
+            <span>Rappresenti un&apos;azienda e vuoi valutare una partnership o iscrivere un team? </span>
+            <a
+              href="mailto:alan.mattiassi@gmail.com?subject=Info%20Aziende%20e%20Sponsor%20Masterclass"
+              className="text-emerald-500 dark:text-emerald-400 font-semibold underline hover:opacity-80 transition-opacity"
+            >
+              Scrivici direttamente via email
+            </a>
           </div>
         </form>
       )}
