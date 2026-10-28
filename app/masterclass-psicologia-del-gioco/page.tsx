@@ -18,6 +18,7 @@ import {
   ShieldAlert,
   HelpCircle,
   Award,
+  X,
 } from "lucide-react";
 import MasterclassPriorityForm from "@/components/MasterclassPriorityForm";
 
@@ -160,7 +161,7 @@ export default function MasterclassPage() {
       </section>
 
       {/* 2. Authority & Context Banner */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-8">
+      <section className="max-w-5xl mx-auto px-4 sm:px-8 space-y-8">
         <div className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border-color)] p-6 sm:p-8 flex flex-col md:flex-row items-center gap-6 text-left">
           <div className="w-14 h-14 rounded-2xl bg-sky-500/10 border border-sky-400/30 text-sky-400 flex items-center justify-center shrink-0">
             <BookOpen className="w-7 h-7" />
@@ -172,9 +173,58 @@ export default function MasterclassPage() {
             <p>
               Questa Masterclass nasce in stretta sinergia con la pubblicazione della teoria unificante della psicologia del gioco
               (pubblicata su <em>Canadian Journal of Experimental Psychology / APA</em>) e con l&apos;uscita del volume di riferimento
-              collettivo edito da <strong>Hogrefe</strong>. L&apos;obiettivo non è trasmettere nozioni passive, ma
-              <strong> trasferire la capacità di progettare architetture mentali ed esperienziali basate su evidenze scientifiche</strong>.
+              collettivo edito da <strong>Hogrefe</strong>. L&apos;obiettivo è{" "}
+              <strong>trasferire la capacità di progettare architetture mentali ed esperienziali basate su evidenze scientifiche</strong>.
             </p>
+          </div>
+        </div>
+
+        {/* Questa formazione NON è il classico corso */}
+        <div className="space-y-4">
+          <h2 className="text-xl sm:text-2xl font-bold text-[var(--text-main)] text-left">
+            Questa formazione <span className="text-rose-500 dark:text-rose-400 font-black">NON</span> è il classico corso:
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
+            <div className="p-4 sm:p-5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] flex items-start space-x-3.5 hover:border-[var(--border-strong)] transition-colors">
+              <div className="w-6 h-6 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-500 dark:text-rose-400 flex items-center justify-center shrink-0 mt-0.5">
+                <X className="w-3.5 h-3.5 stroke-[2.5]" />
+              </div>
+              <div className="text-xs sm:text-sm leading-relaxed">
+                <span className="font-bold text-[var(--text-main)]">NON è solo nozionistica:</span>{" "}
+                <span className="text-[var(--text-muted)]">ci saranno molti momenti applicativi</span>
+              </div>
+            </div>
+
+            <div className="p-4 sm:p-5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] flex items-start space-x-3.5 hover:border-[var(--border-strong)] transition-colors">
+              <div className="w-6 h-6 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-500 dark:text-rose-400 flex items-center justify-center shrink-0 mt-0.5">
+                <X className="w-3.5 h-3.5 stroke-[2.5]" />
+              </div>
+              <div className="text-xs sm:text-sm leading-relaxed">
+                <span className="font-bold text-[var(--text-main)]">NON si limita ad una banale gamification:</span>{" "}
+                <span className="text-[var(--text-muted)]">andremo ben oltre</span>
+              </div>
+            </div>
+
+            <div className="p-4 sm:p-5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] flex items-start space-x-3.5 hover:border-[var(--border-strong)] transition-colors">
+              <div className="w-6 h-6 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-500 dark:text-rose-400 flex items-center justify-center shrink-0 mt-0.5">
+                <X className="w-3.5 h-3.5 stroke-[2.5]" />
+              </div>
+              <div className="text-xs sm:text-sm leading-relaxed">
+                <span className="font-bold text-[var(--text-main)]">NON è per chi vuole solo far divertire:</span>{" "}
+                <span className="text-[var(--text-muted)]">questo sarà il primo preconcetto che scardineremo</span>
+              </div>
+            </div>
+
+            <div className="p-4 sm:p-5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] flex items-start space-x-3.5 hover:border-[var(--border-strong)] transition-colors">
+              <div className="w-6 h-6 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-500 dark:text-rose-400 flex items-center justify-center shrink-0 mt-0.5">
+                <X className="w-3.5 h-3.5 stroke-[2.5]" />
+              </div>
+              <div className="text-xs sm:text-sm leading-relaxed">
+                <span className="font-bold text-[var(--text-main)]">NON è superficiale:</span>{" "}
+                <span className="text-[var(--text-muted)]">ci addentreremo in profondità nella psicologia dell&apos;esperienza gameful</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
