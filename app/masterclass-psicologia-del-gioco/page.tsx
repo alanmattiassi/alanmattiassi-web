@@ -22,13 +22,13 @@ import {
 import MasterclassPriorityForm from "@/components/MasterclassPriorityForm";
 
 export const metadata: Metadata = {
-  title: "Masterclass in Psicologia del Gioco (Inizio 2027) | Alan Mattiassi, PhD",
+  title: "Masterclass in Psicologia del Gioco: Capire e Progettare Ambienti, Scelte e Apprendimento Profondo | Alan Mattiassi, PhD",
   description:
-    "Weekend intensivo in presenza in Friuli con Alan Mattiassi, PhD. Neurocognizione del gioco e laboratorio di co-design supervisionato su progetti reali. Posti limitati (max 18 iscritti). Priority List aperta con tariffa agevolata a 490€ (invece di 750€) e 48 ore di prelazione.",
+    "Dal funzionamento della mente che gioca alla progettazione di attività game-based per contesti formativi, aziendali ed educativi. Weekend intensivo a inizio 2027 in Friuli (max 18 iscritti) con Alan Mattiassi, PhD. Priority List con tariffa agevolata a 490€ (invece di 750€) e 48 ore di prelazione.",
   openGraph: {
-    title: "Masterclass in Psicologia del Gioco (Inizio 2027) – Priority List Ufficiale",
+    title: "Masterclass in Psicologia del Gioco: Capire e Progettare Ambienti, Scelte e Apprendimento Profondo",
     description:
-      "Weekend intensivo in presenza in Friuli con Alan Mattiassi, PhD. Tariffa agevolata a 490€ (invece di 750€) riservata a chi entra in Priority List con 48 ore di prelazione. Max 18 posti.",
+      "Dal funzionamento della mente che gioca alla progettazione di attività game-based per contesti formativi, aziendali ed educativi. Weekend intensivo con Alan Mattiassi, PhD. Tariffa agevolata a 490€ (invece di 750€) riservata alla Priority List con 48h di prelazione.",
     url: "https://alanmattiassi.com/masterclass-psicologia-del-gioco",
     siteName: "Alan Mattiassi, PhD",
     locale: "it_IT",
@@ -44,9 +44,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Masterclass in Psicologia del Gioco (Inizio 2027) – Priority List",
+    title: "Masterclass in Psicologia del Gioco: Capire e Progettare Ambienti, Scelte e Apprendimento Profondo",
     description:
-      "Tariffa agevolata a 490€ (invece di 750€) con 48 ore di prelazione riservata a chi entra in lista. Solo 18 posti.",
+      "Dal funzionamento della mente che gioca alla progettazione di attività game-based per contesti formativi, aziendali ed educativi. Priority List a 490€ con 48h di prelazione.",
     images: ["/images/profiloam.jpg"],
   },
 };
@@ -64,15 +64,14 @@ export default function MasterclassPage() {
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[var(--text-main)] tracking-tight leading-tight">
           Masterclass in Psicologia del Gioco:<br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-teal-300 to-emerald-400">
-            Dalla Neurocognizione alla Progettazione di Esperienze e Ambienti
+            Capire e Progettare Ambienti, Scelte e Apprendimento Profondo
           </span>
         </h1>
 
         <p className="text-[var(--text-muted)] text-base sm:text-lg max-w-3xl mx-auto leading-relaxed">
-          Un fine settimana immersivo per consulenti, formatori aziendali, HR e game designer.
-          Non una semplice rassegna di giochi o l&apos;ennesima sovrastruttura di punti e badge,
-          ma un percorso scientifico e laboratoriale per padroneggiare il gioco come ambiente
-          psicologico, decisionale e neurocognitivo.
+          Dal funzionamento della mente che gioca alla progettazione di attività game-based per contesti formativi,
+          aziendali ed educativi. Un fine settimana intensivo a numero chiuso per padroneggiare i meccanismi
+          psicologici del gioco applicato al tuo contesto.
         </p>
 
         {/* Priority List Callout Box matching LinkedIn Announcement */}
