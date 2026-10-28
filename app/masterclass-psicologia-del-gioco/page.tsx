@@ -488,7 +488,7 @@ export default function MasterclassPage() {
         <div className="rounded-3xl bg-gradient-to-b from-[#0f1a2e] to-[#0d1424] border border-slate-700/60 p-8 sm:p-12 text-center space-y-8 shadow-2xl">
           <div className="space-y-2 max-w-xl mx-auto">
             <span className="px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold tracking-wider uppercase border border-emerald-500/30">
-              TRACCIABILITÀ &bull; FATTURAZIONE PROFESSIONALE
+              TARIFFE SOSTENIBILI
             </span>
             <h3 className="text-3xl sm:text-4xl font-extrabold text-white">
               Investimento Trasparente
