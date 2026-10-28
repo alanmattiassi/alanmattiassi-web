@@ -466,7 +466,7 @@ export default function MasterclassPage() {
             </h3>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
               Un modello sostenibile pensato per permettere anche a chi viaggia da fuori regione di contenere
-              la spesa complessiva (corso, viaggio e soggiorno) attorno ai 1.000€ totali.
+              la spesa complessiva (corso, viaggio e soggiorno).
             </p>
           </div>
 
