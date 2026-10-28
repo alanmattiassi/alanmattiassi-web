@@ -22,11 +22,11 @@ import {
 import MasterclassPriorityForm from "@/components/MasterclassPriorityForm";
 
 export const metadata: Metadata = {
-  title: "Masterclass in Psicologia del Gioco: Capire e Progettare Ambienti, Scelte e Apprendimento Profondo | Alan Mattiassi, PhD",
+  title: "Masterclass in Psicologia del Gioco – Capire e Progettare Ambienti, Scelte e Apprendimento Profondo | Alan Mattiassi, PhD",
   description:
     "Dal funzionamento della mente che gioca alla progettazione di attività game-based per contesti formativi, aziendali ed educativi. Weekend intensivo a inizio 2027 in Friuli (max 18 iscritti) con Alan Mattiassi, PhD. Priority List con tariffa agevolata a 490€ (invece di 750€) e 48 ore di prelazione.",
   openGraph: {
-    title: "Masterclass in Psicologia del Gioco: Capire e Progettare Ambienti, Scelte e Apprendimento Profondo",
+    title: "Masterclass in Psicologia del Gioco – Capire e Progettare Ambienti, Scelte e Apprendimento Profondo",
     description:
       "Dal funzionamento della mente che gioca alla progettazione di attività game-based per contesti formativi, aziendali ed educativi. Weekend intensivo con Alan Mattiassi, PhD. Tariffa agevolata a 490€ (invece di 750€) riservata alla Priority List con 48h di prelazione.",
     url: "https://alanmattiassi.com/masterclass-psicologia-del-gioco",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Masterclass in Psicologia del Gioco: Capire e Progettare Ambienti, Scelte e Apprendimento Profondo",
+    title: "Masterclass in Psicologia del Gioco – Capire e Progettare Ambienti, Scelte e Apprendimento Profondo",
     description:
       "Dal funzionamento della mente che gioca alla progettazione di attività game-based per contesti formativi, aziendali ed educativi. Priority List a 490€ con 48h di prelazione.",
     images: ["/images/profiloam.jpg"],
@@ -61,12 +61,14 @@ export default function MasterclassPage() {
           <span>ALTA FORMAZIONE PROFESSIONALE &bull; WEEKEND INTENSIVO IN PRESENZA &bull; MAX 18 ISCRITTI</span>
         </div>
 
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[var(--text-main)] tracking-tight leading-tight">
-          Masterclass in Psicologia del Gioco:<br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-teal-300 to-emerald-400">
+        <div className="space-y-3 sm:space-y-4">
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-[var(--text-main)] tracking-tight leading-[1.08]">
+            Masterclass in Psicologia del Gioco
+          </h1>
+          <p className="text-lg sm:text-2xl lg:text-3xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-sky-500 via-teal-500 to-emerald-500 dark:from-sky-400 dark:via-teal-300 dark:to-emerald-400 max-w-4xl mx-auto leading-snug">
             Capire e Progettare Ambienti, Scelte e Apprendimento Profondo
-          </span>
-        </h1>
+          </p>
+        </div>
 
         <p className="text-[var(--text-muted)] text-base sm:text-lg max-w-3xl mx-auto leading-relaxed">
           Dal funzionamento della mente che gioca alla progettazione di attività game-based per contesti formativi,
