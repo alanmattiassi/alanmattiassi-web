@@ -76,13 +76,30 @@ export default function MasterclassPage() {
           psicologici del gioco applicato al tuo contesto.
         </p>
 
-        {/* Priority List Callout Box matching LinkedIn Announcement */}
-        <div className="inline-block p-4 sm:p-5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 max-w-2xl mx-auto text-left sm:text-center space-y-1.5 shadow-sm">
-          <p className="text-xs sm:text-sm text-emerald-700 dark:text-emerald-300 font-bold flex items-center justify-center gap-2">
-            <Sparkles className="w-4 h-4 text-emerald-500 dark:text-emerald-400 shrink-0" />
-            <span>Tariffa agevolata 490€ (invece di 750€) riservata a chi entra in lista</span>
+        {/* Priority List Callout Box with Strikethrough Price */}
+        <div className="inline-flex flex-col items-center justify-center p-5 sm:p-6 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 max-w-2xl mx-auto text-center space-y-2.5 shadow-sm">
+          <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider">
+            <Sparkles className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" />
+            <span>Prezzo Early Bird</span>
+          </div>
+
+          <div className="flex items-baseline justify-center space-x-3 pt-0.5">
+            <span className="text-4xl sm:text-5xl font-black text-emerald-600 dark:text-emerald-400 tracking-tight">
+              490€
+            </span>
+            <span className="text-2xl sm:text-3xl font-semibold text-[var(--text-subtle)] line-through decoration-rose-500/70 decoration-2">
+              750€
+            </span>
+            <span className="text-xs text-[var(--text-muted)] font-medium">
+              + IVA
+            </span>
+          </div>
+
+          <p className="text-sm font-semibold text-[var(--text-main)]">
+            Riservato ai primi ad iscriversi alla Priority List.
           </p>
-          <p className="text-xs text-[var(--text-muted)] leading-relaxed">
+
+          <p className="text-xs text-[var(--text-muted)] leading-relaxed max-w-lg">
             Con <strong>48 ore di prelazione</strong> per assicurarti uno dei <strong>soli 18 posti in presenza</strong> prima dell&apos;apertura pubblica delle iscrizioni.
           </p>
         </div>
