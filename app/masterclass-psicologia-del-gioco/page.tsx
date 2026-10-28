@@ -375,7 +375,7 @@ export default function MasterclassPage() {
               </h3>
 
               <p className="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
-                Il cuore differenziante della Masterclass: quasi un&apos;intera seconda giornata dedicata a lavorare direttamente sui progetti dei partecipanti con la supervisione 1-a-1 di Alan Mattiassi.
+                Il cuore applicativo della Masterclass: quasi un&apos;intera seconda giornata dedicata a lavorare direttamente sui progetti dei partecipanti con la supervisione 1-a-1 di Alan Mattiassi.
               </p>
 
               <div className="space-y-3.5 text-xs sm:text-sm text-[var(--text-muted)]">
