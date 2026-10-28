@@ -105,26 +105,34 @@ export default function MasterclassPage() {
         </div>
 
         {/* Feature Badges Strip */}
-        <div className="pt-2 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm text-[var(--text-muted)] font-medium">
+        <div className="pt-2 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3.5 text-xs sm:text-sm text-[var(--text-muted)] font-medium">
           <span className="inline-flex items-center space-x-1.5 bg-[var(--bg-surface)] px-3 py-1.5 rounded-lg border border-[var(--border-color)]">
             <MapPin className="w-4 h-4 text-emerald-500 dark:text-emerald-400" />
-            <span>Friuli (Udine / Pordenone)</span>
+            <span>Friuli</span>
           </span>
           <span className="inline-flex items-center space-x-1.5 bg-[var(--bg-surface)] px-3 py-1.5 rounded-lg border border-[var(--border-color)]">
             <Calendar className="w-4 h-4 text-amber-500 dark:text-amber-400" />
-            <span>Inizio 2027 (Gennaio / Febbraio)</span>
+            <span>Inizio 2027 (gennaio/febbraio)</span>
           </span>
           <span className="inline-flex items-center space-x-1.5 bg-[var(--bg-surface)] px-3 py-1.5 rounded-lg border border-[var(--border-color)]">
-            <Clock className="w-4 h-4 text-sky-400" />
-            <span>Quasi 2 giorni interi (Sabato + Domenica fino a metà pomeriggio)</span>
+            <Clock className="w-4 h-4 text-sky-500 dark:text-sky-400" />
+            <span>Sabato e domenica</span>
           </span>
           <span className="inline-flex items-center space-x-1.5 bg-[var(--bg-surface)] px-3 py-1.5 rounded-lg border border-[var(--border-color)]">
-            <Users className="w-4 h-4 text-amber-400" />
-            <span>Solo 18 Partecipanti</span>
+            <Users className="w-4 h-4 text-rose-500 dark:text-rose-400" />
+            <span>Massimo 18 partecipanti</span>
           </span>
           <span className="inline-flex items-center space-x-1.5 bg-[var(--bg-surface)] px-3 py-1.5 rounded-lg border border-[var(--border-color)]">
-            <Utensils className="w-4 h-4 text-teal-400" />
-            <span>2 Light Lunch a buffet &amp; Coffee Break inclusi</span>
+            <CheckCircle2 className="w-4 h-4 text-emerald-500 dark:text-emerald-400" />
+            <span>Si parte con 12 iscrizioni</span>
+          </span>
+          <span className="inline-flex items-center space-x-1.5 bg-[var(--bg-surface)] px-3 py-1.5 rounded-lg border border-[var(--border-color)]">
+            <Utensils className="w-4 h-4 text-teal-500 dark:text-teal-400" />
+            <span>2 Light Lunch inclusi</span>
+          </span>
+          <span className="inline-flex items-center space-x-1.5 bg-[var(--bg-surface)] px-3 py-1.5 rounded-lg border border-[var(--border-color)]">
+            <BookOpen className="w-4 h-4 text-indigo-500 dark:text-indigo-400" />
+            <span>Materiale didattico incluso</span>
           </span>
         </div>
 
