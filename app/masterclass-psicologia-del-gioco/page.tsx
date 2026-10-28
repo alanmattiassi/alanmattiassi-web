@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import type { Metadata } from "next";
 import {
   Brain,
   Sparkles,
@@ -10,6 +11,7 @@ import {
   CheckCircle2,
   Clock,
   MapPin,
+  Calendar,
   Utensils,
   BookOpen,
   ArrowRight,
@@ -19,10 +21,34 @@ import {
 } from "lucide-react";
 import MasterclassPriorityForm from "@/components/MasterclassPriorityForm";
 
-export const metadata = {
-  title: "Masterclass in Psicologia del Gioco – Weekend Intensivo in Friuli | Alan Mattiassi, PhD",
+export const metadata: Metadata = {
+  title: "Masterclass in Psicologia del Gioco (Inizio 2027) | Alan Mattiassi, PhD",
   description:
-    "Masterclass intensiva in presenza in Friuli con Alan Mattiassi, PhD. Quasi due giorni interi (Sabato e Domenica fino a metà pomeriggio) tra neurocognizione del gioco e laboratorio applicato di co-design supervisionato. Max 18 posti.",
+    "Weekend intensivo in presenza in Friuli con Alan Mattiassi, PhD. Neurocognizione del gioco e laboratorio di co-design supervisionato su progetti reali. Posti limitati (max 18 iscritti). Priority List aperta con tariffa agevolata a 490€ (invece di 750€) e 48 ore di prelazione.",
+  openGraph: {
+    title: "Masterclass in Psicologia del Gioco (Inizio 2027) – Priority List Ufficiale",
+    description:
+      "Weekend intensivo in presenza in Friuli con Alan Mattiassi, PhD. Tariffa agevolata a 490€ (invece di 750€) riservata a chi entra in Priority List con 48 ore di prelazione. Max 18 posti.",
+    url: "https://alanmattiassi.com/masterclass-psicologia-del-gioco",
+    siteName: "Alan Mattiassi, PhD",
+    locale: "it_IT",
+    type: "website",
+    images: [
+      {
+        url: "/images/profiloam.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Masterclass in Psicologia del Gioco – Alan Mattiassi, PhD",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Masterclass in Psicologia del Gioco (Inizio 2027) – Priority List",
+    description:
+      "Tariffa agevolata a 490€ (invece di 750€) con 48 ore di prelazione riservata a chi entra in lista. Solo 18 posti.",
+    images: ["/images/profiloam.jpg"],
+  },
 };
 
 export default function MasterclassPage() {
@@ -42,18 +68,33 @@ export default function MasterclassPage() {
           </span>
         </h1>
 
-        <p className="text-slate-300 text-base sm:text-lg max-w-3xl mx-auto leading-relaxed">
+        <p className="text-[var(--text-muted)] text-base sm:text-lg max-w-3xl mx-auto leading-relaxed">
           Un fine settimana immersivo per consulenti, formatori aziendali, HR e game designer.
           Non una semplice rassegna di giochi o l&apos;ennesima sovrastruttura di punti e badge,
           ma un percorso scientifico e laboratoriale per padroneggiare il gioco come ambiente
           psicologico, decisionale e neurocognitivo.
         </p>
 
+        {/* Priority List Callout Box matching LinkedIn Announcement */}
+        <div className="inline-block p-4 sm:p-5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 max-w-2xl mx-auto text-left sm:text-center space-y-1.5 shadow-sm">
+          <p className="text-xs sm:text-sm text-emerald-700 dark:text-emerald-300 font-bold flex items-center justify-center gap-2">
+            <Sparkles className="w-4 h-4 text-emerald-500 dark:text-emerald-400 shrink-0" />
+            <span>Tariffa agevolata 490€ (invece di 750€) riservata a chi entra in lista</span>
+          </p>
+          <p className="text-xs text-[var(--text-muted)] leading-relaxed">
+            Con <strong>48 ore di prelazione</strong> per assicurarti uno dei <strong>soli 18 posti in presenza</strong> prima dell&apos;apertura pubblica delle iscrizioni.
+          </p>
+        </div>
+
         {/* Feature Badges Strip */}
         <div className="pt-2 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm text-[var(--text-muted)] font-medium">
           <span className="inline-flex items-center space-x-1.5 bg-[var(--bg-surface)] px-3 py-1.5 rounded-lg border border-[var(--border-color)]">
-            <MapPin className="w-4 h-4 text-emerald-400" />
+            <MapPin className="w-4 h-4 text-emerald-500 dark:text-emerald-400" />
             <span>Friuli (Udine / Pordenone)</span>
+          </span>
+          <span className="inline-flex items-center space-x-1.5 bg-[var(--bg-surface)] px-3 py-1.5 rounded-lg border border-[var(--border-color)]">
+            <Calendar className="w-4 h-4 text-amber-500 dark:text-amber-400" />
+            <span>Inizio 2027 (Gennaio / Febbraio)</span>
           </span>
           <span className="inline-flex items-center space-x-1.5 bg-[var(--bg-surface)] px-3 py-1.5 rounded-lg border border-[var(--border-color)]">
             <Clock className="w-4 h-4 text-sky-400" />
@@ -361,7 +402,7 @@ export default function MasterclassPage() {
               <div className="text-xs uppercase font-bold text-emerald-400 mb-1">Quota Early Bird</div>
               <div className="text-4xl font-extrabold text-white">490€ <span className="text-xs font-normal text-slate-400">+ IVA</span></div>
               <p className="text-xs text-slate-300 mt-3 leading-relaxed">
-                Riservata a chi entra nella Priority List, alla community Patreon e ai primi 6 iscritti. Include i due giorni, laboratorio e catering.
+                Riservata a chi entra nella Priority List con 48 ore di prelazione prima dell&apos;apertura pubblica. Include l&apos;accesso ai due giorni intensivi, laboratorio di co-design e catering completo (2 light lunch a buffet + coffee break continui).
               </p>
             </div>
 
