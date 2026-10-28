@@ -238,8 +238,6 @@ export default function MasterclassPriorityForm() {
               <span>Nessun obbligo di acquisto</span>
             </span>
             <span>&bull;</span>
-            <span>Prelazione 48h assicurata</span>
-            <span>&bull;</span>
             <span>No spam</span>
           </div>
         </form>
