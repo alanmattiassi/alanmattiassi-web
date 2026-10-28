@@ -317,7 +317,7 @@ export default function MasterclassPage() {
             IL PROGRAMMA COMPLETO DEL WEEKEND
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-main)]">
-            Due Giornate Intensive: Dalla Neurocognizione al Co-Design
+            Due Giornate Intensive
           </h2>
           <p className="text-[var(--text-muted)] text-sm sm:text-base leading-relaxed">
             Un percorso intensivo strutturato per accompagnarti dalla comprensione profonda dei meccanismi mentali
