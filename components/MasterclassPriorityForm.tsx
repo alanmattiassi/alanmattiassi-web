@@ -86,7 +86,7 @@ export default function MasterclassPriorityForm() {
             Abbiamo registrato la tua manifestazione d&apos;interesse. Appena chiuderemo il sondaggio delle date
             con la community, riceverai un&apos;email personale con il programma definitivo e{" "}
             <strong className="text-emerald-400 font-semibold">
-              48 ore di prelazione per bloccare il ticket a tariffa agevolata (490€)
+              il link prioritario per bloccare il ticket a tariffa agevolata (490€)
             </strong>{" "}
             prima dell&apos;apertura pubblica.
           </p>

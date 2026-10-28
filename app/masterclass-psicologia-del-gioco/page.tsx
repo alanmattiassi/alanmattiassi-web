@@ -25,11 +25,11 @@ import MasterclassPriorityForm from "@/components/MasterclassPriorityForm";
 export const metadata: Metadata = {
   title: "Masterclass in Psicologia del Gioco – Capire e Progettare Ambienti, Scelte e Apprendimento Profondo | Alan Mattiassi, PhD",
   description:
-    "Dal funzionamento della mente che gioca alla progettazione di attività game-based per contesti formativi, aziendali ed educativi. Weekend intensivo a inizio 2027 in Friuli (max 18 iscritti) con Alan Mattiassi, PhD. Priority List con tariffa agevolata a 490€ (invece di 750€) e 48 ore di prelazione.",
+    "Dal funzionamento della mente che gioca alla progettazione di attività game-based per contesti formativi, aziendali ed educativi. Weekend intensivo a inizio 2027 in Friuli (max 18 iscritti) con Alan Mattiassi, PhD. Priority List con tariffa agevolata a 490€ (invece di 750€).",
   openGraph: {
     title: "Masterclass in Psicologia del Gioco – Capire e Progettare Ambienti, Scelte e Apprendimento Profondo",
     description:
-      "Dal funzionamento della mente che gioca alla progettazione di attività game-based per contesti formativi, aziendali ed educativi. Weekend intensivo con Alan Mattiassi, PhD. Tariffa agevolata a 490€ (invece di 750€) riservata alla Priority List con 48h di prelazione.",
+      "Dal funzionamento della mente che gioca alla progettazione di attività game-based per contesti formativi, aziendali ed educativi. Weekend intensivo con Alan Mattiassi, PhD. Tariffa agevolata a 490€ (invece di 750€) riservata alla Priority List.",
     url: "https://alanmattiassi.com/masterclass-psicologia-del-gioco",
     siteName: "Alan Mattiassi, PhD",
     locale: "it_IT",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Masterclass in Psicologia del Gioco – Capire e Progettare Ambienti, Scelte e Apprendimento Profondo",
     description:
-      "Dal funzionamento della mente che gioca alla progettazione di attività game-based per contesti formativi, aziendali ed educativi. Priority List a 490€ con 48h di prelazione.",
+      "Dal funzionamento della mente che gioca alla progettazione di attività game-based per contesti formativi, aziendali ed educativi. Priority List a 490€ (invece di 750€).",
     images: ["/images/profiloam.jpg"],
   },
 };
@@ -100,7 +100,7 @@ export default function MasterclassPage() {
           </p>
 
           <p className="text-xs text-[var(--text-muted)] leading-relaxed max-w-lg">
-            Con <strong>48 ore di prelazione</strong> per assicurarti uno dei <strong>soli 18 posti in presenza</strong> prima dell&apos;apertura pubblica delle iscrizioni.
+            Per assicurarti uno dei <strong>soli 18 posti in presenza</strong> prima dell&apos;apertura pubblica delle iscrizioni.
           </p>
         </div>
 
