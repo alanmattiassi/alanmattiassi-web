@@ -20,6 +20,7 @@ import {
   Award,
   X,
   Building2,
+  ChevronDown,
 } from "lucide-react";
 import MasterclassPriorityForm from "@/components/MasterclassPriorityForm";
 
@@ -521,24 +522,29 @@ export default function MasterclassPage() {
             </div>
           </div>
 
-          {/* Box B2B / Sponsor / Partnership */}
-          <div className="mt-8 p-6 sm:p-7 rounded-2xl bg-slate-900/90 border border-sky-500/30 text-left space-y-3 relative overflow-hidden">
-            <div className="flex items-center space-x-2 text-sky-400 font-bold text-sm sm:text-base">
-              <Building2 className="w-5 h-5 shrink-0" />
-              <span>Sei un&apos;azienda, un polo di innovazione o un team L&amp;D?</span>
+          {/* Accordion B2B / Sponsor / Partnership */}
+          <details className="group mt-6 max-w-2xl mx-auto rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-slate-700/80 transition-all text-left overflow-hidden">
+            <summary className="flex items-center justify-between p-4 sm:px-5 cursor-pointer list-none select-none text-sky-400 hover:text-sky-300 [&::-webkit-details-marker]:hidden">
+              <div className="flex items-center space-x-2.5 font-semibold text-xs sm:text-sm">
+                <Building2 className="w-4 h-4 shrink-0" />
+                <span>Sei un&apos;azienda, un polo di innovazione o un team L&amp;D?</span>
+              </div>
+              <ChevronDown className="w-4 h-4 shrink-0 text-slate-400 group-open:rotate-180 transition-transform duration-200" />
+            </summary>
+            <div className="px-5 pb-5 pt-2 space-y-3 border-t border-slate-800/80 text-xs sm:text-sm text-slate-300 leading-relaxed">
+              <p>
+                Sono disponibili <strong>pacchetti team B2B dedicati</strong> (iscrizione agevolata per 2 o più colleghi con fatturazione aziendale) e un numero limitato di <strong>slot di Partnership &amp; Sponsorship</strong> per legare il vostro brand all&apos;evento, finanziare borse di studio per talenti e portare una sfida reale del vostro contesto nel laboratorio di co-design della domenica.
+              </p>
+              <div>
+                <a
+                  href="mailto:alan.mattiassi@gmail.com?subject=Partnership%20Aziendale%20Masterclass"
+                  className="inline-flex items-center space-x-1.5 font-semibold text-sky-400 hover:text-sky-300 underline underline-offset-4 transition-colors"
+                >
+                  <span>Richiedi i dettagli per aziende e partnership &rarr;</span>
+                </a>
+              </div>
             </div>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              Sono disponibili <strong>pacchetti team B2B dedicati</strong> (iscrizione agevolata per 2 o più colleghi con fatturazione aziendale) e un numero limitato di <strong>slot di Partnership &amp; Sponsorship</strong> per legare il vostro brand all&apos;evento, finanziare borse di studio per talenti e portare una sfida reale del vostro contesto nel laboratorio di co-design della domenica.
-            </p>
-            <div className="pt-1">
-              <a
-                href="mailto:alan.mattiassi@gmail.com?subject=Partnership%20Aziendale%20Masterclass"
-                className="inline-flex items-center space-x-1.5 text-xs sm:text-sm font-semibold text-sky-400 hover:text-sky-300 underline underline-offset-4 transition-colors"
-              >
-                <span>Richiedi i dettagli per aziende e partnership &rarr;</span>
-              </a>
-            </div>
-          </div>
+          </details>
         </div>
       </section>
 
