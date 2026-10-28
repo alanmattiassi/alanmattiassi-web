@@ -214,47 +214,47 @@ export default function MasterclassPage() {
             Questa formazione <span className="text-rose-500 dark:text-rose-400 font-black">NON</span> è il classico corso:
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
-            <div className="p-4 sm:p-5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] flex items-start space-x-3.5 hover:border-[var(--border-strong)] transition-colors">
-              <div className="w-6 h-6 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-500 dark:text-rose-400 flex items-center justify-center shrink-0 mt-0.5">
+          <ul className="space-y-2.5 sm:space-y-3 text-sm sm:text-base leading-relaxed text-[var(--text-muted)]">
+            <li className="flex items-start space-x-3">
+              <span className="w-5 h-5 rounded-full bg-rose-500/10 text-rose-500 dark:text-rose-400 flex items-center justify-center shrink-0 mt-0.5">
                 <X className="w-3.5 h-3.5 stroke-[2.5]" />
-              </div>
-              <div className="text-xs sm:text-sm leading-relaxed">
-                <span className="font-bold text-[var(--text-main)]">NON è solo nozionistica:</span>{" "}
-                <span className="text-[var(--text-muted)]">ci saranno molti momenti applicativi</span>
-              </div>
-            </div>
+              </span>
+              <span>
+                <strong className="text-[var(--text-main)] font-bold">NON è solo nozionistica:</strong>{" "}
+                ci saranno molti momenti applicativi
+              </span>
+            </li>
 
-            <div className="p-4 sm:p-5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] flex items-start space-x-3.5 hover:border-[var(--border-strong)] transition-colors">
-              <div className="w-6 h-6 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-500 dark:text-rose-400 flex items-center justify-center shrink-0 mt-0.5">
+            <li className="flex items-start space-x-3">
+              <span className="w-5 h-5 rounded-full bg-rose-500/10 text-rose-500 dark:text-rose-400 flex items-center justify-center shrink-0 mt-0.5">
                 <X className="w-3.5 h-3.5 stroke-[2.5]" />
-              </div>
-              <div className="text-xs sm:text-sm leading-relaxed">
-                <span className="font-bold text-[var(--text-main)]">NON si limita ad una banale gamification:</span>{" "}
-                <span className="text-[var(--text-muted)]">andremo ben oltre</span>
-              </div>
-            </div>
+              </span>
+              <span>
+                <strong className="text-[var(--text-main)] font-bold">NON si limita ad una banale gamification:</strong>{" "}
+                andremo ben oltre
+              </span>
+            </li>
 
-            <div className="p-4 sm:p-5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] flex items-start space-x-3.5 hover:border-[var(--border-strong)] transition-colors">
-              <div className="w-6 h-6 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-500 dark:text-rose-400 flex items-center justify-center shrink-0 mt-0.5">
+            <li className="flex items-start space-x-3">
+              <span className="w-5 h-5 rounded-full bg-rose-500/10 text-rose-500 dark:text-rose-400 flex items-center justify-center shrink-0 mt-0.5">
                 <X className="w-3.5 h-3.5 stroke-[2.5]" />
-              </div>
-              <div className="text-xs sm:text-sm leading-relaxed">
-                <span className="font-bold text-[var(--text-main)]">NON è per chi vuole solo far divertire:</span>{" "}
-                <span className="text-[var(--text-muted)]">questo sarà il primo preconcetto che scardineremo</span>
-              </div>
-            </div>
+              </span>
+              <span>
+                <strong className="text-[var(--text-main)] font-bold">NON è per chi vuole solo far divertire:</strong>{" "}
+                questo sarà il primo preconcetto che scardineremo
+              </span>
+            </li>
 
-            <div className="p-4 sm:p-5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] flex items-start space-x-3.5 hover:border-[var(--border-strong)] transition-colors">
-              <div className="w-6 h-6 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-500 dark:text-rose-400 flex items-center justify-center shrink-0 mt-0.5">
+            <li className="flex items-start space-x-3">
+              <span className="w-5 h-5 rounded-full bg-rose-500/10 text-rose-500 dark:text-rose-400 flex items-center justify-center shrink-0 mt-0.5">
                 <X className="w-3.5 h-3.5 stroke-[2.5]" />
-              </div>
-              <div className="text-xs sm:text-sm leading-relaxed">
-                <span className="font-bold text-[var(--text-main)]">NON è superficiale:</span>{" "}
-                <span className="text-[var(--text-muted)]">ci addentreremo in profondità nella psicologia dell&apos;esperienza gameful</span>
-              </div>
-            </div>
-          </div>
+              </span>
+              <span>
+                <strong className="text-[var(--text-main)] font-bold">NON è superficiale:</strong>{" "}
+                ci addentreremo in profondità nella psicologia dell&apos;esperienza gameful
+              </span>
+            </li>
+          </ul>
         </div>
       </section>
 
