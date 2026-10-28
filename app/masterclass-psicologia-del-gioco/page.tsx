@@ -320,7 +320,7 @@ export default function MasterclassPage() {
                   <CheckCircle2 className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
                   <span>
                     <strong className="text-[var(--text-main)]">Il Core Psicologico del Gioco:</strong> Regole come schemi d&apos;azione,
-                    la visione evoluzionistica e gli <em>obiettivi lusori</em> (Bernard Suits).
+                    la visione evoluzionistica e gli <em>obiettivi lusori</em>.
                   </span>
                 </li>
                 <li className="flex items-start space-x-2.5">
