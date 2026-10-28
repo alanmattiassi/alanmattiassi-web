@@ -396,7 +396,7 @@ export default function MasterclassPage() {
                   </div>
                   <p>
                     Playtesting rapido tra tavoli incrociati. Simulazione della facilitazione,
-                    scrittura della scheda di debriefing su misura per il tuo committente e supervisione finale personalizzata.
+                    conduzione del debriefing e supervisione finale personalizzata.
                   </p>
                 </div>
               </div>
