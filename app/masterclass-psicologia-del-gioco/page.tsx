@@ -64,7 +64,8 @@ export default function MasterclassPage() {
 
         <div className="space-y-3 sm:space-y-4">
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-[var(--text-main)] tracking-tight leading-[1.08]">
-            Masterclass in Psicologia del Gioco
+            Masterclass in <br />
+            Psicologia del Gioco
           </h1>
           <p className="text-lg sm:text-2xl lg:text-3xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-sky-500 via-teal-500 to-emerald-500 dark:from-sky-400 dark:via-teal-300 dark:to-emerald-400 max-w-4xl mx-auto leading-snug">
             Capire e Progettare Ambienti, Scelte e Apprendimento Profondo
