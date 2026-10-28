@@ -326,8 +326,8 @@ export default function MasterclassPage() {
                 <li className="flex items-start space-x-2.5">
                   <CheckCircle2 className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
                   <span>
-                    <strong className="text-[var(--text-main)]">Neurobiologia &amp; Play System:</strong> Sistemi di ricompensa,
-                    dopamina, SEEKING system e correlati neurali dell&apos;ingaggio.
+                    <strong className="text-[var(--text-main)]">Neurobiologia del Gioco:</strong> Sistemi di ricompensa,
+                    dopamina, curiosità, esplorazione e correlati neurali dell&apos;ingaggio.
                   </span>
                 </li>
                 <li className="flex items-start space-x-2.5">
