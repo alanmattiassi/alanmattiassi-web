@@ -478,7 +478,7 @@ export default function MasterclassPage() {
               <div className="text-xs uppercase font-bold text-emerald-400 mb-1">Quota Early Bird</div>
               <div className="text-4xl font-extrabold text-white">490€ <span className="text-xs font-normal text-slate-400">+ IVA</span></div>
               <p className="text-xs text-slate-300 mt-3 leading-relaxed">
-                Riservata a chi entra nella Priority List con 48 ore di prelazione prima dell&apos;apertura pubblica. Include l&apos;accesso ai due giorni intensivi, laboratorio di co-design e catering completo (2 light lunch a buffet + coffee break continui).
+                Riservata ai primi che entrano nella Priority List. Include l&apos;accesso ai due giorni intensivi, laboratorio di co-design e catering completo (2 light lunch a buffet + coffee break continui).
               </p>
             </div>
 
