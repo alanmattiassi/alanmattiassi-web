@@ -91,9 +91,7 @@ export default function MasterclassPage() {
             <span className="text-2xl sm:text-3xl font-semibold text-[var(--text-subtle)] line-through decoration-rose-500/70 decoration-2">
               750€
             </span>
-            <span className="text-xs text-[var(--text-muted)] font-medium">
-              + IVA
-            </span>
+
           </div>
 
           <p className="text-sm font-semibold text-[var(--text-main)]">
@@ -476,7 +474,7 @@ export default function MasterclassPage() {
                 Riservato Priority List
               </div>
               <div className="text-xs uppercase font-bold text-emerald-400 mb-1">Quota Early Bird</div>
-              <div className="text-4xl font-extrabold text-white">490€ <span className="text-xs font-normal text-slate-400">+ IVA</span></div>
+              <div className="text-4xl font-extrabold text-white">490€</div>
               <p className="text-xs text-slate-300 mt-3 leading-relaxed">
                 Riservata ai primi che entrano nella Priority List. Include l&apos;accesso ai due giorni intensivi, laboratorio di co-design e catering completo (2 light lunch a buffet + coffee break continui).
               </p>
@@ -484,7 +482,7 @@ export default function MasterclassPage() {
 
             <div className="p-6 rounded-2xl bg-slate-900/50 border border-slate-800">
               <div className="text-xs uppercase font-bold text-slate-400 mb-1">Quota Ordinaria B2B</div>
-              <div className="text-4xl font-extrabold text-white">750€ <span className="text-xs font-normal text-slate-400">+ IVA</span></div>
+              <div className="text-4xl font-extrabold text-white">750€</div>
               <p className="text-xs text-slate-400 mt-3 leading-relaxed">
                 Tariffa standard a completamento aula (fino al limite massimo di 18 persone). Deducibile come formazione professionale.
               </p>

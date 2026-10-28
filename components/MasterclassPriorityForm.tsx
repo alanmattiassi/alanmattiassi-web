@@ -111,7 +111,7 @@ export default function MasterclassPriorityForm() {
             </h3>
             <p className="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
               Compila il modulo per votare la data e garantirti l&apos;accesso prioritario alla tariffa Early Bird a{" "}
-              <strong className="text-[var(--text-main)]">490€ + IVA</strong> (invece di 750€). Nessun vincolo di acquisto.
+              <strong className="text-[var(--text-main)]">490€</strong> (invece di 750€). Nessun vincolo di acquisto.
             </p>
           </div>
 
