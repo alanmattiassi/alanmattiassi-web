@@ -214,7 +214,7 @@ export default function MasterclassSpotlightSection() {
                 <div className="space-y-2.5 pt-2 border-t border-[var(--border-color)] text-xs text-[var(--text-muted)]">
                   <div className="flex items-start space-x-2">
                     <CheckCircle2 className="w-4 h-4 text-emerald-500 dark:text-emerald-400 shrink-0 mt-0.5" />
-                    <span>{isEn ? "Saturday full day + Sunday hands-on lab" : "Sabato full day + domenica laboratorio"}</span>
+                    <span>{isEn ? "From Saturday morning to Sunday afternoon" : "Dal sabato mattina alla domenica pomeriggio"}</span>
                   </div>
                   <div className="flex items-start space-x-2">
                     <CheckCircle2 className="w-4 h-4 text-emerald-500 dark:text-emerald-400 shrink-0 mt-0.5" />
@@ -222,7 +222,7 @@ export default function MasterclassSpotlightSection() {
                   </div>
                   <div className="flex items-start space-x-2">
                     <CheckCircle2 className="w-4 h-4 text-emerald-500 dark:text-emerald-400 shrink-0 mt-0.5" />
-                    <span>{isEn ? "2 buffet light lunches + continuous catering" : "2 light lunch a buffet + coffee station"}</span>
+                    <span>{isEn ? "2 buffet light lunches included" : "2 light lunch a buffet inclusi"}</span>
                   </div>
                   <div className="flex items-start space-x-2">
                     <CheckCircle2 className="w-4 h-4 text-emerald-500 dark:text-emerald-400 shrink-0 mt-0.5" />
