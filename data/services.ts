@@ -50,6 +50,7 @@ export const services: Service[] = [
     shortDesc: "Workshop interattivi, team building scientifico e dinamiche di gruppo per manager, team e organizzazioni complesse.",
     longDesc: "Gamification con basi scientifiche, lontana da banali sistemi a punti. Utilizziamo il gioco come simulatore di complessità per indagare le dinamiche relazionali, rafforzare la leadership orizzontale, analizzare il clima aziendale e allenare il decision making strategico sotto incertezza.",
     benefits: [
+      "Masterclass intensiva in presenza in Psicologia del Gioco (formula weekend con co-design e debriefing)",
       "Team building scientifico fondato sulle dinamiche di gruppo reali",
       "Simulazioni strategiche per decision making e problem solving",
       "Analisi del clima organizzativo ed ergonomia della comunicazione",
@@ -61,6 +62,7 @@ export const services: Service[] = [
     shortDescEn: "Interactive workshops, evidence-based team building, and group dynamics for managers, teams, and complex organizations.",
     longDescEn: "Scientifically grounded gamification, far removed from superficial point systems. We utilize games as complexity simulators to analyze interpersonal dynamics, foster horizontal leadership, evaluate organizational climate, and sharpen strategic decision-making under uncertainty.",
     benefitsEn: [
+      "Flagship in-person Masterclass in Game Psychology (intensive weekend with co-design & debriefing lab)",
       "Evidence-based team building grounded in real group dynamics",
       "Strategic simulations for decision making and problem solving",
       "Organizational climate analysis and communication ergonomics",

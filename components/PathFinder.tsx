@@ -127,6 +127,35 @@ export default function PathFinder() {
           })}
         </div>
 
+        {/* Flagship Masterclass Banner */}
+        <div className="rounded-2xl border-2 border-emerald-500/40 bg-gradient-to-r from-emerald-500/10 via-[var(--bg-card)] to-sky-500/10 p-6 sm:p-8 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-xl relative overflow-hidden">
+          <div className="space-y-2 text-center lg:text-left">
+            <div className="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-600 dark:text-emerald-300 text-xs font-bold uppercase">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>{isEn ? "Flagship In-Person Training ? Early 2027" : "Alta Formazione in Presenza ? Inizio 2027"}</span>
+            </div>
+            <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-main)]">
+              {isEn
+                ? "Masterclass in Game Psychology: Cognition, Choice & Co-Design"
+                : "Masterclass in Psicologia del Gioco: Neurocognizione & Co-Design"}
+            </h3>
+            <p className="text-sm text-[var(--text-muted)] max-w-2xl leading-relaxed">
+              {isEn
+                ? "An intensive in-person weekend in Friuli (max 18 attendees) for corporate trainers, HR professionals, educators, and game designers. 1-on-1 supervision on your real project."
+                : "Fine settimana intensivo in Friuli a numero chiuso (max 18 iscritti) per formatori, consulenti HR, docenti e game designer. Sabato di modelli neurocognitivi e domenica di co-design 1-a-1 sul proprio progetto reale."}
+            </p>
+          </div>
+
+          <div className="flex-shrink-0 flex items-center space-x-3">
+            <Link
+              href="/masterclass-psicologia-del-gioco"
+              className="inline-flex items-center space-x-2 px-6 py-3 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 shadow-lg shadow-emerald-500/25 transition-all hover:scale-105"
+            >
+              <span>{isEn ? "Masterclass & Priority List (490?) ?" : "Scopri la Masterclass (Tariffa 490?) ?"}</span>
+            </Link>
+          </div>
+        </div>
+
         {/* Free YouTube Course Banner */}
         <div className="rounded-2xl border border-amber-500/30 bg-gradient-to-r from-amber-500/10 via-[var(--bg-card)] to-amber-500/10 p-6 sm:p-8 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-xl">
           <div className="space-y-2 text-center lg:text-left">

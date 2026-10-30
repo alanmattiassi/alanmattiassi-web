@@ -57,6 +57,18 @@ export default function HeroSection() {
                     : "Nuovo libro (2026): «Psicologia del gioco» →"}
                 </span>
               </Link>
+
+              <Link
+                href="/masterclass-psicologia-del-gioco"
+                className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-sky-500/15 hover:bg-sky-500/25 border border-sky-500/35 text-sky-600 dark:text-sky-300 text-xs font-bold tracking-wide transition-all group shadow-sm hover:scale-105"
+              >
+                <span className="w-2 h-2 rounded-full bg-sky-500 animate-pulse" />
+                <span>
+                  {isEn
+                    ? "In-Person Masterclass (Early 2027) ?"
+                    : "Masterclass in Presenza (Inizio 2027) ?"}
+                </span>
+              </Link>
             </div>
 
             {/* Main Title & Roles */}
@@ -123,6 +135,14 @@ export default function HeroSection() {
                 >
                   <BookOpen className="w-4 h-4 text-[var(--accent-primary)] group-hover:scale-110 transition-transform" />
                   <span>{isEn ? 'Book "Psychology of Games"' : 'Libro "Psicologia del gioco"'}</span>
+                </Link>
+
+                <Link
+                  href="/masterclass-psicologia-del-gioco"
+                  className="inline-flex items-center space-x-2 px-4 py-3 rounded-xl font-bold text-xs sm:text-sm text-sky-600 dark:text-sky-300 bg-sky-500/10 hover:bg-sky-500/20 border border-sky-500/30 hover:scale-[1.02] transition-all"
+                >
+                  <Sparkles className="w-4 h-4 text-sky-500 dark:text-sky-400" />
+                  <span>{isEn ? "Masterclass (Early 2027)" : "Masterclass (Inizio 2027)"}</span>
                 </Link>
 
                 <a

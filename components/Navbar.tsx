@@ -195,6 +195,22 @@ export default function Navbar() {
             </NextLink>
 
             <NextLink
+              href="/masterclass-psicologia-del-gioco"
+              className={`px-3 py-1.5 rounded-lg transition-colors text-[var(--text-nav-link)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-hover)] ${
+                pathname === "/masterclass-psicologia-del-gioco"
+                  ? "text-[var(--accent-primary)] bg-[var(--bg-card-hover)] font-semibold"
+                  : ""
+              }`}
+            >
+              <span className="inline-flex items-center space-x-1.5">
+                <span>Masterclass</span>
+                <span className="text-[9px] font-extrabold px-1.5 py-0.5 rounded-full bg-sky-500/15 text-sky-600 dark:text-sky-400 border border-sky-500/30">
+                  2027
+                </span>
+              </span>
+            </NextLink>
+
+            <NextLink
               href={isEn ? "/en/talks-interventi" : "/talks-interventi"}
               className={`px-3 py-1.5 rounded-lg transition-colors text-[var(--text-nav-link)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-hover)] ${
                 pathname === (isEn ? "/en/talks-interventi" : "/talks-interventi") ? "text-[var(--accent-primary)] bg-[var(--bg-card-hover)] font-semibold" : ""
@@ -212,6 +228,15 @@ export default function Navbar() {
             >
               {isEn ? "Blog" : "Notizie"}
             </NextLink>
+              <NextLink
+                href="/masterclass-psicologia-del-gioco"
+                className="px-3 py-2.5 rounded-lg text-sky-600 dark:text-sky-400 font-bold hover:bg-[var(--bg-card-hover)] transition-colors flex items-center justify-between"
+              >
+                <span>{isEn ? "In-Person Masterclass" : "Masterclass in Presenza"}</span>
+                <span className="text-[10px] uppercase px-2 py-0.5 rounded-full bg-sky-500/15 border border-sky-500/30">
+                  {isEn ? "Early 2027" : "Inizio 2027"}
+                </span>
+              </NextLink>
           </div>
 
           {/* Action CTAs */}

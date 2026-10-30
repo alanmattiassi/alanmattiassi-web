@@ -9,6 +9,7 @@ import PressSection from "@/components/PressSection";
 import PartnersGrid from "@/components/PartnersGrid";
 import ContactSection from "@/components/ContactSection";
 import BookSpotlightSection from "@/components/BookSpotlightSection";
+import MasterclassSpotlightSection from "@/components/MasterclassSpotlightSection";
 import { services } from "@/data/services";
 import {
   GraduationCap,
@@ -31,6 +32,9 @@ export default function HomePage() {
 
       {/* 2.5 Book Spotlight Announcement */}
       <BookSpotlightSection />
+
+      {/* 2.8 Flagship In-Person Masterclass */}
+      <MasterclassSpotlightSection />
 
       {/* 3. Settori d'Intervento / Ambiti di Applicazione */}
       <section id="ambiti" className="py-24 bg-[var(--bg-canvas)] relative transition-colors">
