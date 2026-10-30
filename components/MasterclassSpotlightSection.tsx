@@ -14,7 +14,9 @@ import {
   Layers,
   Building2,
   Clock,
-  BookOpen
+  BookOpen,
+  Ticket,
+  Compass
 } from "lucide-react";
 import { useLanguage } from "./LanguageProvider";
 
@@ -44,8 +46,8 @@ export default function MasterclassSpotlightSection() {
                   <Sparkles className="w-3.5 h-3.5 text-emerald-500 animate-pulse" />
                   <span>
                     {isEn
-                      ? "PROFESSIONAL TRAINING ? IN-PERSON INTENSIVE WEEKEND ? MAX 18 ATTENDEES"
-                      : "ALTA FORMAZIONE PROFESSIONALE ? WEEKEND INTENSIVO IN PRESENZA ? MAX 18 ISCRITTI"}
+                      ? "PROFESSIONAL TRAINING • IN-PERSON INTENSIVE WEEKEND • MAX 18 ATTENDEES"
+                      : "ALTA FORMAZIONE PROFESSIONALE • WEEKEND INTENSIVO IN PRESENZA • MAX 18 ISCRITTI"}
                   </span>
                 </span>
               </div>
@@ -70,7 +72,7 @@ export default function MasterclassSpotlightSection() {
                     </>
                   ) : (
                     <>
-                      Dal funzionamento della mente che gioca alla progettazione di attivit? game-based per contesti formativi, aziendali ed educativi.
+                      Dal funzionamento della mente che gioca alla progettazione di attività game-based per contesti formativi, aziendali ed educativi.
                       Un fine settimana intensivo a numero chiuso (max 18 iscritti) per padroneggiare i meccanismi psicologici del gioco applicato al tuo contesto professionale.
                     </>
                   )}
@@ -82,7 +84,7 @@ export default function MasterclassSpotlightSection() {
                 <div className="p-4 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)] space-y-1.5 border-t-2 border-t-sky-400">
                   <div className="flex items-center space-x-2 text-sky-500 dark:text-sky-400 font-bold text-xs uppercase tracking-wider">
                     <Brain className="w-4 h-4 shrink-0" />
-                    <span>{isEn ? "Saturday ? Full Day Immersive" : "Sabato ? Full Day Immersivo"}</span>
+                    <span>{isEn ? "Saturday • Full Day Immersive" : "Sabato • Full Day Immersivo"}</span>
                   </div>
                   <div className="font-bold text-[var(--text-main)] text-sm">
                     {isEn ? "Cognitive Models & Game Architecture" : "I Modelli Cognitivi & L'Architettura del Gioco"}
@@ -97,7 +99,7 @@ export default function MasterclassSpotlightSection() {
                 <div className="p-4 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)] space-y-1.5 border-t-2 border-t-emerald-400">
                   <div className="flex items-center space-x-2 text-emerald-500 dark:text-emerald-400 font-bold text-xs uppercase tracking-wider">
                     <Layers className="w-4 h-4 shrink-0" />
-                    <span>{isEn ? "Sunday ? Hands-on Lab" : "Domenica ? Laboratorio Applicato"}</span>
+                    <span>{isEn ? "Sunday • Hands-on Lab" : "Domenica • Laboratorio Applicato"}</span>
                   </div>
                   <div className="font-bold text-[var(--text-main)] text-sm">
                     {isEn ? "Co-Design Lab & 1-on-1 Supervision" : "Laboratorio di Co-Design & Supervisione Continua"}
@@ -148,18 +150,22 @@ export default function MasterclassSpotlightSection() {
                   href="/masterclass-psicologia-del-gioco#priority-list"
                   className="inline-flex items-center space-x-2 px-6 py-4 rounded-xl font-bold text-sm sm:text-base text-white bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 hover:from-emerald-400 hover:to-teal-400 shadow-xl shadow-emerald-500/25 hover:scale-[1.02] active:scale-[0.98] transition-all"
                 >
+                  <Ticket className="w-4 h-4 mr-1.5 shrink-0" />
                   <span>
                     {isEn
-                      ? "??? Join Priority List (Discounted at 490?) ?"
-                      : "??? Unisciti alla Priority List (Posti Scontati a 490?) ?"}
+                      ? "Join Priority List (Discounted at 490€)"
+                      : "Unisciti alla Priority List (Posti Scontati a 490€)"}
                   </span>
+                  <ArrowRight className="w-4 h-4 ml-1.5 shrink-0" />
                 </Link>
 
                 <Link
                   href="/masterclass-psicologia-del-gioco"
                   className="inline-flex items-center space-x-2 px-5 py-4 rounded-xl font-medium text-sm text-[var(--text-main)] bg-[var(--bg-surface)] hover:bg-[var(--bg-card-hover)] border border-[var(--border-color)] hover:border-[var(--border-strong)] transition-all"
                 >
-                  <span>{isEn ? "Explore Tentative Program ?" : "?? Esplora il Programma Provvisorio ?"}</span>
+                  <Compass className="w-4 h-4 mr-1.5 text-emerald-500 shrink-0" />
+                  <span>{isEn ? "Explore Tentative Program" : "Esplora il Programma Provvisorio"}</span>
+                  <ArrowRight className="w-4 h-4 ml-1.5 shrink-0 opacity-70" />
                 </Link>
               </div>
             </div>
@@ -175,10 +181,10 @@ export default function MasterclassSpotlightSection() {
 
                   <div className="flex items-baseline justify-center space-x-3 pt-0.5">
                     <span className="text-4xl sm:text-5xl font-black text-emerald-600 dark:text-emerald-400 tracking-tight">
-                      490?
+                      490€
                     </span>
                     <span className="text-2xl sm:text-3xl font-semibold text-[var(--text-subtle)] line-through decoration-rose-500/70 decoration-2">
-                      750?
+                      750€
                     </span>
                   </div>
 
@@ -217,7 +223,8 @@ export default function MasterclassSpotlightSection() {
                     href="/masterclass-psicologia-del-gioco#priority-list"
                     className="w-full block text-center py-3.5 px-4 rounded-xl font-bold text-xs sm:text-sm text-white bg-emerald-600 hover:bg-emerald-500 transition-colors shadow-md"
                   >
-                    {isEn ? "Block Early Bird Price (490?) ?" : "Blocca la Quota Agevolata (490?) ?"}
+                    <span>{isEn ? "Block Early Bird Price (490€)" : "Blocca la Quota Agevolata (490€)"}</span>
+                    <ArrowRight className="w-4 h-4 shrink-0 inline-block ml-1.5" />
                   </Link>
                 </div>
 

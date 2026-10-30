@@ -110,7 +110,7 @@ export default function AcademyPage() {
             Direttore Scientifico &amp; Docente: <strong className="text-white">Alan Mattiassi, PhD</strong> &bull; Friuli (gennaio/febbraio 2027)
           </div>
           <p className="text-sm text-slate-300 leading-relaxed">
-            Dal funzionamento della mente che gioca alla progettazione di attivit? game-based per contesti formativi, aziendali ed educativi.
+            Dal funzionamento della mente che gioca alla progettazione di attività game-based per contesti formativi, aziendali ed educativi.
             Sabato dedicato all'architettura cognitiva del gioco e domenica laboratorio pratico di co-design con supervisione 1-a-1 sui progetti reali portati dai corsisti.
           </p>
           <div className="pt-2">
@@ -118,7 +118,7 @@ export default function AcademyPage() {
               href="/masterclass-psicologia-del-gioco"
               className="inline-flex items-center space-x-1.5 text-xs sm:text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition-colors"
             >
-              <span>Dettagli programma, date e Priority List (Early Bird 490?) &rarr;</span>
+              <span>Dettagli programma, date e Priority List (Early Bird 490€) &rarr;</span>
             </Link>
           </div>
         </div>

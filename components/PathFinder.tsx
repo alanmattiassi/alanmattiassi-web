@@ -132,7 +132,7 @@ export default function PathFinder() {
           <div className="space-y-2 text-center lg:text-left">
             <div className="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-600 dark:text-emerald-300 text-xs font-bold uppercase">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>{isEn ? "Flagship In-Person Training ? Early 2027" : "Alta Formazione in Presenza ? Inizio 2027"}</span>
+              <span>{isEn ? "Flagship In-Person Training • Early 2027" : "Alta Formazione in Presenza • Inizio 2027"}</span>
             </div>
             <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-main)]">
               Masterclass in Psicologia del Gioco
@@ -152,7 +152,8 @@ export default function PathFinder() {
               href="/masterclass-psicologia-del-gioco"
               className="inline-flex items-center space-x-2 px-6 py-3.5 rounded-xl font-bold text-xs sm:text-sm text-white bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 shadow-lg shadow-emerald-500/25 transition-all hover:scale-105"
             >
-              <span>{isEn ? "Explore Masterclass & Priority List (490?) ?" : "Scopri la Masterclass (Posti Scontati a 490?) ?"}</span>
+              <span>{isEn ? "Explore Masterclass & Priority List (490€)" : "Scopri la Masterclass (Posti Scontati a 490€)"}</span>
+              <ArrowRight className="w-4 h-4 shrink-0 ml-1.5" />
             </Link>
           </div>
         </div>
