@@ -246,25 +246,29 @@ export default function AziendePage() {
           </div>
 
           {/* Box Masterclass Interaziendale B2B */}
-          <div className="p-5 rounded-2xl bg-slate-950/90 border border-sky-500/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div className="space-y-1">
+          <div className="p-6 rounded-2xl bg-slate-950/90 border border-sky-500/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="space-y-1.5">
               <span className="text-[11px] font-bold text-sky-400 uppercase tracking-wider block">
-                ALTA FORMAZIONE INTERAZIENDALE &bull; EARLY 2027
+                ALTA FORMAZIONE INTERAZIENDALE &bull; INIZIO 2027 &bull; MAX 18 ISCRITTI
               </span>
-              <div className="text-lg font-bold text-white">
-                Masterclass in Psicologia del Gioco (Pacchetti Team &amp; Partnership)
+              <div className="text-lg sm:text-xl font-bold text-white">
+                Masterclass in Psicologia del Gioco
               </div>
+              <p className="text-xs font-semibold text-sky-400">
+                Capire e Progettare Ambienti, Scelte e Apprendimento Profondo
+              </p>
               <p className="text-xs text-slate-300 max-w-xl leading-relaxed">
-                Vuoi formare singoli HR specialist o un piccolo team direzionale senza un intero corso in-house? Partecipa alla Masterclass intensiva a numero chiuso (formula weekend con co-design supervisionato e opzioni sponsor).
+                Desideri formare singoli HR specialist o un team direzionale senza un intero corso in-house? Due giornate intensive in presenza in Friuli con laboratorio di co-design sui tuoi progetti reali. Disponibili pacchetti team B2B deducibili e opzioni di sponsorship.
               </p>
             </div>
             <Link
               href="/masterclass-psicologia-del-gioco"
-              className="px-5 py-2.5 rounded-xl font-bold text-xs text-white bg-sky-600 hover:bg-sky-500 transition-colors whitespace-nowrap"
+              className="px-5 py-3 rounded-xl font-bold text-xs text-white bg-sky-600 hover:bg-sky-500 transition-colors whitespace-nowrap"
             >
               Scopri la Masterclass B2B &rarr;
             </Link>
           </div>
+
           <p className="text-xs text-slate-500 italic">
             * Per percorsi modulari a medio termine, academy aziendali continuative o co-progettazione di serious games su misura,
             viene redatto un preventivo dedicato in base alla complessità e agli obiettivi strategici.

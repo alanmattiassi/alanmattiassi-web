@@ -65,8 +65,8 @@ export default function HeroSection() {
                 <span className="w-2 h-2 rounded-full bg-sky-500 animate-pulse" />
                 <span>
                   {isEn
-                    ? "In-Person Masterclass (Early 2027) ?"
-                    : "Masterclass in Presenza (Inizio 2027) ?"}
+                    ? "Masterclass: Game Psychology (Early 2027) ?"
+                    : "Masterclass: Psicologia del Gioco (Inizio 2027) ?"}
                 </span>
               </Link>
             </div>
@@ -142,7 +142,7 @@ export default function HeroSection() {
                   className="inline-flex items-center space-x-2 px-4 py-3 rounded-xl font-bold text-xs sm:text-sm text-sky-600 dark:text-sky-300 bg-sky-500/10 hover:bg-sky-500/20 border border-sky-500/30 hover:scale-[1.02] transition-all"
                 >
                   <Sparkles className="w-4 h-4 text-sky-500 dark:text-sky-400" />
-                  <span>{isEn ? "Masterclass (Early 2027)" : "Masterclass (Inizio 2027)"}</span>
+                  <span>{isEn ? "Masterclass: Game Psychology" : "Masterclass: Psicologia del Gioco"}</span>
                 </Link>
 
                 <a

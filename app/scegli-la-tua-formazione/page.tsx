@@ -61,38 +61,41 @@ export default function ScegliFormazionePage() {
         <div className="p-8 rounded-3xl bg-gradient-to-r from-emerald-950/40 via-[#0d1424] to-sky-950/40 border-2 border-emerald-500/50 space-y-4 shadow-2xl relative overflow-hidden">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="text-xs font-bold px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 uppercase tracking-wider">
-              ?? ALTA FORMAZIONE IN PRESENZA &bull; NUMERO CHIUSO (MAX 18 ISCRITTI)
+              ?? ALTA FORMAZIONE IN PRESENZA &bull; DUE GIORNATE INTENSIVE &bull; MAX 18 ISCRITTI
             </span>
             <span className="text-xs text-slate-300 font-semibold">
-              Friuli (Udine/Pordenone) &bull; Inizio 2027
+              Friuli &bull; Inizio 2027 (gennaio/febbraio)
             </span>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
             <div className="lg:col-span-8 space-y-2">
               <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
-                Masterclass in Psicologia del Gioco: Neurocognizione &amp; Co-Design
+                Masterclass in Psicologia del Gioco
               </h3>
+              <p className="text-sm sm:text-base font-bold text-sky-400">
+                Capire e Progettare Ambienti, Scelte e Apprendimento Profondo
+              </p>
               <p className="text-xs text-emerald-400 font-semibold">
-                Target: Formatori aziendali, HR Specialist, Consulenti, Game Designer, Educatori e Psicologi
+                Target: Formatori &amp; HR Specialist, Game Designer &amp; Creator, Consulenti &amp; Coach, Psicologi &amp; Clinici
               </p>
               <p className="text-sm text-slate-300 leading-relaxed">
-                La formula intensiva 1.5 in presenza che unisce modelli neurocognitivi e supervisione chirurgica 1-a-1:
-                sabato full day sui meccanismi decisionali, bias, play system e debriefing; domenica laboratorio di co-design
-                sul proprio progetto reale (workshop aziendali, corsi didattici o prototipi di gioco).
+                Dal funzionamento della mente che gioca alla progettazione di attivit? game-based per contesti formativi, aziendali ed educativi.
+                Sabato full day immersivo su modelli cognitivi, play system, bias e debriefing; domenica quasi intera seconda giornata di laboratorio
+                di co-design con supervisione continua 1-a-1 di Alan Mattiassi sui tuoi progetti reali.
               </p>
             </div>
 
             <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col items-start lg:items-end justify-center gap-3">
               <div className="text-left lg:text-right">
-                <span className="text-xs text-slate-400 block">Early Bird Priority List</span>
+                <span className="text-xs text-slate-400 block">Prezzo Early Bird (Priority List)</span>
                 <span className="text-3xl font-black text-emerald-400">490 ? <span className="text-lg line-through text-slate-500 font-normal">750 ?</span></span>
               </div>
               <Link
                 href="/masterclass-psicologia-del-gioco"
-                className="px-6 py-3 rounded-xl font-bold text-xs sm:text-sm text-white bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 shadow-lg shadow-emerald-500/25 transition-all text-center w-full sm:w-auto"
+                className="px-6 py-3.5 rounded-xl font-bold text-xs sm:text-sm text-white bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 shadow-lg shadow-emerald-500/25 transition-all text-center w-full sm:w-auto"
               >
-                Scopri la Masterclass &rarr;
+                Scopri la Masterclass (Posti Scontati) &rarr;
               </Link>
             </div>
           </div>

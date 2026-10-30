@@ -232,7 +232,7 @@ export default function Navbar() {
                 href="/masterclass-psicologia-del-gioco"
                 className="px-3 py-2.5 rounded-lg text-sky-600 dark:text-sky-400 font-bold hover:bg-[var(--bg-card-hover)] transition-colors flex items-center justify-between"
               >
-                <span>{isEn ? "In-Person Masterclass" : "Masterclass in Presenza"}</span>
+                <span>{isEn ? "??? Masterclass in Psicologia del Gioco" : "??? Masterclass in Psicologia del Gioco"}</span>
                 <span className="text-[10px] uppercase px-2 py-0.5 rounded-full bg-sky-500/15 border border-sky-500/30">
                   {isEn ? "Early 2027" : "Inizio 2027"}
                 </span>

@@ -96,25 +96,29 @@ export default function AcademyPage() {
         <div className="p-7 rounded-2xl bg-gradient-to-r from-indigo-950/40 via-[#0d1424] to-emerald-950/40 border border-indigo-500/50 space-y-3 shadow-xl">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 uppercase tracking-wider">
-              ALTA FORMAZIONE PROFESSIONALE SPECIALISTICA &bull; 2027
+              ALTA FORMAZIONE PROFESSIONALE SPECIALISTICA &bull; INIZIO 2027
             </span>
-            <span className="text-xs text-indigo-300 font-medium">Weekend Intensivo in Presenza</span>
+            <span className="text-xs text-indigo-300 font-medium">Due Giornate Intensive in Presenza &bull; Max 18 iscritti</span>
           </div>
           <h3 className="text-xl sm:text-2xl font-bold text-white">
-            Masterclass in Psicologia del Gioco: Neurocognizione &amp; Co-Design
+            Masterclass in Psicologia del Gioco
           </h3>
-          <div className="text-xs font-medium text-sky-400">
-            Direttore Scientifico &amp; Docente: Alan Mattiassi, PhD &bull; <span className="text-slate-300">Friuli (Udine/Pordenone)</span>
+          <p className="text-xs sm:text-sm font-semibold text-sky-400">
+            Capire e Progettare Ambienti, Scelte e Apprendimento Profondo
+          </p>
+          <div className="text-xs font-medium text-slate-300">
+            Direttore Scientifico &amp; Docente: <strong className="text-white">Alan Mattiassi, PhD</strong> &bull; Friuli (gennaio/febbraio 2027)
           </div>
           <p className="text-sm text-slate-300 leading-relaxed">
-            Percorso specialistico a numero chiuso (max 18 iscritti) ideato per trasferire l&apos;approccio scientifico della psicologia del gioco nella pratica professionale di formatori, HR, consulenti e game designer. Moduli neurocognitivi e laboratorio di co-design 1-a-1.
+            Dal funzionamento della mente che gioca alla progettazione di attivit? game-based per contesti formativi, aziendali ed educativi.
+            Sabato dedicato all'architettura cognitiva del gioco e domenica laboratorio pratico di co-design con supervisione 1-a-1 sui progetti reali portati dai corsisti.
           </p>
           <div className="pt-2">
             <Link
               href="/masterclass-psicologia-del-gioco"
               className="inline-flex items-center space-x-1.5 text-xs sm:text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition-colors"
             >
-              <span>Dettagli programma, date e Priority List agevolata &rarr;</span>
+              <span>Dettagli programma, date e Priority List (Early Bird 490?) &rarr;</span>
             </Link>
           </div>
         </div>

@@ -135,23 +135,24 @@ export default function PathFinder() {
               <span>{isEn ? "Flagship In-Person Training ? Early 2027" : "Alta Formazione in Presenza ? Inizio 2027"}</span>
             </div>
             <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-main)]">
-              {isEn
-                ? "Masterclass in Game Psychology: Cognition, Choice & Co-Design"
-                : "Masterclass in Psicologia del Gioco: Neurocognizione & Co-Design"}
+              Masterclass in Psicologia del Gioco
             </h3>
-            <p className="text-sm text-[var(--text-muted)] max-w-2xl leading-relaxed">
+            <p className="text-xs sm:text-sm font-semibold text-sky-500 dark:text-sky-400">
+              {isEn ? "Understanding and Designing Environments, Choices, and Deep Learning" : "Capire e Progettare Ambienti, Scelte e Apprendimento Profondo"}
+            </p>
+            <p className="text-xs sm:text-sm text-[var(--text-muted)] max-w-2xl leading-relaxed">
               {isEn
-                ? "An intensive in-person weekend in Friuli (max 18 attendees) for corporate trainers, HR professionals, educators, and game designers. 1-on-1 supervision on your real project."
-                : "Fine settimana intensivo in Friuli a numero chiuso (max 18 iscritti) per formatori, consulenti HR, docenti e game designer. Sabato di modelli neurocognitivi e domenica di co-design 1-a-1 sul proprio progetto reale."}
+                ? "Two intensive in-person days in Friuli (max 18 attendees) for corporate trainers, HR specialists, educators, and game designers. Saturday on cognitive models, Sunday dedicated to hands-on co-design with 1-on-1 supervision on your real project."
+                : "Due giornate intensive in Friuli a numero chiuso (max 18 iscritti) per formatori, HR specialist, game designer, consulenti e psicologi. Sabato di modelli cognitivi e neuroscienze, domenica quasi intera seconda giornata di co-design con supervisione 1-a-1 sui tuoi progetti reali."}
             </p>
           </div>
 
           <div className="flex-shrink-0 flex items-center space-x-3">
             <Link
               href="/masterclass-psicologia-del-gioco"
-              className="inline-flex items-center space-x-2 px-6 py-3 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 shadow-lg shadow-emerald-500/25 transition-all hover:scale-105"
+              className="inline-flex items-center space-x-2 px-6 py-3.5 rounded-xl font-bold text-xs sm:text-sm text-white bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 shadow-lg shadow-emerald-500/25 transition-all hover:scale-105"
             >
-              <span>{isEn ? "Masterclass & Priority List (490?) ?" : "Scopri la Masterclass (Tariffa 490?) ?"}</span>
+              <span>{isEn ? "Explore Masterclass & Priority List (490?) ?" : "Scopri la Masterclass (Posti Scontati a 490?) ?"}</span>
             </Link>
           </div>
         </div>
