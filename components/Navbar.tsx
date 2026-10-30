@@ -157,7 +157,7 @@ export default function Navbar() {
                 pathname === (isEn ? "/en/docenti" : "/docenti") ? "text-[var(--accent-primary)] bg-[var(--bg-card-hover)] font-semibold" : ""
               }`}
             >
-              {isEn ? "Education" : "Docenti & Scuola"}
+              {isEn ? "Education" : "Docenti"}
             </NextLink>
 
             <NextLink
