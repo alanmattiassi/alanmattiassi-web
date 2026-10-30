@@ -80,35 +80,47 @@ export default function MasterclassSpotlightSection() {
               </div>
 
               {/* Due Giornate Intensive Highlights */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1">
-                <div className="p-4 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)] space-y-1.5 border-t-2 border-t-sky-400">
-                  <div className="flex items-center space-x-2 text-sky-500 dark:text-sky-400 font-bold text-xs uppercase tracking-wider">
-                    <Brain className="w-4 h-4 shrink-0" />
-                    <span>{isEn ? "Saturday • Full Day Immersive" : "Sabato • Full Day Immersivo"}</span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1 items-stretch">
+                <div className="p-4 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)] space-y-2 border-t-2 border-t-sky-400 flex flex-col justify-between">
+                  <div className="space-y-1.5">
+                    <div className="flex items-center space-x-2 text-sky-500 dark:text-sky-400 font-bold text-xs uppercase tracking-wider">
+                      <Brain className="w-4 h-4 shrink-0" />
+                      <span>{isEn ? "Saturday • Full Day Immersive" : "Sabato • Full Day Immersivo"}</span>
+                    </div>
+                    <div className="font-bold text-[var(--text-main)] text-sm leading-snug">
+                      {isEn ? (
+                        <>Cognitive Models &amp;<br className="hidden sm:inline" /> Game Architecture</>
+                      ) : (
+                        <>I Modelli Cognitivi &amp;<br className="hidden sm:inline" /> L&apos;Architettura del Gioco</>
+                      )}
+                    </div>
+                    <p className="text-xs text-[var(--text-muted)] leading-relaxed">
+                      {isEn
+                        ? "A full day to debunk gaming myths and explore mental mechanisms: cerebral play system, executive functions, decision biases, procedural rhetoric, and debriefing."
+                        : "Una giornata per smontare i falsi miti e comprendere cosa accade nella mente: play system cerebrale, funzioni esecutive, bias decisionali, retorica procedurale e debriefing."}
+                    </p>
                   </div>
-                  <div className="font-bold text-[var(--text-main)] text-sm">
-                    {isEn ? "Cognitive Models & Game Architecture" : "I Modelli Cognitivi & L'Architettura del Gioco"}
-                  </div>
-                  <p className="text-xs text-[var(--text-muted)] leading-relaxed">
-                    {isEn
-                      ? "Play system, reward circuits, executive functions, decision biases, procedural rhetoric, and metacognitive debriefing."
-                      : "Core psicologico del gioco, play system cerebrale, funzioni esecutive, bias decisionali, retorica procedurale e debriefing."}
-                  </p>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)] space-y-1.5 border-t-2 border-t-emerald-400">
-                  <div className="flex items-center space-x-2 text-emerald-500 dark:text-emerald-400 font-bold text-xs uppercase tracking-wider">
-                    <Layers className="w-4 h-4 shrink-0" />
-                    <span>{isEn ? "Sunday • Hands-on Lab" : "Domenica • Laboratorio Applicato"}</span>
+                <div className="p-4 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)] space-y-2 border-t-2 border-t-emerald-400 flex flex-col justify-between">
+                  <div className="space-y-1.5">
+                    <div className="flex items-center space-x-2 text-emerald-500 dark:text-emerald-400 font-bold text-xs uppercase tracking-wider">
+                      <Layers className="w-4 h-4 shrink-0" />
+                      <span>{isEn ? "Sunday • Hands-on Lab" : "Domenica • Laboratorio Applicato"}</span>
+                    </div>
+                    <div className="font-bold text-[var(--text-main)] text-sm leading-snug">
+                      {isEn ? (
+                        <>Co-Design Lab &amp;<br className="hidden sm:inline" /> Continuous Supervision</>
+                      ) : (
+                        <>Laboratorio di Co-Design &amp;<br className="hidden sm:inline" /> Supervisione Continua</>
+                      )}
+                    </div>
+                    <p className="text-xs text-[var(--text-muted)] leading-relaxed">
+                      {isEn
+                        ? "A full second day working directly on attendees' real projects (corporate workshops, GBL units, game prototypes) with 1-on-1 supervision from Alan Mattiassi."
+                        : "Quasi un'intera seconda giornata dedicata a lavorare direttamente sui progetti dei partecipanti con la supervisione 1-a-1 di Alan Mattiassi."}
+                    </p>
                   </div>
-                  <div className="font-bold text-[var(--text-main)] text-sm">
-                    {isEn ? "Co-Design Lab & 1-on-1 Supervision" : "Laboratorio di Co-Design & Supervisione Continua"}
-                  </div>
-                  <p className="text-xs text-[var(--text-muted)] leading-relaxed">
-                    {isEn
-                      ? "A full second day working directly on attendees' real projects (corporate workshops, GBL units, game prototypes) with Alan Mattiassi."
-                      : "Quasi un'intera seconda giornata dedicata a lavorare direttamente sui progetti dei partecipanti con la supervisione 1-a-1 di Alan Mattiassi."}
-                  </p>
                 </div>
               </div>
 
