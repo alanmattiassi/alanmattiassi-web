@@ -3,7 +3,6 @@ import Link from "next/link";
 import ItFlag from "@/components/icons/ItFlag";
 import {
   Compass,
-  Sparkles,
   Search,
   Eye,
   CheckCircle2,
@@ -211,24 +210,17 @@ export default function EnglishComeLavoroPage() {
         </div>
       </section>
 
-      {/* 4.5 Easter Egg: Explore vs Exploit */}
+      {/* 4.5 Explore vs Exploit */}
       <section className="max-w-4xl mx-auto px-4 sm:px-8">
-        <div className="p-6 rounded-2xl bg-[var(--bg-card,#0b1120)] border border-[var(--border-color,#1e293b)] hover:border-sky-500/30 transition-all flex flex-col sm:flex-row items-center justify-between gap-5 group shadow-lg">
-          <div className="space-y-1.5 text-center sm:text-left">
-            <div className="inline-flex items-center space-x-1.5 text-[11px] font-bold uppercase tracking-wider text-sky-400">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>EASTER EGG &bull; BEHIND THE SCENES</span>
-            </div>
-            <h4 className="text-base font-bold text-[var(--text-main,#ffffff)]">
-              Want to see how I balance research and consulting? There&apos;s a game for that.
+        <div className="p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[var(--accent-primary)] transition-all flex flex-col sm:flex-row items-center justify-between gap-5 group shadow-lg">
+          <div className="text-center sm:text-left">
+            <h4 className="text-base sm:text-lg font-bold text-[var(--text-main)] leading-snug">
+              Want to know how I divide my time between research and application? There&apos;s a game for that.
             </h4>
-            <p className="text-xs text-[var(--text-muted,#94a3b8)] max-w-xl leading-relaxed">
-              An interactive mini-experiment exploring the cognitive dilemma of <em>Explore vs Exploit</em>: uncovering uncharted horizons or harvesting established value?
-            </p>
           </div>
           <Link
             href="/en/explore-exploit"
-            className="flex-shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold text-sky-300 bg-sky-500/10 border border-sky-500/30 hover:bg-sky-500/20 transition-all inline-flex items-center space-x-2 group-hover:border-sky-400/50"
+            className="flex-shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold text-[var(--accent-primary)] bg-[var(--badge-bg)] border border-[var(--badge-border)] hover:bg-[var(--bg-card-hover)] hover:border-[var(--accent-primary)] transition-all inline-flex items-center space-x-2"
           >
             <span>🎮 Play Explore vs Exploit</span>
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
