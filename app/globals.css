@@ -514,12 +514,12 @@ html.light .theme-logo-black {
   --ee-foreground: #23272e;
   --ee-muted: #5c6370;
   --ee-border: #d8d3c8;
-  --ee-explore: #236477;
-  --ee-explore-surface: #e4eff2;
-  --ee-exploit: #9c6314;
-  --ee-exploit-surface: #f5ecdc;
-  --ee-gold: #c98a18;
-  --ee-gold-deep: #8f4e00;
+  --ee-explore: #16a34a;
+  --ee-explore-surface: #dcfce7;
+  --ee-exploit: #ca8a04;
+  --ee-exploit-surface: #fef9c3;
+  --ee-gold: #eab308;
+  --ee-gold-deep: #a16207;
 
   --color-background: var(--ee-bg);
   --color-surface: var(--ee-surface);
