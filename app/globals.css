@@ -503,3 +503,88 @@ html.light .theme-logo-black {
   display: block !important;
 }
 
+
+
+/* ==========================================================================
+   EXPLORE VS EXPLOIT GAME STYLES (EASTER EGG)
+   ========================================================================== */
+.ee-scope {
+  --ee-bg: #f5f2eb;
+  --ee-surface: #fcfbf8;
+  --ee-foreground: #23272e;
+  --ee-muted: #5c6370;
+  --ee-border: #d8d3c8;
+  --ee-explore: #236477;
+  --ee-explore-surface: #e4eff2;
+  --ee-exploit: #9c6314;
+  --ee-exploit-surface: #f5ecdc;
+  --ee-gold: #c98a18;
+  --ee-gold-deep: #8f4e00;
+
+  --color-background: var(--ee-bg);
+  --color-surface: var(--ee-surface);
+  --color-foreground: var(--ee-foreground);
+  --color-muted: var(--ee-muted);
+  --color-border: var(--ee-border);
+  --color-explore: var(--ee-explore);
+  --color-explore-surface: var(--ee-explore-surface);
+  --color-exploit: var(--ee-exploit);
+  --color-exploit-surface: var(--ee-exploit-surface);
+  --color-gold: var(--ee-gold);
+  --color-gold-deep: var(--ee-gold-deep);
+}
+
+.ee-scope .bg-background { background-color: var(--ee-bg); }
+.ee-scope .bg-surface { background-color: var(--ee-surface); }
+.ee-scope .text-foreground { color: var(--ee-foreground); }
+.ee-scope .text-muted { color: var(--ee-muted); }
+.ee-scope .border-border { border-color: var(--ee-border); }
+.ee-scope .bg-explore { background-color: var(--ee-explore); }
+.ee-scope .text-explore { color: var(--ee-explore); }
+.ee-scope .bg-explore-surface { background-color: var(--ee-explore-surface); }
+.ee-scope .bg-exploit { background-color: var(--ee-exploit); }
+.ee-scope .text-exploit { color: var(--ee-exploit); }
+.ee-scope .bg-exploit-surface { background-color: var(--ee-exploit-surface); }
+.ee-scope .bg-gold { background-color: var(--ee-gold); }
+.ee-scope .text-gold { color: var(--ee-gold); }
+.ee-scope .text-gold-deep { color: var(--ee-gold-deep); }
+.ee-scope .rounded-control { border-radius: 0.5rem; }
+.ee-scope .rounded-card { border-radius: 0.75rem; }
+.ee-scope .rounded-xs { border-radius: 0.25rem; }
+.ee-scope .shadow-surface { box-shadow: 0 1px 2px rgba(35, 39, 46, 0.06); }
+.ee-scope .font-display { font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: 700; }
+
+@keyframes floatUpFade {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 0px) scale(0.85);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, -10px) scale(1.04);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -48px) scale(0.95);
+  }
+}
+
+.animate-coin-float {
+  animation: floatUpFade 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes redFlashPulse {
+  0% {
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.65;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-red-flash {
+  animation: redFlashPulse 0.45s ease-out forwards;
+}

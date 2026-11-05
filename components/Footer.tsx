@@ -267,6 +267,14 @@ export default function Footer() {
             >
               {isEn ? "News Archive" : "Archivio News"}
             </Link>
+            <span>&bull;</span>
+            <Link
+              href={isEn ? "/en/explore-exploit" : "/explore-exploit"}
+              className="hover:text-[var(--accent-primary)] transition-colors opacity-75 hover:opacity-100 inline-flex items-center space-x-1"
+              title={isEn ? "Explore vs Exploit (Interactive Game)" : "Explore vs Exploit (Gioco interattivo)"}
+            >
+              <span>🎮 {isEn ? "Explore / Exploit" : "Explore vs Exploit"}</span>
+            </Link>
           </div>
         </div>
       </div>
