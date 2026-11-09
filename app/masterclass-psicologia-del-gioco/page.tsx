@@ -21,17 +21,19 @@ import {
   X,
   Building2,
   ChevronDown,
+  Lock,
+  Ticket,
 } from "lucide-react";
 import MasterclassPriorityForm from "@/components/MasterclassPriorityForm";
 
 export const metadata: Metadata = {
   title: "Masterclass in Psicologia del Gioco – Capire e Progettare Ambienti, Scelte e Apprendimento Profondo | Alan Mattiassi, PhD",
   description:
-    "Dal funzionamento della mente che gioca alla progettazione di attività game-based per contesti formativi, aziendali ed educativi. Weekend intensivo a inizio 2027 in Friuli (max 18 iscritti) con Alan Mattiassi, PhD. Priority List con tariffa agevolata a 490€ (invece di 750€).",
+    "Dal funzionamento della mente che gioca alla progettazione di attività game-based per contesti formativi, aziendali ed educativi. Weekend intensivo 23–24 Gennaio 2027 in Friuli (max 18 iscritti) con Alan Mattiassi, PhD. Prelazione riservata in corso. Quota Ordinaria a 750€.",
   openGraph: {
     title: "Masterclass in Psicologia del Gioco – Capire e Progettare Ambienti, Scelte e Apprendimento Profondo",
     description:
-      "Dal funzionamento della mente che gioca alla progettazione di attività game-based per contesti formativi, aziendali ed educativi. Weekend intensivo con Alan Mattiassi, PhD. Tariffa agevolata a 490€ (invece di 750€) riservata alla Priority List.",
+      "Dal funzionamento della mente che gioca alla progettazione di attività game-based per contesti formativi, aziendali ed educativi. Weekend intensivo 23–24 Gennaio 2027 con Alan Mattiassi, PhD. Prelazione riservata in corso. Quota Ordinaria a 750€.",
     url: "https://alanmattiassi.com/masterclass-psicologia-del-gioco",
     siteName: "Alan Mattiassi, PhD",
     locale: "it_IT",
@@ -49,7 +51,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Masterclass in Psicologia del Gioco – Capire e Progettare Ambienti, Scelte e Apprendimento Profondo",
     description:
-      "Dal funzionamento della mente che gioca alla progettazione di attività game-based per contesti formativi, aziendali ed educativi. Priority List a 490€ (invece di 750€).",
+      "Dal funzionamento della mente che gioca alla progettazione di attività game-based per contesti formativi, aziendali ed educativi. Quota Ordinaria a 750€.",
     images: ["/images/profiloam.jpg"],
   },
 };
@@ -59,9 +61,9 @@ export default function MasterclassPage() {
     <div className="py-12 sm:py-20 space-y-24 bg-[var(--bg-canvas)] transition-colors">
       {/* 1. Hero Section */}
       <section className="max-w-5xl mx-auto px-4 sm:px-8 text-center space-y-6">
-        <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>ALTA FORMAZIONE PROFESSIONALE &bull; WEEKEND INTENSIVO IN PRESENZA &bull; MAX 18 ISCRITTI</span>
+        <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-700 dark:text-amber-400 text-xs font-semibold uppercase tracking-wider">
+          <Lock className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
+          <span>PRELAZIONE RISERVATA IN CORSO &bull; APERTURA PUBBLICA: GIOVEDÌ ORE 12:00</span>
         </div>
 
         <div className="space-y-3 sm:space-y-4">
@@ -80,41 +82,40 @@ export default function MasterclassPage() {
           psicologici del gioco applicato al tuo contesto.
         </p>
 
-        {/* Priority List Callout Box with Strikethrough Price */}
-        <div className="inline-flex flex-col items-center justify-center p-5 sm:p-6 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 max-w-2xl mx-auto text-center space-y-2.5 shadow-sm">
-          <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider">
-            <Sparkles className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" />
-            <span>Prezzo Early Bird</span>
+        {/* Presale Status & Pricing Box */}
+        <div className="inline-flex flex-col items-center justify-center p-5 sm:p-6 rounded-2xl bg-[var(--bg-surface)] border-2 border-amber-500/40 max-w-2xl mx-auto text-center space-y-3 shadow-lg">
+          <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-700 dark:text-amber-400 text-xs font-bold uppercase tracking-wider">
+            <Lock className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
+            <span>Prelazione Riservata (48h) in Corso</span>
           </div>
 
           <div className="flex items-baseline justify-center space-x-3 pt-0.5">
-            <span className="text-4xl sm:text-5xl font-black text-emerald-600 dark:text-emerald-400 tracking-tight">
-              490€
-            </span>
-            <span className="text-2xl sm:text-3xl font-semibold text-[var(--text-subtle)] line-through decoration-rose-500/70 decoration-2">
+            <span className="text-4xl sm:text-5xl font-black text-[var(--text-main)] tracking-tight">
               750€
             </span>
-
+            <span className="text-xs uppercase font-bold text-[var(--text-muted)]">
+              Quota Ordinaria
+            </span>
           </div>
 
-          <p className="text-sm font-semibold text-[var(--text-main)]">
-            Riservato ai primi ad iscriversi alla Priority List.
+          <p className="text-xs sm:text-sm font-semibold text-amber-700 dark:text-amber-400">
+            Posti a tariffa Early Bird (490€) esauriti.
           </p>
 
           <p className="text-xs text-[var(--text-muted)] leading-relaxed max-w-lg">
-            Per assicurarti uno dei <strong>soli 18 posti in presenza</strong> prima dell&apos;apertura pubblica delle iscrizioni.
+            I primi posti a tariffa agevolata sono stati riservati agli iscritti alla Priority List in prelazione esclusiva per 48 ore. I posti residui in aula apriranno pubblicamente <strong>Giovedì alle ore 12:00</strong> a Quota Ordinaria (750€).
           </p>
         </div>
 
         {/* Feature Badges Strip */}
         <div className="pt-2 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3.5 text-xs sm:text-sm text-[var(--text-muted)] font-medium">
           <span className="inline-flex items-center space-x-1.5 bg-[var(--bg-surface)] px-3 py-1.5 rounded-lg border border-[var(--border-color)]">
-            <MapPin className="w-4 h-4 text-emerald-500 dark:text-emerald-400" />
-            <span>Friuli</span>
+            <MapPin className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+            <span>Friuli (Udine/Pordenone)</span>
           </span>
-          <span className="inline-flex items-center space-x-1.5 bg-[var(--bg-surface)] px-3 py-1.5 rounded-lg border border-[var(--border-color)]">
-            <Calendar className="w-4 h-4 text-amber-500 dark:text-amber-400" />
-            <span>Inizio 2027 (gennaio/febbraio)</span>
+          <span className="inline-flex items-center space-x-1.5 bg-[var(--bg-surface)] px-3 py-1.5 rounded-lg border border-amber-500/40 font-semibold text-[var(--text-main)]">
+            <Calendar className="w-4 h-4 text-amber-600 dark:text-amber-400" />
+            <span>23–24 Gennaio 2027</span>
           </span>
           <span className="inline-flex items-center space-x-1.5 bg-[var(--bg-surface)] px-3 py-1.5 rounded-lg border border-[var(--border-color)]">
             <Clock className="w-4 h-4 text-sky-500 dark:text-sky-400" />
@@ -141,16 +142,18 @@ export default function MasterclassPage() {
         {/* Hero CTAs */}
         <div className="pt-4 flex flex-wrap justify-center gap-4">
           <a
-            href="#priority-list"
-            className="px-6 py-4 rounded-xl font-bold text-sm sm:text-base text-white bg-gradient-to-r from-emerald-500 to-teal-600 shadow-xl shadow-emerald-500/25 hover:scale-105 active:scale-95 transition-all"
+            href="#iscrizione"
+            className="inline-flex items-center space-x-2 px-6 py-4 rounded-xl font-bold text-sm sm:text-base text-white bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-400 shadow-xl shadow-amber-500/25 hover:scale-105 active:scale-95 transition-all"
           >
-            🎟️ Unisciti alla Priority List (Posti Scontati a 490€) →
+            <Ticket className="w-4 h-4 mr-1 text-white shrink-0" />
+            <span>Prenota a Quota Ordinaria (750€) →</span>
           </a>
           <a
             href="#programma"
-            className="px-5 py-4 rounded-xl font-medium text-sm text-[var(--text-main)] bg-[var(--bg-surface)] border border-[var(--border-color)] hover:border-[var(--border-strong)] transition-all"
+            className="inline-flex items-center space-x-2 px-5 py-4 rounded-xl font-medium text-sm text-[var(--text-main)] bg-[var(--bg-surface)] border border-[var(--border-color)] hover:border-[var(--border-strong)] transition-all"
           >
-            🧭 Esplora il Programma Provvisorio ↓
+            <Compass className="w-4 h-4 mr-1 text-amber-600 dark:text-amber-400 shrink-0" />
+            <span>Esplora il Programma Provvisorio ↓</span>
           </a>
         </div>
 
@@ -487,58 +490,61 @@ export default function MasterclassPage() {
 
       {/* 6. Pricing & Transparent Model */}
       <section className="max-w-4xl mx-auto px-4 sm:px-8">
-        <div className="rounded-3xl bg-gradient-to-b from-[#0f1a2e] to-[#0d1424] border border-slate-700/60 p-8 sm:p-12 text-center space-y-8 shadow-2xl">
+        <div className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border-color)] p-8 sm:p-12 text-center space-y-8 shadow-xl">
           <div className="space-y-2 max-w-xl mx-auto">
-            <span className="px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold tracking-wider uppercase border border-emerald-500/30">
+            <span className="px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 text-xs font-bold tracking-wider uppercase border border-emerald-500/30">
               TARIFFE SOSTENIBILI
             </span>
-            <h3 className="text-3xl sm:text-4xl font-extrabold text-white">
+            <h3 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-main)]">
               Investimento Trasparente
             </h3>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
               Un modello sostenibile pensato per permettere anche a chi viaggia da fuori regione di contenere
               la spesa complessiva (corso, viaggio e soggiorno).
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-left max-w-2xl mx-auto">
-            <div className="p-6 rounded-2xl bg-slate-900/80 border border-emerald-500/40 relative">
-              <div className="absolute -top-3 right-4 px-2.5 py-0.5 rounded-full bg-emerald-500 text-slate-950 font-bold text-xs uppercase">
-                Riservato Priority List
+            <div className="p-6 rounded-2xl bg-[var(--bg-surface)] border border-emerald-500/40 relative">
+              <div className="absolute -top-3 right-4 px-2.5 py-0.5 rounded-full bg-emerald-600 text-white font-bold text-xs uppercase shadow-sm">
+                Esaurita in Prelazione
               </div>
-              <div className="text-xs uppercase font-bold text-emerald-400 mb-1">Quota Early Bird</div>
-              <div className="text-4xl font-extrabold text-white">490€</div>
-              <p className="text-xs text-slate-300 mt-3 leading-relaxed">
-                Riservata ai primi che entrano nella Priority List. Include l&apos;accesso ai due giorni intensivi, laboratorio di co-design e catering completo (2 light lunch a buffet + coffee break continui).
+              <div className="text-xs uppercase font-bold text-emerald-600 dark:text-emerald-400 mb-1">Quota Early Bird</div>
+              <div className="text-4xl font-extrabold text-[var(--text-main)]">490€</div>
+              <p className="text-xs text-[var(--text-muted)] mt-3 leading-relaxed">
+                Riservata agli iscritti alla Priority List in prelazione 48h. Include l&apos;accesso ai due giorni intensivi, laboratorio di co-design e catering completo (2 light lunch a buffet + coffee break continui).
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-slate-900/50 border border-slate-800">
-              <div className="text-xs uppercase font-bold text-slate-400 mb-1">Quota Ordinaria B2B</div>
-              <div className="text-4xl font-extrabold text-white">750€</div>
-              <p className="text-xs text-slate-400 mt-3 leading-relaxed">
-                Tariffa standard a completamento aula (fino al limite massimo di 18 persone). Deducibile come formazione professionale.
+            <div className="p-6 rounded-2xl bg-[var(--bg-surface)] border-2 border-amber-500/40 relative">
+              <div className="absolute -top-3 right-4 px-2.5 py-0.5 rounded-full bg-amber-500 text-slate-950 font-bold text-xs uppercase shadow-sm">
+                Apertura Giovedì ore 12
+              </div>
+              <div className="text-xs uppercase font-bold text-amber-700 dark:text-amber-400 mb-1">Quota Ordinaria</div>
+              <div className="text-4xl font-extrabold text-[var(--text-main)]">750€</div>
+              <p className="text-xs text-[var(--text-muted)] mt-3 leading-relaxed">
+                Tariffa standard per i posti residui fino al limite massimo di 18 persone. Include due giorni, laboratorio e 2 light lunch a buffet. Deducibile come formazione professionale.
               </p>
             </div>
           </div>
 
           {/* Accordion B2B / Sponsor / Partnership */}
-          <details className="group mt-6 max-w-2xl mx-auto rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-slate-700/80 transition-all text-left overflow-hidden">
-            <summary className="flex items-center justify-between p-4 sm:px-5 cursor-pointer list-none select-none text-sky-400 hover:text-sky-300 [&::-webkit-details-marker]:hidden">
+          <details className="group mt-6 max-w-2xl mx-auto rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)] hover:border-[var(--border-strong)] transition-all text-left overflow-hidden">
+            <summary className="flex items-center justify-between p-4 sm:px-5 cursor-pointer list-none select-none text-sky-600 dark:text-sky-400 hover:opacity-80 [&::-webkit-details-marker]:hidden">
               <div className="flex items-center space-x-2.5 font-semibold text-xs sm:text-sm">
                 <Building2 className="w-4 h-4 shrink-0" />
                 <span>Sei un&apos;azienda, un polo di innovazione o un team L&amp;D?</span>
               </div>
-              <ChevronDown className="w-4 h-4 shrink-0 text-slate-400 group-open:rotate-180 transition-transform duration-200" />
+              <ChevronDown className="w-4 h-4 shrink-0 text-[var(--text-muted)] group-open:rotate-180 transition-transform duration-200" />
             </summary>
-            <div className="px-5 pb-5 pt-2 space-y-3 border-t border-slate-800/80 text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <div className="px-5 pb-5 pt-2 space-y-3 border-t border-[var(--border-color)] text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
               <p>
                 Sono disponibili <strong>pacchetti team B2B dedicati</strong> (iscrizione agevolata per 2 o più colleghi con fatturazione aziendale) e un numero limitato di <strong>slot di Partnership &amp; Sponsorship</strong> per legare il vostro brand all&apos;evento, finanziare borse di studio per talenti e portare una sfida reale del vostro contesto nel laboratorio di co-design della domenica.
               </p>
               <div>
                 <a
                   href="mailto:alan.mattiassi@gmail.com?subject=Partnership%20Aziendale%20Masterclass"
-                  className="inline-flex items-center space-x-1.5 font-semibold text-sky-400 hover:text-sky-300 underline underline-offset-4 transition-colors"
+                  className="inline-flex items-center space-x-1.5 font-semibold text-sky-600 dark:text-sky-400 hover:underline underline-offset-4 transition-colors"
                 >
                   <span>Richiedi i dettagli per aziende e partnership &rarr;</span>
                 </a>
@@ -548,8 +554,9 @@ export default function MasterclassPage() {
         </div>
       </section>
 
-      {/* 7. Interactive Priority List Form Section */}
-      <section id="priority-list" className="max-w-4xl mx-auto px-4 sm:px-8 space-y-8">
+      {/* 7. Interactive Form Section */}
+      <section id="iscrizione" className="max-w-4xl mx-auto px-4 sm:px-8 space-y-8 relative">
+        <span id="priority-list" className="absolute -top-24 pointer-events-none" />
         <MasterclassPriorityForm />
       </section>
     </div>

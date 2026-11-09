@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Send, CheckCircle2, Sparkles, Calendar, Clock, ShieldCheck, Loader2 } from "lucide-react";
+import { Send, CheckCircle2, Calendar, ShieldCheck, Loader2, Ticket, Building2 } from "lucide-react";
 
 export default function MasterclassPriorityForm() {
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -10,8 +10,8 @@ export default function MasterclassPriorityForm() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    role: "Formatore / Facilitatore / HR",
-    preferredDate: "Indifferente",
+    role: "Formatore / Facilitatore aziendale / HR Specialist",
+    choice: "Prenota un posto a Quota Ordinaria (750€)",
     projectIdea: "",
   });
 
@@ -21,14 +21,14 @@ export default function MasterclassPriorityForm() {
     setErrorMessage(null);
 
     const payload = {
-      _subject: `Nuova Iscrizione Priority List Masterclass: ${formData.name}`,
-      Corso: "Masterclass Psicologia del Gioco",
+      _subject: `Masterclass Psicologia del Gioco: ${formData.choice} - ${formData.name}`,
+      Corso: "Masterclass Psicologia del Gioco (23-24 Gennaio 2027)",
       "Nome e Cognome": formData.name,
       Email: formData.email,
       "Ruolo / Professione": formData.role,
-      "Periodo Preferito": formData.preferredDate,
+      "Opzione Scelta": formData.choice,
       "Idea di Progetto": formData.projectIdea || "Nessun progetto specificato al momento",
-      "Data Iscrizione": new Date().toLocaleString("it-IT", { timeZone: "Europe/Rome" }),
+      "Data Registrazione": new Date().toLocaleString("it-IT", { timeZone: "Europe/Rome" }),
     };
 
     try {
@@ -76,19 +76,32 @@ export default function MasterclassPriorityForm() {
 
       {formSubmitted ? (
         <div className="text-center py-10 space-y-5 animate-fade-in">
-          <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 mx-auto flex items-center justify-center">
+          <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-600 dark:text-emerald-400 mx-auto flex items-center justify-center">
             <CheckCircle2 className="w-8 h-8" />
           </div>
           <h3 className="text-2xl font-bold text-[var(--text-main)]">
-            Sei nella Priority List!
+            Richiesta Registrata!
           </h3>
           <p className="text-[var(--text-muted)] text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
-            Abbiamo registrato la tua manifestazione d&apos;interesse. Appena chiuderemo il sondaggio delle date
-            con la community, riceverai un&apos;email personale con il programma definitivo e{" "}
-            <strong className="text-emerald-400 font-semibold">
-              il link prioritario per bloccare il ticket a tariffa agevolata (490€)
-            </strong>{" "}
-            prima dell&apos;apertura pubblica.
+            {formData.choice === "Prenota un posto a Quota Ordinaria (750€)" && (
+              <>
+                Abbiamo registrato la tua richiesta di prenotazione per il{" "}
+                <strong className="text-[var(--text-main)] font-semibold">23–24 Gennaio 2027 a Quota Ordinaria (750€)</strong>.
+                Riceverai a breve un&apos;email personale con la conferma del posto e le istruzioni operative.
+              </>
+            )}
+            {formData.choice === "Richiesta B2B / Azienda (pacchetti team o soluzioni su misura)" && (
+              <>
+                Abbiamo registrato la tua richiesta aziendale. Ti contatteremo personalmente via email per concordare il{" "}
+                <strong className="text-sky-600 dark:text-sky-400 font-semibold">pacchetto team dedicato</strong> e i dettagli di fatturazione.
+              </>
+            )}
+            {formData.choice.includes("2ª Edizione") && (
+              <>
+                Grazie per la segnalazione. Riceverai la prelazione con tariffa agevolata Early Bird (490€) prima di qualunque annuncio pubblico appena apriremo le iscrizioni per la{" "}
+                <strong className="text-amber-600 dark:text-amber-400 font-semibold">2ª Edizione</strong>.
+              </>
+            )}
           </p>
           <div className="pt-4">
             <button
@@ -102,16 +115,15 @@ export default function MasterclassPriorityForm() {
       ) : (
         <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
           <div className="space-y-2">
-            <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>POSTI LIMITATI (MAX 18 ISCRITTI)</span>
+            <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-700 dark:text-amber-300 text-xs font-semibold">
+              <Ticket className="w-3.5 h-3.5" />
+              <span>DATA CONFERMATA: 23–24 GENNAIO 2027 &bull; MAX 18 ISCRITTI</span>
             </div>
             <h3 className="text-2xl font-extrabold text-[var(--text-main)]">
-              Entra nella Priority List della Masterclass
+              Partecipa alla Masterclass in Psicologia del Gioco
             </h3>
             <p className="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
-              Compila il modulo per votare la data e garantirti l&apos;accesso prioritario alla tariffa Early Bird a{" "}
-              <strong className="text-[var(--text-main)]">490€</strong> (invece di 750€). Nessun vincolo di acquisto.
+              La quota Early Bird a 490€ è esaurita (in prelazione riservata per 48h). Puoi prenotare uno dei posti rimanenti in aula a Quota Ordinaria (750€), richiedere un pacchetto team aziendale B2B, oppure manifestare interesse per la 2ª Edizione a tariffa agevolata.
             </p>
           </div>
 
@@ -132,7 +144,7 @@ export default function MasterclassPriorityForm() {
                 placeholder="es. Mario Rossi"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl bg-[var(--bg-canvas)] border border-[var(--border-color)] text-[var(--text-main)] placeholder:text-[var(--text-subtle)] text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-[var(--bg-canvas)] border border-[var(--border-color)] text-[var(--text-main)] placeholder:text-[var(--text-subtle)] text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all"
               />
             </div>
 
@@ -146,7 +158,7 @@ export default function MasterclassPriorityForm() {
                 placeholder="mario.rossi@azienda.it"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl bg-[var(--bg-canvas)] border border-[var(--border-color)] text-[var(--text-main)] placeholder:text-[var(--text-subtle)] text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-[var(--bg-canvas)] border border-[var(--border-color)] text-[var(--text-main)] placeholder:text-[var(--text-subtle)] text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all"
               />
             </div>
           </div>
@@ -158,9 +170,9 @@ export default function MasterclassPriorityForm() {
             <select
               value={formData.role}
               onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-              className="w-full px-4 py-3 rounded-xl bg-[var(--bg-canvas)] border border-[var(--border-color)] text-[var(--text-main)] text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all"
+              className="w-full px-4 py-3 rounded-xl bg-[var(--bg-canvas)] border border-[var(--border-color)] text-[var(--text-main)] text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all"
             >
-              <option value="Formatore / Facilitatore / HR">Formatore / Facilitatore aziendale / HR Specialist</option>
+              <option value="Formatore / Facilitatore aziendale / HR Specialist">Formatore / Facilitatore aziendale / HR Specialist</option>
               <option value="Azienda / HR & L&D / Partner">Azienda / Referente Risorse Umane &amp; L&amp;D / Potenziale Partner</option>
               <option value="Game Designer / Autore">Game Designer / Autore di giochi (analogici o digitali)</option>
               <option value="Consulente di Direzione / Coach">Consulente Organizzativo / Coach</option>
@@ -172,85 +184,98 @@ export default function MasterclassPriorityForm() {
 
           <div className="space-y-2.5">
             <label className="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] flex items-center space-x-1.5">
-              <Calendar className="w-3.5 h-3.5 text-sky-400" />
-              <span>Quale periodo preferisci per il weekend intensivo in Friuli? *</span>
+              <Calendar className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
+              <span>Come desideri procedere? *</span>
             </label>
             <div className="space-y-2 text-xs sm:text-sm text-[var(--text-muted)]">
               {[
-                { label: "Seconda metà di Gennaio 2027 (es. 23-24 o 30-31 Gennaio)", val: "Seconda metà Gennaio" },
-                { label: "Prima metà di Febbraio 2027 (es. 6-7 o 13-14 Febbraio)", val: "Prima metà Febbraio" },
-                { label: "Entrambi i periodi sono compatibili con la mia agenda", val: "Indifferente" },
-              ].map((item) => (
-                <label
-                  key={item.val}
-                  className={`flex items-center space-x-3 p-3 rounded-xl border cursor-pointer transition-all ${
-                    formData.preferredDate === item.val
-                      ? "bg-emerald-500/10 border-emerald-500/40 text-[var(--text-main)]"
-                      : "bg-[var(--bg-canvas)] border-[var(--border-color)] hover:border-[var(--border-strong)]"
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    name="preferredDate"
-                    checked={formData.preferredDate === item.val}
-                    onChange={() => setFormData({ ...formData, preferredDate: item.val })}
-                    className="accent-emerald-500 w-4 h-4"
-                  />
-                  <span>{item.label}</span>
-                </label>
-              ))}
+                {
+                  label: "Prenota un posto a Quota Ordinaria (750€)",
+                  desc: "Partecipa al weekend del 23–24 Gennaio 2027 in Friuli (max 18 iscritti, la classe parte con 12).",
+                  val: "Prenota un posto a Quota Ordinaria (750€)",
+                },
+                {
+                  label: "Richiesta B2B / Azienda (pacchetti team o soluzioni su misura)",
+                  desc: "Iscrizione agevolata per 2 o più colleghi dello stesso team, fatturazione aziendale o pacchetti su misura.",
+                  val: "Richiesta B2B / Azienda (pacchetti team o soluzioni su misura)",
+                },
+                {
+                  label: "Non posso a Gennaio: inseriscimi in lista per la 2ª Edizione (tariffa agevolata)",
+                  desc: "Riceverai l'accesso prioritario con tariffa agevolata (490€) quando apriremo le prossime aule.",
+                  val: "Non posso a Gennaio: lista 2ª Edizione",
+                },
+              ].map((item) => {
+                const isSelected = formData.choice === item.val;
+                return (
+                  <label
+                    key={item.val}
+                    className={`flex items-start space-x-3 p-3.5 sm:p-4 rounded-xl border cursor-pointer transition-all ${
+                      isSelected
+                        ? "bg-amber-500/10 border-amber-500/60 shadow-sm"
+                        : "bg-[var(--bg-surface)] border-[var(--border-color)] hover:border-[var(--border-strong)]"
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="choice"
+                      checked={isSelected}
+                      onChange={() => setFormData({ ...formData, choice: item.val })}
+                      className="accent-amber-500 w-4 h-4 mt-0.5 shrink-0"
+                    />
+                    <div className="space-y-0.5">
+                      <div className={`font-bold text-sm ${isSelected ? "text-amber-700 dark:text-amber-300" : "text-[var(--text-main)]"}`}>
+                        {item.label}
+                      </div>
+                      <div className="text-xs text-[var(--text-muted)] leading-relaxed">
+                        {item.desc}
+                      </div>
+                    </div>
+                  </label>
+                );
+              })}
             </div>
           </div>
 
           <div className="space-y-1.5">
             <label className="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)]">
-              Che progetto, workshop o gioco vorresti portare la domenica? (Opzionale)
+              Che progetto, workshop o gioco vorresti portare al laboratorio? (Opzionale)
             </label>
             <textarea
               rows={3}
               placeholder="Es. un'attività formativa sulla negoziazione, il prototipo di un gioco cooperativo, un workshop per manager..."
               value={formData.projectIdea}
               onChange={(e) => setFormData({ ...formData, projectIdea: e.target.value })}
-              className="w-full px-4 py-3 rounded-xl bg-[var(--bg-canvas)] border border-[var(--border-color)] text-[var(--text-main)] placeholder:text-[var(--text-subtle)] text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all"
+              className="w-full px-4 py-3 rounded-xl bg-[var(--bg-canvas)] border border-[var(--border-color)] text-[var(--text-main)] placeholder:text-[var(--text-subtle)] text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all"
             />
           </div>
 
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full py-4 px-6 rounded-xl font-bold text-sm sm:text-base text-white bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 hover:from-emerald-400 hover:to-teal-400 disabled:opacity-60 shadow-xl shadow-emerald-500/25 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center space-x-2"
+            className="w-full py-4 px-6 rounded-xl font-bold text-sm sm:text-base text-white bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-400 disabled:opacity-60 shadow-xl shadow-amber-500/25 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center space-x-2"
           >
             {isSubmitting ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin" />
-                <span>Invio in corso...</span>
+                <span>Invio richiesta in corso...</span>
               </>
             ) : (
               <>
+                <span>Invia Richiesta</span>
                 <Send className="w-4 h-4" />
-                <span>Unisciti alla Priority List (Posti Scontati a 490€) →</span>
               </>
             )}
           </button>
 
           <div className="flex items-center justify-center space-x-4 text-xs text-[var(--text-subtle)] pt-1">
             <span className="flex items-center space-x-1">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Nessun obbligo di acquisto</span>
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+              <span>Nessun addebito immediato</span>
             </span>
             <span>&bull;</span>
-            <span>No spam</span>
+            <span>Riceverai conferma e dettagli via email</span>
           </div>
 
-          <div className="pt-3 text-center text-xs text-[var(--text-muted)] border-t border-[var(--border-color)]">
-            <span>Rappresenti un&apos;azienda e vuoi valutare una partnership o iscrivere un team? </span>
-            <a
-              href="mailto:alan.mattiassi@gmail.com?subject=Info%20Aziende%20e%20Sponsor%20Masterclass"
-              className="text-emerald-500 dark:text-emerald-400 font-semibold underline hover:opacity-80 transition-opacity"
-            >
-              Scrivici direttamente via email
-            </a>
-          </div>
         </form>
       )}
     </div>
