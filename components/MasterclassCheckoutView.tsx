@@ -30,7 +30,7 @@ export default function MasterclassCheckoutView() {
 
   const ibanRaw = "IT52K0357601601010006297871";
   const ibanFormatted = "IT52 K035 7601 6010 1000 6297 871";
-  const causaleText = "Masterclass Gioco - [Tuo Nome e Cognome]";
+  const causaleText = "Masterclass Psicologia del Gioco - Gennaio 2027 - [Tuo Nome e Cognome]";
   const stripeLink = "https://buy.stripe.com/5kQaEYacfdJP8Yw76R5sA01";
   const whatsappUrl =
     "https://wa.me/393926808384?text=" +
