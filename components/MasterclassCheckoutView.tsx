@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import {
   ArrowLeft,
+  ArrowRight,
   CheckCircle2,
   Copy,
   Check,
@@ -261,7 +262,8 @@ export default function MasterclassCheckoutView() {
                   className="inline-flex items-center space-x-2 px-5 py-3 rounded-xl font-bold text-xs sm:text-sm text-white bg-emerald-600 hover:bg-emerald-500 shadow-md shadow-emerald-600/20 active:scale-95 transition-all"
                 >
                   <MessageCircle className="w-4 h-4" />
-                  <span>Invia Ricevuta su WhatsApp (392 6808384) →</span>
+                  <span>Invia Ricevuta su WhatsApp (392 6808384)</span>
+                  <ArrowRight className="w-4 h-4 ml-1 shrink-0" />
                 </a>
 
                 <a
