@@ -523,7 +523,7 @@ export default function MasterclassPage() {
               <div className="text-xs uppercase font-bold text-amber-700 dark:text-amber-400 mb-1">Quota Ordinaria</div>
               <div className="text-4xl font-extrabold text-[var(--text-main)]">750€</div>
               <p className="text-xs text-[var(--text-muted)] mt-3 leading-relaxed">
-                Tariffa standard per i posti residui fino al limite massimo di 18 persone. Include due giorni, laboratorio e 2 pranzi inclusi. Deducibile come formazione professionale.
+                Tariffa standard per i posti residui fino al limite massimo di 18 persone. Include due giorni, laboratorio e 2 pranzi inclusi.
               </p>
             </div>
           </div>

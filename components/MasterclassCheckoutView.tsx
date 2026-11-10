@@ -153,15 +153,11 @@ export default function MasterclassCheckoutView() {
             </div>
             <div className="flex items-start space-x-2.5">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-              <span>Tutti i materiali operativi, canvas metodologici e slide complete</span>
+              <span>Tutti i materiali operativi, materiale didattico e slide complete</span>
             </div>
             <div className="flex items-start space-x-2.5">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
               <span>Attestato ufficiale di partecipazione con monte ore formativo</span>
-            </div>
-            <div className="flex items-start space-x-2.5">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-              <span>Spesa di formazione e aggiornamento professionale deducibile</span>
             </div>
           </div>
         </div>
