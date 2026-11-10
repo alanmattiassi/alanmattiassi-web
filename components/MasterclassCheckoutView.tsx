@@ -82,7 +82,7 @@ export default function MasterclassCheckoutView() {
         <div className="flex flex-wrap items-center justify-center gap-2.5 text-xs sm:text-sm text-[var(--text-muted)] font-medium pt-1">
           <span className="inline-flex items-center space-x-1.5 bg-[var(--bg-surface)] px-3 py-1.5 rounded-lg border border-[var(--border-color)]">
             <Calendar className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
-            <strong className="text-[var(--text-main)] font-semibold">23?24 Gennaio 2027</strong>
+            <strong className="text-[var(--text-main)] font-semibold">23–24 Gennaio 2027</strong>
           </span>
           <span className="inline-flex items-center space-x-1.5 bg-[var(--bg-surface)] px-3 py-1.5 rounded-lg border border-[var(--border-color)]">
             <MapPin className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
@@ -113,10 +113,10 @@ export default function MasterclassCheckoutView() {
 
           <div className="text-left sm:text-right shrink-0">
             <div className="text-4xl sm:text-5xl font-black text-[var(--text-main)] tracking-tight">
-              490?
+              490€
             </div>
             <div className="text-xs text-[var(--text-subtle)] line-through decoration-rose-500/70">
-              Quota ordinaria: 750?
+              Quota ordinaria: 750€
             </div>
           </div>
         </div>
@@ -128,7 +128,7 @@ export default function MasterclassCheckoutView() {
             <strong className="text-[var(--text-main)] font-semibold">
               Contingente massimo: 8 quote Early Bird.
             </strong>{" "}
-            Per garantire la sostenibilit? logistica dell&apos;evento e la massima cura didattica, i posti a 490? sono assegnati in{" "}
+            Per garantire la sostenibilità logistica dell&apos;evento e la massima cura didattica, i posti a 490€ sono assegnati in{" "}
             <strong className="text-[var(--text-main)] font-semibold">ordine rigorosamente cronologico di conferma/ricevuta</strong>.
           </div>
         </div>
@@ -174,12 +174,12 @@ export default function MasterclassCheckoutView() {
             Scegli come confermare il tuo posto
           </h2>
           <p className="text-xs sm:text-sm text-[var(--text-muted)]">
-            Seleziona la modalit? di pagamento che preferisci tra bonifico bancario diretto o carta di credito.
+            Seleziona la modalità di pagamento che preferisci tra bonifico bancario diretto o carta di credito.
           </p>
         </div>
 
         <div className="grid grid-cols-1 gap-6">
-          {/* OPZIONE 1: BONIFICO BANCARIO (CONSIGLIATA ?) */}
+          {/* OPZIONE 1: BONIFICO BANCARIO (CONSIGLIATA) */}
           <div className="rounded-3xl bg-[var(--bg-card)] border-2 border-emerald-500/50 p-6 sm:p-8 space-y-6 shadow-xl relative">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="inline-flex items-center space-x-2 text-emerald-700 dark:text-emerald-400 font-bold text-xs uppercase tracking-wider">
@@ -224,7 +224,7 @@ export default function MasterclassCheckoutView() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-[var(--border-color)] pb-3">
                 <span className="text-[var(--text-muted)] font-medium">Importo:</span>
                 <span className="font-extrabold text-emerald-600 dark:text-emerald-400 text-base sm:text-lg">
-                  490,00 ?
+                  490,00 €
                 </span>
               </div>
 
@@ -250,7 +250,7 @@ export default function MasterclassCheckoutView() {
                 <span>Come bloccare il posto all&apos;istante (senza attendere i giorni bancari):</span>
               </div>
               <p className="text-xs text-[var(--text-muted)] leading-relaxed">
-                Non serve aspettare che il bonifico arrivi sul conto per assicurarti la priorit?.{" "}
+                Non serve aspettare che il bonifico arrivi sul conto per assicurarti la priorità.{" "}
                 <strong className="text-[var(--text-main)]">
                   Fai uno screenshot della contabile/ricevuta con il codice CRO/TRN
                 </strong>{" "}
@@ -265,7 +265,7 @@ export default function MasterclassCheckoutView() {
                   className="inline-flex items-center space-x-2 px-5 py-3 rounded-xl font-bold text-xs sm:text-sm text-white bg-emerald-600 hover:bg-emerald-500 shadow-md shadow-emerald-600/20 active:scale-95 transition-all"
                 >
                   <MessageCircle className="w-4 h-4" />
-                  <span>Invia Ricevuta su WhatsApp (392 6808384) ?</span>
+                  <span>Invia Ricevuta su WhatsApp (392 6808384) →</span>
                 </a>
 
                 <a
@@ -308,7 +308,7 @@ export default function MasterclassCheckoutView() {
                 className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-6 py-4 rounded-xl font-bold text-sm sm:text-base text-white bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-400 shadow-xl shadow-amber-500/20 active:scale-95 transition-all text-center"
               >
                 <CreditCard className="w-4 h-4 mr-1" />
-                <span>Paga con Carta o Apple/Google Pay (490?)</span>
+                <span>Paga con Carta o Apple/Google Pay (490€)</span>
                 <ExternalLink className="w-4 h-4 ml-1 opacity-80" />
               </a>
             </div>
@@ -327,7 +327,7 @@ export default function MasterclassCheckoutView() {
           <span>Fatturazione, Ricevuta e Assistenza Diretta</span>
         </div>
         <p>
-          Subito dopo la ricezione del pagamento (o della distinta via WhatsApp), Alan ti invier? un&apos;email personale di conferma definitiva con la richiesta dei tuoi dati fiscali per l&apos;emissione del documento fiscale (Codice Fiscale o Partita IVA e Codice SDI/PEC aziendale).
+          Subito dopo la ricezione del pagamento (o della distinta via WhatsApp), Alan ti invierà un&apos;email personale di conferma definitiva con la richiesta dei tuoi dati fiscali per l&apos;emissione del documento fiscale (Codice Fiscale o Partita IVA e Codice SDI/PEC aziendale).
         </p>
         <p>
           Per qualsiasi dubbio logistico, convenzioni alberghiere a Udine/Pordenone o richieste alimentari per il catering, puoi scrivere in qualsiasi momento su WhatsApp al{" "}
