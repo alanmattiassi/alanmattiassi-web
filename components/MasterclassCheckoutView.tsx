@@ -328,7 +328,7 @@ export default function MasterclassCheckoutView() {
           Subito dopo la ricezione del pagamento (o della distinta via WhatsApp), Alan ti invierà un&apos;email personale di conferma definitiva con la richiesta dei tuoi dati fiscali per l&apos;emissione del documento fiscale (Codice Fiscale o Partita IVA e Codice SDI/PEC aziendale).
         </p>
         <p>
-          Per qualsiasi dubbio logistico, convenzioni alberghiere a Udine/Pordenone o richieste alimentari per il catering, puoi scrivere in qualsiasi momento su WhatsApp al{" "}
+          Per qualsiasi dubbio logistico, convenzioni alberghiere in zona o richieste per il catering, puoi scrivere in qualsiasi momento su WhatsApp al{" "}
           <strong className="text-[var(--text-main)]">+39 392 6808384</strong> o via email a{" "}
           <strong className="text-[var(--text-main)]">alan.mattiassi@gmail.com</strong>.
         </p>
