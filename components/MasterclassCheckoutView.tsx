@@ -149,7 +149,7 @@ export default function MasterclassCheckoutView() {
             </div>
             <div className="flex items-start space-x-2.5">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-              <span>2 light lunch a buffet (riservati ai partecipanti) e coffee break continui</span>
+              <span>2 pranzi (riservati ai partecipanti) e coffee break continui</span>
             </div>
             <div className="flex items-start space-x-2.5">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />

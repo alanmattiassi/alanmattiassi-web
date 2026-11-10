@@ -131,7 +131,7 @@ export default function MasterclassPage() {
           </span>
           <span className="inline-flex items-center space-x-1.5 bg-[var(--bg-surface)] px-3 py-1.5 rounded-lg border border-[var(--border-color)]">
             <Utensils className="w-4 h-4 text-teal-500 dark:text-teal-400" />
-            <span>2 Light Lunch inclusi</span>
+            <span>2 Pranzi inclusi</span>
           </span>
           <span className="inline-flex items-center space-x-1.5 bg-[var(--bg-surface)] px-3 py-1.5 rounded-lg border border-[var(--border-color)]">
             <BookOpen className="w-4 h-4 text-indigo-500 dark:text-indigo-400" />
@@ -390,7 +390,7 @@ export default function MasterclassPage() {
 
             <div className="pt-4 border-t border-[var(--border-color)] text-xs text-[var(--text-subtle)] flex items-center space-x-2">
               <Utensils className="w-4 h-4 text-sky-400" />
-              <span>Light lunch a buffet e coffee break continui inclusi.</span>
+              <span>Pranzo e coffee break continui inclusi.</span>
             </div>
           </div>
 
@@ -439,7 +439,7 @@ export default function MasterclassPage() {
             <div className="pt-4 border-t border-[var(--border-color)] text-xs text-[var(--text-subtle)] flex items-center justify-between">
               <span className="flex items-center space-x-2">
                 <Utensils className="w-4 h-4 text-emerald-400" />
-                <span>Light lunch a buffet e coffee break inclusi.</span>
+                <span>Pranzo e coffee break inclusi.</span>
               </span>
               <span className="text-emerald-400 font-semibold">Chiusura ore 16:30</span>
             </div>
@@ -512,7 +512,7 @@ export default function MasterclassPage() {
               <div className="text-xs uppercase font-bold text-emerald-600 dark:text-emerald-400 mb-1">Quota Early Bird</div>
               <div className="text-4xl font-extrabold text-[var(--text-main)]">490€</div>
               <p className="text-xs text-[var(--text-muted)] mt-3 leading-relaxed">
-                Riservata agli iscritti alla Priority List in prelazione 48h. Include l&apos;accesso ai due giorni intensivi, laboratorio di co-design e catering completo (2 light lunch a buffet + coffee break continui).
+                Riservata agli iscritti alla Priority List in prelazione 48h. Include l&apos;accesso ai due giorni intensivi, laboratorio di co-design e catering completo (2 pranzi + coffee break continui).
               </p>
             </div>
 
@@ -523,7 +523,7 @@ export default function MasterclassPage() {
               <div className="text-xs uppercase font-bold text-amber-700 dark:text-amber-400 mb-1">Quota Ordinaria</div>
               <div className="text-4xl font-extrabold text-[var(--text-main)]">750€</div>
               <p className="text-xs text-[var(--text-muted)] mt-3 leading-relaxed">
-                Tariffa standard per i posti residui fino al limite massimo di 18 persone. Include due giorni, laboratorio e 2 light lunch a buffet. Deducibile come formazione professionale.
+                Tariffa standard per i posti residui fino al limite massimo di 18 persone. Include due giorni, laboratorio e 2 pranzi inclusi. Deducibile come formazione professionale.
               </p>
             </div>
           </div>

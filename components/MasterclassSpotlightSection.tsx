@@ -149,7 +149,7 @@ export default function MasterclassSpotlightSection() {
                 </span>
                 <span className="inline-flex items-center space-x-1.5 bg-[var(--bg-surface)] px-3 py-1.5 rounded-lg border border-[var(--border-color)]">
                   <Utensils className="w-3.5 h-3.5 text-teal-500 dark:text-teal-400" />
-                  <span>{isEn ? "2 Light Lunches included" : "2 Light Lunch inclusi"}</span>
+                  <span>{isEn ? "2 Lunches included" : "2 Pranzi inclusi"}</span>
                 </span>
                 <span className="inline-flex items-center space-x-1.5 bg-[var(--bg-surface)] px-3 py-1.5 rounded-lg border border-[var(--border-color)]">
                   <BookOpen className="w-3.5 h-3.5 text-indigo-500 dark:text-indigo-400" />
@@ -216,7 +216,7 @@ export default function MasterclassSpotlightSection() {
                   </div>
                   <div className="flex items-start space-x-2">
                     <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-                    <span>{isEn ? "2 buffet light lunches & continuous coffee" : "2 light lunch a buffet e coffee break continui"}</span>
+                    <span>{isEn ? "2 lunches & continuous coffee" : "2 pranzi e coffee break continui"}</span>
                   </div>
                   <div className="flex items-start space-x-2">
                     <Clock className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
