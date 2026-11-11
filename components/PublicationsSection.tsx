@@ -135,13 +135,25 @@ export default function PublicationsSection() {
           {previewPubs.map((pub) => (
             <div
               key={pub.id}
-              className="p-5 rounded-xl bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[var(--border-strong)] transition-all flex flex-col justify-between group space-y-3"
+              className={`p-5 rounded-xl bg-[var(--bg-card)] transition-all flex flex-col justify-between group space-y-3 relative ${
+                pub.is_latest
+                  ? "border-2 border-emerald-500/80 shadow-lg shadow-emerald-500/10 ring-1 ring-emerald-500/30"
+                  : "border border-[var(--border-color)] hover:border-[var(--border-strong)]"
+              }`}
             >
               <div className="space-y-2">
-                <div className="flex items-center justify-between gap-2">
-                  <span className="text-[11px] font-bold text-[var(--accent-primary)] bg-[var(--badge-bg)] border border-[var(--badge-border)] px-2 py-0.5 rounded">
-                    {pub.anno}
-                  </span>
+                <div className="flex items-center justify-between gap-2 flex-wrap">
+                  <div className="flex items-center gap-1.5 flex-wrap">
+                    <span className="text-[11px] font-bold text-[var(--accent-primary)] bg-[var(--badge-bg)] border border-[var(--badge-border)] px-2 py-0.5 rounded">
+                      {pub.anno}
+                    </span>
+                    {pub.is_latest && (
+                      <span className="inline-flex items-center space-x-1 px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/40 text-emerald-600 dark:text-emerald-400 text-[10px] font-extrabold uppercase tracking-wider shadow-sm">
+                        <Sparkles className="w-3 h-3 text-emerald-500" />
+                        <span>{isEn ? "Last publication" : "Ultima pubblicazione"}</span>
+                      </span>
+                    )}
+                  </div>
                   <span className="text-[10px] text-[var(--text-subtle)] font-medium truncate">
                     {pub.tipologia}
                   </span>

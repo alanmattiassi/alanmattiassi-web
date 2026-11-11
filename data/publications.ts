@@ -12,9 +12,25 @@ export interface Publication {
   pdf_url?: string;
   highlight?: boolean;
   in_anteprima?: boolean;
+  is_latest?: boolean;
 }
 
 export const publications: Publication[] = [
+  {
+    "id": "PUB-2026-EDUC-SCI",
+    "anno": 2026,
+    "autori": "Carbone, D., Mattiassi, A. D. A., & Marcatto, F.",
+    "titolo": "Designing and Evaluating Game-Based Organizational Interventions: Quantitative and Qualitative Evidence from Two Longitudinal Quasi-Experimental Studies",
+    "sede_editoriale": "Education Sciences",
+    "volume_issue_pp": "16(11), 1934",
+    "doi_link": "https://doi.org/10.3390/educsci16111934",
+    "publisher_url": "https://www.mdpi.com/2227-7102/16/11/1934",
+    "tipologia": "Journal Article (Peer-Reviewed, Open Access)",
+    "area_tematica": "Interventi Organizzativi & Metodologia ON GAMES",
+    "highlight": false,
+    "in_anteprima": true,
+    "is_latest": true
+  },
   {
     "id": "PUB-BOOK-2026",
     "anno": 2026,
