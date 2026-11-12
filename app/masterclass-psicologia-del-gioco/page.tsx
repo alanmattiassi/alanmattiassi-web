@@ -29,11 +29,11 @@ import MasterclassPriorityForm from "@/components/MasterclassPriorityForm";
 export const metadata: Metadata = {
   title: "Masterclass in Psicologia del Gioco – Capire e Progettare Ambienti, Scelte e Apprendimento Profondo | Alan Mattiassi, PhD",
   description:
-    "Dal funzionamento della mente che gioca alla progettazione di attività game-based per contesti formativi, aziendali ed educativi. Weekend intensivo 23–24 Gennaio 2027 in Friuli (max 18 iscritti) con Alan Mattiassi, PhD. Prelazione riservata in corso. Quota Ordinaria a 750€.",
+    "Dal funzionamento della mente che gioca alla progettazione di attività game-based per contesti formativi, aziendali ed educativi. Weekend intensivo 23–24 Gennaio 2027 in Friuli (max 18 iscritti) con Alan Mattiassi, PhD. Ultimi 9 posti disponibili a Quota Ordinaria (750€).",
   openGraph: {
     title: "Masterclass in Psicologia del Gioco – Capire e Progettare Ambienti, Scelte e Apprendimento Profondo",
     description:
-      "Dal funzionamento della mente che gioca alla progettazione di attività game-based per contesti formativi, aziendali ed educativi. Weekend intensivo 23–24 Gennaio 2027 con Alan Mattiassi, PhD. Prelazione riservata in corso. Quota Ordinaria a 750€.",
+      "Dal funzionamento della mente che gioca alla progettazione di attività game-based per contesti formativi, aziendali ed educativi. Weekend intensivo 23–24 Gennaio 2027 con Alan Mattiassi, PhD. Ultimi 9 posti disponibili a Quota Ordinaria (750€).",
     url: "https://alanmattiassi.com/masterclass-psicologia-del-gioco",
     siteName: "Alan Mattiassi, PhD",
     locale: "it_IT",
@@ -63,7 +63,7 @@ export default function MasterclassPage() {
       <section className="max-w-5xl mx-auto px-4 sm:px-8 text-center space-y-6">
         <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-700 dark:text-amber-400 text-xs font-semibold uppercase tracking-wider">
           <Lock className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
-          <span>PRELAZIONE RISERVATA IN CORSO &bull; APERTURA PUBBLICA: GIOVEDÌ ORE 12:00</span>
+          <span>ISCRIZIONI PUBBLICHE APERTE &bull; 9 POSTI RIMASTI SU 18</span>
         </div>
 
         <div className="space-y-3 sm:space-y-4">
@@ -86,7 +86,7 @@ export default function MasterclassPage() {
         <div className="inline-flex flex-col items-center justify-center p-5 sm:p-6 rounded-2xl bg-[var(--bg-surface)] border-2 border-amber-500/40 max-w-2xl mx-auto text-center space-y-3 shadow-lg">
           <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-700 dark:text-amber-400 text-xs font-bold uppercase tracking-wider">
             <Lock className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
-            <span>Prelazione Riservata (48h) in Corso</span>
+            <span>Iscrizioni Aperte • Quota Ordinaria</span>
           </div>
 
           <div className="flex items-baseline justify-center space-x-3 pt-0.5">
@@ -103,7 +103,7 @@ export default function MasterclassPage() {
           </p>
 
           <p className="text-xs text-[var(--text-muted)] leading-relaxed max-w-lg">
-            I primi posti a tariffa agevolata sono stati riservati agli iscritti alla Priority List in prelazione esclusiva per 48 ore. I posti residui in aula apriranno pubblicamente <strong>Giovedì alle ore 12:00</strong> a Quota Ordinaria (750€).
+            I posti a tariffa agevolata sono andati esauriti durante la prelazione. Il 50% dell'aula è già confermato (9/18 posti assegnati tra iscritti e ospiti): restano disponibili gli ultimi 9 posti a Quota Ordinaria (750€).
           </p>
         </div>
 
@@ -518,7 +518,7 @@ export default function MasterclassPage() {
 
             <div className="p-6 rounded-2xl bg-[var(--bg-surface)] border-2 border-amber-500/40 relative">
               <div className="absolute -top-3 right-4 px-2.5 py-0.5 rounded-full bg-amber-500 text-slate-950 font-bold text-xs uppercase shadow-sm">
-                Apertura Giovedì ore 12
+                Disponibile Ora • 9 Posti Rimasti
               </div>
               <div className="text-xs uppercase font-bold text-amber-700 dark:text-amber-400 mb-1">Quota Ordinaria</div>
               <div className="text-4xl font-extrabold text-[var(--text-main)]">750€</div>

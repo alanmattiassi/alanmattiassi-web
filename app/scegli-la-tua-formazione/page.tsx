@@ -88,14 +88,14 @@ export default function ScegliFormazionePage() {
 
             <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col items-start lg:items-end justify-center gap-3">
               <div className="text-left lg:text-right">
-                <span className="text-xs text-slate-400 block">Prezzo Early Bird (Priority List)</span>
-                <span className="text-3xl font-black text-emerald-400">490€ <span className="text-lg line-through text-slate-500 font-normal">750€</span></span>
+                <span className="text-xs text-slate-400 block">Quota Ordinaria (Ultimi 9 Posti)</span>
+                <span className="text-3xl font-black text-emerald-400">750€</span>
               </div>
               <Link
                 href="/masterclass-psicologia-del-gioco"
                 className="px-6 py-3.5 rounded-xl font-bold text-xs sm:text-sm text-white bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 shadow-lg shadow-emerald-500/25 transition-all text-center w-full sm:w-auto"
               >
-                Scopri la Masterclass (Posti Scontati) &rarr;
+                Scopri la Masterclass (Ultimi 9 Posti) &rarr;
               </Link>
             </div>
           </div>

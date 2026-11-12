@@ -32,7 +32,7 @@ export default function MasterclassCheckoutView() {
   const ibanRaw = "IT52K0357601601010006297871";
   const ibanFormatted = "IT52 K035 7601 6010 1000 6297 871";
   const causaleText = "Masterclass Psicologia del Gioco - Gennaio 2027 - [Tuo Nome e Cognome]";
-  const stripeLink = "https://buy.stripe.com/5kQaEYacfdJP8Yw76R5sA01";
+  const stripeLink = "https://buy.stripe.com/cNi28sfwzbBHgqY8aV5sA02";
   const whatsappUrl =
     "https://wa.me/393926808384?text=" +
     encodeURIComponent(
@@ -68,7 +68,7 @@ export default function MasterclassCheckoutView() {
       <div className="text-center space-y-4">
         <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-700 dark:text-amber-400 text-xs font-semibold uppercase tracking-wider">
           <Lock className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
-          <span>FINESTRA DI PRELAZIONE ESCLUSIVA (48 ORE)</span>
+          <span>ISCRIZIONI PUBBLICHE APERTE • 9 POSTI RIMASTI SU 18</span>
         </div>
 
         <h1 className="text-3xl sm:text-5xl font-black text-[var(--text-main)] tracking-tight leading-tight">
@@ -105,7 +105,7 @@ export default function MasterclassCheckoutView() {
               <span>Tariffa Agevolata Riservata</span>
             </div>
             <h2 className="text-xl sm:text-2xl font-bold text-[var(--text-main)]">
-              Quota Early Bird (Priority List)
+              Quota Ordinaria (Iscrizione Ufficiale)
             </h2>
             <p className="text-xs text-[var(--text-muted)]">
               Prezzo finito omnicomprensivo, esente IVA. Nessun costo nascosto.
@@ -114,10 +114,10 @@ export default function MasterclassCheckoutView() {
 
           <div className="text-left sm:text-right shrink-0">
             <div className="text-4xl sm:text-5xl font-black text-[var(--text-main)] tracking-tight">
-              490€
+              750€
             </div>
-            <div className="text-xs text-[var(--text-subtle)] line-through decoration-rose-500/70">
-              Quota ordinaria: 750€
+            <div className="text-xs text-amber-700 dark:text-amber-400 font-semibold">
+              Early Bird (490€) esaurita in prelazione
             </div>
           </div>
         </div>
@@ -127,9 +127,9 @@ export default function MasterclassCheckoutView() {
           <AlertCircle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
           <div>
             <strong className="text-[var(--text-main)] font-semibold">
-              Contingente massimo: 8 quote Early Bird.
+              Disponibilità limitata: 9 posti rimanenti su 18.
             </strong>{" "}
-            Per garantire la sostenibilità logistica dell&apos;evento e la massima cura didattica, i posti a 490€ sono assegnati in{" "}
+            Il 50% dell&apos;aula è già confermato (9 slot assegnati tra iscrizioni e ospiti). Per garantire la massima cura didattica nel laboratorio di co-design, i posti residui sono assegnati in{" "}
             <strong className="text-[var(--text-main)] font-semibold">ordine rigorosamente cronologico di conferma/ricevuta</strong>.
           </div>
         </div>
@@ -221,7 +221,7 @@ export default function MasterclassCheckoutView() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-[var(--border-color)] pb-3">
                 <span className="text-[var(--text-muted)] font-medium">Importo:</span>
                 <span className="font-extrabold text-emerald-600 dark:text-emerald-400 text-base sm:text-lg">
-                  490,00 €
+                  750,00 €
                 </span>
               </div>
 
@@ -306,7 +306,7 @@ export default function MasterclassCheckoutView() {
                 className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-6 py-4 rounded-xl font-bold text-sm sm:text-base text-white bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-400 shadow-xl shadow-amber-500/20 active:scale-95 transition-all text-center"
               >
                 <CreditCard className="w-4 h-4 mr-1" />
-                <span>Paga con Carta o Apple/Google Pay (490€)</span>
+                <span>Paga con Carta o Apple/Google Pay (750€)</span>
                 <ExternalLink className="w-4 h-4 ml-1 opacity-80" />
               </a>
             </div>

@@ -47,8 +47,8 @@ export default function MasterclassSpotlightSection() {
                   <Lock className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 shrink-0" />
                   <span>
                     {isEn
-                      ? "RESERVED PRESALE ACTIVE • PUBLIC REGISTRATION OPENS THURSDAY AT 12:00"
-                      : "PRELAZIONE RISERVATA IN CORSO • APERTURA PUBBLICA: GIOVEDÌ ORE 12:00"}
+                      ? "PUBLIC REGISTRATION OPEN • 9 SEATS REMAINING (MAX 18)"
+                      : "ISCRIZIONI PUBBLICHE APERTE • 9 POSTI RIMASTI SU 18"}
                   </span>
                 </span>
               </div>
@@ -200,8 +200,8 @@ export default function MasterclassSpotlightSection() {
 
                   <p className="text-xs text-[var(--text-muted)] leading-relaxed">
                     {isEn
-                      ? "Priority List members hold exclusive 48h pre-emption. Remaining seats open publicly on Thursday at 12:00."
-                      : "La prelazione di 48 ore è attiva per chi è in lista. I posti residui apriranno per tutti Giovedì alle ore 12:00."}
+                      ? "50% of the class booked (9/18 spots assigned). Remaining 9 seats open publicly at standard fee."
+                      : "50% dell'aula già confermata (9/18 posti assegnati). Restano disponibili gli ultimi 9 posti in aula."}
                   </p>
                 </div>
 
@@ -220,7 +220,7 @@ export default function MasterclassSpotlightSection() {
                   </div>
                   <div className="flex items-start space-x-2">
                     <Clock className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
-                    <span>{isEn ? "Public opening: Thursday at 12:00" : "Apertura pubblica: Giovedì ore 12:00"}</span>
+                    <span>{isEn ? "Availability: 9 seats remaining out of 18" : "Disponibilità: 9 posti rimasti su 18"}</span>
                   </div>
                 </div>
 

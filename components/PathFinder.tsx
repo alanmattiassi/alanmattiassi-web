@@ -152,7 +152,7 @@ export default function PathFinder() {
               href="/masterclass-psicologia-del-gioco"
               className="inline-flex items-center space-x-2 px-6 py-3.5 rounded-xl font-bold text-xs sm:text-sm text-white bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 shadow-lg shadow-emerald-500/25 transition-all hover:scale-105"
             >
-              <span>{isEn ? "Explore Masterclass & Priority List (490€)" : "Scopri la Masterclass (Posti Scontati a 490€)"}</span>
+              <span>{isEn ? "Explore Masterclass (Last 9 Seats Available)" : "Scopri la Masterclass (Ultimi 9 Posti)"}</span>
               <ArrowRight className="w-4 h-4 shrink-0 ml-1.5" />
             </Link>
           </div>
