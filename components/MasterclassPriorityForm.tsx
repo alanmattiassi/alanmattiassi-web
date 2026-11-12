@@ -11,7 +11,7 @@ export default function MasterclassPriorityForm() {
     name: "",
     email: "",
     role: "Formatore / Facilitatore aziendale / HR Specialist",
-    choice: "Prenota un posto a Quota Ordinaria (750€)",
+    choice: "Iscrizione alla Masterclass (750€)",
     projectIdea: "",
   });
 
@@ -83,9 +83,9 @@ export default function MasterclassPriorityForm() {
             Richiesta Registrata!
           </h3>
           <p className="text-[var(--text-muted)] text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
-            {formData.choice === "Prenota un posto a Quota Ordinaria (750€)" && (
+            {formData.choice === "Iscrizione alla Masterclass (750€)" && (
               <>
-                Abbiamo registrato la tua richiesta di prenotazione per il{" "}
+                Abbiamo registrato la tua iscrizione per il{" "}
                 <strong className="text-[var(--text-main)] font-semibold">23–24 Gennaio 2027 a Quota Ordinaria (750€)</strong>.
                 Riceverai a breve un&apos;email personale con la conferma del posto e le istruzioni operative.
               </>
@@ -117,13 +117,13 @@ export default function MasterclassPriorityForm() {
           <div className="space-y-2">
             <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-700 dark:text-amber-300 text-xs font-semibold">
               <Ticket className="w-3.5 h-3.5" />
-              <span>DATA CONFERMATA: 23–24 GENNAIO 2027 &bull; 50% AULA CONFERMATA</span>
+              <span>DATA CONFERMATA: 23–24 GENNAIO 2027 &bull; PIÙ DEL 50% DELL'AULA CONFERMATO</span>
             </div>
             <h3 className="text-2xl font-extrabold text-[var(--text-main)]">
               Partecipa alla Masterclass in Psicologia del Gioco
             </h3>
             <p className="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
-              La quota Early Bird a 490€ è esaurita. Il 50% dell'aula è già confermato tra iscritti e ospiti. Puoi prenotare uno dei posti residui in aula a Quota Ordinaria (750€), richiedere un pacchetto team aziendale B2B, oppure manifestare interesse per la 2ª Edizione a tariffa agevolata.
+              La quota Early Bird a 490€ è esaurita. Più del 50% dell'aula è già confermato. Puoi perfezionare la tua iscrizione per uno dei posti residui in aula a Quota Ordinaria (750€), richiedere un pacchetto team aziendale B2B, oppure manifestare interesse per la 2ª Edizione a tariffa agevolata.
             </p>
           </div>
 
@@ -190,9 +190,9 @@ export default function MasterclassPriorityForm() {
             <div className="space-y-2 text-xs sm:text-sm text-[var(--text-muted)]">
               {[
                 {
-                  label: "Prenota un posto a Quota Ordinaria (750€)",
+                  label: "Iscriviti alla Masterclass (Quota Ordinaria 750€)",
                   desc: "Partecipa al weekend del 23–24 Gennaio 2027 in Friuli (max 18 iscritti, la classe parte con 12).",
-                  val: "Prenota un posto a Quota Ordinaria (750€)",
+                  val: "Iscrizione alla Masterclass (750€)",
                 },
                 {
                   label: "Richiesta B2B / Azienda (pacchetti team o soluzioni su misura)",
@@ -261,7 +261,7 @@ export default function MasterclassPriorityForm() {
               </>
             ) : (
               <>
-                <span>Invia Richiesta</span>
+                <span>Conferma Iscrizione</span>
                 <Send className="w-4 h-4" />
               </>
             )}

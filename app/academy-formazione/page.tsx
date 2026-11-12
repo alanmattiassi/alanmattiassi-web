@@ -118,7 +118,7 @@ export default function AcademyPage() {
               href="/masterclass-psicologia-del-gioco"
               className="inline-flex items-center space-x-1.5 text-xs sm:text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition-colors"
             >
-              <span>Dettagli programma e iscrizioni (50% confermato) &rarr;</span>
+              <span>Dettagli programma e iscrizioni (Più del 50% confermato) &rarr;</span>
             </Link>
           </div>
         </div>

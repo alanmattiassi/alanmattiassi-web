@@ -88,7 +88,7 @@ export default function ScegliFormazionePage() {
 
             <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col items-start lg:items-end justify-center gap-3">
               <div className="text-left lg:text-right">
-                <span className="text-xs text-slate-400 block">Quota Ordinaria (50% Confermato)</span>
+                <span className="text-xs text-slate-400 block">Quota Ordinaria (Più del 50% Confermato)</span>
                 <span className="text-3xl font-black text-emerald-400">750€</span>
               </div>
               <Link

@@ -63,7 +63,7 @@ export default function MasterclassPage() {
       <section className="max-w-5xl mx-auto px-4 sm:px-8 text-center space-y-6">
         <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-700 dark:text-amber-400 text-xs font-semibold uppercase tracking-wider">
           <Lock className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
-          <span>ISCRIZIONI PUBBLICHE APERTE &bull; 50% DELL'AULA CONFERMATA</span>
+          <span>ISCRIZIONI PUBBLICHE APERTE &bull; PIÙ DEL 50% DELL'AULA CONFERMATO</span>
         </div>
 
         <div className="space-y-3 sm:space-y-4">
@@ -103,7 +103,7 @@ export default function MasterclassPage() {
           </p>
 
           <p className="text-xs text-[var(--text-muted)] leading-relaxed max-w-lg">
-            I posti a tariffa agevolata sono andati esauriti durante la prelazione. Il 50% dell'aula è già confermato tra iscritti e ospiti: restano disponibili i posti residui a Quota Ordinaria (750€) fino a capienza massima (18 iscritti).
+            I posti a tariffa agevolata sono andati esauriti durante la prelazione. Più del 50% dell'aula è già confermato: restano disponibili i posti residui a Quota Ordinaria (750€) fino a capienza massima (18 iscritti).
           </p>
         </div>
 
@@ -146,7 +146,7 @@ export default function MasterclassPage() {
             className="inline-flex items-center space-x-2 px-6 py-4 rounded-xl font-bold text-sm sm:text-base text-white bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-400 shadow-xl shadow-amber-500/25 hover:scale-105 active:scale-95 transition-all"
           >
             <Ticket className="w-4 h-4 mr-1 text-white shrink-0" />
-            <span>Prenota a Quota Ordinaria (750€) →</span>
+            <span>Iscriviti alla Masterclass (750€) →</span>
           </a>
           <a
             href="#programma"

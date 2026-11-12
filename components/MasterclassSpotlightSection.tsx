@@ -47,8 +47,8 @@ export default function MasterclassSpotlightSection() {
                   <Lock className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 shrink-0" />
                   <span>
                     {isEn
-                      ? "PUBLIC REGISTRATION OPEN • 50% OF SEATS BOOKED"
-                      : "ISCRIZIONI PUBBLICHE APERTE • 50% DELL'AULA CONFERMATA"}
+                      ? "PUBLIC REGISTRATION OPEN • OVER 50% OF SEATS CONFIRMED"
+                      : "ISCRIZIONI PUBBLICHE APERTE • PIÙ DEL 50% DELL'AULA CONFERMATO"}
                   </span>
                 </span>
               </div>
@@ -164,7 +164,7 @@ export default function MasterclassSpotlightSection() {
                   className="inline-flex items-center space-x-2 px-6 py-4 rounded-xl font-bold text-sm sm:text-base text-white bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-400 shadow-xl shadow-amber-500/25 hover:scale-[1.02] active:scale-[0.98] transition-all"
                 >
                   <Ticket className="w-4 h-4 mr-1.5 text-white shrink-0" />
-                  <span>{isEn ? "Book Seat at Regular Fee (750€)" : "Prenota a Quota Ordinaria (750€)"}</span>
+                  <span>{isEn ? "Join the Masterclass (750€)" : "Iscriviti alla Masterclass (750€)"}</span>
                   <ArrowRight className="w-4 h-4 ml-1.5 shrink-0" />
                 </Link>
 
@@ -200,8 +200,8 @@ export default function MasterclassSpotlightSection() {
 
                   <p className="text-xs text-[var(--text-muted)] leading-relaxed">
                     {isEn
-                      ? "50% of seats already confirmed. Remaining seats open publicly at standard fee (max 18 attendees)."
-                      : "50% dell'aula già confermata tra iscritti e ospiti. Posti residui limitati a numero chiuso (max 18 iscritti)."}
+                      ? "Over 50% of seats are already confirmed. Remaining seats open publicly at standard fee (max 18 attendees)."
+                      : "Più del 50% dell'aula è già confermato. Posti residui limitati a numero chiuso (max 18 iscritti)."}
                   </p>
                 </div>
 
@@ -220,7 +220,7 @@ export default function MasterclassSpotlightSection() {
                   </div>
                   <div className="flex items-start space-x-2">
                     <Clock className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
-                    <span>{isEn ? "Availability: 50% of seats booked (max 18)" : "Disponibilità: 50% dell'aula confermata (max 18)"}</span>
+                    <span>{isEn ? "Availability: Over 50% of seats confirmed (max 18)" : "Disponibilità: Più del 50% dell'aula confermato (max 18)"}</span>
                   </div>
                 </div>
 
@@ -229,7 +229,7 @@ export default function MasterclassSpotlightSection() {
                     href="/masterclass-psicologia-del-gioco#iscrizione"
                     className="w-full block text-center py-3.5 px-4 rounded-xl font-bold text-xs sm:text-sm text-white bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-400 transition-colors shadow-md"
                   >
-                    <span>{isEn ? "Book Seat at Regular Fee (750€)" : "Prenota a Quota Ordinaria (750€)"}</span>
+                    <span>{isEn ? "Join the Masterclass (750€)" : "Iscriviti alla Masterclass (750€)"}</span>
                     <ArrowRight className="w-4 h-4 shrink-0 inline-block ml-1.5" />
                   </Link>
                 </div>
