@@ -117,13 +117,13 @@ export default function MasterclassPriorityForm() {
           <div className="space-y-2">
             <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-700 dark:text-amber-300 text-xs font-semibold">
               <Ticket className="w-3.5 h-3.5" />
-              <span>DATA CONFERMATA: 23–24 GENNAIO 2027 &bull; ULTIMI 9 POSTI SU 18</span>
+              <span>DATA CONFERMATA: 23–24 GENNAIO 2027 &bull; 50% AULA CONFERMATA</span>
             </div>
             <h3 className="text-2xl font-extrabold text-[var(--text-main)]">
               Partecipa alla Masterclass in Psicologia del Gioco
             </h3>
             <p className="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
-              La quota Early Bird a 490€ è esaurita. Il 50% dell'aula è già confermato (9 posti su 18 assegnati tra iscritti e ospiti). Puoi prenotare uno degli ultimi 9 posti in aula a Quota Ordinaria (750€), richiedere un pacchetto team aziendale B2B, oppure manifestare interesse per la 2ª Edizione a tariffa agevolata.
+              La quota Early Bird a 490€ è esaurita. Il 50% dell'aula è già confermato tra iscritti e ospiti. Puoi prenotare uno dei posti residui in aula a Quota Ordinaria (750€), richiedere un pacchetto team aziendale B2B, oppure manifestare interesse per la 2ª Edizione a tariffa agevolata.
             </p>
           </div>
 

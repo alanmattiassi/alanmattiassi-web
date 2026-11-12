@@ -68,7 +68,7 @@ export default function MasterclassCheckoutView() {
       <div className="text-center space-y-4">
         <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-700 dark:text-amber-400 text-xs font-semibold uppercase tracking-wider">
           <Lock className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
-          <span>ISCRIZIONI PUBBLICHE APERTE • 9 POSTI RIMASTI SU 18</span>
+          <span>ISCRIZIONI PUBBLICHE APERTE • 50% AULA CONFERMATA</span>
         </div>
 
         <h1 className="text-3xl sm:text-5xl font-black text-[var(--text-main)] tracking-tight leading-tight">
@@ -127,9 +127,9 @@ export default function MasterclassCheckoutView() {
           <AlertCircle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
           <div>
             <strong className="text-[var(--text-main)] font-semibold">
-              Disponibilità limitata: 9 posti rimanenti su 18.
+              Disponibilità limitata: il 50% dell&apos;aula è già confermato tra iscrizioni e ospiti.
             </strong>{" "}
-            Il 50% dell&apos;aula è già confermato (9 slot assegnati tra iscrizioni e ospiti). Per garantire la massima cura didattica nel laboratorio di co-design, i posti residui sono assegnati in{" "}
+            Per garantire la massima cura didattica nel laboratorio di co-design (max 18 iscritti), i posti residui sono assegnati in{" "}
             <strong className="text-[var(--text-main)] font-semibold">ordine rigorosamente cronologico di conferma/ricevuta</strong>.
           </div>
         </div>

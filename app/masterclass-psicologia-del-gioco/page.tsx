@@ -29,11 +29,11 @@ import MasterclassPriorityForm from "@/components/MasterclassPriorityForm";
 export const metadata: Metadata = {
   title: "Masterclass in Psicologia del Gioco – Capire e Progettare Ambienti, Scelte e Apprendimento Profondo | Alan Mattiassi, PhD",
   description:
-    "Dal funzionamento della mente che gioca alla progettazione di attività game-based per contesti formativi, aziendali ed educativi. Weekend intensivo 23–24 Gennaio 2027 in Friuli (max 18 iscritti) con Alan Mattiassi, PhD. Ultimi 9 posti disponibili a Quota Ordinaria (750€).",
+    "Dal funzionamento della mente che gioca alla progettazione di attività game-based per contesti formativi, aziendali ed educativi. Weekend intensivo 23–24 Gennaio 2027 in Friuli (max 18 iscritti) con Alan Mattiassi, PhD. Posti residui disponibili a Quota Ordinaria (750€).",
   openGraph: {
     title: "Masterclass in Psicologia del Gioco – Capire e Progettare Ambienti, Scelte e Apprendimento Profondo",
     description:
-      "Dal funzionamento della mente che gioca alla progettazione di attività game-based per contesti formativi, aziendali ed educativi. Weekend intensivo 23–24 Gennaio 2027 con Alan Mattiassi, PhD. Ultimi 9 posti disponibili a Quota Ordinaria (750€).",
+      "Dal funzionamento della mente che gioca alla progettazione di attività game-based per contesti formativi, aziendali ed educativi. Weekend intensivo 23–24 Gennaio 2027 con Alan Mattiassi, PhD. Posti residui disponibili a Quota Ordinaria (750€).",
     url: "https://alanmattiassi.com/masterclass-psicologia-del-gioco",
     siteName: "Alan Mattiassi, PhD",
     locale: "it_IT",
@@ -63,7 +63,7 @@ export default function MasterclassPage() {
       <section className="max-w-5xl mx-auto px-4 sm:px-8 text-center space-y-6">
         <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-700 dark:text-amber-400 text-xs font-semibold uppercase tracking-wider">
           <Lock className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
-          <span>ISCRIZIONI PUBBLICHE APERTE &bull; 9 POSTI RIMASTI SU 18</span>
+          <span>ISCRIZIONI PUBBLICHE APERTE &bull; 50% DELL'AULA CONFERMATA</span>
         </div>
 
         <div className="space-y-3 sm:space-y-4">
@@ -103,7 +103,7 @@ export default function MasterclassPage() {
           </p>
 
           <p className="text-xs text-[var(--text-muted)] leading-relaxed max-w-lg">
-            I posti a tariffa agevolata sono andati esauriti durante la prelazione. Il 50% dell'aula è già confermato (9/18 posti assegnati tra iscritti e ospiti): restano disponibili gli ultimi 9 posti a Quota Ordinaria (750€).
+            I posti a tariffa agevolata sono andati esauriti durante la prelazione. Il 50% dell'aula è già confermato tra iscritti e ospiti: restano disponibili i posti residui a Quota Ordinaria (750€) fino a capienza massima (18 iscritti).
           </p>
         </div>
 
@@ -518,7 +518,7 @@ export default function MasterclassPage() {
 
             <div className="p-6 rounded-2xl bg-[var(--bg-surface)] border-2 border-amber-500/40 relative">
               <div className="absolute -top-3 right-4 px-2.5 py-0.5 rounded-full bg-amber-500 text-slate-950 font-bold text-xs uppercase shadow-sm">
-                Disponibile Ora • 9 Posti Rimasti
+                Disponibile Ora • Posti Limitati
               </div>
               <div className="text-xs uppercase font-bold text-amber-700 dark:text-amber-400 mb-1">Quota Ordinaria</div>
               <div className="text-4xl font-extrabold text-[var(--text-main)]">750€</div>
