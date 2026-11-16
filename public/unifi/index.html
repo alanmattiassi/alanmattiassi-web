@@ -1,0 +1,3708 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <base href="/" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Unscripted Run | Alan Mattiassi, Ph.D. — Placement UniFi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F8FAFC;
+      --surface-glass: rgba(255, 255, 255, 0.72);
+      --glass-border: rgba(255, 255, 255, 0.95);
+      --text-main: #0F172A;
+      --text-muted: #475569;
+      --accent-warm: #F97316;
+      --accent-cool: #0EA5E9;
+      --shadow-ambient: 0 30px 60px -15px rgba(15, 23, 42, 0.07), 0 0 1px 1px rgba(255, 255, 255, 0.95);
+      --shadow-card-inner: inset 0 1px 2px rgba(255, 255, 255, 0.95), inset 0 -1px 2px rgba(255, 255, 255, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background: #0B0F19;
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .deck-viewport {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .slide-stage {
+      width: 1920px;
+      height: 1080px;
+      max-width: 100vw;
+      max-height: 56.25vw;
+      aspect-ratio: 16 / 9;
+      background: radial-gradient(circle at 15% 15%, #FFFFFF 0%, #F8FAFC 45%, #F1F5F9 100%);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ambient-sphere {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(55px);
+      z-index: 1;
+      opacity: 0.65;
+    }
+    .sphere-1 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, #ffedd5 0%, #fed7aa 40%, rgba(254, 215, 170, 0) 70%);
+      top: -120px;
+      right: 18%;
+    }
+    .sphere-2 {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, #e0f2fe 0%, #bae6fd 40%, rgba(186, 230, 253, 0) 70%);
+      bottom: -160px;
+      left: 15%;
+    }
+    .sphere-3 {
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, #f5f3ff 0%, #ede9fe 40%, rgba(237, 233, 254, 0) 70%);
+      top: 30%;
+      right: 4%;
+    }
+
+    .slides-wrapper {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 4.5rem 6.5rem;
+      display: flex;
+      align-items: center;
+      gap: 5rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0.985);
+      transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.45s;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
+    }
+
+    .slide.title-left {
+      flex-direction: row;
+    }
+    .slide.title-right {
+      flex-direction: row-reverse;
+    }
+
+    .title-col {
+      flex: 0 0 42%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      z-index: 3;
+    }
+
+    /* Header Bar above Title */
+    .title-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      width: 100%;
+    }
+
+    .title-category {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #64748B;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .category-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #0EA5E9;
+      box-shadow: 0 0 10px #0EA5E9;
+    }
+
+    .title-number {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: rgba(15, 23, 42, 0.22);
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    .main-title {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      line-height: 1.06;
+      letter-spacing: -0.035em;
+      color: #0F172A;
+      margin-bottom: 1.5rem;
+    }
+
+    .subtitle-text {
+      font-size: 1.3rem;
+      line-height: 1.55;
+      color: #475569;
+      font-weight: 400;
+      margin-bottom: 2rem;
+    }
+
+    .note-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1.25rem;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      border-radius: 16px;
+      font-size: 0.95rem;
+      color: #334155;
+      font-weight: 500;
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.02);
+    }
+
+    
+    .note-pill strong,
+    .quest-tag {
+      color: var(--accent-warm);
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
+    .note-pill::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      background: var(--accent-warm);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent-warm);
+    }
+
+    /* PURE GLASS CARD (>50%, 58%) */
+    .glass-card-col {
+      flex: 0 0 58%;
+      height: 830px;
+      position: relative;
+      border-radius: 36px;
+      background: var(--surface-glass);
+      backdrop-filter: blur(36px) saturate(190%);
+      -webkit-backdrop-filter: blur(36px) saturate(190%);
+      border: 1.8px solid var(--glass-border);
+      box-shadow: var(--shadow-ambient), var(--shadow-card-inner);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem;
+      transition: all 0.4s ease;
+    }
+
+    .glass-card-col::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 130px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0) 100%);
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    /* Clean Visual Container (Slides 2 to 10) */
+    .card-visual-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      border-radius: 26px;
+      background: #FFFFFF;
+      border: 1.2px solid rgba(255, 255, 255, 0.95);
+      overflow: hidden;
+      box-shadow: 0 15px 35px -10px rgba(15, 23, 42, 0.05);
+    }
+
+    .scale-contain-img { object-fit: contain !important; }
+    .card-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .card-visual-container:hover .card-image {
+      transform: scale(1.02);
+    }
+
+    /* PURE WHITE CONTINUOUS SCROLLER (SLIDE 1) */
+    
+
+    .roy-filmstrip-mask {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .filmstrip-fade-left, .filmstrip-fade-right {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100px;
+      z-index: 20;
+      pointer-events: none;
+    }
+    .filmstrip-fade-left {
+      left: 0;
+      background: linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
+    }
+    .filmstrip-fade-right {
+      right: 0;
+      background: linear-gradient(270deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
+    }
+
+    .roy-scroller-viewport {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      border-radius: 26px;
+      background: #FFFFFF;
+      border: 1.2px solid rgba(255, 255, 255, 0.95);
+      overflow: hidden;
+      box-shadow: 0 15px 35px -10px rgba(15, 23, 42, 0.05);
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: pan-y;
+    }
+
+    .roy-scroller-viewport.is-dragging {
+      cursor: grabbing !important;
+    }
+
+    .roy-marquee-track {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      width: max-content;
+      will-change: transform;
+      padding: 0 1.5rem;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* ITEM WRAPPER WITH SUB-BADGE UNDER THE CARD */
+    .roy-item-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      flex: 0 0 680px;
+    }
+
+    .roy-frame-card {
+      width: 100%;
+      height: 430px;
+      border-radius: 22px;
+      overflow: hidden;
+      position: relative;
+      background: #F1F5F9;
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 12px 28px -8px rgba(15, 23, 42, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .roy-frame-card:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.15);
+    }
+
+    .roy-frame-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+      -webkit-user-drag: none;
+      user-select: none;
+    }
+
+    /* BADGE UNDER THE FRAME (SCROLLING TOGETHER) */
+    .roy-frame-sub-badge {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1.2px solid rgba(15, 23, 42, 0.08);
+      color: #0F172A;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.92rem;
+      font-weight: 700;
+      padding: 0.45rem 1.4rem;
+      border-radius: 999px;
+      letter-spacing: 0.14em;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* SPACER WRAPPER */
+    .roy-spacer-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      flex: 0 0 420px;
+    }
+
+    .roy-spacer-gap {
+      width: 100%;
+      height: 430px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: transparent;
+    }
+
+    
+
+    .roy-spacer-sub-placeholder {
+      height: 34px; /* matches sub-badge height to keep baseline aligned */
+    }
+
+    /* Navigation Dock */
+    .deck-dock {
+      position: absolute;
+      bottom: 2.2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.12);
+      padding: 0.65rem 1.4rem;
+      border-radius: 999px;
+      z-index: 50;
+    }
+
+    .dock-separator {
+      width: 1.5px;
+      height: 24px;
+      background: rgba(15, 23, 42, 0.12);
+      margin: 0 0.15rem;
+      border-radius: 999px;
+    }
+
+    .dock-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      background: #FFFFFF;
+      color: #0F172A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+      transition: all 0.2s ease;
+    }
+
+    .dock-btn:hover {
+      background: #0F172A;
+      color: #FFFFFF;
+      transform: scale(1.06);
+    }
+
+    .dots-container {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(15, 23, 42, 0.18);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .dot.active {
+      width: 28px;
+      border-radius: 999px;
+      background: #0F172A;
+    }
+
+    .dock-counter {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #475569;
+      min-width: 60px;
+      text-align: center;
+    }
+    /* EXPLORE VS EXPLOIT INTERACTIVE GAME (SLIDE 10) */
+    .ee-game-stage {
+      width: 100%;
+      height: 100%;
+      flex: 1 1 0%;
+      min-height: 0;
+      border-radius: 26px;
+      background: #FAF8F5;
+      border: 1.2px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 15px 35px -10px rgba(15, 23, 42, 0.05);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      z-index: 5;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .ee-hud {
+      height: 66px;
+      background: #FFFFFF;
+      border-bottom: 1.5px solid #E2E8F0;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      z-index: 10;
+      flex-shrink: 0;
+    }
+
+    .ee-stat-coins {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .ee-coin-img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    }
+
+    .ee-coins-val {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1;
+      color: #0F172A;
+    }
+
+    .ee-rate-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #64748B;
+      background: #F1F5F9;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid #E2E8F0;
+    }
+
+    .ee-bar-wrapper {
+      flex: 1;
+      max-width: 320px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .ee-bar-track {
+      width: 100%;
+      height: 22px;
+      background: #F1F5F9;
+      border: 1.5px solid #CBD5E1;
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ee-bar-fill {
+      height: 100%;
+      width: 50%;
+      background: #16A34A;
+      transition: width 60ms linear, background-color 150ms ease;
+      border-radius: 6px;
+    }
+
+    .ee-bar-fill.gold {
+      background: #EAB308;
+      box-shadow: 0 0 12px rgba(234, 179, 8, 0.6);
+    }
+
+    .ee-bar-midline {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: #0F172A;
+      opacity: 0.35;
+      transform: translateX(-50%);
+    }
+
+    .ee-hud-right {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .ee-timer {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #0F172A;
+      min-width: 55px;
+      text-align: right;
+    }
+
+    .ee-btn-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid #CBD5E1;
+      background: #F8FAFC;
+      color: #334155;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .ee-btn-icon:hover {
+      background: #0F172A;
+      color: #FFFFFF;
+      border-color: #0F172A;
+    }
+
+    .ee-arena {
+      flex: 1 1 0%;
+      min-height: 0;
+      height: calc(100% - 66px);
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      overflow: hidden;
+      touch-action: none;
+      cursor: grab;
+    }
+
+    .ee-arena.is-dragging {
+      cursor: grabbing !important;
+    }
+
+    .ee-zone {
+      flex: 1 1 50%;
+      width: 50%;
+      height: 100%;
+      min-height: 100%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem 1.5rem;
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+
+    .ee-zone.explore {
+      background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
+      border-right: 2px dashed #86EFAC;
+    }
+
+    .ee-zone.explore.active {
+      background: linear-gradient(135deg, #BBF7D0 0%, #86EFAC 50%, #4ADE80 100%);
+      box-shadow: inset 0 0 80px rgba(34, 197, 94, 0.35);
+    }
+
+    .ee-zone.exploit {
+      background: linear-gradient(135deg, #FFFBEB 0%, #FEF9C3 100%);
+    }
+
+    .ee-zone.exploit.active {
+      background: linear-gradient(135deg, #FEF9C3 0%, #FEF08A 50%, #FDE047 100%);
+      box-shadow: inset 0 0 80px rgba(234, 179, 8, 0.4);
+    }
+
+    .ee-zone.exploit.gold {
+      background: linear-gradient(135deg, #FEF08A 0%, #FDE047 50%, #EAB308 100%);
+      box-shadow: inset 0 0 90px rgba(234, 179, 8, 0.55);
+    }
+
+    .ee-zone-watermark {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: clamp(3.5rem, 8vw, 7.5rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    .ee-zone.explore .ee-zone-watermark {
+      color: #15803D;
+      opacity: 0.38;
+    }
+
+    .ee-zone.explore.active .ee-zone-watermark {
+      color: #14532D;
+      opacity: 0.85;
+      text-shadow: 0 0 35px rgba(34, 197, 94, 0.5);
+      transform: scale(1.04);
+    }
+
+    .ee-zone.exploit .ee-zone-watermark {
+      color: #92400E;
+      opacity: 0.38;
+    }
+
+    .ee-zone.exploit.active .ee-zone-watermark {
+      color: #78350F;
+      opacity: 0.85;
+      text-shadow: 0 0 35px rgba(234, 179, 8, 0.5);
+      transform: scale(1.04);
+    }
+
+    .ee-zone.exploit.gold .ee-zone-watermark {
+      color: #713F12;
+      opacity: 0.95;
+      text-shadow: 0 0 45px rgba(234, 179, 8, 0.7);
+      transform: scale(1.06);
+    }
+
+    .ee-zone-desc {
+      margin-top: 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      pointer-events: none;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+    }
+
+    .ee-zone.explore .ee-zone-desc {
+      color: #166534;
+    }
+
+    .ee-zone.exploit .ee-zone-desc {
+      color: #854D0E;
+    }
+
+    .ee-token {
+      position: absolute;
+      width: 96px;
+      height: 96px;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.1s ease;
+    }
+
+    .ee-progress-ring {
+      position: absolute;
+      inset: -6px;
+      width: 108px;
+      height: 108px;
+      transform: rotate(-90deg);
+    }
+
+    .ee-token-img {
+      width: 76px;
+      height: 76px;
+      object-fit: contain;
+      filter: drop-shadow(0 6px 14px rgba(0,0,0,0.18));
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .ee-token.gold .ee-token-img {
+      transform: scale(1.12);
+      filter: drop-shadow(0 0 20px rgba(234, 179, 8, 0.8));
+    }
+
+    .ee-floating-coin {
+      position: absolute;
+      pointer-events: none;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: #0F172A;
+      animation: eeCoinFloat 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .ee-floating-coin.gold {
+      color: #B45309;
+      text-shadow: 0 0 10px rgba(234, 179, 8, 0.6);
+    }
+
+    @keyframes eeCoinFloat {
+      0% { opacity: 1; transform: translate(-50%, -50%) translateY(0) scale(0.9); }
+      50% { opacity: 1; transform: translate(-50%, -50%) translateY(-35px) scale(1.15); }
+      100% { opacity: 0; transform: translate(-50%, -50%) translateY(-65px) scale(1); }
+    }
+
+    #eeParticlesContainer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 30;
+    }
+
+    .ee-red-flash {
+      position: absolute;
+      inset: 0;
+      background: #DC2626;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 40;
+      mix-blend-mode: multiply;
+      transition: opacity 120ms ease;
+    }
+
+    .ee-red-flash.active {
+      opacity: 0.65;
+    }
+
+    .ee-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(245, 242, 235, 0.92);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .ee-modal-card {
+      background: #FFFFFF;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 28px;
+      padding: 2.5rem 3rem;
+      box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.15);
+      max-width: 480px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: auto;
+    }
+
+    .ee-modal-title {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #0F172A;
+      margin: 1rem 0 0.5rem;
+    }
+
+    .ee-modal-sub {
+      font-size: 0.95rem;
+      color: #475569;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+    }
+
+    .ee-mode-switch {
+      display: inline-flex;
+      background: #F1F5F9;
+      padding: 0.3rem;
+      border-radius: 999px;
+      border: 1px solid #E2E8F0;
+      margin-bottom: 1.5rem;
+      gap: 0.35rem;
+    }
+
+    .ee-mode-btn {
+      padding: 0.4rem 1.1rem;
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border: none;
+      background: transparent;
+      color: #64748B;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .ee-mode-btn.active {
+      background: #FFFFFF;
+      color: #0F172A;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+    }
+
+    .ee-btn-cta {
+      background: #0F172A;
+      color: #FFFFFF;
+      border: none;
+      padding: 0.85rem 2.2rem;
+      border-radius: 999px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.15);
+    }
+
+    .ee-btn-cta:hover {
+      background: #1E293B;
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 12px 25px rgba(15, 23, 42, 0.22);
+    }
+
+  
+    /* MUSEUM EXHIBITION VITRINE & SPOTLIGHT (SLIDE 09) */
+    .glass-card-col.museum-theme {
+      background: #080C16 !important;
+      border: 1.8px solid rgba(255, 255, 255, 0.15) !important;
+      box-shadow: 
+        0 40px 90px -20px rgba(0, 0, 0, 0.95),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+      padding: 0 !important;
+      overflow: hidden !important;
+    }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0F172A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .glass-card-mock {
+      width: 928px;
+      height: 780px;
+      border-radius: 36px;
+      background: #070A11;
+      border: 1.8px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.85);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* DARK MUSEUM GALLERY ATMOSPHERE */
+    .museum-stage {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(ellipse 90% 70% at 50% 20%, #151F33 0%, #0A0F1A 50%, #04060A 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1800px;
+    }
+
+    /* THEATRICAL OVERHEAD SPOTLIGHT CONE */
+    .museum-spotlight-cone {
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 580px;
+      height: 740px;
+      clip-path: polygon(42% 0%, 58% 0%, 100% 100%, 0% 100%);
+      background: linear-gradient(180deg, 
+        rgba(255, 255, 255, 0.45) 0%, 
+        rgba(225, 240, 255, 0.22) 25%, 
+        rgba(200, 225, 255, 0.08) 65%, 
+        rgba(200, 225, 255, 0.01) 90%, 
+        transparent 100%);
+      filter: blur(18px);
+      pointer-events: none;
+      mix-blend-mode: screen;
+      z-index: 20;
+    }
+
+    /* SECONDARY SPOTLIGHT CORE BEAM */
+    .museum-spotlight-core {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 320px;
+      height: 680px;
+      clip-path: polygon(46% 0%, 54% 0%, 90% 100%, 10% 100%);
+      background: linear-gradient(180deg, 
+        rgba(255, 255, 255, 0.65) 0%, 
+        rgba(255, 255, 255, 0.25) 30%, 
+        rgba(255, 255, 255, 0.05) 75%, 
+        transparent 100%);
+      filter: blur(8px);
+      pointer-events: none;
+      mix-blend-mode: screen;
+      z-index: 22;
+    }
+
+    /* SPOTLIGHT ILLUMINATION POOL ON THE BASE */
+    .museum-light-pool {
+      position: absolute;
+      bottom: 70px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 520px;
+      height: 140px;
+      background: radial-gradient(ellipse at 50% 50%, 
+        rgba(255, 255, 255, 0.75) 0%, 
+        rgba(215, 235, 255, 0.4) 35%, 
+        rgba(180, 210, 255, 0.12) 65%, 
+        transparent 80%);
+      filter: blur(14px);
+      pointer-events: none;
+      mix-blend-mode: screen;
+      z-index: 8;
+    }
+
+    /* TOP MUSEUM CATEGORY BADGE */
+    .museum-top-badge {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.75rem;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 0.45rem 1.15rem;
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #E2E8F0;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .museum-top-badge .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #F59E0B;
+      box-shadow: 0 0 10px #F59E0B;
+    }
+
+    /* MUSEUM EXHIBITION UNIT (VITRINE + PEDESTAL + BOOK) */
+    .museum-unit {
+      position: relative;
+      width: 480px;
+      height: 640px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      z-index: 10;
+      padding-bottom: 25px;
+    }
+
+    /* GLASS VITRINE (TECA MUSEALE) */
+    .museum-vitrine {
+      position: absolute;
+      top: 25px;
+      bottom: 80px;
+      width: 440px;
+      border: 1.8px solid rgba(255, 255, 255, 0.45);
+      border-bottom: none;
+      border-radius: 12px 12px 0 0;
+      background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.22) 0%, 
+        rgba(255, 255, 255, 0.05) 18%, 
+        rgba(255, 255, 255, 0.02) 45%, 
+        rgba(255, 255, 255, 0.08) 75%, 
+        transparent 100%);
+      box-shadow: 
+        inset 0 2px 15px rgba(255, 255, 255, 0.35),
+        inset 2px 0 10px rgba(255, 255, 255, 0.2),
+        inset -2px 0 10px rgba(255, 255, 255, 0.2),
+        0 0 40px rgba(255, 255, 255, 0.12);
+      pointer-events: none;
+      z-index: 25;
+    }
+
+    /* Vitrine glass top cap */
+    .vitrine-top-cap {
+      position: absolute;
+      top: -12px;
+      left: -8px;
+      right: -8px;
+      height: 16px;
+      background: rgba(255, 255, 255, 0.3);
+      border: 1.5px solid rgba(255, 255, 255, 0.65);
+      border-radius: 4px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.35);
+    }
+
+    /* Diagonal reflection across glass */
+    .vitrine-glare {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(120deg, 
+        transparent 30%, 
+        rgba(255, 255, 255, 0.28) 42%, 
+        rgba(255, 255, 255, 0.06) 55%, 
+        transparent 70%);
+      border-radius: 12px 12px 0 0;
+    }
+
+    /* Chrome corner brackets on vitrine */
+    .vitrine-corner {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border: 2px solid #E2E8F0;
+      z-index: 26;
+      box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+    }
+    .vitrine-corner.top-left { top: 2px; left: 2px; border-right: none; border-bottom: none; }
+    .vitrine-corner.top-right { top: 2px; right: 2px; border-left: none; border-bottom: none; }
+
+    /* 3D BOOK WRAPPER INSIDE VITRINE */
+    .book-3d-stage {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1600px;
+      z-index: 12;
+      margin-bottom: 20px;
+    }
+
+    .book-3d-wrapper {
+      position: relative;
+      width: 310px;
+      height: 470px; /* Scaled down slightly to fit gracefully inside vitrine */
+      transform-style: preserve-3d;
+      transform: rotateY(-24deg) rotateX(10deg) rotateZ(-2deg);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+
+    .glass-card-mock:hover .book-3d-wrapper {
+      transform: rotateY(-16deg) rotateX(6deg) rotateZ(-1deg) scale(1.02);
+    }
+
+    /* FRONT COVER */
+    .book-3d-cover {
+      position: absolute;
+      inset: 0;
+      width: 310px;
+      height: 470px;
+      border-radius: 4px 10px 10px 4px;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transform: translateZ(18px);
+      box-shadow: 
+        inset 4px 0 10px rgba(0,0,0,0.3),
+        inset -1px 0 3px rgba(255,255,255,0.5),
+        0 15px 35px rgba(0,0,0,0.7);
+      background: #1B3668;
+      z-index: 10;
+    }
+
+    .book-3d-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Intense spotlight sheen on top half of cover */
+    .book-3d-gloss {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(145deg, 
+        rgba(255, 255, 255, 0.45) 0%, 
+        rgba(255, 255, 255, 0.15) 30%, 
+        transparent 65%, 
+        rgba(0, 0, 0, 0.25) 100%);
+      pointer-events: none;
+      border-radius: 4px 10px 10px 4px;
+    }
+
+    .book-3d-hinge {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 18px;
+      background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 40%, rgba(255,255,255,0.25) 75%, transparent 100%);
+      pointer-events: none;
+      z-index: 12;
+    }
+
+    /* SPINE (COSTA DEL LIBRO: Mattiassi in alto, titolo in basso) */
+    .book-3d-spine {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 36px;
+      height: 470px;
+      background: #183360;
+      transform: rotateY(-90deg) translateZ(0);
+      transform-origin: left center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 0;
+      box-shadow: inset 0 0 12px rgba(0,0,0,0.7);
+      z-index: 5;
+      overflow: hidden;
+    }
+
+    .book-3d-spine::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, 
+        rgba(0,0,0,0.65) 0%, 
+        rgba(255,255,255,0.35) 30%, 
+        rgba(255,255,255,0.1) 60%, 
+        rgba(0,0,0,0.6) 100%);
+      pointer-events: none;
+    }
+
+    .spine-author {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 12.5px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+      margin-top: 8px;
+    }
+
+    .spine-title {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 13.5px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #FFFFFF;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+      margin-bottom: 20px;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .spine-brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      color: #FFFFFF;
+      margin-bottom: 8px;
+    }
+
+    .spine-brand-name {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: lowercase;
+      color: #FFFFFF;
+    }
+
+    /* 3D PAGES BLOCK */
+    .book-3d-pages-right {
+      position: absolute;
+      right: 2px;
+      top: 4px;
+      bottom: 4px;
+      width: 34px;
+      background: repeating-linear-gradient(to right, #F8F5EE 0px, #F8F5EE 2px, #DBD5C7 2px, #DBD5C7 3px);
+      transform: rotateY(90deg) translateZ(16px);
+      transform-origin: right center;
+      box-shadow: inset 0 0 14px rgba(0,0,0,0.4);
+      border-radius: 2px;
+    }
+
+    .book-3d-pages-top {
+      position: absolute;
+      top: 0;
+      left: 10px;
+      right: 2px;
+      height: 34px;
+      /* Lit strongly from overhead spotlight */
+      background: repeating-linear-gradient(to bottom, #FFFFFF 0px, #FFFFFF 2px, #EDE7D8 2px, #EDE7D8 3px);
+      transform: rotateX(90deg) translateZ(17px);
+      transform-origin: top center;
+      box-shadow: inset 0 0 8px rgba(0,0,0,0.15), 0 0 15px rgba(255,255,255,0.4);
+    }
+
+    .book-3d-pages-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 10px;
+      right: 2px;
+      height: 34px;
+      background: repeating-linear-gradient(to top, #EAE4D5 0px, #EAE4D5 2px, #CFC6B4 2px, #CFC6B4 3px);
+      transform: rotateX(-90deg) translateZ(17px);
+      transform-origin: bottom center;
+      box-shadow: inset 0 0 14px rgba(0,0,0,0.5);
+    }
+
+    .book-3d-back {
+      position: absolute;
+      inset: 0;
+      width: 310px;
+      height: 470px;
+      background: #11213D;
+      border-radius: 4px 10px 10px 4px;
+      transform: translateZ(-18px);
+      box-shadow: -20px 30px 50px rgba(0, 0, 0, 0.85);
+    }
+
+    /* ACRYLIC DISPLAY STAND (LEGGIO TRASPARENTE) */
+    .acrylic-stand {
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%) translateZ(-5px);
+      width: 220px;
+      height: 45px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.08) 100%);
+      border: 1.5px solid rgba(255,255,255,0.5);
+      border-radius: 6px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+      z-index: 9;
+    }
+
+    /* MUSEUM PEDESTAL / PLINTH (PIEDISTALLO NERO DA GALLERIA) */
+    .museum-pedestal {
+      position: relative;
+      width: 480px;
+      height: 82px;
+      background: linear-gradient(180deg, #242E44 0%, #151C2C 35%, #0B0F19 100%);
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      border-radius: 10px 10px 14px 14px;
+      box-shadow: 
+        0 25px 60px rgba(0, 0, 0, 0.9),
+        inset 0 2px 4px rgba(255, 255, 255, 0.5),
+        inset 0 -2px 6px rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 1.5rem;
+      z-index: 15;
+    }
+
+    /* Pedestal top beveled lip */
+    .pedestal-lip {
+      position: absolute;
+      top: 0;
+      left: 10px;
+      right: 10px;
+      height: 4px;
+      background: linear-gradient(90deg, 
+        rgba(255,255,255,0.2) 0%, 
+        rgba(255,255,255,0.85) 50%, 
+        rgba(255,255,255,0.2) 100%);
+      border-radius: 999px;
+    }
+
+    /* ENGRAVED MUSEUM PLAQUE (TARGA MUSEALE IN METALLO) */
+    .museum-plaque {
+      position: relative;
+      background: linear-gradient(135deg, #1C2436 0%, #0D1320 100%);
+      border: 1px solid rgba(245, 158, 11, 0.5); /* Antique brass / gold border */
+      box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      border-radius: 6px;
+      padding: 0.55rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+      text-align: center;
+      max-width: 420px;
+      width: 100%;
+    }
+
+    .plaque-category {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #F59E0B; /* Warm gold */
+      text-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+    }
+
+    .plaque-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .plaque-meta {
+      font-size: 0.73rem;
+      color: #94A3B8;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      letter-spacing: 0.02em;
+    }
+
+    .plaque-sep {
+      color: #64748B;
+    }
+  
+    /* ==========================================================================
+       HERO TITLE SLIDE (UN'UNICA SCHEDA CENTRALE)
+       ========================================================================== */
+    .slide.title-slide {
+      padding: 4.5rem 6.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .hero-center-card {
+      width: 100%;
+      max-width: 1320px;
+      height: 830px;
+      position: relative;
+      border-radius: 44px;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(40px) saturate(190%);
+      -webkit-backdrop-filter: blur(40px) saturate(190%);
+      border: 1.8px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 
+        0 40px 90px -20px rgba(15, 23, 42, 0.1),
+        0 20px 40px -15px rgba(15, 23, 42, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.98);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3.5rem 5rem;
+      overflow: hidden;
+      user-select: none;
+      cursor: pointer;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hero-center-card:hover {
+      box-shadow: 
+        0 45px 100px -20px rgba(246, 154, 35, 0.18),
+        0 25px 45px -15px rgba(15, 23, 42, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.98);
+    }
+
+    .hero-bg-glow {
+      position: absolute;
+      width: 950px;
+      height: 950px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(246, 154, 35, 0.15) 0%, rgba(37, 99, 235, 0.04) 45%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(15, 23, 42, 0.04);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      padding: 0.55rem 1.4rem;
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #475569;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.75rem;
+      z-index: 2;
+    }
+
+    .hero-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #F97316;
+      box-shadow: 0 0 10px #F97316;
+    }
+
+    .hero-logo-img {
+      width: 96px;
+      height: 96px;
+      object-fit: contain;
+      filter: drop-shadow(0 12px 24px rgba(15, 23, 42, 0.12));
+      margin-bottom: 1.5rem;
+      z-index: 2;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hero-center-card:hover .hero-logo-img {
+      transform: scale(1.08) rotate(3deg);
+    }
+
+    .hero-title-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 2rem;
+      z-index: 2;
+      max-width: 1200px;
+      gap: 0.95rem;
+    }
+
+    .hero-title-main {
+      font-family: 'Cabinet Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: clamp(2.9rem, 4.5vw, 4.6rem);
+      font-weight: 900;
+      line-height: 1.04;
+      letter-spacing: -0.035em;
+      color: #F69A23;
+      text-transform: uppercase;
+      text-wrap: balance;
+      text-shadow: 0 4px 24px rgba(246, 154, 35, 0.15);
+    }
+
+    .hero-title-sub {
+      font-family: 'Cabinet Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: clamp(1.4rem, 2.05vw, 1.95rem);
+      font-weight: 700;
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+      color: #F69A23;
+      opacity: 0.94;
+      text-wrap: balance;
+    }
+
+    .hero-speaker-line {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1.5px solid rgba(226, 232, 240, 0.9);
+      padding: 0.75rem 2.2rem;
+      border-radius: 999px;
+      box-shadow: 0 10px 25px -8px rgba(15, 23, 42, 0.08);
+      margin-bottom: 1.75rem;
+      z-index: 2;
+    }
+
+    .speaker-name {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 1.65rem;
+      font-weight: 800;
+      color: #0F172A;
+      letter-spacing: -0.01em;
+    }
+
+    .speaker-sep {
+      color: #CBD5E1;
+      font-size: 1.65rem;
+      font-weight: 300;
+      margin: 0 1.1rem;
+    }
+
+    .speaker-role {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 1.55rem;
+      font-weight: 600;
+      color: #475569;
+    }
+
+    /* HERO EVENT INFORMATION (OFFICIAL LOCANDINA) */
+    .hero-event-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.85rem;
+      max-width: 1040px;
+      margin-top: 0.4rem;
+      z-index: 2;
+    }
+
+    .event-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.85rem;
+    }
+
+    .event-meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      color: #334155;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1.2px solid rgba(203, 213, 225, 0.9);
+      padding: 0.55rem 1.25rem;
+      border-radius: 999px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+      letter-spacing: 0.02em;
+    }
+
+    .event-title-pill {
+      background: rgba(248, 250, 252, 0.98);
+      border-color: rgba(14, 165, 233, 0.35);
+      padding: 0.6rem 1.45rem;
+    }
+
+    .event-meta-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0284C7;
+    }
+
+    .event-title-pill .event-meta-icon {
+      color: #F97316;
+    }
+
+    .event-meta-label {
+      font-weight: 800;
+      color: #64748B;
+      letter-spacing: 0.08em;
+      font-size: 0.74rem;
+    }
+
+    .event-title-pill .event-meta-label {
+      color: #C2410C;
+    }
+
+    .event-meta-val {
+      font-weight: 700;
+      color: #0F172A;
+    }
+  
+    /* ==========================================================================
+       OUTRO & MASTERCLASS SLIDE (RINGRAZIAMENTI, CONTATTI, YOUTUBE & MASTERCLASS)
+       ========================================================================== */
+    .slide.outro-slide {
+      padding: 3.5rem 5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .outro-card {
+      width: 100%;
+      max-width: 1540px;
+      height: 840px;
+      position: relative;
+      border-radius: 40px;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(40px) saturate(190%);
+      -webkit-backdrop-filter: blur(40px) saturate(190%);
+      border: 1.8px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 
+        0 40px 90px -20px rgba(15, 23, 42, 0.1),
+        0 20px 40px -15px rgba(15, 23, 42, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.98);
+      display: flex;
+      flex-direction: column;
+      padding: 2.25rem 3.5rem 1.85rem;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .outro-glow-left {
+      position: absolute;
+      top: -150px;
+      left: -100px;
+      width: 650px;
+      height: 650px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(14, 165, 233, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .outro-glow-right {
+      position: absolute;
+      bottom: -150px;
+      right: -100px;
+      width: 750px;
+      height: 750px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(246, 154, 35, 0.12) 0%, rgba(217, 119, 6, 0.04) 45%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .outro-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .outro-title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .outro-kicker-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(15, 23, 42, 0.05);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      padding: 0.35rem 1rem;
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #475569;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      align-self: flex-start;
+    }
+
+    .kicker-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10B981;
+      box-shadow: 0 0 8px #10B981;
+    }
+
+    .outro-main-title {
+      font-family: 'Cabinet Grotesk', -apple-system, sans-serif;
+      font-size: 2.85rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: #0F172A;
+      line-height: 1.05;
+    }
+
+    .outro-sub-title {
+      font-size: 1.15rem;
+      color: #475569;
+      font-weight: 400;
+      max-width: 760px;
+    }
+
+    .outro-speaker-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #FFFFFF;
+      border: 1.5px solid rgba(226, 232, 240, 0.95);
+      padding: 0.55rem 1.25rem 0.55rem 0.75rem;
+      border-radius: 999px;
+      box-shadow: 0 8px 20px -6px rgba(15, 23, 42, 0.06);
+    }
+
+    .outro-speaker-img {
+      width: 44px;
+      height: 44px;
+      border-radius: 0;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
+    }
+
+    .outro-speaker-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .outro-speaker-name {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #0F172A;
+      line-height: 1.2;
+    }
+
+    .outro-speaker-role {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #64748B;
+    }
+
+    .outro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 2rem;
+      flex: 1;
+      position: relative;
+      z-index: 2;
+    }
+
+    .outro-left-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      justify-content: space-between;
+    }
+
+    .hub-section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #64748B;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hub-label-line {
+      flex: 1;
+      height: 1px;
+      background: rgba(226, 232, 240, 0.8);
+    }
+
+    .hub-links-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .hub-tile {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1.5px solid rgba(226, 232, 240, 0.9);
+      border-radius: 20px;
+      padding: 0.95rem 1.25rem;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+    }
+
+    .hub-tile:hover {
+      transform: translateY(-2px);
+      border-color: #0EA5E9;
+      box-shadow: 0 10px 24px -6px rgba(14, 165, 233, 0.12);
+    }
+
+    .hub-tile-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .icon-globe {
+      background: #E0F2FE;
+      color: #0284C7;
+    }
+
+    .icon-yt {
+      background: #FEE2E2;
+      color: #DC2626;
+    }
+
+    .icon-mail {
+      background: #FEF3C7;
+      color: #D97706;
+    }
+
+    .icon-linkedin {
+      background: #E0E7FF;
+      color: #4F46E5;
+    }
+
+    .hub-tile-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hub-tile-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #0F172A;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .hub-tile-sub {
+      font-size: 0.82rem;
+      color: #64748B;
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    .hub-tile-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #0284C7;
+      background: rgba(14, 165, 233, 0.1);
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+
+    .hub-tile-tag.yt-tag {
+      color: #DC2626;
+      background: rgba(220, 38, 38, 0.1);
+    }
+
+    .hub-bottom-row {
+      display: flex;
+      align-items: center;
+      gap: 1.15rem;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 18px;
+      padding: 0.85rem 1.15rem;
+    }
+
+    .hub-qr-img {
+      width: 76px;
+      height: 76px;
+      border-radius: 10px;
+      border: 1px solid #CBD5E1;
+      background: #FFFFFF;
+      padding: 4px;
+    }
+
+    .hub-qr-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hub-qr-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #0F172A;
+    }
+
+    .hub-qr-desc {
+      font-size: 0.8rem;
+      color: #64748B;
+      line-height: 1.3;
+    }
+
+    .masterclass-card {
+      background: linear-gradient(145deg, #FFFFFF 0%, #FFFDF9 60%, #FEF8ED 100%);
+      border: 2px solid rgba(246, 154, 35, 0.4);
+      border-radius: 28px;
+      box-shadow: 
+        0 20px 45px -10px rgba(246, 154, 35, 0.15),
+        0 10px 20px -5px rgba(15, 23, 42, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
+      padding: 2rem 2.25rem 1.85rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.25rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .masterclass-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #F97316 0%, #F59E0B 50%, #EAB308 100%);
+    }
+
+    .mc-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.85rem;
+    }
+
+    .mc-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(249, 115, 22, 0.12);
+      border: 1px solid rgba(249, 115, 22, 0.3);
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #C2410C;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .mc-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #F97316;
+      box-shadow: 0 0 6px #F97316;
+    }
+
+    .mc-capacity-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #92400E;
+      background: #FEF3C7;
+      border: 1px solid #FDE68A;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+    }
+
+    .mc-title-group {
+      margin-bottom: 1.15rem;
+    }
+
+    .mc-main-title {
+      font-family: 'Cabinet Grotesk', -apple-system, sans-serif;
+      font-size: 1.85rem;
+      font-weight: 900;
+      color: #0F172A;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.35rem;
+    }
+
+    .mc-subtitle {
+      font-size: 1.05rem;
+      font-style: italic;
+      color: #C2410C;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.35;
+    }
+
+    .mc-specs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1.15rem;
+    }
+
+    .mc-spec-item {
+      background: #FFFFFF;
+      border: 1.5px solid #F1F5F9;
+      border-radius: 16px;
+      padding: 0.95rem 1.15rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.02);
+    }
+
+    .mc-spec-icon {
+      font-size: 1.1rem;
+      line-height: 1;
+      padding-top: 2px;
+    }
+
+    .mc-spec-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mc-spec-label {
+      font-size: 0.72rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #94A3B8;
+      letter-spacing: 0.04em;
+    }
+
+    .mc-spec-val {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #1E293B;
+      line-height: 1.25;
+    }
+
+    .mc-syllabus-box {
+      background: rgba(254, 243, 199, 0.55);
+      border: 1.5px solid rgba(245, 158, 11, 0.35);
+      border-radius: 18px;
+      padding: 1.1rem 1.35rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.05);
+    }
+
+    .mc-day-line {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.92rem;
+      color: #451A03;
+      line-height: 1.42;
+    }
+
+    .day-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 800;
+      background: #FFFFFF;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      padding: 1px 6px;
+      border-radius: 6px;
+      color: #B45309;
+      flex-shrink: 0;
+    }
+
+    .mc-footer-action {
+      display: flex;
+      align-items: center;
+      gap: 1.35rem;
+      background: #FFFFFF;
+      border: 1.5px solid #FDE68A;
+      border-radius: 20px;
+      padding: 1.05rem 1.35rem;
+      box-shadow: 0 6px 18px rgba(245, 158, 11, 0.09);
+    }
+
+    .mc-qr-img {
+      width: 92px;
+      height: 92px;
+      border-radius: 12px;
+      border: 1px solid #CBD5E1;
+      padding: 5px;
+      background: #FFFFFF;
+      flex-shrink: 0;
+    }
+
+    .mc-action-details {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .mc-cta-title {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 1.12rem;
+      font-weight: 900;
+      color: #0F172A;
+      letter-spacing: -0.015em;
+      margin-bottom: 0.25rem;
+    }
+
+    .mc-scan-hint {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: #C2410C;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .mc-url-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      color: #475569;
+      margin-top: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div class="deck-viewport">
+    <div class="slide-stage">
+      <div class="ambient-sphere sphere-1"></div>
+      <div class="ambient-sphere sphere-2"></div>
+      <div class="ambient-sphere sphere-3"></div>
+
+      <div class="slides-wrapper">
+        
+          <div class="slide title-slide active" data-index="0">
+            <div class="hero-center-card" id="heroTitleCard" title="The Unscripted Run &bull; Alan Mattiassi, PhD">
+              <div class="hero-bg-glow"></div>
+
+              <!-- TOP BADGE -->
+              <div class="hero-badge">
+                <span class="hero-badge-dot"></span>
+                <span>UNIVERSITÀ DEGLI STUDI DI FIRENZE // SCUOLA DI PSICOLOGIA</span>
+              </div>
+
+              <!-- GOLD MONOGRAM -->
+              <img src="slides_img/am_logo_glassmorphic.png" alt="Alan Mattiassi" class="hero-logo-img" draggable="false" />
+
+              <!-- ORANGE MAIN TITLE (UPPERCASE & VERY LARGE) & SUBTITLE (SMALL) -->
+              <div class="hero-title-group">
+                <h1 class="hero-title-main">LA SFIDA DI CREARE NUOVE STRADE</h1>
+                <p class="hero-title-sub">esplorare opportunità oltre i percorsi tradizionali</p>
+              </div>
+
+              <!-- SPEAKER BYLINE -->
+              <div class="hero-speaker-line">
+                <span class="speaker-name">Alan Mattiassi, PhD</span>
+                <span class="speaker-sep">|</span>
+                <span class="speaker-role">Psicologo del Gioco</span>
+              </div>
+
+              <!-- EVENT INFORMATION (FROM OFFICIAL LOCANDINA) -->
+              <div class="hero-event-info">
+                <div class="event-meta-pill event-title-pill">
+                  <span class="event-meta-icon">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg>
+                  </span>
+                  <span class="event-meta-label">EVENTO:</span>
+                  <span class="event-meta-val">Sbocchi professionali nel ciclo di vita e nei contesti</span>
+                </div>
+
+                <div class="event-meta-row">
+                  <div class="event-meta-pill">
+                    <span class="event-meta-icon">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                      </svg>
+                    </span>
+                    <span class="event-meta-label">DATA:</span>
+                    <span class="event-meta-val">Lunedì 16 Novembre 2026 • 09:30–13:30</span>
+                  </div>
+
+                  <div class="event-meta-pill">
+                    <span class="event-meta-icon">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                      </svg>
+                    </span>
+                    <span class="event-meta-label">SEDE:</span>
+                    <span class="event-meta-val">Aula 13 • Plesso didattico La Torretta • UniFi</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+            
+          <div class="slide title-left " data-index="1">
+            <div class="title-col">
+              <div class="title-topbar">
+                <div class="title-category">
+                  <span class="category-indicator"></span>
+                  <span>L'ASPETTATIVA</span>
+                </div>
+                <div class="title-number">01</div>
+              </div>
+
+              <h1 class="main-title">RAILROADING.</h1>
+              <p class="subtitle-text">Riconoscere i percorsi professionali predefiniti e decidere se accettarli o rifiutarli quando non corrispondono ai propri desiderata. La professione di psicologo si può costruire attivamente, senza subire necessariamente un binario obbligato.</p>
+              <div class="note-pill"><strong>QUEST:</strong> Decidi se stare sui binari o scendere a cercare una strada nuova.</div>
+            </div>
+
+            <div class="glass-card-col ">
+              
+                <div class="roy-scroller-viewport" id="royScrollerViewport">
+                  <div class="filmstrip-fade-left"></div>
+                  <div class="filmstrip-fade-right"></div>
+                  <div class="roy-filmstrip-mask">
+                    <div class="roy-marquee-track" id="royMarqueeTrack">
+                      
+                          <div class="roy-item-wrapper" title="BLIPS & CHITZ">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_01.jpg" alt="BLIPS & CHITZ" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">01 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="THE HELMET">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_02.jpg" alt="THE HELMET" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">02 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="PRESS START">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_03.jpg" alt="PRESS START" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">03 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="CHILDHOOD AWAKENING">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_04.jpg" alt="CHILDHOOD AWAKENING" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">04 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="THE CLASSROOM">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_05.jpg" alt="THE CLASSROOM" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">05 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="FOOTBALL GLORY">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_06.jpg" alt="FOOTBALL GLORY" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">06 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="THE CARPET STORE">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_07.jpg" alt="THE CARPET STORE" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">07 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="THE DIAGNOSIS">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_08.jpg" alt="THE DIAGNOSIS" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">08 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="HOSPITAL BED">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_09.jpg" alt="HOSPITAL BED" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">09 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="BEATING CANCER">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_10.jpg" alt="BEATING CANCER" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">10 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="BACK TO THE CARPETS">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_11.jpg" alt="BACK TO THE CARPETS" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">11 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="THE TOP SHELF">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_12.jpg" alt="THE TOP SHELF" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">12 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="THE FATAL FALL">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_13.jpg" alt="THE FATAL FALL" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">13 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="GAME OVER // 55 YEARS">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_14.jpg" alt="GAME OVER // 55 YEARS" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">14 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="YOU WENT BACK?!">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_15.jpg" alt="YOU WENT BACK?!" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">15 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="RICK TAKES THE HELMET">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_16.jpg" alt="RICK TAKES THE HELMET" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">16 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="OFF THE GRID">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_17.jpg" alt="OFF THE GRID" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">17 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="ALIEN CROWD CHEERS">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_18.jpg" alt="ALIEN CROWD CHEERS" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">18 / 18</div>
+                          </div>
+                        
+                            <div class="roy-item-wrapper roy-spacer-wrapper">
+                              <div class="roy-spacer-gap" title="Spazio tra fine corsa e ripartenza">
+                                
+                              </div>
+                              <div class="roy-spacer-sub-placeholder"></div>
+                            </div>
+                          
+                          <div class="roy-item-wrapper" title="BLIPS & CHITZ">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_01.jpg" alt="BLIPS & CHITZ" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">01 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="THE HELMET">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_02.jpg" alt="THE HELMET" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">02 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="PRESS START">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_03.jpg" alt="PRESS START" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">03 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="CHILDHOOD AWAKENING">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_04.jpg" alt="CHILDHOOD AWAKENING" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">04 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="THE CLASSROOM">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_05.jpg" alt="THE CLASSROOM" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">05 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="FOOTBALL GLORY">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_06.jpg" alt="FOOTBALL GLORY" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">06 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="THE CARPET STORE">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_07.jpg" alt="THE CARPET STORE" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">07 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="THE DIAGNOSIS">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_08.jpg" alt="THE DIAGNOSIS" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">08 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="HOSPITAL BED">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_09.jpg" alt="HOSPITAL BED" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">09 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="BEATING CANCER">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_10.jpg" alt="BEATING CANCER" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">10 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="BACK TO THE CARPETS">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_11.jpg" alt="BACK TO THE CARPETS" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">11 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="THE TOP SHELF">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_12.jpg" alt="THE TOP SHELF" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">12 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="THE FATAL FALL">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_13.jpg" alt="THE FATAL FALL" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">13 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="GAME OVER // 55 YEARS">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_14.jpg" alt="GAME OVER // 55 YEARS" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">14 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="YOU WENT BACK?!">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_15.jpg" alt="YOU WENT BACK?!" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">15 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="RICK TAKES THE HELMET">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_16.jpg" alt="RICK TAKES THE HELMET" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">16 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="OFF THE GRID">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_17.jpg" alt="OFF THE GRID" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">17 / 18</div>
+                          </div>
+                        
+                          <div class="roy-item-wrapper" title="ALIEN CROWD CHEERS">
+                            <div class="roy-frame-card">
+                              <img src="roy_story/roy_18.jpg" alt="ALIEN CROWD CHEERS" class="roy-frame-img" draggable="false" />
+                            </div>
+                            <!-- SUB-BADGE UNDER THE CARD, SCROLLING TOGETHER -->
+                            <div class="roy-frame-sub-badge">18 / 18</div>
+                          </div>
+                        
+                            <div class="roy-item-wrapper roy-spacer-wrapper">
+                              <div class="roy-spacer-gap" title="Spazio tra fine corsa e ripartenza">
+                                
+                              </div>
+                              <div class="roy-spacer-sub-placeholder"></div>
+                            </div>
+                          
+                    </div>
+                  </div>
+                </div>
+              
+            </div>
+          </div>
+          
+          <div class="slide title-right " data-index="2">
+            <div class="title-col">
+              <div class="title-topbar">
+                <div class="title-category">
+                  <span class="category-indicator"></span>
+                  <span>UNCHARTED TERRITORY</span>
+                </div>
+                <div class="title-number">02</div>
+              </div>
+
+              <h1 class="main-title">FOG OF WAR.</h1>
+              <p class="subtitle-text">Fuori dai percorsi canonici è necessario accettare l'incertezza dell'innovazione professionale. Il mercato del lavoro può definire la mappa, ma tu puoi muovere passi nel territorio inesplorato e scoprire che la mappa è molto più vasta.</p>
+              <div class="note-pill"><strong>QUEST:</strong> Esplora la mappa e scopri il territorio.</div>
+            </div>
+
+            <div class="glass-card-col ">
+              
+                <div class="card-visual-container">
+                  <img src="slides_img/slide_02_fog_of_war.jpg" alt="FOG OF WAR." class="card-image" />
+                </div>
+              
+            </div>
+          </div>
+          
+          <div class="slide title-left " data-index="3">
+            <div class="title-col">
+              <div class="title-topbar">
+                <div class="title-category">
+                  <span class="category-indicator"></span>
+                  <span>STATS & TRAITS</span>
+                </div>
+                <div class="title-number">03</div>
+              </div>
+
+              <h1 class="main-title">LA BUILD.</h1>
+              <p class="subtitle-text">Mappare con lucidità i propri tratti distintivi, punti di forza e passioni pregresse: la tua identità professionale non parte da zero con la laurea, ma poggia sulle competenze tacite e sulle attitudini già maturate nel tuo percorso di vita.</p>
+              <div class="note-pill"><strong>QUEST:</strong> Ispeziona la tua scheda personaggio, calcola i modificatori di competenza passiva ed elenca tre talenti unici del tuo background da portare nella build.</div>
+            </div>
+
+            <div class="glass-card-col ">
+              
+                <div class="card-visual-container">
+                  <img src="slides_img/slide_03_character_sheet.jpg" alt="LA BUILD." class="card-image" />
+                </div>
+              
+            </div>
+          </div>
+          
+          <div class="slide title-right " data-index="4">
+            <div class="title-col">
+              <div class="title-topbar">
+                <div class="title-category">
+                  <span class="category-indicator"></span>
+                  <span>EQUIPAGGIAMENTO DI PARTENZA</span>
+                </div>
+                <div class="title-number">04</div>
+              </div>
+
+              <h1 class="main-title">L'INVENTARIO.</h1>
+              <p class="subtitle-text">Lo psicologo deve integrare il rigore scientifico di base (neuroscienze, metodologia, psicometria) nella sua pratica: la credibilità teorica è necessaria per legittimare qualsiasi applicazione innovativa sul campo.</p>
+              <div class="note-pill"><strong>QUEST:</strong> Equipaggia nel tuo inventario il tomo di classe.</div>
+            </div>
+
+            <div class="glass-card-col ">
+              
+                <div class="card-visual-container">
+                  <img src="slides_img/slide_02.jpg" alt="L'INVENTARIO." class="card-image" />
+                </div>
+              
+            </div>
+          </div>
+          
+          <div class="slide title-left " data-index="5">
+            <div class="title-col">
+              <div class="title-topbar">
+                <div class="title-category">
+                  <span class="category-indicator"></span>
+                  <span>LEVEL UP</span>
+                </div>
+                <div class="title-number">05</div>
+              </div>
+
+              <h1 class="main-title">SKILL TREE.</h1>
+              <p class="subtitle-text">Sviluppare una progressione di competenze, senza limitarsi alle biforcazioni convenzionali ed investendo nei "talenti ponte" che connettono discipline apparentemente distanti e prive di dialogo.</p>
+              <div class="note-pill"><strong>QUEST:</strong> Scegli dei perk condivisi con un'altra classe.</div>
+            </div>
+
+            <div class="glass-card-col ">
+              
+                <div class="card-visual-container">
+                  <img src="slides_img/slide_05_skill_tree.jpg" alt="SKILL TREE." class="card-image" />
+                </div>
+              
+            </div>
+          </div>
+          
+          <div class="slide title-right " data-index="6">
+            <div class="title-col">
+              <div class="title-topbar">
+                <div class="title-category">
+                  <span class="category-indicator"></span>
+                  <span>L'INSIGHT</span>
+                </div>
+                <div class="title-number">06</div>
+              </div>
+
+              <h1 class="main-title">BENEFICI DEL MULTICLASSE.</h1>
+              <p class="subtitle-text">Avere la lente del metodo scientifico in psicologia e una preparazione su altri ambiti permette interazioni uniche, come guardare ai sistemi di interazione complessi per estrarre insight comportamentali irraggiungibili con approcci standard.</p>
+              <div class="note-pill"><strong>QUEST:</strong> Sblocca il talento "Interpretare il setting di gioco come laboratorio sperimentale di psicologia".</div>
+            </div>
+
+            <div class="glass-card-col ">
+              
+                <div class="card-visual-container">
+                  <img src="slides_img/slide_03.jpg" alt="BENEFICI DEL MULTICLASSE." class="card-image" />
+                </div>
+              
+            </div>
+          </div>
+          
+          <div class="slide title-left " data-index="7">
+            <div class="title-col">
+              <div class="title-topbar">
+                <div class="title-category">
+                  <span class="category-indicator"></span>
+                  <span>DEONTOLOGIA E CONFINI</span>
+                </div>
+                <div class="title-number">07</div>
+              </div>
+
+              <h1 class="main-title">ALLINEAMENTO.</h1>
+              <p class="subtitle-text">Presidiare con fermezza il proprio ruolo e il codice deontologico: lo psicologo non deve improvvisare mestieri altrui (es. game designer), ma collaborare come specialista dei processi cognitivi, emotivi e relazionali con le figure specialistiche senza confondere le responsabilità.</p>
+              <div class="note-pill"><strong>QUEST:</strong> Rifiuta missioni di altre classi.</div>
+            </div>
+
+            <div class="glass-card-col ">
+              
+                <div class="card-visual-container">
+                  <img src="slides_img/slide_06.jpg" alt="ALLINEAMENTO." class="card-image" />
+                </div>
+              
+            </div>
+          </div>
+          
+          <div class="slide title-right " data-index="8">
+            <div class="title-col">
+              <div class="title-topbar">
+                <div class="title-category">
+                  <span class="category-indicator"></span>
+                  <span>METAGAMING</span>
+                </div>
+                <div class="title-number">08</div>
+              </div>
+
+              <h1 class="main-title">ROGUE VS ESTABLISHED.</h1>
+              <p class="subtitle-text">Sostenere lo scetticismo iniziale e l'effetto sorpresa del contesto accademico e professionale: comunicare con rigore formale la solidità del proprio approccio trasforma la perplessità altrui in curiosità e apertura.</p>
+              <div class="note-pill"><strong>QUEST:</strong> Entra nell'arena della tua fazione come rogue, e in quella di un'altra fazione come guest character.</div>
+            </div>
+
+            <div class="glass-card-col ">
+              
+                <div class="card-visual-container">
+                  <img src="slides_img/slide_07.jpg" alt="ROGUE VS ESTABLISHED." class="card-image" />
+                </div>
+              
+            </div>
+          </div>
+          
+          <div class="slide title-left " data-index="9">
+            <div class="title-col">
+              <div class="title-topbar">
+                <div class="title-category">
+                  <span class="category-indicator"></span>
+                  <span>ACHIEVEMENT UNLOCKED</span>
+                </div>
+                <div class="title-number">09</div>
+              </div>
+
+              <h1 class="main-title">AUTHORITY.</h1>
+              <p class="subtitle-text">Formalizzare il proprio metodo affinché possa essere giudicato, testato e difeso (es. articoli peer-reviewed): la validazione esterna della comunità scientifica non serve per fare il lavoro quotidiano, ma per proteggere la propria professionalità.</p>
+              <div class="note-pill"><strong>QUEST:</strong> Vinci le sfide alla tua build.</div>
+            </div>
+
+            <div class="glass-card-col ">
+              
+                <div class="card-visual-container">
+                  <img src="slides_img/slide_08.jpg" alt="AUTHORITY." class="card-image" />
+                </div>
+              
+            </div>
+          </div>
+          
+          <div class="slide title-right " data-index="10">
+            <div class="title-col">
+              <div class="title-topbar">
+                <div class="title-category">
+                  <span class="category-indicator"></span>
+                  <span>SOSTENIBILITÀ</span>
+                </div>
+                <div class="title-number">10</div>
+              </div>
+
+              <h1 class="main-title">GESTIONE RISORSE.</h1>
+              <p class="subtitle-text">Mantenere una sostenibilità economica autonoma (es. reinvestendo costantemente parte del tempo e delle risorse nella formazione e nella ricerca scientifica, equilibrio tra Explore ed Exploit).</p>
+              <div class="note-pill"><strong>QUEST:</strong> Crea un circolo virtuoso in un infinite game.</div>
+            </div>
+
+            <div class="glass-card-col ">
+              
+                <div class="ee-game-stage" id="eeGameStage">
+                  <div class="ee-hud">
+                    <div class="ee-stat-coins">
+                      <img src="assets/aistudio/AMcoin_6be22906.png" alt="Coin" class="ee-coin-img" />
+                      <div>
+                        <div class="ee-coins-val" id="eeCoinsVal">0</div>
+                      </div>
+                      <div class="ee-rate-pill" id="eeRatePill">0.00/s</div>
+                    </div>
+
+                    <div class="ee-bar-wrapper">
+                      <div class="ee-bar-track">
+                        <div class="ee-bar-fill" id="eeBarFill"></div>
+                        <div class="ee-bar-midline"></div>
+                      </div>
+                    </div>
+
+                    <div class="ee-hud-right">
+                      <div class="ee-timer" id="eeTimer">60.0s</div>
+                      <button class="ee-btn-icon" id="eeBtnMute" title="Audio On/Off">
+                        <svg id="eeIconSoundOn" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                        </svg>
+                        <svg id="eeIconSoundOff" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                          <line x1="23" y1="9" x2="17" y2="15"></line>
+                          <line x1="17" y1="9" x2="23" y2="15"></line>
+                        </svg>
+                      </button>
+                      <button class="ee-btn-icon" id="eeBtnReset" title="Riavvia Partita">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                          <path d="M3 3v5h5"></path>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="ee-arena" id="eeArena">
+                    <div class="ee-red-flash" id="eeRedFlash"></div>
+                    
+                    <div class="ee-zone explore" id="eeZoneExplore">
+                      <div class="ee-zone-watermark">EXPLORE</div>
+                      <div class="ee-zone-desc">RICERCA (Ricarica valore)</div>
+                    </div>
+
+                    <div class="ee-zone exploit" id="eeZoneExploit">
+                      <div class="ee-zone-watermark">EXPLOIT</div>
+                      <div class="ee-zone-desc">CONSULENZA (Raccolta monete)</div>
+                    </div>
+
+                    <div class="ee-token" id="eeToken" style="left: 50%; top: 50%;">
+                      <svg class="ee-progress-ring" viewBox="0 0 104 104">
+                        <circle cx="52" cy="52" r="46" fill="none" stroke="#E2E8F0" stroke-width="3" />
+                        <circle id="eeRingProgress" cx="52" cy="52" r="46" fill="none" stroke="#CA8A04" stroke-width="4" stroke-linecap="round" stroke-dasharray="289.02" stroke-dashoffset="289.02" />
+                      </svg>
+                      <img id="eeTokenImg" src="assets/aistudio/AMlogoHQ_c863776d.png" alt="Token" class="ee-token-img" draggable="false" />
+                    </div>
+
+                    <div id="eeParticlesContainer"></div>
+
+                    <!-- START MODAL -->
+                    <div class="ee-overlay" id="eeStartOverlay">
+                      <div class="ee-modal-card">
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                          <img src="assets/aistudio/AMlogoHQ_c863776d.png" style="width: 58px; height: 58px; object-fit: contain;" />
+                          <img src="assets/aistudio/AMgold_7ec3dabb.png" style="width: 58px; height: 58px; object-fit: contain;" />
+                        </div>
+                        <h2 class="ee-modal-title">Explore vs Exploit</h2>
+                        <p class="ee-modal-sub">Trascina il logo tra <strong>Ricerca</strong> (ricarica) e <strong>Consulenza</strong> (monete) per scoprire il loop sostenibile.</p>
+                        
+                        <div class="ee-mode-switch">
+                          <button type="button" class="ee-mode-btn active" id="eeModeTimed">60 Secondi</button>
+                          <button type="button" class="ee-mode-btn" id="eeModeEndless">Libera</button>
+                        </div>
+
+                        <button type="button" class="ee-btn-cta" id="eeBtnStart">INIZIA A GIOCARE</button>
+                      </div>
+                    </div>
+
+                    <!-- GAMEOVER MODAL -->
+                    <div class="ee-overlay" id="eeGameOverOverlay" style="display: none;">
+                      <div class="ee-modal-card">
+                        <img src="assets/aistudio/AMcoin_6be22906.png" style="width: 64px; height: 64px; object-fit: contain;" />
+                        <div style="font-family: 'Cabinet Grotesk', sans-serif; font-size: 3.2rem; font-weight: 900; color: #0F172A; line-height: 1; margin: 0.75rem 0;" id="eeFinalScore">0</div>
+                        <div style="font-size: 0.95rem; color: #64748B; margin-bottom: 1.25rem;">Monete raccolte</div>
+                        
+                        <div style="width: 100%; border-top: 1px solid #E2E8F0; border-bottom: 1px solid #E2E8F0; padding: 0.85rem 0; margin-bottom: 1.5rem; display: flex; justify-content: space-around; font-size: 0.9rem;">
+                          <div><strong>Bilanciamento:</strong> <span id="eeBalanceStats">50% / 50%</span></div>
+                          <div><strong>Tempo Gold:</strong> <span id="eeGoldStats">0.0s</span></div>
+                        </div>
+
+                        <button type="button" class="ee-btn-cta" id="eeBtnRestart">GIOCA ANCORA</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              
+            </div>
+          </div>
+          
+          <div class="slide outro-slide " data-index="11">
+            <div class="outro-card">
+              <div class="outro-glow-left"></div>
+              <div class="outro-glow-right"></div>
+
+              <!-- TOP HEADER BAR -->
+              <div class="outro-header">
+                <div class="outro-title-block">
+                  <div class="outro-kicker-badge">
+                    <span class="kicker-dot"></span>
+                    <span>LEVEL COMPLETE // Q&A & NETWORKING</span>
+                  </div>
+                  <h1 class="outro-main-title">GRAZIE.</h1>
+                  <p class="outro-sub-title">Il gioco continua fuori da quest'aula: esploriamo opportunità, connettiamo discipline e creiamo nuove strade insieme.</p>
+                </div>
+
+                <div class="outro-speaker-pill">
+                  <img src="slides_img/am_logo_black.png" alt="Alan Mattiassi" class="outro-speaker-img" />
+                  <div class="outro-speaker-text">
+                    <span class="outro-speaker-name">Alan Mattiassi, Ph.D.</span>
+                    <span class="outro-speaker-role">Psicologo del Gioco</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- TWO-COLUMN CONTENT GRID -->
+              <div class="outro-grid">
+
+                <!-- LEFT COLUMN: CONTATTI, SITO & YOUTUBE -->
+                <div class="outro-left-col">
+                  <div class="hub-section-label">
+                    <span>Canali &amp; Risorse</span>
+                    <span class="hub-label-line"></span>
+                  </div>
+
+                  <div class="hub-links-container">
+                    <!-- SITO WEB -->
+                    <a href="https://alanmattiassi.com" target="_blank" rel="noopener noreferrer" class="hub-tile">
+                      <div class="hub-tile-icon icon-globe">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="12" cy="12" r="10"></circle>
+                          <line x1="2" y1="12" x2="22" y2="12"></line>
+                          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                        </svg>
+                      </div>
+                      <div class="hub-tile-content">
+                        <div class="hub-tile-title">
+                          <span>alanmattiassi.com</span>
+                          <span class="hub-tile-tag">SITO WEB</span>
+                        </div>
+                        <span class="hub-tile-sub">Tutte le informazioni su di me, sul mio modo di lavorare e sulle collaborazioni che si possono imbastire con me.</span>
+                      </div>
+                    </a>
+
+                    <!-- YOUTUBE -->
+                    <a href="https://www.youtube.com/@gameinsightsAM" target="_blank" rel="noopener noreferrer" class="hub-tile">
+                      <div class="hub-tile-icon icon-yt">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        </svg>
+                      </div>
+                      <div class="hub-tile-content">
+                        <div class="hub-tile-title">
+                          <span>Game Insights (@gameinsightsAM)</span>
+                          <span class="hub-tile-tag yt-tag">YOUTUBE</span>
+                        </div>
+                        <span class="hub-tile-sub">Canale di divulgazione scientifica sulla psicologia del gioco.</span>
+                      </div>
+                    </a>
+
+                    <!-- EMAIL & LINKEDIN INLINE TILES -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                      <a href="mailto:alan.mattiassi@gmail.com" class="hub-tile" style="padding: 0.75rem 0.95rem;">
+                        <div class="hub-tile-icon icon-mail" style="width: 36px; height: 36px;">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                          </svg>
+                        </div>
+                        <div class="hub-tile-content">
+                          <span style="font-size: 0.78rem; font-weight: 800; color: #0F172A;">Email Diretta</span>
+                          <span style="font-size: 0.72rem; color: #64748B; font-family: monospace;">alan.mattiassi@gmail.com</span>
+                        </div>
+                      </a>
+
+                      <a href="https://www.linkedin.com/in/alanmattiassi/" target="_blank" rel="noopener noreferrer" class="hub-tile" style="padding: 0.75rem 0.95rem;">
+                        <div class="hub-tile-icon icon-linkedin" style="width: 36px; height: 36px;">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28z"/>
+                          </svg>
+                        </div>
+                        <div class="hub-tile-content">
+                          <span style="font-size: 0.78rem; font-weight: 800; color: #0F172A;">LinkedIn</span>
+                          <span style="font-size: 0.72rem; color: #64748B;">/in/alanmattiassi</span>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+
+                  <!-- MINI QR HUB -->
+                  <div class="hub-bottom-row">
+                    <img src="slides_img/qr_website.png" alt="QR Website" class="hub-qr-img" />
+                    <div class="hub-qr-text">
+                      <span class="hub-qr-title">Inquadra per il Sito &amp; Canali</span>
+                      <span class="hub-qr-desc">Accesso rapido a tutti i paper, articoli divulgativi, contatti e video sul canale YouTube.</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- RIGHT COLUMN: MASTERCLASS PUBBLICITÀ -->
+                <div class="masterclass-card">
+                  <!-- 1. HEADER SECTION -->
+                  <div class="mc-header-section">
+                    <div class="mc-topbar">
+                      <div class="mc-badge">
+                        <span class="mc-badge-dot"></span>
+                        <span>FORMAZIONE INTENSIVA IN PRESENZA</span>
+                      </div>
+                      <span class="mc-capacity-pill">NUMERO CHIUSO: MAX 18 POSTI</span>
+                    </div>
+
+                    <div class="mc-title-group">
+                      <h2 class="mc-main-title">Masterclass in Psicologia del Gioco</h2>
+                      <p class="mc-subtitle">Capire e Progettare Ambienti, Scelte e Apprendimento Profondo</p>
+                    </div>
+                  </div>
+
+                  <!-- 2. SPECS GRID -->
+                  <div class="mc-specs-grid">
+                    <div class="mc-spec-item">
+                      <span class="mc-spec-icon">📍</span>
+                      <div class="mc-spec-text">
+                        <span class="mc-spec-label">Quando e Dove</span>
+                        <span class="mc-spec-val">23–24 Gennaio 2027<br>Friuli (In presenza)</span>
+                      </div>
+                    </div>
+
+                    <div class="mc-spec-item">
+                      <span class="mc-spec-icon">🎯</span>
+                      <div class="mc-spec-text">
+                        <span class="mc-spec-label">Formula Didattica</span>
+                        <span class="mc-spec-val">Full Weekend (2 Giorni)<br>Sabato &amp; Domenica full-day</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 3. SYLLABUS PROGRAM CARDS -->
+                  <div class="mc-syllabus-box">
+                    <div class="mc-day-line">
+                      <span class="day-tag">SABATO</span>
+                      <span><strong>Modelli neurocognitivi &amp; architettura delle scelte:</strong> processi decisionali, motivazione intrinseca e decodifica ecologica dei giochi.</span>
+                    </div>
+                    <div class="mc-day-line">
+                      <span class="day-tag">DOMENICA</span>
+                      <span><strong>Laboratorio intensivo di co-design 1-a-1:</strong> applicazione chirurgica e supervisione diretta sui progetti reali dei singoli partecipanti.</span>
+                    </div>
+                  </div>
+
+                  <!-- 4. FOOTER ACTION & BIG QR (NO PREZZO, SPAZI DISTRIBUITI) -->
+                  <div class="mc-footer-action">
+                    <img src="slides_img/qr_masterclass.png" alt="QR Masterclass" class="mc-qr-img" />
+                    <div class="mc-action-details">
+                      <div class="mc-cta-title">Candidature Aperte &bull; Selezione Partecipanti</div>
+                      <div class="mc-scan-hint">
+                        <span>Inquadra per info, programma completo &amp; candidatura</span>
+                        <span>→</span>
+                      </div>
+                      <span class="mc-url-code">alanmattiassi.com/masterclass-psicologia-del-gioco</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+            
+      </div>
+
+      <div class="deck-dock">
+        <button class="dock-btn" id="btnPrev" title="Precedente (Freccia Sinistra)">←</button>
+        <div class="dots-container" id="dotsContainer">
+          <div class="dot active" data-target="0" title="Titolo"></div><div class="dot " data-target="1" title="Slide 01"></div><div class="dot " data-target="2" title="Slide 02"></div><div class="dot " data-target="3" title="Slide 03"></div><div class="dot " data-target="4" title="Slide 04"></div><div class="dot " data-target="5" title="Slide 05"></div><div class="dot " data-target="6" title="Slide 06"></div><div class="dot " data-target="7" title="Slide 07"></div><div class="dot " data-target="8" title="Slide 08"></div><div class="dot " data-target="9" title="Slide 09"></div><div class="dot " data-target="10" title="Slide 10"></div><div class="dot " data-target="11" title="Ringraziamenti & Masterclass"></div>
+        </div>
+        <span class="dock-counter" id="dockCounter">INTRO</span>
+        <button class="dock-btn" id="btnNext" title="Successiva (Freccia Destra o Spazio)">→</button>
+        <div class="dock-separator"></div>
+        <button class="dock-btn" id="btnFullscreen" title="Schermo Intero (Tasto F)">
+          <svg class="fs-icon-enter" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+          </svg>
+          <svg class="fs-icon-exit" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+            <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const totalSlides = 12;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    const counter = document.getElementById('dockCounter');
+
+    function goToSlide(index) {
+      if (index < 0 || index >= totalSlides) return;
+      slides[currentSlide].classList.remove('active');
+      dots[currentSlide].classList.remove('active');
+
+      currentSlide = index;
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+      if (currentSlide === 0) {
+        counter.textContent = 'INTRO';
+      } else if (currentSlide === totalSlides - 1) {
+        counter.textContent = 'OUTRO';
+      } else {
+        counter.textContent = String(currentSlide).padStart(2, '0') + ' / ' + String(totalSlides - 2).padStart(2, '0');
+      }
+    }
+
+    const heroTitleCard = document.getElementById('heroTitleCard');
+    if (heroTitleCard) {
+      heroTitleCard.addEventListener('click', () => goToSlide(1));
+    }
+
+    document.getElementById('btnNext').addEventListener('click', () => {
+      goToSlide((currentSlide + 1) % totalSlides);
+    });
+
+    document.getElementById('btnPrev').addEventListener('click', () => {
+      goToSlide((currentSlide - 1 + totalSlides) % totalSlides);
+    });
+
+    dots.forEach(d => {
+      d.addEventListener('click', () => {
+        goToSlide(parseInt(d.dataset.target, 10));
+      });
+    });
+
+    // --- ROY FILMSTRIP INTERACTIVE CONTROLLER (AUTO + DRAG + WHEEL) ---
+    (function initRoyScroller() {
+      const viewport = document.getElementById('royScrollerViewport');
+      const track = document.getElementById('royMarqueeTrack');
+      if (!viewport || !track) return;
+
+      let currentOffset = 0;
+      let isDragging = false;
+      let startX = 0;
+      let dragStartOffset = 0;
+      let lastX = 0;
+      let lastTime = 0;
+      let velocity = 0;
+      let isInteracting = false;
+      let resumeTimer = null;
+      let halfWidth = 0;
+
+      const autoSpeed = -0.9; // steady drift speed (pixels per frame)
+
+      function updateDimensions() {
+        if (track.scrollWidth > 0) {
+          halfWidth = track.scrollWidth / 2;
+        }
+      }
+
+      window.addEventListener('load', updateDimensions);
+      window.addEventListener('resize', updateDimensions);
+      setTimeout(updateDimensions, 150);
+      setTimeout(updateDimensions, 600);
+
+      function wrap(val) {
+        if (halfWidth <= 0) return val;
+        while (val <= -halfWidth) val += halfWidth;
+        while (val > 0) val -= halfWidth;
+        return val;
+      }
+
+      function render(val) {
+        track.style.transform = 'translate3d(' + val + 'px, 0, 0)';
+      }
+
+      // Mouse Dragging
+      viewport.addEventListener('mousedown', (e) => {
+        if (e.button !== 0) return; // Left mouse click only
+        isDragging = true;
+        isInteracting = true;
+        velocity = 0;
+        startX = e.clientX;
+        lastX = e.clientX;
+        lastTime = performance.now();
+        dragStartOffset = currentOffset;
+        viewport.classList.add('is-dragging');
+        clearTimeout(resumeTimer);
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const now = performance.now();
+        const dt = Math.max(1, now - lastTime);
+        const dx = e.clientX - lastX;
+
+        // Instant velocity
+        velocity = (dx / dt) * 16;
+        lastX = e.clientX;
+        lastTime = now;
+
+        currentOffset = wrap(dragStartOffset + (e.clientX - startX));
+        render(currentOffset);
+      });
+
+      window.addEventListener('mouseup', (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        viewport.classList.remove('is-dragging');
+
+        // Limit velocity to avoid sudden extreme speeds
+        if (velocity > 30) velocity = 30;
+        if (velocity < -30) velocity = -30;
+
+        clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(() => {
+          isInteracting = false;
+        }, 1200);
+      });
+
+      // Touch Dragging (Tablets & Mobile)
+      viewport.addEventListener('touchstart', (e) => {
+        if (e.touches.length !== 1) return;
+        isDragging = true;
+        isInteracting = true;
+        velocity = 0;
+        startX = e.touches[0].clientX;
+        lastX = e.touches[0].clientX;
+        lastTime = performance.now();
+        dragStartOffset = currentOffset;
+        clearTimeout(resumeTimer);
+      }, { passive: true });
+
+      window.addEventListener('touchmove', (e) => {
+        if (!isDragging || e.touches.length !== 1) return;
+        const now = performance.now();
+        const dt = Math.max(1, now - lastTime);
+        const touchX = e.touches[0].clientX;
+        const dx = touchX - lastX;
+
+        velocity = (dx / dt) * 16;
+        lastX = touchX;
+        lastTime = now;
+
+        currentOffset = wrap(dragStartOffset + (touchX - startX));
+        render(currentOffset);
+      }, { passive: true });
+
+      window.addEventListener('touchend', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        if (velocity > 30) velocity = 30;
+        if (velocity < -30) velocity = -30;
+        clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(() => {
+          isInteracting = false;
+        }, 1200);
+      });
+
+      // Mouse Wheel / Trackpad Scroll (Horizontal & Vertical)
+      viewport.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        isInteracting = true;
+        velocity = 0;
+
+        const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+        currentOffset = wrap(currentOffset - delta * 1.15);
+        render(currentOffset);
+
+        clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(() => {
+          isInteracting = false;
+        }, 1100);
+      }, { passive: false });
+
+      // Continuous Animation Frame Loop
+      function tick() {
+        if (halfWidth <= 0) {
+          updateDimensions();
+        }
+
+        if (halfWidth > 0 && !isDragging) {
+          if (Math.abs(velocity) > 0.08) {
+            currentOffset = wrap(currentOffset + velocity);
+            velocity *= 0.92; // Friction deceleration
+            render(currentOffset);
+          } else {
+            velocity = 0;
+            if (!isInteracting) {
+              currentOffset = wrap(currentOffset + autoSpeed);
+              render(currentOffset);
+            }
+          }
+        }
+
+        requestAnimationFrame(tick);
+      }
+
+      requestAnimationFrame(tick);
+    })();
+
+    
+    const btnFullscreen = document.getElementById('btnFullscreen');
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen().catch(() => {});
+      }
+    }
+
+    if (btnFullscreen) {
+      btnFullscreen.addEventListener('click', toggleFullscreen);
+    }
+
+    document.addEventListener('fullscreenchange', () => {
+      const isFs = !!document.fullscreenElement;
+      document.querySelectorAll('.fs-icon-enter').forEach(el => el.style.display = isFs ? 'none' : 'block');
+      document.querySelectorAll('.fs-icon-exit').forEach(el => el.style.display = isFs ? 'block' : 'none');
+      if (btnFullscreen) {
+        btnFullscreen.setAttribute('title', isFs ? 'Esci da Schermo Intero (ESC o F)' : 'Schermo Intero (Tasto F)');
+      }
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        goToSlide((currentSlide + 1) % totalSlides);
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        goToSlide((currentSlide - 1 + totalSlides) % totalSlides);
+      } else if (e.key.toLowerCase() === 'f') {
+        toggleFullscreen();
+      }
+    });
+    // --- EXPLORE VS EXPLOIT GAME CONTROLLER ---
+    (function initExploreExploitGame() {
+      const stage = document.getElementById('eeGameStage');
+      if (!stage) return;
+
+      const arena = document.getElementById('eeArena');
+      const token = document.getElementById('eeToken');
+      const tokenImg = document.getElementById('eeTokenImg');
+      const ringProgress = document.getElementById('eeRingProgress');
+      const barFill = document.getElementById('eeBarFill');
+      const coinsVal = document.getElementById('eeCoinsVal');
+      const ratePill = document.getElementById('eeRatePill');
+      const timerEl = document.getElementById('eeTimer');
+      const zoneExplore = document.getElementById('eeZoneExplore');
+      const zoneExploit = document.getElementById('eeZoneExploit');
+      const redFlash = document.getElementById('eeRedFlash');
+      const particlesContainer = document.getElementById('eeParticlesContainer');
+      const startOverlay = document.getElementById('eeStartOverlay');
+      const gameOverOverlay = document.getElementById('eeGameOverOverlay');
+      const finalScoreEl = document.getElementById('eeFinalScore');
+      const balanceStatsEl = document.getElementById('eeBalanceStats');
+      const goldStatsEl = document.getElementById('eeGoldStats');
+      const btnStart = document.getElementById('eeBtnStart');
+      const btnRestart = document.getElementById('eeBtnRestart');
+      const btnReset = document.getElementById('eeBtnReset');
+      const btnMute = document.getElementById('eeBtnMute');
+      const iconSoundOn = document.getElementById('eeIconSoundOn');
+      const iconSoundOff = document.getElementById('eeIconSoundOff');
+      const modeTimedBtn = document.getElementById('eeModeTimed');
+      const modeEndlessBtn = document.getElementById('eeModeEndless');
+
+      const LOGO_SRC = 'assets/aistudio/AMlogoHQ_c863776d.png';
+      const GOLD_SRC = 'assets/aistudio/AMgold_7ec3dabb.png';
+      const COIN_SRC = 'assets/aistudio/AMcoin_6be22906.png';
+
+      const ringCircumference = 2 * Math.PI * 46; // 289.02
+
+      // Sound Engine (Web Audio API Synthesizer)
+      let audioCtx = null;
+      let isMuted = false;
+
+      function ensureAudio() {
+        if (isMuted) return null;
+        if (!audioCtx && typeof window !== 'undefined') {
+          const AudioCtx = window.AudioContext || window.webkitAudioContext;
+          if (AudioCtx) audioCtx = new AudioCtx();
+        }
+        if (audioCtx && audioCtx.state === 'suspended') {
+          audioCtx.resume().catch(() => {});
+        }
+        return audioCtx;
+      }
+
+      function playCoinSound(isGold) {
+        const ctx = ensureAudio();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = isGold ? 'triangle' : 'sine';
+        const baseFreq = isGold ? 880 : 660;
+        osc.frequency.setValueAtTime(baseFreq, now);
+        osc.frequency.exponentialRampToValueAtTime(baseFreq * 1.45, now + 0.09);
+        gain.gain.setValueAtTime(0.001, now);
+        gain.gain.linearRampToValueAtTime(isGold ? 0.12 : 0.08, now + 0.01);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.15);
+      }
+
+      function playGoldFanfare() {
+        const ctx = ensureAudio();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+        const notes = [523.25, 659.25, 783.99, 1046.5];
+        notes.forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'triangle';
+          const t = now + idx * 0.045;
+          osc.frequency.setValueAtTime(freq, t);
+          gain.gain.setValueAtTime(0.001, t);
+          gain.gain.linearRampToValueAtTime(0.09, t + 0.01);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + 0.22);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(t);
+          osc.stop(t + 0.24);
+        });
+      }
+
+      function playWarningSound() {
+        const ctx = ensureAudio();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(220, now);
+        osc.frequency.exponentialRampToValueAtTime(110, now + 0.18);
+        gain.gain.setValueAtTime(0.001, now);
+        gain.gain.linearRampToValueAtTime(0.12, now + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.24);
+      }
+
+      // Game State
+      let gameStatus = 'title'; // 'title' | 'playing' | 'gameover'
+      let gameMode = 'timed'; // 'timed' | 'endless'
+      let logoX = 0.5, logoY = 0.5, targetX = 0.5, targetY = 0.5;
+      let bar = 0.5;
+      let coins = 0;
+      let coinAccumulator = 0;
+      let elapsedSec = 0;
+      let remainingSec = 60;
+      let exploreSec = 0, exploitSec = 0, goldSec = 0;
+      let timeSinceLastCoin = 0, flashTriggerCount = 0;
+      const flashThresholds = [8.0, 10.0, 11.0, 11.5];
+      let isDragging = false;
+      let lastTime = 0;
+      let wasGold = false;
+
+      function spawnCoinParticle(xPct, yPct, isGold) {
+        const p = document.createElement('div');
+        p.className = 'ee-floating-coin' + (isGold ? ' gold' : '');
+        p.style.left = xPct + '%';
+        p.style.top = yPct + '%';
+        p.innerHTML = '<img src="' + COIN_SRC + '" style="width:20px;height:20px;object-fit:contain;" /> +1';
+        particlesContainer.appendChild(p);
+        setTimeout(() => { p.remove(); }, 900);
+      }
+
+      function triggerRedFlash() {
+        redFlash.classList.add('active');
+        playWarningSound();
+        setTimeout(() => redFlash.classList.remove('active'), 250);
+      }
+
+      function updateTargetFromPointer(clientX, clientY) {
+        const r = arena.getBoundingClientRect();
+        if (r.width <= 0 || r.height <= 0) return;
+        targetX = Math.max(0.07, Math.min(0.93, (clientX - r.left) / r.width));
+        targetY = Math.max(0.15, Math.min(0.85, (clientY - r.top) / r.height));
+      }
+
+      arena.addEventListener('pointerdown', (e) => {
+        if (gameStatus !== 'playing') return;
+        isDragging = true;
+        arena.classList.add('is-dragging');
+        updateTargetFromPointer(e.clientX, e.clientY);
+      });
+
+      window.addEventListener('pointermove', (e) => {
+        if (!isDragging || gameStatus !== 'playing') return;
+        updateTargetFromPointer(e.clientX, e.clientY);
+      });
+
+      window.addEventListener('pointerup', () => {
+        if (isDragging) {
+          isDragging = false;
+          arena.classList.remove('is-dragging');
+        }
+      });
+
+      // Start game
+      function startGame() {
+        ensureAudio();
+        gameStatus = 'playing';
+        logoX = 0.5; logoY = 0.5; targetX = 0.5; targetY = 0.5;
+        bar = 0.5; coins = 0; coinAccumulator = 0;
+        elapsedSec = 0; remainingSec = 60;
+        exploreSec = 0; exploitSec = 0; goldSec = 0;
+        timeSinceLastCoin = 0; flashTriggerCount = 0;
+        wasGold = false;
+        particlesContainer.innerHTML = '';
+        startOverlay.style.display = 'none';
+        gameOverOverlay.style.display = 'none';
+        lastTime = performance.now();
+      }
+
+      btnStart.addEventListener('click', startGame);
+      btnRestart.addEventListener('click', startGame);
+      btnReset.addEventListener('click', startGame);
+
+      btnMute.addEventListener('click', () => {
+        isMuted = !isMuted;
+        iconSoundOn.style.display = isMuted ? 'none' : 'block';
+        iconSoundOff.style.display = isMuted ? 'block' : 'none';
+      });
+
+      modeTimedBtn.addEventListener('click', () => {
+        gameMode = 'timed';
+        modeTimedBtn.classList.add('active');
+        modeEndlessBtn.classList.remove('active');
+      });
+
+      modeEndlessBtn.addEventListener('click', () => {
+        gameMode = 'endless';
+        modeEndlessBtn.classList.add('active');
+        modeTimedBtn.classList.remove('active');
+      });
+
+      // Keyboard navigation support: W, A, S, D
+      window.addEventListener('keydown', (e) => {
+        if (gameStatus !== 'playing') return;
+        const speed = 0.05;
+        const k = e.key.toLowerCase();
+        if (k === 'a') targetX = Math.max(0.07, targetX - speed);
+        if (k === 'd') targetX = Math.min(0.93, targetX + speed);
+        if (k === 'w') targetY = Math.max(0.15, targetY - speed);
+        if (k === 's') targetY = Math.min(0.85, targetY + speed);
+      });
+
+      // Game loop
+      function loop(now) {
+        if (gameStatus === 'playing') {
+          const dt = Math.min(0.1, (now - lastTime) / 1000);
+          lastTime = now;
+
+          // Lerp token position
+          logoX += (targetX - logoX) * Math.min(1, dt * 16);
+          logoY += (targetY - logoY) * Math.min(1, dt * 16);
+
+          const zone = logoX < 0.48 ? 'EXPLORE' : (logoX > 0.52 ? 'EXPLOIT' : 'NEUTRAL');
+
+          let chargeRate = 0;
+          if (zone === 'EXPLORE') {
+            const clampedX = Math.max(0.08, Math.min(0.48, logoX));
+            const depth = (0.48 - clampedX) / (0.48 - 0.08);
+            chargeRate = 0.05 + depth * 0.20;
+            bar = Math.min(1, bar + chargeRate * dt);
+            exploreSec += dt;
+          } else {
+            bar = Math.max(0, bar - 0.125 * dt);
+          }
+
+          if (zone === 'EXPLOIT') exploitSec += dt;
+
+          const isGold = bar > 0.5;
+          if (isGold) goldSec += dt;
+
+          if (!wasGold && isGold) {
+            playGoldFanfare();
+          }
+          wasGold = isGold;
+
+          // Earning rate
+          let rate = 0;
+          if (zone === 'EXPLOIT') {
+            rate = isGold ? 1.0 + ((bar - 0.5) / 0.5) * 1.25 : Math.pow(Math.max(0, bar) / 0.5, 1.6);
+          }
+
+          coinAccumulator += rate * dt;
+          const minted = Math.floor(coinAccumulator);
+          if (minted > 0) {
+            coinAccumulator -= minted;
+            coins += minted;
+            playCoinSound(isGold);
+            spawnCoinParticle(logoX * 100, logoY * 100, isGold);
+            timeSinceLastCoin = 0;
+            flashTriggerCount = 0;
+          } else {
+            timeSinceLastCoin += dt;
+            if (flashTriggerCount < flashThresholds.length && timeSinceLastCoin >= flashThresholds[flashTriggerCount]) {
+              triggerRedFlash();
+              flashTriggerCount++;
+            }
+          }
+
+          elapsedSec += dt;
+          if (gameMode === 'timed') {
+            remainingSec = Math.max(0, remainingSec - dt);
+          }
+
+          // Render HUD & Token
+          token.style.left = (logoX * 100) + '%';
+          token.style.top = (logoY * 100) + '%';
+          token.className = 'ee-token' + (isGold ? ' gold' : '');
+          tokenImg.src = isGold ? GOLD_SRC : LOGO_SRC;
+
+          // Progress Ring
+          const ringOffset = ringCircumference * (1 - coinAccumulator);
+          ringProgress.style.strokeDashoffset = ringOffset;
+          ringProgress.style.stroke = isGold ? '#EAB308' : '#CA8A04';
+
+          coinsVal.textContent = coins;
+          if (zone === 'EXPLOIT' && rate > 0) {
+            ratePill.textContent = '+' + rate.toFixed(2) + '/s';
+          } else if (zone === 'EXPLORE' && chargeRate > 0) {
+            ratePill.textContent = '+' + Math.round(chargeRate * 100) + '%/s';
+          } else {
+            ratePill.textContent = '0.00/s';
+          }
+
+          barFill.style.width = (bar * 100) + '%';
+          barFill.className = 'ee-bar-fill' + (isGold ? ' gold' : '');
+
+          timerEl.textContent = gameMode === 'timed' ? remainingSec.toFixed(1) + 's' : Math.floor(elapsedSec) + 's';
+
+          zoneExplore.className = 'ee-zone explore' + (zone === 'EXPLORE' ? ' active' : '');
+          zoneExploit.className = 'ee-zone exploit' + (zone === 'EXPLOIT' ? ' active' : '') + (isGold ? ' gold' : '');
+
+          // Check Game Over
+          const inactivityGameOver = timeSinceLastCoin >= 12.0;
+          const timedGameOver = gameMode === 'timed' && remainingSec <= 0;
+
+          if (inactivityGameOver || timedGameOver) {
+            gameStatus = 'gameover';
+            finalScoreEl.textContent = coins;
+            const total = exploreSec + exploitSec;
+            const expPct = total > 0 ? Math.round((exploreSec / total) * 100) : 50;
+            balanceStatsEl.textContent = expPct + '% / ' + (100 - expPct) + '%';
+            goldStatsEl.textContent = goldSec.toFixed(1) + 's';
+            gameOverOverlay.style.display = 'flex';
+          }
+        }
+        requestAnimationFrame(loop);
+      }
+
+      requestAnimationFrame(loop);
+    })();
+
+  </script>
+</body>
+</html>

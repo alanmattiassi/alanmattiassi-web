@@ -24,6 +24,11 @@ const nextConfig: NextConfig = {
         destination: "/en/libro-psicologia-del-gioco",
         permanent: true,
       },
+      {
+        source: "/unifi/slides",
+        destination: "/unifi/slides.html",
+        permanent: false,
+      },
     ];
   },
 };
