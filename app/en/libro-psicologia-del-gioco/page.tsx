@@ -31,7 +31,6 @@ import { bookData } from "@/data/book";
 export default function BookPageEnglish() {
   const [copied, setCopied] = useState(false);
   const [expandedChapter, setExpandedChapter] = useState<number | null>(null);
-  const [filterAlanOnly, setFilterAlanOnly] = useState(false);
 
   const handleCopyCitation = () => {
     navigator.clipboard.writeText(bookData.apaCitation);
@@ -43,9 +42,7 @@ export default function BookPageEnglish() {
     setExpandedChapter(expandedChapter === num ? null : num);
   };
 
-  const displayedChapters = filterAlanOnly
-    ? bookData.chapters.filter((c) => c.isAlanAuthor)
-    : bookData.chapters;
+  const displayedChapters = bookData.chapters;
 
   return (
     <div className="py-12 sm:py-20 space-y-24 bg-[var(--bg-canvas)] transition-colors">
@@ -178,7 +175,7 @@ export default function BookPageEnglish() {
                 This landmark volume brings together over 15 psychologists and university researchers across Italy, providing an overarching, rigorous, evidence-based foundation for <strong>Game Psychology</strong>.
               </p>
               <p>
-                <strong>Alan Mattiassi authored 5 core chapters</strong> (What is a Game, Games as Learning Systems, Game Motivation, Game-Based Learning, and Gamification), providing foundational models, psychometric inventories (PMPVG, TGMI extensions), and operational frameworks.
+                The volume spans <strong>13 thematic chapters</strong> guiding the reader through an organic journey: from defining the psychological core of play to evolutionary foundations, from experiential learning to the debriefing cycle, from analog and digital motivations to Game-Based Learning, Gamification, and clinical and organizational applications.
               </p>
             </div>
 
@@ -187,10 +184,10 @@ export default function BookPageEnglish() {
               <div className="rounded-xl bg-[var(--bg-card)] border border-[var(--border-color)] p-3.5 space-y-1">
                 <div className="text-xs font-bold text-[var(--accent-primary)] flex items-center space-x-1.5">
                   <Brain className="w-4 h-4" />
-                  <span>5 Authored Chapters</span>
+                  <span>Scientific Foundations</span>
                 </div>
                 <p className="text-xs text-[var(--text-muted)]">
-                  Authored directly by Alan Mattiassi on foundational and applied pillars.
+                  From neurocognitive and evolutionary roots to practical real-world applications.
                 </p>
               </div>
 
@@ -284,24 +281,14 @@ export default function BookPageEnglish() {
             return (
               <div
                 key={chap.number}
-                className={`rounded-2xl bg-[var(--bg-card)] border transition-all ${
-                  chap.isAlanAuthor
-                    ? "border-[var(--accent-primary)]/40 hover:border-[var(--accent-primary)]"
-                    : "border-[var(--border-color)] hover:border-[var(--border-strong)]"
-                }`}
+                className="rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[var(--border-strong)] transition-all"
               >
                 <button
                   onClick={() => toggleChapter(chap.number)}
                   className="w-full text-left p-4 sm:p-5 flex items-start sm:items-center justify-between gap-4"
                 >
                   <div className="flex items-start sm:items-center space-x-3 sm:space-x-4">
-                    <div
-                      className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm flex-shrink-0 ${
-                        chap.isAlanAuthor
-                          ? "bg-[var(--accent-primary)] text-white shadow-md shadow-sky-500/20"
-                          : "bg-[var(--bg-surface)] text-[var(--text-main)] border border-[var(--border-color)]"
-                      }`}
-                    >
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm flex-shrink-0 bg-[var(--bg-surface)] text-[var(--text-main)] border border-[var(--border-color)]">
                       {chap.number}
                     </div>
 
@@ -310,11 +297,6 @@ export default function BookPageEnglish() {
                         <h3 className="font-bold text-base sm:text-lg text-[var(--text-main)]">
                           {chap.title}
                         </h3>
-                        {chap.isAlanAuthor && (
-                          <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-[var(--badge-bg)] text-[var(--accent-primary)] border border-[var(--badge-border)]">
-                            Authored by Alan Mattiassi
-                          </span>
-                        )}
                       </div>
                       <p className="text-xs sm:text-sm text-[var(--text-muted)]">
                         Author(s): <span className="font-medium text-[var(--text-main)]">{chap.authors}</span>

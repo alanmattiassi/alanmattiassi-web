@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import PublicationsSection from "@/components/PublicationsSection";
+import BookSpotlightSection from "@/components/BookSpotlightSection";
 import {
   Microscope,
   Award,
@@ -58,7 +59,7 @@ export default function ResearchPage() {
   ];
 
   return (
-    <div className="py-12 sm:py-20 space-y-20">
+    <div className="py-12 sm:py-20 space-y-20 bg-[var(--bg-canvas)] transition-colors">
       {/* 1. Header Hero */}
       <section className="max-w-5xl mx-auto px-4 sm:px-8 text-center space-y-5">
         <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-400/30 text-sky-400 text-xs font-semibold uppercase tracking-wider">
@@ -66,7 +67,7 @@ export default function ResearchPage() {
           <span>RICERCA SCIENTIFICA &bull; PAPERS &bull; EVIDENCE-BASED</span>
         </div>
 
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[var(--text-main)] tracking-tight leading-tight">
           Research // Ricerca Scientifica
         </h1>
 
@@ -74,7 +75,7 @@ export default function ResearchPage() {
           Dalla cognizione sperimentale all&apos;epistemologia del gioco
         </p>
 
-        <p className="text-slate-300 text-base sm:text-lg max-w-3xl mx-auto leading-relaxed">
+        <p className="text-[var(--text-muted)] text-base sm:text-lg max-w-3xl mx-auto leading-relaxed">
           Articoli scientifici internazionali peer-reviewed, modelli psicometrici validati (mcSQ, PMPVG)
           e afferenze nei principali centri di ricerca europei e mondiali.
         </p>
@@ -84,7 +85,7 @@ export default function ResearchPage() {
             href="https://orcid.org/0000-0002-9996-0700"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-sky-300 bg-slate-900 border border-sky-500/40 hover:bg-slate-850 transition-all"
+            className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-sky-400 bg-[var(--bg-card)] border border-sky-500/40 hover:bg-[var(--bg-card-hover)] transition-all"
           >
             <span>Consulta l&apos;ORCID ID Ufficiale (0000-0002-9996-0700)</span>
             <ExternalLink className="w-4 h-4" />
@@ -92,32 +93,35 @@ export default function ResearchPage() {
         </div>
       </section>
 
-      {/* 2. Affiliations & Research Centers Grid */}
+      {/* 2. Book Spotlight Section */}
+      <BookSpotlightSection />
+
+      {/* 3. Affiliations & Research Centers Grid */}
       <section className="max-w-6xl mx-auto px-4 sm:px-8 space-y-8">
-        <div className="border-b border-slate-800 pb-4">
-          <h2 className="text-2xl font-bold text-white">Afferenze e Centri di Ricerca</h2>
-          <p className="text-xs text-slate-400 mt-1">Network scientifico e comitati di revisione accademica</p>
+        <div className="border-b border-[var(--border-color)] pb-4">
+          <h2 className="text-2xl font-bold text-[var(--text-main)]">Afferenze e Centri di Ricerca</h2>
+          <p className="text-xs text-[var(--text-muted)] mt-1">Network scientifico e comitati di revisione accademica</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {affiliations.map((aff, idx) => (
             <div
               key={idx}
-              className="p-6 rounded-2xl bg-[#0d1424] border border-slate-800 hover:border-sky-500/40 transition-all space-y-3"
+              className="p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-sky-500/40 transition-all space-y-3 shadow-md"
             >
               <div className="flex items-center justify-between">
                 <span className="text-[11px] font-semibold text-sky-400 px-2 py-0.5 rounded bg-sky-950/60 border border-sky-800/60">
                   {aff.years}
                 </span>
-                <Award className="w-4 h-4 text-slate-500" />
+                <Award className="w-4 h-4 text-[var(--text-subtle)]" />
               </div>
-              <h3 className="text-base font-bold text-white leading-snug">
+              <h3 className="text-base font-bold text-[var(--text-main)] leading-snug">
                 {aff.name}
               </h3>
-              <p className="text-xs text-slate-300 font-medium">
+              <p className="text-xs text-[var(--accent-primary)] font-medium">
                 {aff.role}
               </p>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-[var(--text-muted)]">
                 {aff.place}
               </p>
             </div>
@@ -125,7 +129,7 @@ export default function ResearchPage() {
         </div>
       </section>
 
-      {/* 3. Full Publications Section Component */}
+      {/* 4. Full Publications Section Component */}
       <PublicationsSection />
     </div>
   );

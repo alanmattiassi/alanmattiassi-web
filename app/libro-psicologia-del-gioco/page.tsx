@@ -31,7 +31,6 @@ export default function LibroPsicologiaDelGiocoPage() {
   const { isEn } = useLanguage();
   const [copied, setCopied] = useState(false);
   const [expandedChapter, setExpandedChapter] = useState<number | null>(null);
-  const [filterAlanOnly, setFilterAlanOnly] = useState(false);
 
   const handleCopyCitation = () => {
     navigator.clipboard.writeText(bookData.apaCitation);
@@ -43,9 +42,7 @@ export default function LibroPsicologiaDelGiocoPage() {
     setExpandedChapter(expandedChapter === num ? null : num);
   };
 
-  const displayedChapters = filterAlanOnly
-    ? bookData.chapters.filter((c) => c.isAlanAuthor)
-    : bookData.chapters;
+  const displayedChapters = bookData.chapters;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -222,7 +219,7 @@ export default function LibroPsicologiaDelGiocoPage() {
                   Questo volume nasce come un&apos;<strong>opera a molte mani</strong>, coordinata da Alan Mattiassi con un team di oltre quindici colleghi psicologi, ricercatori universitari e professionisti clinici e organizzativi. L&apos;obiettivo è costruire una sintesi organica ed evidence-based che dia piena dignità epistemologica alla <strong>Psicologia del Gioco</strong>.
                 </p>
                 <p>
-                  All&apos;interno del manuale, <strong>Alan Mattiassi firma 5 capitoli come autore</strong> (dalla definizione del <em>core</em> psicologico alle basi evolutive, dall&apos;apprendimento al ciclo del debriefing, dalle motivazioni analogiche e digitali al Game-Based Learning e alla Gamification), accompagnando il lettore in un percorso che va dalle fondamenta teoriche alle applicazioni operative più avanzate.
+                  Il volume si sviluppa in <strong>13 capitoli tematici</strong> che accompagnano il lettore in un percorso organico: dalla definizione del <em>core</em> psicologico alle basi evolutive, dall&apos;apprendimento al ciclo del debriefing, dalle motivazioni analogiche e digitali al Game-Based Learning, alla Gamification e alle applicazioni cliniche e organizzative.
                 </p>
               </div>
 
@@ -231,10 +228,10 @@ export default function LibroPsicologiaDelGiocoPage() {
                 <div className="rounded-xl bg-[var(--bg-card)] border border-[var(--border-color)] p-3.5 space-y-1">
                   <div className="text-xs font-bold text-[var(--accent-primary)] flex items-center space-x-1.5">
                     <Brain className="w-4 h-4" />
-                    <span>5 Capitoli d&apos;Autore</span>
+                    <span>Sintesi Organica</span>
                   </div>
                   <p className="text-xs text-[var(--text-muted)]">
-                    Scritti direttamente da Alan Mattiassi sui nodi cruciali della disciplina.
+                    Dalle basi cognitive ed evolutive alle applicazioni didattiche, cliniche e aziendali.
                   </p>
                 </div>
 
@@ -320,30 +317,6 @@ export default function LibroPsicologiaDelGiocoPage() {
             <p className="text-[var(--text-muted)] text-sm sm:text-base leading-relaxed">
               Esplora la struttura dettagliata dei 13 capitoli, i box tematici di approfondimento clinico e i singoli paragrafi.
             </p>
-
-            {/* Filter Toggle */}
-            <div className="pt-2 flex items-center justify-center space-x-3">
-              <button
-                onClick={() => setFilterAlanOnly(false)}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                  !filterAlanOnly
-                    ? "bg-[var(--accent-primary)] text-white shadow-md"
-                    : "bg-[var(--bg-card)] text-[var(--text-muted)] border border-[var(--border-color)] hover:text-[var(--text-main)]"
-                }`}
-              >
-                Tutti i 13 Capitoli ({bookData.chapters.length})
-              </button>
-              <button
-                onClick={() => setFilterAlanOnly(true)}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                  filterAlanOnly
-                    ? "bg-[var(--accent-primary)] text-white shadow-md"
-                    : "bg-[var(--bg-card)] text-[var(--text-muted)] border border-[var(--border-color)] hover:text-[var(--text-main)]"
-                }`}
-              >
-                Solo capitoli scritti da Alan Mattiassi (5)
-              </button>
-            </div>
           </div>
 
           {/* Preface banner */}
@@ -367,24 +340,14 @@ export default function LibroPsicologiaDelGiocoPage() {
               return (
                 <div
                   key={chap.number}
-                  className={`rounded-2xl bg-[var(--bg-card)] border transition-all ${
-                    chap.isAlanAuthor
-                      ? "border-[var(--accent-primary)]/40 hover:border-[var(--accent-primary)]"
-                      : "border-[var(--border-color)] hover:border-[var(--border-strong)]"
-                  }`}
+                  className="rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[var(--border-strong)] transition-all"
                 >
                   <button
                     onClick={() => toggleChapter(chap.number)}
                     className="w-full text-left p-4 sm:p-5 flex items-start sm:items-center justify-between gap-4"
                   >
                     <div className="flex items-start sm:items-center space-x-3 sm:space-x-4">
-                      <div
-                        className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm flex-shrink-0 ${
-                          chap.isAlanAuthor
-                            ? "bg-[var(--accent-primary)] text-white shadow-md shadow-sky-500/20"
-                            : "bg-[var(--bg-surface)] text-[var(--text-main)] border border-[var(--border-color)]"
-                        }`}
-                      >
+                      <div className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm flex-shrink-0 bg-[var(--bg-surface)] text-[var(--text-main)] border border-[var(--border-color)]">
                         {chap.number}
                       </div>
 
@@ -393,11 +356,6 @@ export default function LibroPsicologiaDelGiocoPage() {
                           <h3 className="font-bold text-base sm:text-lg text-[var(--text-main)]">
                             {chap.title}
                           </h3>
-                          {chap.isAlanAuthor && (
-                            <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-[var(--badge-bg)] text-[var(--accent-primary)] border border-[var(--badge-border)]">
-                              Capitolo di Alan Mattiassi
-                            </span>
-                          )}
                         </div>
                         <p className="text-xs sm:text-sm text-[var(--text-muted)]">
                           Autori: <span className="font-medium text-[var(--text-main)]">{chap.authors}</span>

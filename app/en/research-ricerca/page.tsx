@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import PublicationsSection from "@/components/PublicationsSection";
+import BookSpotlightSection from "@/components/BookSpotlightSection";
 import ItFlag from "@/components/icons/ItFlag";
 import {
   Microscope,
@@ -100,7 +101,10 @@ export default function EnglishResearchPage() {
         </div>
       </section>
 
-      {/* 2. Affiliations & Research Centers Grid */}
+      {/* 2. Book Spotlight Section */}
+      <BookSpotlightSection />
+
+      {/* 3. Affiliations & Research Centers Grid */}
       <section className="max-w-6xl mx-auto px-4 sm:px-8 space-y-8">
         <div className="border-b border-[var(--border-color)] pb-4">
           <h2 className="text-2xl font-bold text-[var(--text-main)]">Academic Affiliations &amp; Research Centers</h2>
