@@ -1,0 +1,42 @@
+/* Validation styles after user interaction (:user-invalid with fallback) */
+.billing-field-input:is(:user-invalid, .user-invalid-fallback) {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 1px rgba(220, 38, 38, 0.25);
+}
+
+.billing-field-input:is(:user-valid, .user-valid-fallback) {
+  border-color: #059669;
+}
+
+.billing-error-msg {
+  display: none;
+  color: #dc2626;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  margin-top: 0.375rem;
+}
+
+html.dark .billing-error-msg {
+  color: #f87171;
+}
+
+.billing-field-input:is(:user-invalid, .user-invalid-fallback) + .billing-error-msg,
+.billing-checkbox-group:has(.billing-field-input:is(:user-invalid, .user-invalid-fallback)) .billing-error-msg,
+.billing-error-msg[data-visible="true"] {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.375rem;
+}
+
+/* Visually hidden utility (accessible to screen readers, hidden from sighted users) */
+.visually-hidden:where(:not(:focus-within, :active)) {
+  position: absolute !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
