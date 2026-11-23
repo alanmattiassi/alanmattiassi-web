@@ -325,7 +325,7 @@ export default function EnglishFrameworkPage() {
               <span>How to cite this work (APA format)</span>
             </div>
             <div className="p-4 rounded-xl bg-[var(--bg-canvas)] border border-[var(--border-color)] font-mono text-xs sm:text-sm text-[var(--text-main)] leading-relaxed select-all">
-              Mattiassi, A. D. A. (2024). Redefining the psychology of games: A unifying framework beyond play and gaming. <em>Canadian Journal of Experimental Psychology / Revue canadienne de psychologie expérimentale</em>. Advance online publication. https://doi.org/10.1037/cep0000413
+              Mattiassi, A. D. A. (2026). Redefining the psychology of games: A unifying framework beyond play and gaming. <em>Canadian Journal of Experimental Psychology / Revue canadienne de psychologie expérimentale</em>. Advance online publication. https://doi.org/10.1037/cep0000413
             </div>
             <p className="text-[11px] text-[var(--text-muted)] italic">
               For academic citations and bibliographic references, please use the official version with the APA DOI.
