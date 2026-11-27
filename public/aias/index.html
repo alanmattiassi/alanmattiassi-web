@@ -1141,6 +1141,63 @@
     }
 
     /* ============================================================
+       SLIDE PMPVGs — RADAR 12 MOTIVAZIONI (GURSESLI ET AL., 2024)
+       ============================================================ */
+    .pmpvg-stage {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .pmpvg-radar-box {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #F8FAFC;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 22px;
+      padding: 0.5rem;
+      position: relative;
+    }
+
+    .pmpvg-readout {
+      width: 100%;
+      background: #0F172A;
+      color: #F8FAFC;
+      border-radius: 16px;
+      padding: 0.85rem 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .pmpvg-score-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(14, 165, 233, 0.22);
+      color: #7DD3FC;
+      white-space: nowrap;
+    }
+
+    .pmpvg-dot {
+      cursor: pointer;
+      transition: r 0.18s ease;
+    }
+    .pmpvg-dot:hover {
+      r: 8;
+    }
+
+    /* ============================================================
        SLIDE 03 — AUTONOMIA (CONTINUA) VS AGENCY (SOGLIA)
        ============================================================ */
     .dual-lab {
@@ -2907,9 +2964,44 @@
         </section>
 
         <!-- ==========================================================
-             SLIDE — RADICI EVOLUTIVE E SOGLIA DELL'AGENCY
+             SLIDE — MOTIVAZIONI AL VIDEOGIOCO (PMPVGs — GURSESLI ET AL., 2024)
              ========================================================== -->
         <section class="slide title-right">
+          <div class="title-col">
+            <div class="title-topbar">
+              <div class="title-category"><span class="category-indicator"></span>MOTIVAZIONI AL GIOCO</div>
+            </div>
+            <h2 class="main-title">PERCHÉ GIOCHIAMO? I 12 FATTORI.</h2>
+            <p class="subtitle-text">
+              Partendo dalle 57 principali scale in letteratura, lo studio di Firenze (<strong>Gursesli, Martucci, Mattiassi, Duradoni &amp; Guazzini, 2024</strong>) ha validato la scala <strong>PMPVGs</strong>: 12 fattori motivazionali distinti nei videogiochi.
+            </p>
+            <div class="note-pill">
+              <span><strong class="lens-tag">LENTE:</strong> Subito dopo l'intrattenimento (4.57), spicca <strong>Sfida / Competenza (4.05)</strong> — l'espressione soggettiva dell'apprendimento avvenuto.</span>
+            </div>
+          </div>
+          <div class="glass-card-col">
+            <div class="card-inner-stage">
+              <div class="stage-header">
+                <div class="stage-kicker">PMPVGs &bull; SPETTRO MOTIVAZIONALE (SCALA 1–5)</div>
+                <span class="stage-badge">Gursesli et al., 2024</span>
+              </div>
+              <div class="pmpvg-stage">
+                <div class="pmpvg-radar-box">
+                  <svg id="pmpvgSvg" viewBox="0 0 680 500" width="100%" height="100%" style="max-height: 525px;"></svg>
+                </div>
+                <div class="pmpvg-readout" id="pmpvgReadout">
+                  <span><strong>Sfida / Competenza (Mastery):</strong> piacere di superare ostacoli calibrati e percepire padronanza.</span>
+                  <span class="pmpvg-score-pill">4.05 / 5.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================================
+             SLIDE — RADICI EVOLUTIVE E SOGLIA DELL'AGENCY
+             ========================================================== -->
+        <section class="slide title-left">
           <div class="title-col">
             <div class="title-topbar">
               <div class="title-category"><span class="category-indicator"></span>RADICI E SOGLIA</div>
@@ -2992,7 +3084,7 @@
         <!-- ==========================================================
              SLIDE — LE QUATTRO DIMENSIONI COME SISTEMA
              ========================================================== -->
-        <section class="slide title-left">
+        <section class="slide title-right">
           <div class="title-col">
             <div class="title-topbar">
               <div class="title-category"><span class="category-indicator"></span>IL FRAMEWORK</div>
@@ -3054,7 +3146,7 @@
         <!-- ==========================================================
              SLIDE — DIMENSIONE I: CORNICE SIMBOLICA REGOLATA
              ========================================================== -->
-        <section class="slide title-right">
+        <section class="slide title-left">
           <div class="title-col">
             <div class="title-topbar">
               <div class="title-category"><span class="category-indicator"></span>DIMENSIONE I</div>
@@ -3130,7 +3222,7 @@
         <!-- ==========================================================
              SLIDE — DIMENSIONE II: PROSPETTIVA DI RUOLO ALTERATA
              ========================================================== -->
-        <section class="slide title-left">
+        <section class="slide title-right">
           <div class="title-col">
             <div class="title-topbar">
               <div class="title-category"><span class="category-indicator"></span>DIMENSIONE II</div>
@@ -3188,7 +3280,7 @@
         <!-- ==========================================================
              SLIDE — DIMENSIONE III: PERFORMANCE ORIENTATA ALL'OBIETTIVO
              ========================================================== -->
-        <section class="slide title-right">
+        <section class="slide title-left">
           <div class="title-col">
             <div class="title-topbar">
               <div class="title-category"><span class="category-indicator"></span>DIMENSIONE III</div>
@@ -3265,7 +3357,7 @@
         <!-- ==========================================================
              SLIDE — DIMENSIONE IV: MONITORAGGIO ESECUTIVO METACOGNITIVO
              ========================================================== -->
-        <section class="slide title-left">
+        <section class="slide title-right">
           <div class="title-col">
             <div class="title-topbar">
               <div class="title-category"><span class="category-indicator"></span>DIMENSIONE IV</div>
@@ -3333,7 +3425,7 @@
         <!-- ==========================================================
              SLIDE — STRESS TEST LIVE: COSA SUCCEDE SE NE TOGLI UNA?
              ========================================================== -->
-        <section class="slide title-right">
+        <section class="slide title-left">
           <div class="title-col">
             <div class="title-topbar">
               <div class="title-category"><span class="category-indicator"></span>STRESS TEST</div>
@@ -3404,7 +3496,7 @@
         <!-- ==========================================================
              SLIDE — DIMENSIONAL WEIGHTING (RADAR + BARRE)
              ========================================================== -->
-        <section class="slide title-left">
+        <section class="slide title-right">
           <div class="title-col">
             <div class="title-topbar">
               <div class="title-category"><span class="category-indicator"></span>DIMENSIONAL WEIGHTING</div>
@@ -3478,7 +3570,7 @@
         <!-- ==========================================================
              SLIDE — DAL CONCETTO ALL'ESPERIMENTO (TABLE 1 & H1-H7)
              ========================================================== -->
-        <section class="slide title-right">
+        <section class="slide title-left">
           <div class="title-col">
             <div class="title-topbar">
               <div class="title-category"><span class="category-indicator"></span>RICERCA E DESIGN</div>
@@ -3585,7 +3677,7 @@
         <!-- ==========================================================
              SLIDE — IL MANUALE: PSICOLOGIA DEL GIOCO (HOGREFE, 2026)
              ========================================================== -->
-        <section class="slide title-left">
+        <section class="slide title-right">
           <div class="title-col">
             <div class="title-topbar">
               <div class="title-category"><span class="category-indicator"></span>IL MANUALE DI RIFERIMENTO</div>
@@ -3974,6 +4066,123 @@
         scopeInfoBox.innerHTML = `<div class="scope-info-title">${d.title}</div><div class="scope-info-desc">${d.desc}</div>`;
       });
     });
+
+    // --- SLIDE PMPVGs: RADAR 12 MOTIVAZIONI (GURSESLI ET AL., 2024) ---
+    (function initPmpvgRadar() {
+      const svg = document.getElementById('pmpvgSvg');
+      const readout = document.getElementById('pmpvgReadout');
+      if (!svg || !readout) return;
+
+      const data = [
+        { label: 'Sfida / Competenza', val: 4.05, highlight: true, desc: 'Piacere di superare ostacoli calibrati e percepire padronanza (espressione soggettiva dell\'apprendimento).' },
+        { label: 'Creatività', val: 3.58, desc: 'Esprimere se stessi, costruire, immaginare e sperimentare soluzioni originali.' },
+        { label: 'Noia', val: 3.15, desc: 'Alleviare la noia e riempire i momenti vuoti della giornata.' },
+        { label: 'Competizione', val: 2.43, desc: 'Misurarsi e battere altri giocatori (tra i fattori meno dominanti rispetto allo stereotipo).' },
+        { label: 'Umore / Stress', val: 3.72, desc: 'Mood management: regolare attivamente uno stato d\'animo negativo, ansia o fatica emotiva.' },
+        { label: 'Distrazione', val: 2.16, desc: 'Interrompere un sovraccarico cognitivo o pensieri intrusivi attraverso attenzione assorbente.' },
+        { label: 'Intrattenimento', val: 4.57, highlight: true, desc: 'Il picco più alto: piacere immediato e gratificazione intrinseca dell\'esperienza di gioco.' },
+        { label: 'Escapismo', val: 2.96, desc: 'Allontanarsi temporaneamente dalle pressioni e dalle routine della vita quotidiana.' },
+        { label: 'Fantasia / Immersione', val: 3.79, desc: 'Entrare in mondi possibili, storie e ruoli diversi dal quotidiano.' },
+        { label: 'Abitudine', val: 2.91, desc: 'Il giocare integrato come routine consolidata nel proprio tempo libero.' },
+        { label: 'Autostima', val: 2.56, desc: 'Riconoscimento personale e conferma del proprio valore attraverso i risultati.' },
+        { label: 'Sociale', val: 2.77, desc: 'Condivisione, appartenenza e mantenimento di legami interpersonali.' }
+      ];
+
+      const cx = 340, cy = 250, maxR = 178;
+      const n = data.length;
+      const ns = 'http://www.w3.org/2000/svg';
+
+      function el(tag, attrs, text) {
+        const node = document.createElementNS(ns, tag);
+        for (const [k, v] of Object.entries(attrs || {})) node.setAttribute(k, v);
+        if (text !== undefined) node.textContent = text;
+        return node;
+      }
+
+      // Concentric circles 1..5
+      for (let rStep = 1; rStep <= 5; rStep++) {
+        const r = (rStep / 5) * maxR;
+        svg.appendChild(el('circle', {
+          cx, cy, r,
+          fill: rStep === 5 ? '#FFFFFF' : 'none',
+          stroke: rStep === 5 ? '#CBD5E1' : '#E2E8F0',
+          'stroke-width': rStep === 5 ? '1.6' : '1.1',
+          'stroke-dasharray': rStep < 5 ? '3 3' : 'none'
+        }));
+        svg.appendChild(el('text', {
+          x: cx + 5, y: cy - r + 13,
+          'font-family': 'JetBrains Mono', 'font-size': '10', 'font-weight': '700', fill: '#94A3B8'
+        }, String(rStep)));
+      }
+
+      // Spokes + labels + points
+      const pts = [];
+      data.forEach((d, i) => {
+        const angle = -Math.PI / 2 + (i * 2 * Math.PI) / n;
+        const cos = Math.cos(angle), sin = Math.sin(angle);
+        const xEnd = cx + maxR * cos;
+        const yEnd = cy + maxR * sin;
+        svg.appendChild(el('line', { x1: cx, y1: cy, x2: xEnd, y2: yEnd, stroke: '#E2E8F0', 'stroke-width': '1.1' }));
+
+        const px = cx + (d.val / 5) * maxR * cos;
+        const py = cy + (d.val / 5) * maxR * sin;
+        pts.push(`${px.toFixed(1)},${py.toFixed(1)}`);
+
+        const lx = cx + (maxR + 24) * cos;
+        const ly = cy + (maxR + 22) * sin;
+        let anchor = 'middle';
+        if (cos > 0.25) anchor = 'start';
+        else if (cos < -0.25) anchor = 'end';
+
+        const lbl = el('text', {
+          x: lx.toFixed(1),
+          y: (ly + 4).toFixed(1),
+          'text-anchor': anchor,
+          'font-family': 'Plus Jakarta Sans',
+          'font-size': d.highlight ? '13' : '12',
+          'font-weight': d.highlight ? '800' : '600',
+          fill: d.highlight ? '#0F172A' : '#475569',
+          style: 'cursor:pointer;'
+        }, d.label);
+
+        const updateReadout = () => {
+          readout.innerHTML = `<span><strong>${d.label}:</strong> ${d.desc}</span><span class="pmpvg-score-pill">${d.val.toFixed(2)} / 5.00</span>`;
+        };
+        lbl.addEventListener('mouseenter', updateReadout);
+        lbl.addEventListener('click', updateReadout);
+        svg.appendChild(lbl);
+      });
+
+      // Data polygon
+      svg.appendChild(el('polygon', {
+        points: pts.join(' '),
+        fill: 'rgba(14, 165, 233, 0.2)',
+        stroke: '#0EA5E9',
+        'stroke-width': '3',
+        'stroke-linejoin': 'round'
+      }));
+
+      // Interactive data dots
+      data.forEach((d, i) => {
+        const angle = -Math.PI / 2 + (i * 2 * Math.PI) / n;
+        const px = cx + (d.val / 5) * maxR * Math.cos(angle);
+        const py = cy + (d.val / 5) * maxR * Math.sin(angle);
+        const dot = el('circle', {
+          cx: px.toFixed(1), cy: py.toFixed(1),
+          r: d.highlight ? '6.5' : '5',
+          fill: d.highlight ? '#F97316' : '#0EA5E9',
+          stroke: '#FFFFFF',
+          'stroke-width': '2',
+          class: 'pmpvg-dot'
+        });
+        const updateReadout = () => {
+          readout.innerHTML = `<span><strong>${d.label}:</strong> ${d.desc}</span><span class="pmpvg-score-pill">${d.val.toFixed(2)} / 5.00</span>`;
+        };
+        dot.addEventListener('mouseenter', updateReadout);
+        dot.addEventListener('click', updateReadout);
+        svg.appendChild(dot);
+      });
+    })();
 
     // --- SLIDE 03: AUTONOMIA VS AGENCY ---
     const autonomySlider = document.getElementById('autonomySlider');
