@@ -7,7 +7,9 @@
   <title>Architettura psicologica del gioco | Alan D. A. Mattiassi, Ph.D. — AIAS Milano</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #F8FAFC;
@@ -32,6 +34,12 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    html {
+      font-size: 16px !important;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
     body {
       background: #0B0F19;
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -41,13 +49,17 @@
       justify-content: center;
       width: 100vw;
       height: 100vh;
+      height: 100dvh;
       overflow: hidden;
       user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
     }
 
     .deck-viewport {
       width: 100vw;
       height: 100vh;
+      height: 100dvh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -3939,14 +3951,41 @@
   </div>
 
   <script>
-    // --- RESPONSIVE 1920x1080 STAGE SCALING ---
+    // --- RESPONSIVE 1920x1080 STAGE SCALING (IDENTICO SU OGNI DISPOSITIVO) ---
     function scaleStage() {
       const stage = document.getElementById('slideStage');
-      const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+      const vw = window.visualViewport ? window.visualViewport.width : window.innerWidth;
+      const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+      const scale = Math.min(vw / 1920, vh / 1080);
       stage.style.transform = `scale(${scale})`;
     }
     window.addEventListener('resize', scaleStage);
+    window.addEventListener('orientationchange', () => setTimeout(scaleStage, 120));
+    document.addEventListener('fullscreenchange', () => setTimeout(scaleStage, 60));
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', scaleStage);
+    }
     scaleStage();
+
+    // --- SWIPE TOUCH PER MOBILE E TABLET ---
+    (function initTouchSwipe() {
+      let sx = 0, sy = 0;
+      document.addEventListener('touchstart', (e) => {
+        if (e.touches.length !== 1 || e.target.tagName === 'INPUT') return;
+        sx = e.touches[0].clientX;
+        sy = e.touches[0].clientY;
+      }, { passive: true });
+      document.addEventListener('touchend', (e) => {
+        if (!sx && !sy) return;
+        const dx = e.changedTouches[0].clientX - sx;
+        const dy = e.changedTouches[0].clientY - sy;
+        sx = 0; sy = 0;
+        if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+          if (dx < 0) stepForward();
+          else stepBackward();
+        }
+      }, { passive: true });
+    })();
 
     // --- DECK NAVIGATION (CON SUPPORTO SUB-STEP PER SLIDE STORICHE) ---
     const slides = document.querySelectorAll('.slide');
