@@ -1611,6 +1611,101 @@
       border: 1px solid #E2E8F0;
     }
 
+    /* Literature Synthesis Grid inside the 4 Dimension Slides */
+    .lit-synthesis-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0.85rem;
+    }
+
+    .lit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
+      flex: 1;
+    }
+
+    .lit-card {
+      background: #F8FAFC;
+      border: 1.4px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 0.9rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.28rem;
+    }
+    .lit-card.span-2 {
+      grid-column: span 2;
+    }
+
+    .lit-author {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #0284C7;
+      letter-spacing: 0.04em;
+    }
+
+    .lit-construct {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 1.08rem;
+      font-weight: 800;
+      color: #0F172A;
+      line-height: 1.15;
+    }
+
+    .lit-desc {
+      font-size: 0.83rem;
+      color: #475569;
+      line-height: 1.35;
+    }
+
+    .lit-converge-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #94A3B8;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .lit-fusion-box {
+      background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+      color: #F8FAFC;
+      border-radius: 18px;
+      padding: 1.05rem 1.35rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      box-shadow: 0 12px 26px -12px rgba(15, 23, 42, 0.35);
+    }
+
+    .lit-fusion-kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #38BDF8;
+      text-transform: uppercase;
+    }
+
+    .lit-fusion-text {
+      font-size: 0.92rem;
+      color: #E2E8F0;
+      line-height: 1.42;
+    }
+    .lit-fusion-text strong {
+      color: #FFFFFF;
+    }
+
     /* Slide 06 Lenses */
     .lenses-stage {
       flex: 1;
@@ -3209,58 +3304,38 @@
           <div class="glass-card-col">
             <div class="card-inner-stage">
               <div class="stage-header">
-                <div class="stage-kicker">RISIGNIFICAZIONE SIMBOLICA &amp; GENERATIVITÀ</div>
-                <span class="stage-badge">Schema + Simbolo</span>
+                <div class="stage-kicker">DALLA LETTERATURA ALLA DIMENSIONE</div>
+                <span class="stage-badge">Sintesi Teorica</span>
               </div>
-              <div class="dim-visual-body">
-                <div class="transform-cards">
-                  <div class="t-card">
-                    <div class="t-icon">🪵</div>
-                    <div class="t-raw">Un bastone</div>
-                    <div class="t-arrow">↓</div>
-                    <div class="t-sym">Bacchetta magica</div>
+              <div class="lit-synthesis-wrap">
+                <div class="lit-grid">
+                  <div class="lit-card">
+                    <div class="lit-author">STENROS (2017)</div>
+                    <div class="lit-construct">Regole come invariante</div>
+                    <div class="lit-desc">Rassegna di 63 definizioni: vincoli, divieti e criteri di successo sono il nucleo più ricorrente.</div>
                   </div>
-                  <div class="t-card">
-                    <div class="t-icon">➖</div>
-                    <div class="t-raw">Una linea a terra</div>
-                    <div class="t-arrow">↓</div>
-                    <div class="t-sym">Confine territoriale</div>
+                  <div class="lit-card">
+                    <div class="lit-author">PIAGET (1951)</div>
+                    <div class="lit-construct">Regola come schema cognitivo</div>
+                    <div class="lit-desc">Struttura generativa che organizza informazione e azione, aprendo uno spazio di possibilità.</div>
                   </div>
-                  <div class="t-card">
-                    <div class="t-icon">♟️</div>
-                    <div class="t-raw">Pedine su cartone</div>
-                    <div class="t-arrow">↓</div>
-                    <div class="t-sym">Conflitto strategico</div>
+                  <div class="lit-card">
+                    <div class="lit-author">VYGOTSKY (1978) &bull; BRUNER (1973)</div>
+                    <div class="lit-construct">Risignificazione simbolica</div>
+                    <div class="lit-desc">Oggetti e gesti ordinari assumono nuovi significati condivisi dentro il sistema di gioco.</div>
                   </div>
-                </div>
-
-                <div class="flow-chain">
-                  <div class="chain-step">
-                    <div class="chain-kicker">01 &bull; VINCOLO</div>
-                    <div class="chain-title">Sistema di Regole</div>
-                    <div class="chain-desc">Definisce possibilità, divieti e criteri di successo.</div>
-                  </div>
-                  <div class="chain-sep">→</div>
-                  <div class="chain-step">
-                    <div class="chain-kicker">02 &bull; COGNIZIONE</div>
-                    <div class="chain-title">Spazio di Possibilità</div>
-                    <div class="chain-desc">Rappresentazioni multiple coesistono simultaneamente.</div>
-                  </div>
-                  <div class="chain-sep">→</div>
-                  <div class="chain-step highlight">
-                    <div class="chain-kicker">03 &bull; EMERGENZA</div>
-                    <div class="chain-title">Azione Significativa</div>
-                    <div class="chain-desc">Es. il <strong>bluff</strong> nel poker: non scritto, ma reso possibile.</div>
+                  <div class="lit-card">
+                    <div class="lit-author">FEIN (1981)</div>
+                    <div class="lit-construct">Rappresentazioni multiple</div>
+                    <div class="lit-desc">Nel <em>pretend play</em> il piano reale e il piano simbolico coesistono simultaneamente.</div>
                   </div>
                 </div>
-
-                <div class="citation-strip">
-                  <span style="font-family:'JetBrains Mono',monospace; font-size:0.7rem; font-weight:800; color:#0284C7; letter-spacing:0.08em; margin-right:0.2rem;">RIFERIMENTI:</span>
-                  <span class="cite-chip">Piaget (1951)</span>
-                  <span class="cite-chip">Bruner (1973)</span>
-                  <span class="cite-chip">Vygotsky (1978)</span>
-                  <span class="cite-chip">Fein (1981)</span>
-                  <span class="cite-chip">Stenros (2017)</span>
+                <div class="lit-converge-bar">↓ &nbsp; CONVERGENZA NELLA DIMENSIONE I &nbsp; ↓</div>
+                <div class="lit-fusion-box">
+                  <div class="lit-fusion-kicker">CORNICE SIMBOLICA REGOLATA</div>
+                  <div class="lit-fusion-text">
+                    <strong>Schemi regolativi + risignificazione simbolica</strong> creano uno spazio condiviso di significati che genera azioni emergenti (es. il <em>bluff</em> nel poker).
+                  </div>
                 </div>
               </div>
             </div>
@@ -3287,47 +3362,43 @@
           <div class="glass-card-col">
             <div class="card-inner-stage">
               <div class="stage-header">
-                <div class="stage-kicker">PROSPETTIVA STRATIFICATA &bull; SÉ ↔ RUOLO</div>
-                <span class="stage-badge">Individuale &amp; Relazionale</span>
+                <div class="stage-kicker">DALLA LETTERATURA ALLA DIMENSIONE</div>
+                <span class="stage-badge">Sintesi Teorica</span>
               </div>
-              <div class="dim-visual-body">
-                <div class="lenses-stage">
-                  <div class="lens-circle lens-self">
-                    <div style="font-family:'JetBrains Mono',monospace; font-size:0.74rem; font-weight:700; color:#0369A1;">OUT-OF-GAME</div>
-                    <div style="font-family:'Cabinet Grotesk',sans-serif; font-size:1.55rem; font-weight:900; color:#0F172A; margin:0.35rem 0;">Il Giocatore</div>
-                    <div style="font-size:0.86rem; color:#475569; line-height:1.45;">Competenze cognitive, valori personali, capacità decisionale.</div>
+              <div class="lit-synthesis-wrap">
+                <div class="lit-grid">
+                  <div class="lit-card">
+                    <div class="lit-author">VYGOTSKY (1978)</div>
+                    <div class="lit-construct">Assunzione di ruolo</div>
+                    <div class="lit-desc">Abitare una funzione o identità fittizia trasforma il modo in cui il Sé viene esperito e agito.</div>
                   </div>
-                  <div class="lens-center-arrows">⇄</div>
-                  <div class="lens-circle lens-role">
-                    <div style="font-family:'JetBrains Mono',monospace; font-size:0.74rem; font-weight:700; color:#C2410C;">IN-GAME</div>
-                    <div style="font-family:'Cabinet Grotesk',sans-serif; font-size:1.55rem; font-weight:900; color:#0F172A; margin:0.35rem 0;">Il Ruolo</div>
-                    <div style="font-size:0.86rem; color:#475569; line-height:1.45;">Funzione, vincoli narrativi, obiettivi validi solo nella cornice.</div>
+                  <div class="lit-card">
+                    <div class="lit-author">DECETY &amp; SOMMERVILLE (2003)</div>
+                    <div class="lit-construct">Rappresentazioni Sé / Altro</div>
+                    <div class="lit-desc">Basi neurocognitive del decentramento e del cambio intenzionale di prospettiva.</div>
                   </div>
-                  <div class="lens-center-pill">⇄ OSCILLAZIONE ATTIVA</div>
-                </div>
-
-                <div class="meta-loop-grid">
-                  <div class="meta-box online">
-                    <div style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; font-weight:700; color:#0284C7; margin-bottom:0.3rem;">LIVELLO INTRAPSICHICO</div>
-                    <div style="font-size:0.94rem; color:#334155; line-height:1.45;">
-                      <strong>Perspective-taking &amp; esplorazione identitaria:</strong> proiezione, empatia e flessibilità cognitiva (Bowman, 2010; Goldstein &amp; Winner, 2012).
-                    </div>
+                  <div class="lit-card">
+                    <div class="lit-author">BOWMAN (2010)</div>
+                    <div class="lit-construct">Prospettiva stratificata</div>
+                    <div class="lit-desc">Decidere come se stessi restando dentro i vincoli e la narrativa di un altro ruolo.</div>
                   </div>
-                  <div class="meta-box offline">
-                    <div style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; font-weight:700; color:#4F46E5; margin-bottom:0.3rem;">LIVELLO RELAZIONALE</div>
-                    <div style="font-size:0.94rem; color:#334155; line-height:1.45;">
-                      <strong>Ruoli in rete:</strong> coordinazione, negoziazione e <em>shared intentionality</em> tra più agenti (Heesen et al., 2017; Decety &amp; Sommerville, 2003).
-                    </div>
+                  <div class="lit-card">
+                    <div class="lit-author">GOLDSTEIN &amp; WINNER (2012)</div>
+                    <div class="lit-construct">Empatia &amp; flessibilità</div>
+                    <div class="lit-desc">Oscillazione attiva tra punto di vista interno ed esterno, proiezione e <em>perspective-taking</em>.</div>
+                  </div>
+                  <div class="lit-card span-2">
+                    <div class="lit-author">HEESEN ET AL. (2017)</div>
+                    <div class="lit-construct">Ruolo relazionale &amp; intenzionalità condivisa</div>
+                    <div class="lit-desc">Nei giochi sociali ogni ruolo è definito dalla rete degli altri giocatori, abilitando coordinazione e negoziazione.</div>
                   </div>
                 </div>
-
-                <div class="citation-strip">
-                  <span style="font-family:'JetBrains Mono',monospace; font-size:0.7rem; font-weight:800; color:#0284C7; letter-spacing:0.08em; margin-right:0.2rem;">RIFERIMENTI:</span>
-                  <span class="cite-chip">Vygotsky (1978)</span>
-                  <span class="cite-chip">Decety &amp; Sommerville (2003)</span>
-                  <span class="cite-chip">Bowman (2010)</span>
-                  <span class="cite-chip">Goldstein &amp; Winner (2012)</span>
-                  <span class="cite-chip">Heesen et al. (2017)</span>
+                <div class="lit-converge-bar">↓ &nbsp; CONVERGENZA NELLA DIMENSIONE II &nbsp; ↓</div>
+                <div class="lit-fusion-box">
+                  <div class="lit-fusion-kicker">PROSPETTIVA DI RUOLO ALTERATA</div>
+                  <div class="lit-fusion-text">
+                    <strong>Decentramento del Sé + ruoli interdipendenti</strong> orientano percezione, decisioni e agency verso obiettivi validi solo dentro la cornice simbolica.
+                  </div>
                 </div>
               </div>
             </div>
@@ -3354,66 +3425,43 @@
           <div class="glass-card-col">
             <div class="card-inner-stage">
               <div class="stage-header">
-                <div class="stage-kicker">DALL'AZIONE ARBITRARIA ALLA TRAIETTORIA INTENZIONALE</div>
-                <span class="stage-badge">Suits, 1978 &bull; Bandura, 1977</span>
+                <div class="stage-kicker">DALLA LETTERATURA ALLA DIMENSIONE</div>
+                <span class="stage-badge">Sintesi Teorica</span>
               </div>
-              <div class="dim-visual-body">
-                <div style="background:#F8FAFC; border:1.5px solid #E2E8F0; border-radius:22px; padding:1.4rem 1.8rem;">
-                  <svg viewBox="0 0 820 220" width="100%" height="205">
-                    <!-- Left: Scattered actions -->
-                    <rect x="10" y="15" width="240" height="190" rx="18" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
-                    <text x="130" y="42" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#64748B">SENZA OBIETTIVO LUSORIO</text>
-                    <circle cx="75" cy="95" r="7" fill="#CBD5E1"/>
-                    <circle cx="145" cy="145" r="7" fill="#CBD5E1"/>
-                    <circle cx="190" cy="88" r="7" fill="#CBD5E1"/>
-                    <circle cx="95" cy="160" r="7" fill="#CBD5E1"/>
-                    <circle cx="135" cy="80" r="7" fill="#CBD5E1"/>
-                    <path d="M75 95 L135 80 L190 88 M95 160 L145 145" stroke="#CBD5E1" stroke-width="1.8" stroke-dasharray="4 4"/>
-                    <text x="130" y="190" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="12" fill="#94A3B8">Azioni disorganizzate</text>
-
-                    <!-- Arrow -->
-                    <path d="M268 110 L318 110" stroke="#0EA5E9" stroke-width="3.5" stroke-linecap="round"/>
-                    <polygon points="318,102 332,110 318,118" fill="#0EA5E9"/>
-
-                    <!-- Right: Structured trajectory -->
-                    <rect x="348" y="15" width="462" height="190" rx="18" fill="#FFFFFF" stroke="#BAE6FD" stroke-width="2"/>
-                    <text x="579" y="42" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#0284C7">CON OBIETTIVO PRELUSORIO / LUSORIO (SUITS, 1978)</text>
-                    <path d="M390 155 Q480 140 535 110 T725 85" fill="none" stroke="#0EA5E9" stroke-width="4" stroke-linecap="round"/>
-                    <circle cx="390" cy="155" r="8" fill="#0EA5E9"/>
-                    <circle cx="535" cy="110" r="8" fill="#0EA5E9"/>
-                    <circle cx="640" cy="95" r="8" fill="#0EA5E9"/>
-                    <circle cx="735" cy="85" r="14" fill="#F97316"/>
-                    <circle cx="735" cy="85" r="22" fill="none" stroke="#F97316" stroke-width="2" opacity="0.45"/>
-                    <text x="735" y="128" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#C2410C">GOAL</text>
-                    <text x="545" y="185" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="12.5" font-weight="600" fill="#334155">Strategia, coordinazione cognitiva ed emotiva</text>
-                  </svg>
-                </div>
-
-                <div class="pillars-grid">
-                  <div class="pillar-card">
-                    <span style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; font-weight:700; color:#0284C7;">01 &bull; SFIDA</span>
-                    <h4>Problem Solving</h4>
-                    <p>Il conflitto integrato nell'obiettivo organizza scelte strategiche o improvvisative (Locke &amp; Latham, 2002).</p>
+              <div class="lit-synthesis-wrap">
+                <div class="lit-grid">
+                  <div class="lit-card">
+                    <div class="lit-author">SUITS (1978)</div>
+                    <div class="lit-construct">Obiettivo prelusorio / lusorio</div>
+                    <div class="lit-desc">Lo stato-obiettivo da raggiungere trasforma azioni arbitrarie in condotta strutturata.</div>
                   </div>
-                  <div class="pillar-card">
-                    <span style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; font-weight:700; color:#F97316;">02 &bull; PADRONANZA</span>
-                    <h4>Autoefficacia</h4>
-                    <p>Competenza percepita e motivazione intrinseca rafforzano il senso di efficacia (Bandura, 1977; Rodríguez et al., 2021).</p>
+                  <div class="lit-card">
+                    <div class="lit-author">LOCKE &amp; LATHAM (2002)</div>
+                    <div class="lit-construct">Goal-setting &amp; sforzo</div>
+                    <div class="lit-desc">L'obiettivo organizza interpretazione, strategie e sforzo cognitivo ed emotivo verso il risultato.</div>
                   </div>
-                  <div class="pillar-card">
-                    <span style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; font-weight:700; color:#10B981;">03 &bull; EQUILIBRIO</span>
-                    <h4>Stato di Flow</h4>
-                    <p>L'incastro tra difficoltà del compito e abilità fonde attenzione, motivazione e azione (Csíkszentmihályi, 1990).</p>
+                  <div class="lit-card">
+                    <div class="lit-author">RODRÍGUEZ ET AL. (2021)</div>
+                    <div class="lit-construct">Competenza percepita</div>
+                    <div class="lit-desc">La sfida integrata nell'obiettivo elicita problem solving e sostiene la motivazione intrinseca.</div>
+                  </div>
+                  <div class="lit-card">
+                    <div class="lit-author">BANDURA (1977)</div>
+                    <div class="lit-construct">Autoefficacia</div>
+                    <div class="lit-desc">La padronanza della performance consolida la percezione di efficacia nell'affrontare la sfida.</div>
+                  </div>
+                  <div class="lit-card span-2">
+                    <div class="lit-author">CSÍKSZENTMIHÁLYI (1990)</div>
+                    <div class="lit-construct">Bilanciamento sfida / abilità → Flow</div>
+                    <div class="lit-desc">L'incastro dinamico tra difficoltà del compito e abilità fonde attenzione, motivazione e azione in un'esperienza unitaria.</div>
                   </div>
                 </div>
-
-                <div class="citation-strip">
-                  <span style="font-family:'JetBrains Mono',monospace; font-size:0.7rem; font-weight:800; color:#0284C7; letter-spacing:0.08em; margin-right:0.2rem;">RIFERIMENTI:</span>
-                  <span class="cite-chip">Bandura (1977)</span>
-                  <span class="cite-chip">Suits (1978)</span>
-                  <span class="cite-chip">Csíkszentmihályi (1990)</span>
-                  <span class="cite-chip">Locke &amp; Latham (2002)</span>
-                  <span class="cite-chip">Rodríguez et al. (2021)</span>
+                <div class="lit-converge-bar">↓ &nbsp; CONVERGENZA NELLA DIMENSIONE III &nbsp; ↓</div>
+                <div class="lit-fusion-box">
+                  <div class="lit-fusion-kicker">PERFORMANCE ORIENTATA ALL'OBIETTIVO</div>
+                  <div class="lit-fusion-text">
+                    <strong>Obiettivo simbolico + sfida + padronanza</strong> trasformano il comportamento in azione intenzionale e motivata; senza obiettivo, il coinvolgimento si dissolve.
+                  </div>
                 </div>
               </div>
             </div>
@@ -3440,55 +3488,48 @@
           <div class="glass-card-col">
             <div class="card-inner-stage">
               <div class="stage-header">
-                <div class="stage-kicker">DOPPIO LOOP DI CONTROLLO &amp; FILTRO INIBITORIO</div>
-                <span class="stage-badge">Diamond, 2013 &bull; Flavell, 1979</span>
+                <div class="stage-kicker">DALLA LETTERATURA ALLA DIMENSIONE</div>
+                <span class="stage-badge">Sintesi Teorica</span>
               </div>
-              <div class="dim-visual-body">
-                <div class="meta-loop-grid">
-                  <div class="meta-box online">
-                    <div style="font-family:'JetBrains Mono',monospace; font-size:0.74rem; font-weight:700; color:#0284C7; margin-bottom:0.35rem;">LOOP 1 &bull; ONLINE MONITORING</div>
-                    <div style="font-family:'Cabinet Grotesk',sans-serif; font-size:1.35rem; font-weight:800; color:#0F172A; margin-bottom:0.4rem;">Controllo in Tempo Reale</div>
-                    <div style="font-size:0.9rem; color:#475569; line-height:1.45;">
-                      Rilevazione immediata di errori e discrepanze tra esito atteso e reale (Botvinick et al., 2001). Gestione attentiva sotto pressione temporale.
-                    </div>
+              <div class="lit-synthesis-wrap">
+                <div class="lit-grid">
+                  <div class="lit-card">
+                    <div class="lit-author">NORMAN &amp; SHALLICE (1986) &bull; DIAMOND (2013)</div>
+                    <div class="lit-construct">Controllo esecutivo</div>
+                    <div class="lit-desc">Flessibilità cognitiva, working memory e controllo inibitorio in ambienti a feedback chiaro.</div>
                   </div>
-                  <div class="meta-box offline">
-                    <div style="font-family:'JetBrains Mono',monospace; font-size:0.74rem; font-weight:700; color:#4F46E5; margin-bottom:0.35rem;">LOOP 2 &bull; OFFLINE REFLECTION</div>
-                    <div style="font-family:'Cabinet Grotesk',sans-serif; font-size:1.35rem; font-weight:800; color:#0F172A; margin-bottom:0.4rem;">Valutazione &amp; Raffinamento</div>
-                    <div style="font-size:0.9rem; color:#475569; line-height:1.45;">
-                      Analisi <em>post hoc</em> di strategie e credenze (Zimmerman, 2000; Efklides, 2008) + mentalizzazione delle intenzioni altrui (Frith &amp; Frith, 2006).
-                    </div>
+                  <div class="lit-card">
+                    <div class="lit-author">FLAVELL (1979) &bull; EFKLIDES (2008)</div>
+                    <div class="lit-construct">Monitoraggio metacognitivo</div>
+                    <div class="lit-desc">Supervisione e autoregolazione continua dei propri processi rispetto all'obiettivo.</div>
+                  </div>
+                  <div class="lit-card">
+                    <div class="lit-author">BOTVINICK ET AL. (2001)</div>
+                    <div class="lit-construct">Monitoraggio online</div>
+                    <div class="lit-desc">Rilevazione immediata di errori, conflitti e discrepanze tra esito atteso e reale.</div>
+                  </div>
+                  <div class="lit-card">
+                    <div class="lit-author">ZIMMERMAN (2000)</div>
+                    <div class="lit-construct">Riflessione offline</div>
+                    <div class="lit-desc">Valutazione <em>post hoc</em> e raffinamento strategico della propria performance.</div>
+                  </div>
+                  <div class="lit-card">
+                    <div class="lit-author">FRITH &amp; FRITH (2006) &bull; DECETY &amp; LAMM (2007)</div>
+                    <div class="lit-construct">Mentalizzazione &amp; ToM</div>
+                    <div class="lit-desc">Integrazione del monitoraggio con intenzioni, credenze e mosse probabili degli altri.</div>
+                  </div>
+                  <div class="lit-card">
+                    <div class="lit-author">LEE ET AL. (2021)</div>
+                    <div class="lit-construct">Inibizione script esterni</div>
+                    <div class="lit-desc">Mind perception strategica e blocco di affetto, gerarchia e obblighi sociali <em>out-of-game</em>.</div>
                   </div>
                 </div>
-
-                <div class="inhib-box">
-                  <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <div style="font-family:'Cabinet Grotesk',sans-serif; font-size:1.35rem; font-weight:900; color:#0F172A;">
-                      🛡️ Filtro di Inibizione degli Script Out-of-Game
-                    </div>
-                    <span style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; font-weight:700; color:#C2410C;">EXECUTIVE CONTROL</span>
+                <div class="lit-converge-bar">↓ &nbsp; CONVERGENZA NELLA DIMENSIONE IV &nbsp; ↓</div>
+                <div class="lit-fusion-box">
+                  <div class="lit-fusion-kicker">MONITORAGGIO ESECUTIVO METACOGNITIVO</div>
+                  <div class="lit-fusion-text">
+                    <strong>Controllo online/offline + mentalizzazione + filtro inibitorio</strong> sostengono la regolazione a meta-livello dell'intera esecuzione di gioco.
                   </div>
-                  <div style="font-size:0.95rem; color:#334155; line-height:1.45;">
-                    Richiede il coordinamento di <strong>flessibilità cognitiva</strong>, <strong>working memory</strong> e <strong>controllo inibitorio</strong> per evitare che dinamiche esterne invadano la cornice di gioco:
-                  </div>
-                  <div class="script-pills">
-                    <span class="script-blocked">Affetto personale</span>
-                    <span class="script-blocked">Gerarchia aziendale / sociale</span>
-                    <span class="script-blocked">Obbligo relazionale esterno</span>
-                  </div>
-                </div>
-
-                <div class="citation-strip">
-                  <span style="font-family:'JetBrains Mono',monospace; font-size:0.7rem; font-weight:800; color:#0284C7; letter-spacing:0.08em; margin-right:0.2rem;">RIFERIMENTI:</span>
-                  <span class="cite-chip">Flavell (1979)</span>
-                  <span class="cite-chip">Norman &amp; Shallice (1986)</span>
-                  <span class="cite-chip">Zimmerman (2000)</span>
-                  <span class="cite-chip">Botvinick et al. (2001)</span>
-                  <span class="cite-chip">Frith &amp; Frith (2006)</span>
-                  <span class="cite-chip">Decety &amp; Lamm (2007)</span>
-                  <span class="cite-chip">Efklides (2008)</span>
-                  <span class="cite-chip">Diamond (2013)</span>
-                  <span class="cite-chip">Lee et al. (2021)</span>
                 </div>
               </div>
             </div>
