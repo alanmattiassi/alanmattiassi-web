@@ -1,0 +1,4222 @@
+﻿<!DOCTYPE html>
+<html lang="it">
+<head>
+  <base href="/aias/" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Architettura psicologica del gioco | Alan D. A. Mattiassi, Ph.D. — AIAS Milano</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F8FAFC;
+      --surface-glass: rgba(255, 255, 255, 0.76);
+      --glass-border: rgba(255, 255, 255, 0.96);
+      --text-main: #0F172A;
+      --text-muted: #475569;
+      --text-subtle: #64748B;
+      --accent-warm: #F97316;
+      --accent-gold: #F69A23;
+      --accent-cool: #0EA5E9;
+      --accent-violet: #6366F1;
+      --accent-emerald: #10B981;
+      --shadow-ambient: 0 30px 60px -15px rgba(15, 23, 42, 0.08), 0 0 1px 1px rgba(255, 255, 255, 0.95);
+      --shadow-card-inner: inset 0 1px 2px rgba(255, 255, 255, 0.95), inset 0 -1px 2px rgba(255, 255, 255, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background: #0B0F19;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .deck-viewport {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide-stage {
+      width: 1920px;
+      height: 1080px;
+      flex-shrink: 0;
+      background: radial-gradient(circle at 15% 15%, #FFFFFF 0%, #F8FAFC 45%, #F1F5F9 100%);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.65);
+      display: flex;
+      flex-direction: column;
+      transform-origin: center center;
+    }
+
+    /* Ambient Spheres (UniFi Signature) */
+    .ambient-sphere {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(55px);
+      z-index: 1;
+      opacity: 0.68;
+    }
+    .sphere-1 {
+      width: 520px;
+      height: 520px;
+      background: radial-gradient(circle, #ffedd5 0%, #fed7aa 40%, rgba(254, 215, 170, 0) 70%);
+      top: -120px;
+      right: 18%;
+    }
+    .sphere-2 {
+      width: 620px;
+      height: 620px;
+      background: radial-gradient(circle, #e0f2fe 0%, #bae6fd 40%, rgba(186, 230, 253, 0) 70%);
+      bottom: -160px;
+      left: 15%;
+    }
+    .sphere-3 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, #f5f3ff 0%, #ede9fe 40%, rgba(237, 233, 254, 0) 70%);
+      top: 30%;
+      right: 4%;
+    }
+
+    .slides-wrapper {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Base Slide Layout */
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 4.25rem 6rem 6.25rem;
+      display: flex;
+      align-items: center;
+      gap: 4.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0.985);
+      transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.45s;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
+    }
+
+    .slide.title-left { flex-direction: row; }
+    .slide.title-right { flex-direction: row-reverse; }
+
+    /* Editorial Column (42%) */
+    .title-col {
+      flex: 0 0 40%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      z-index: 3;
+    }
+
+    .title-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.75rem;
+      width: 100%;
+    }
+
+    .title-category {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #64748B;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .category-indicator {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent-cool);
+      box-shadow: 0 0 10px var(--accent-cool);
+      flex-shrink: 0;
+    }
+
+    .title-number {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: rgba(15, 23, 42, 0.2);
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    .main-title {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 3.4rem;
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      color: #0F172A;
+      margin-bottom: 1.35rem;
+      transition: opacity 0.22s ease;
+    }
+
+    .main-title.is-updating {
+      opacity: 0.15;
+    }
+
+    .en-subterm {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #0284C7;
+      letter-spacing: 0.06em;
+      margin-top: -0.8rem;
+      margin-bottom: 1.25rem;
+      display: inline-block;
+    }
+
+    .subtitle-text {
+      font-size: 1.26rem;
+      line-height: 1.58;
+      color: #475569;
+      font-weight: 400;
+      margin-bottom: 1.85rem;
+      transition: opacity 0.22s ease;
+    }
+
+    .subtitle-text.is-updating {
+      opacity: 0.15;
+    }
+
+    .author-inline-kicker {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #0284C7;
+      background: #F0F9FF;
+      border: 1px solid #BAE6FD;
+      padding: 0.22rem 0.65rem;
+      border-radius: 999px;
+      margin-bottom: 0.65rem;
+    }
+
+    .subtitle-text strong {
+      color: #0F172A;
+      font-weight: 700;
+    }
+
+    .subtitle-text em {
+      color: #1E293B;
+      font-style: italic;
+    }
+
+    .note-pill {
+      display: inline-flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      padding: 0.85rem 1.3rem;
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.96);
+      border-radius: 18px;
+      font-size: 0.96rem;
+      line-height: 1.45;
+      color: #334155;
+      font-weight: 500;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+    }
+
+    .note-pill::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      margin-top: 0.35rem;
+      background: var(--accent-warm);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent-warm);
+      flex-shrink: 0;
+    }
+
+    .note-pill strong,
+    .lens-tag {
+      color: var(--accent-warm);
+      font-weight: 800;
+      letter-spacing: 0.05em;
+    }
+
+    /* Glass Card Column (58%) */
+    .glass-card-col {
+      flex: 1;
+      height: 820px;
+      position: relative;
+      border-radius: 36px;
+      background: var(--surface-glass);
+      backdrop-filter: blur(36px) saturate(190%);
+      -webkit-backdrop-filter: blur(36px) saturate(190%);
+      border: 1.8px solid var(--glass-border);
+      box-shadow: var(--shadow-ambient), var(--shadow-card-inner);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem;
+      z-index: 3;
+    }
+
+    .glass-card-col::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 110px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0) 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .card-inner-stage {
+      width: 100%;
+      height: 100%;
+      border-radius: 26px;
+      background: #FFFFFF;
+      border: 1.2px solid rgba(226, 232, 240, 0.85);
+      box-shadow: 0 15px 35px -10px rgba(15, 23, 42, 0.05);
+      padding: 2rem 2.25rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      z-index: 4;
+      overflow: hidden;
+    }
+
+    .stage-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+      padding-bottom: 1rem;
+      border-bottom: 1.5px solid #F1F5F9;
+      flex-shrink: 0;
+    }
+
+    .stage-kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #64748B;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .stage-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      background: #F0F9FF;
+      color: #0369A1;
+      border: 1px solid #BAE6FD;
+    }
+
+    .mini-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 0.45rem 0.95rem;
+      border-radius: 999px;
+      border: 1.2px solid #CBD5E1;
+      background: #F8FAFC;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .mini-btn:hover {
+      background: #0F172A;
+      color: #FFFFFF;
+      border-color: #0F172A;
+    }
+    .mini-btn.active {
+      background: #0EA5E9;
+      color: #FFFFFF;
+      border-color: #0EA5E9;
+      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.28);
+    }
+
+    /* ============================================================
+       SLIDE 00 — HERO TITLE SLIDE (UNIFI SIGNATURE)
+       ============================================================ */
+    .slide.title-slide {
+      padding: 4rem 6rem 6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .hero-center-card {
+      width: 100%;
+      max-width: 1360px;
+      height: 820px;
+      position: relative;
+      border-radius: 44px;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(40px) saturate(190%);
+      -webkit-backdrop-filter: blur(40px) saturate(190%);
+      border: 1.8px solid rgba(255, 255, 255, 0.95);
+      box-shadow:
+        0 40px 90px -20px rgba(15, 23, 42, 0.1),
+        0 20px 40px -15px rgba(15, 23, 42, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.98);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3.25rem 5rem;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hero-center-card:hover {
+      box-shadow:
+        0 45px 100px -20px rgba(246, 154, 35, 0.16),
+        0 25px 45px -15px rgba(15, 23, 42, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.98);
+    }
+
+    .hero-bg-glow {
+      position: absolute;
+      width: 960px;
+      height: 960px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(246, 154, 35, 0.14) 0%, rgba(14, 165, 233, 0.06) 45%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: rgba(15, 23, 42, 0.04);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      padding: 0.55rem 1.4rem;
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #475569;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      z-index: 2;
+    }
+
+    .hero-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-warm);
+      box-shadow: 0 0 10px var(--accent-warm);
+    }
+
+    .hero-logo-img {
+      width: 96px;
+      height: 96px;
+      object-fit: contain;
+      filter: drop-shadow(0 12px 24px rgba(15, 23, 42, 0.12));
+      margin-bottom: 1.35rem;
+      z-index: 2;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hero-center-card:hover .hero-logo-img {
+      transform: scale(1.07) rotate(2deg);
+    }
+
+    .hero-title-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 1.85rem;
+      z-index: 2;
+      max-width: 1180px;
+      gap: 0.85rem;
+    }
+
+    .hero-title-main {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 4.35rem;
+      font-weight: 900;
+      line-height: 1.03;
+      letter-spacing: -0.035em;
+      color: #0F172A;
+      text-transform: uppercase;
+    }
+    .hero-title-main span {
+      color: #F69A23;
+    }
+
+    .hero-title-sub {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 1.95rem;
+      font-weight: 700;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      color: #475569;
+    }
+
+    .hero-speaker-line {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1.5px solid rgba(226, 232, 240, 0.95);
+      padding: 0.75rem 2.2rem;
+      border-radius: 999px;
+      box-shadow: 0 10px 25px -8px rgba(15, 23, 42, 0.08);
+      margin-bottom: 1.6rem;
+      z-index: 2;
+    }
+
+    .speaker-name {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #0F172A;
+    }
+    .speaker-sep {
+      color: #CBD5E1;
+      font-size: 1.5rem;
+      font-weight: 300;
+      margin: 0 1rem;
+    }
+    .speaker-role {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #475569;
+    }
+
+    .event-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.85rem;
+      z-index: 2;
+    }
+
+    .event-meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: #334155;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1.2px solid rgba(203, 213, 225, 0.9);
+      padding: 0.55rem 1.2rem;
+      border-radius: 999px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+    }
+    .event-meta-label {
+      font-weight: 800;
+      color: #64748B;
+      letter-spacing: 0.08em;
+      font-size: 0.72rem;
+    }
+    .event-meta-val {
+      font-weight: 700;
+      color: #0F172A;
+    }
+    .event-meta-pill.accent {
+      border-color: rgba(14, 165, 233, 0.4);
+      background: #F0F9FF;
+    }
+    .event-meta-pill.accent .event-meta-label { color: #0284C7; }
+
+    /* ============================================================
+       SLIDE 01 — QUIZ INTERATTIVO "ANALOGICO O DIGITALE?" (RETTANGOLARI ANGOLI VIVI)
+       ============================================================ */
+    .quiz-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      flex: 1;
+    }
+
+    .quiz-card {
+      background: #F8FAFC;
+      border: 1.5px solid #CBD5E1;
+      border-radius: 0;
+      padding: 1.25rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quiz-card:hover {
+      border-color: #64748B;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px -10px rgba(15, 23, 42, 0.1);
+    }
+
+    .quiz-card.revealed-analog {
+      background: linear-gradient(135deg, #FFF7ED 0%, #FFFFFF 100%);
+      border-color: #F97316;
+    }
+
+    .quiz-card.revealed-digital {
+      background: linear-gradient(135deg, #F0F9FF 0%, #FFFFFF 100%);
+      border-color: #0EA5E9;
+    }
+
+    .quiz-finding {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0F172A;
+      line-height: 1.42;
+      margin-top: 0.35rem;
+    }
+
+    .quiz-tag-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #64748B;
+      text-transform: uppercase;
+    }
+
+    .quiz-footer {
+      margin-top: 0.85rem;
+      padding-top: 0.7rem;
+      border-top: 1px dashed #CBD5E1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .quiz-prompt {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: #94A3B8;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .quiz-reveal-badge {
+      display: none;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 0.28rem 0.72rem;
+      border-radius: 0;
+    }
+
+    .quiz-card.revealed-analog .quiz-reveal-badge {
+      display: inline-flex;
+      background: #FFEDD5;
+      color: #C2410C;
+    }
+    .quiz-card.revealed-digital .quiz-reveal-badge {
+      display: inline-flex;
+      background: #E0F2FE;
+      color: #0369A1;
+    }
+
+    .quiz-ref {
+      display: none;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #475569;
+    }
+
+    .quiz-card.revealed-analog .quiz-prompt,
+    .quiz-card.revealed-digital .quiz-prompt { display: none; }
+    .quiz-card.revealed-analog .quiz-ref,
+    .quiz-card.revealed-digital .quiz-ref { display: inline; }
+
+    /* ============================================================
+       SLIDE SEMANTICA — IOCUS -> PLAY / TOY / GAMBLING / GAME
+       ============================================================ */
+    .sem-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .sem-root-banner {
+      background: #0F172A;
+      color: #F8FAFC;
+      border-radius: 18px;
+      padding: 1rem 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .sem-root-word {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 1.55rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: #FFFFFF;
+    }
+
+    .sem-root-etym {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      color: #94A3B8;
+    }
+
+    .sem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.95rem;
+      flex: 1;
+    }
+
+    .sem-card {
+      background: #F8FAFC;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 20px;
+      padding: 1.6rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      opacity: 0.8;
+    }
+
+    .sem-card.is-focus {
+      opacity: 1;
+      background: linear-gradient(135deg, #F0F9FF 0%, #FFFFFF 100%);
+      border: 2.2px solid #0EA5E9;
+      box-shadow: 0 16px 34px -12px rgba(14, 165, 233, 0.25);
+    }
+
+    .sem-card-head {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .sem-word {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 1.85rem;
+      font-weight: 900;
+      color: #0F172A;
+      line-height: 1.05;
+    }
+    .sem-card.is-focus .sem-word { color: #0369A1; }
+
+    .sem-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.26rem 0.75rem;
+      border-radius: 999px;
+      background: #E2E8F0;
+      color: #475569;
+      text-transform: uppercase;
+    }
+    .sem-card.is-focus .sem-tag {
+      background: #F97316;
+      color: #FFFFFF;
+    }
+
+    .sem-desc {
+      font-size: 0.98rem;
+      color: #475569;
+      line-height: 1.48;
+      max-width: 340px;
+    }
+    .sem-card.is-focus .sem-desc {
+      color: #1E293B;
+      font-weight: 500;
+    }
+
+    .sem-footer-note {
+      background: #F8FAFC;
+      border: 1.2px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 0.85rem 1.2rem;
+      font-size: 0.88rem;
+      color: #475569;
+      line-height: 1.42;
+    }
+
+    /* ============================================================
+       SLIDES STORICHE — PANORAMICA AUTORI (CARD TONDE 3x2)
+       ============================================================ */
+    .history-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .history-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 272px);
+      grid-template-rows: repeat(2, 272px);
+      gap: 1.15rem;
+      align-content: center;
+      justify-content: center;
+    }
+
+    .author-card {
+      width: 272px;
+      height: 272px;
+      background: #F8FAFC;
+      border: 1.8px solid #E2E8F0;
+      border-radius: 50%;
+      padding: 1.85rem 1.7rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 0.45rem;
+      cursor: pointer;
+      transition: all 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+      box-shadow: 0 10px 24px -12px rgba(15, 23, 42, 0.08);
+    }
+
+    .author-card:hover {
+      border-color: #94A3B8;
+      transform: translateY(-3px) scale(1.025);
+      box-shadow: 0 16px 32px -12px rgba(15, 23, 42, 0.14);
+    }
+
+    .author-card.selected {
+      background: radial-gradient(circle at 50% 35%, #FFFFFF 0%, #F0F9FF 100%);
+      border: 2.4px solid #0EA5E9;
+      box-shadow: 0 16px 34px -10px rgba(14, 165, 233, 0.28);
+      transform: scale(1.035);
+    }
+
+    .author-card.warm-accent.selected {
+      background: radial-gradient(circle at 50% 35%, #FFFFFF 0%, #FFF7ED 100%);
+      border-color: #F97316;
+      box-shadow: 0 16px 34px -10px rgba(249, 115, 22, 0.28);
+    }
+
+    .author-top {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .author-name {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 1.14rem;
+      font-weight: 800;
+      color: #0F172A;
+      line-height: 1.1;
+    }
+
+    .author-year {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: #E0F2FE;
+      color: #0369A1;
+      white-space: nowrap;
+    }
+    .author-card.warm-accent .author-year {
+      background: #FFEDD5;
+      color: #C2410C;
+    }
+
+    .author-field {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.63rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #64748B;
+      margin-bottom: 0.2rem;
+    }
+
+    .author-claim {
+      font-size: 0.8rem;
+      color: #334155;
+      line-height: 1.34;
+      max-width: 215px;
+    }
+
+    .history-detail-box {
+      background: linear-gradient(135deg, #F0F9FF 0%, #F8FAFC 100%);
+      border: 1.5px solid #BAE6FD;
+      border-radius: 18px;
+      padding: 1.1rem 1.35rem;
+      min-height: 108px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.3rem;
+    }
+    .history-detail-kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: #0284C7;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .history-detail-text {
+      font-size: 0.95rem;
+      color: #1E293B;
+      line-height: 1.45;
+    }
+
+    /* ============================================================
+       SLIDE 02 — DIAGRAMMA CONCENTRICO PLAY / GAMES / GAMING
+       ============================================================ */
+    .scope-stage {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      justify-content: space-between;
+    }
+
+    .concentric-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .ring {
+      border-radius: 999px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .ring-play {
+      width: 660px;
+      height: 410px;
+      background: #F8FAFC;
+      border: 2px dashed #CBD5E1;
+      padding-top: 1.35rem;
+    }
+    .ring-play.selected {
+      background: #F1F5F9;
+      border-color: #64748B;
+      box-shadow: 0 0 0 6px rgba(100, 116, 139, 0.08);
+    }
+
+    .ring-games {
+      width: 470px;
+      height: 290px;
+      margin-top: 1rem;
+      background: linear-gradient(135deg, #F0F9FF 0%, #FFF7ED 100%);
+      border: 2.5px solid #0EA5E9;
+      padding-top: 1.35rem;
+      box-shadow: 0 18px 40px -12px rgba(14, 165, 233, 0.22);
+    }
+    .ring-games.selected {
+      box-shadow: 0 0 0 7px rgba(14, 165, 233, 0.16), 0 22px 45px -12px rgba(14, 165, 233, 0.28);
+      transform: scale(1.015);
+    }
+
+    .ring-gaming {
+      width: 260px;
+      height: 155px;
+      margin-top: 1rem;
+      background: #FFFFFF;
+      border: 2px solid #94A3B8;
+      justify-content: center;
+      padding-top: 0;
+    }
+    .ring-gaming.selected {
+      border-color: #F97316;
+      background: #FFF7ED;
+      box-shadow: 0 0 0 6px rgba(249, 115, 22, 0.14);
+    }
+
+    .ring-label {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .ring-play > .ring-label { font-size: 1.15rem; color: #475569; }
+    .ring-games > .ring-label { font-size: 1.35rem; color: #0369A1; }
+    .ring-gaming > .ring-label { font-size: 1.1rem; color: #0F172A; }
+
+    .ring-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: #64748B;
+      margin-top: 0.2rem;
+    }
+
+    .scope-info-box {
+      background: #F8FAFC;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 20px;
+      padding: 1.25rem 1.5rem;
+      min-height: 138px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.45rem;
+    }
+
+    .scope-info-title {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #0F172A;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .scope-info-desc {
+      font-size: 0.98rem;
+      color: #475569;
+      line-height: 1.5;
+    }
+
+    /* ============================================================
+       SLIDE PROSPETTIVA EVOLUZIONISTICA (SOTTRAZIONE -> NUCLEO -> GAME)
+       ============================================================ */
+    .evo-stack {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .evo-step {
+      background: #F8FAFC;
+      border: 1.6px solid #E2E8F0;
+      border-radius: 20px;
+      padding: 1.15rem 1.45rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .evo-step.core {
+      background: linear-gradient(135deg, #F0F9FF 0%, #ECFDF5 100%);
+      border-color: #38BDF8;
+      box-shadow: 0 12px 26px -12px rgba(14, 165, 233, 0.22);
+    }
+
+    .evo-step.return {
+      background: linear-gradient(135deg, #FFF7ED 0%, #FFFFFF 100%);
+      border-color: #FB923C;
+      box-shadow: 0 12px 26px -12px rgba(249, 115, 22, 0.2);
+    }
+
+    .evo-badge-num {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: #FFFFFF;
+      border: 1.5px solid #CBD5E1;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: #475569;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .evo-step.core .evo-badge-num {
+      background: #0EA5E9;
+      border-color: #0EA5E9;
+      color: #FFFFFF;
+    }
+    .evo-step.return .evo-badge-num {
+      background: #F97316;
+      border-color: #F97316;
+      color: #FFFFFF;
+    }
+
+    .evo-kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #64748B;
+      margin-bottom: 0.2rem;
+    }
+    .evo-step.core .evo-kicker { color: #0284C7; }
+    .evo-step.return .evo-kicker { color: #C2410C; }
+
+    .evo-title {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 1.28rem;
+      font-weight: 800;
+      color: #0F172A;
+      margin-bottom: 0.2rem;
+      line-height: 1.15;
+    }
+
+    .evo-desc {
+      font-size: 0.9rem;
+      color: #334155;
+      line-height: 1.42;
+    }
+
+    .evo-connector {
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #94A3B8;
+      letter-spacing: 0.08em;
+      line-height: 1;
+    }
+
+    /* ============================================================
+       SLIDE 03 — AUTONOMIA (CONTINUA) VS AGENCY (SOGLIA)
+       ============================================================ */
+    .dual-lab {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      justify-content: space-between;
+    }
+
+    .lab-panel {
+      background: #F8FAFC;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 22px;
+      padding: 1.35rem 1.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .lab-panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .lab-title {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #0F172A;
+    }
+
+    .lab-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      background: #E0F2FE;
+      color: #0369A1;
+    }
+    .lab-tag.warm {
+      background: #FFEDD5;
+      color: #C2410C;
+    }
+
+    .range-slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 12px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #CBD5E1 0%, #0EA5E9 100%);
+      outline: none;
+      cursor: pointer;
+    }
+    .range-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      border: 3.5px solid #0EA5E9;
+      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.35);
+      cursor: grab;
+    }
+
+    .slider-labels {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      color: #64748B;
+    }
+
+    .agency-threshold-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .threshold-btn {
+      padding: 1rem 1.2rem;
+      border-radius: 16px;
+      border: 1.8px solid #E2E8F0;
+      background: #FFFFFF;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .threshold-btn:hover { border-color: #94A3B8; }
+    .threshold-btn.active-low {
+      background: #FEF2F2;
+      border-color: #F87171;
+      box-shadow: 0 8px 20px -8px rgba(239, 68, 68, 0.25);
+    }
+    .threshold-btn.active-high {
+      background: #ECFDF5;
+      border-color: #10B981;
+      box-shadow: 0 8px 20px -8px rgba(16, 185, 129, 0.25);
+    }
+
+    .threshold-btn-title {
+      font-weight: 800;
+      font-size: 1rem;
+      color: #0F172A;
+      margin-bottom: 0.25rem;
+    }
+    .threshold-btn-sub {
+      font-size: 0.84rem;
+      color: #64748B;
+      line-height: 1.35;
+    }
+
+    .lab-readout {
+      background: #0F172A;
+      color: #F8FAFC;
+      border-radius: 18px;
+      padding: 1.15rem 1.45rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .lab-readout-text {
+      font-size: 0.96rem;
+      line-height: 1.45;
+      color: #E2E8F0;
+    }
+    .lab-readout-status {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      white-space: nowrap;
+      background: #10B981;
+      color: #FFFFFF;
+    }
+    .lab-readout-status.off {
+      background: #EF4444;
+    }
+
+    /* ============================================================
+       SLIDE 04 — DIAGRAMMA SISTEMICO 4 DIMENSIONI
+       ============================================================ */
+    .sys-grid {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .sys-nodes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.1rem;
+      position: relative;
+      flex: 1;
+    }
+
+    .sys-node {
+      background: #F8FAFC;
+      border: 2px solid #E2E8F0;
+      border-radius: 22px;
+      padding: 1.35rem 1.45rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+    .sys-node:hover {
+      border-color: #94A3B8;
+      transform: translateY(-2px);
+    }
+    .sys-node.active {
+      background: #FFFFFF;
+      border-color: #0EA5E9;
+      box-shadow: 0 14px 32px -10px rgba(14, 165, 233, 0.24);
+    }
+
+    .sys-node-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #0284C7;
+      letter-spacing: 0.1em;
+    }
+    .sys-node-title {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #0F172A;
+      margin: 0.35rem 0;
+      line-height: 1.15;
+    }
+    .sys-node-en {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      color: #64748B;
+    }
+    .sys-node-arrow {
+      margin-top: 0.75rem;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: #F97316;
+    }
+
+    .sys-detail-bar {
+      background: linear-gradient(135deg, #F0F9FF 0%, #F8FAFC 100%);
+      border: 1.5px solid #BAE6FD;
+      border-radius: 18px;
+      padding: 1.15rem 1.4rem;
+      min-height: 112px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.35rem;
+    }
+
+    /* ============================================================
+       SLIDES 05–08 — VISUAL EDITORIALI PER LE 4 DIMENSIONI
+       ============================================================ */
+    .dim-visual-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.2rem;
+    }
+
+    .transform-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .t-card {
+      background: #F8FAFC;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 20px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.55rem;
+    }
+    .t-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: #FFFFFF;
+      border: 1.5px solid #E2E8F0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.05);
+    }
+    .t-raw {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      color: #64748B;
+      text-transform: uppercase;
+    }
+    .t-arrow {
+      color: #0EA5E9;
+      font-weight: 800;
+      font-size: 1rem;
+    }
+    .t-sym {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 1.22rem;
+      font-weight: 800;
+      color: #0F172A;
+    }
+
+    .flow-chain {
+      background: #F8FAFC;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 22px;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .chain-step {
+      flex: 1;
+      background: #FFFFFF;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 1.1rem;
+      text-align: center;
+    }
+    .chain-step.highlight {
+      border-color: #F97316;
+      background: #FFF7ED;
+    }
+    .chain-kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #64748B;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+    .chain-title {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #0F172A;
+      margin-bottom: 0.25rem;
+    }
+    .chain-desc {
+      font-size: 0.84rem;
+      color: #475569;
+      line-height: 1.35;
+    }
+    .chain-sep {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #0EA5E9;
+      flex-shrink: 0;
+    }
+
+    .citation-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
+    }
+    .cite-chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      background: #F1F5F9;
+      color: #475569;
+      border: 1px solid #E2E8F0;
+    }
+
+    /* Slide 06 Lenses */
+    .lenses-stage {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: #F8FAFC;
+      border-radius: 22px;
+      border: 1.5px solid #E2E8F0;
+      padding: 1.25rem 1.5rem 2.25rem;
+    }
+    .lens-circle {
+      width: 345px;
+      height: 345px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+    .lens-self {
+      background: rgba(14, 165, 233, 0.11);
+      border: 2px solid #0EA5E9;
+      margin-right: -36px;
+      padding: 2rem 4.8rem 2rem 2.4rem;
+      text-align: left;
+      align-items: flex-start;
+    }
+    .lens-role {
+      background: rgba(249, 115, 22, 0.11);
+      border: 2px solid #F97316;
+      margin-left: -36px;
+      padding: 2rem 2.4rem 2rem 4.8rem;
+      text-align: right;
+      align-items: flex-end;
+    }
+    .lens-center-pill {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0F172A;
+      color: #FFFFFF;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 0.48rem 1.15rem;
+      border-radius: 999px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.22);
+      z-index: 5;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+    .lens-center-arrows {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #0F172A;
+      opacity: 0.55;
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    /* Slide 07 Goal Pillars */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .pillar-card {
+      background: #F8FAFC;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 20px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+    .pillar-card h4 {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #0F172A;
+    }
+    .pillar-card p {
+      font-size: 0.88rem;
+      color: #475569;
+      line-height: 1.45;
+    }
+
+    /* Slide 08 Double Loop + Filter */
+    .meta-loop-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .meta-box {
+      background: #F8FAFC;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 20px;
+      padding: 1.3rem 1.4rem;
+    }
+    .meta-box.online { border-top: 4px solid #0EA5E9; }
+    .meta-box.offline { border-top: 4px solid #6366F1; }
+
+    .inhib-box {
+      background: linear-gradient(135deg, #FFF7ED 0%, #FFFFFF 100%);
+      border: 1.8px solid #FDBA74;
+      border-radius: 22px;
+      padding: 1.35rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .script-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+    }
+    .script-blocked {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      background: #FEE2E2;
+      color: #B91C1C;
+      text-decoration: line-through;
+      border: 1px solid #FCA5A5;
+    }
+
+    /* ============================================================
+       SLIDE 09 — STRESS TEST INTERATTIVO (4 SWITCH ON/OFF)
+       ============================================================ */
+    .stress-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .switch-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.9rem;
+    }
+
+    .dim-toggle {
+      background: #F8FAFC;
+      border: 1.8px solid #BAE6FD;
+      border-radius: 18px;
+      padding: 1rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .dim-toggle:hover { transform: translateY(-1px); }
+    .dim-toggle.is-off {
+      background: #FEF2F2;
+      border-color: #FCA5A5;
+    }
+
+    .toggle-info-title {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 1.04rem;
+      font-weight: 800;
+      color: #0F172A;
+      line-height: 1.18;
+    }
+    .toggle-info-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: #64748B;
+      margin-top: 0.15rem;
+    }
+
+    .toggle-pill {
+      width: 56px;
+      height: 30px;
+      border-radius: 999px;
+      background: #10B981;
+      position: relative;
+      flex-shrink: 0;
+      transition: background 0.25s ease;
+    }
+    .toggle-pill::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 29px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+      transition: left 0.25s ease;
+    }
+    .dim-toggle.is-off .toggle-pill {
+      background: #EF4444;
+    }
+    .dim-toggle.is-off .toggle-pill::after {
+      left: 3px;
+    }
+
+    .stress-result-card {
+      flex: 1;
+      border-radius: 22px;
+      padding: 1.45rem 1.7rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.6rem;
+      background: linear-gradient(135deg, #ECFDF5 0%, #F0F9FF 100%);
+      border: 2px solid #6EE7B7;
+      transition: all 0.3s ease;
+    }
+    .stress-result-card.collapsed {
+      background: linear-gradient(135deg, #FEF2F2 0%, #FFF7ED 100%);
+      border-color: #F87171;
+    }
+
+    .stress-status-kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #047857;
+    }
+    .stress-result-card.collapsed .stress-status-kicker { color: #B91C1C; }
+
+    .stress-status-title {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 1.85rem;
+      font-weight: 900;
+      color: #0F172A;
+      line-height: 1.1;
+    }
+    .stress-status-desc {
+      font-size: 1rem;
+      color: #334155;
+      line-height: 1.5;
+    }
+
+    .emergent-footer {
+      background: #0F172A;
+      color: #F8FAFC;
+      border-radius: 16px;
+      padding: 0.9rem 1.25rem;
+      font-size: 0.88rem;
+      line-height: 1.4;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .emergent-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(14, 165, 233, 0.22);
+      color: #7DD3FC;
+      white-space: nowrap;
+    }
+
+    /* ============================================================
+       SLIDE 10 — DIMENSIONAL WEIGHTING (RADAR + BARRE DINAMICHE)
+       ============================================================ */
+    .weight-presets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-bottom: 1.15rem;
+    }
+
+    .weight-body {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .radar-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #F8FAFC;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 22px;
+      height: 100%;
+      padding: 1rem;
+    }
+
+    .bars-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .w-bar-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .w-bar-head {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #0F172A;
+    }
+    .w-bar-val {
+      font-family: 'JetBrains Mono', monospace;
+      color: #0284C7;
+    }
+    .w-bar-track {
+      width: 100%;
+      height: 14px;
+      border-radius: 999px;
+      background: #F1F5F9;
+      overflow: hidden;
+    }
+    .w-bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .weight-note {
+      margin-top: 0.5rem;
+      background: #F8FAFC;
+      border: 1.2px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 0.95rem 1.15rem;
+      font-size: 0.9rem;
+      color: #475569;
+      line-height: 1.45;
+    }
+
+    /* ============================================================
+       SLIDE 11 — OPERAZIONALIZZAZIONE (TABLE 1) & IPOTESI (H1-H7)
+       ============================================================ */
+    .exp-tabs {
+      display: flex;
+      gap: 0.65rem;
+    }
+
+    .exp-panel {
+      display: none;
+      flex: 1;
+      flex-direction: column;
+      gap: 0.8rem;
+      overflow: hidden;
+    }
+    .exp-panel.active { display: flex; }
+
+    .t1-row {
+      background: #F8FAFC;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 18px;
+      padding: 1rem 1.25rem;
+      display: grid;
+      grid-template-columns: 1.1fr 1.35fr 1.35fr;
+      gap: 1rem;
+      align-items: center;
+      transition: all 0.2s ease;
+    }
+    .t1-row:hover {
+      border-color: #0EA5E9;
+      background: #F0F9FF;
+    }
+    .t1-dim {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 1.12rem;
+      font-weight: 800;
+      color: #0F172A;
+    }
+    .t1-col-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.66rem;
+      font-weight: 700;
+      color: #64748B;
+      text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+    .t1-col-val {
+      font-size: 0.86rem;
+      color: #334155;
+      line-height: 1.38;
+    }
+
+    .hyp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+      flex: 1;
+    }
+    .hyp-card {
+      background: #F8FAFC;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 0.95rem 1.15rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .hyp-card.sys {
+      border-left: 4px solid #0EA5E9;
+    }
+    .hyp-card.base {
+      border-left: 4px solid #F97316;
+    }
+    .hyp-id {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: #0284C7;
+    }
+    .hyp-card.base .hyp-id { color: #C2410C; }
+    .hyp-text {
+      font-size: 0.88rem;
+      color: #334155;
+      line-height: 1.4;
+    }
+
+    /* ============================================================
+       SLIDE LIBRO — COPERTINA EDITORIALE PULITA (HOGREFE, 2026)
+       ============================================================ */
+    .book-clean-stage {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.35rem;
+      background: radial-gradient(circle at 50% 45%, #F8FAFC 0%, #F1F5F9 100%);
+      border-radius: 20px;
+      border: 1.2px solid #E2E8F0;
+      padding: 1.75rem;
+    }
+
+    .book-cover-clean {
+      height: 540px;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow:
+        0 28px 55px -16px rgba(15, 23, 42, 0.28),
+        0 10px 22px -8px rgba(15, 23, 42, 0.14);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .book-clean-stage:hover .book-cover-clean {
+      transform: translateY(-4px) scale(1.015);
+    }
+
+    .book-clean-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #475569;
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      padding: 0.45rem 1.15rem;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ============================================================
+       SLIDE PAPER A TUTTA PAGINA — BASE TEORICA IN RILIEVO
+       ============================================================ */
+    .slide.paper-showcase-slide {
+      padding: 3.25rem 6rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 1.85rem;
+      overflow: hidden;
+    }
+
+    .paper-showcase-header {
+      width: 100%;
+      max-width: 1320px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      z-index: 4;
+      flex-shrink: 0;
+    }
+
+    .paper-showcase-title {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 3.1rem;
+      font-weight: 900;
+      line-height: 1.03;
+      letter-spacing: -0.035em;
+      color: #0F172A;
+      margin-top: 0.65rem;
+    }
+
+    .paper-showcase-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.45rem;
+      text-align: center;
+    }
+
+    .paper-journal-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.45rem 1.1rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1.2px solid #BAE6FD;
+      color: #0369A1;
+      box-shadow: 0 6px 16px rgba(14, 165, 233, 0.08);
+    }
+
+    .paper-doi-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      color: #64748B;
+      letter-spacing: 0.04em;
+    }
+
+    .paper-sheet-frame {
+      width: 100%;
+      max-width: 1180px;
+      background: #FFFFFF;
+      border: 1.5px solid rgba(226, 232, 240, 0.95);
+      border-bottom: none;
+      border-radius: 22px 22px 0 0;
+      padding: 1.35rem 2.2rem 0;
+      box-shadow:
+        0 -8px 30px -12px rgba(15, 23, 42, 0.08),
+        0 35px 90px -10px rgba(15, 23, 42, 0.24),
+        0 18px 40px -12px rgba(15, 23, 42, 0.16);
+      position: relative;
+      z-index: 4;
+      margin-bottom: -40px;
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .paper-sheet-frame:hover {
+      transform: translateY(-6px);
+    }
+
+    .paper-sheet-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 10px 10px 0 0;
+    }
+
+    /* ============================================================
+       SLIDE 12 — OUTRO SLIDE (UNIFI SIGNATURE)
+       ============================================================ */
+    .slide.outro-slide {
+      padding: 3.25rem 5rem 5.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .outro-card {
+      width: 100%;
+      max-width: 1560px;
+      height: 830px;
+      position: relative;
+      border-radius: 40px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(40px) saturate(190%);
+      -webkit-backdrop-filter: blur(40px) saturate(190%);
+      border: 1.8px solid rgba(255, 255, 255, 0.96);
+      box-shadow:
+        0 40px 90px -20px rgba(15, 23, 42, 0.1),
+        0 20px 40px -15px rgba(15, 23, 42, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.98);
+      display: flex;
+      flex-direction: column;
+      padding: 2.35rem 3.5rem 2rem;
+      overflow: hidden;
+    }
+
+    .outro-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.6rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .outro-kicker-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(15, 23, 42, 0.05);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      padding: 0.35rem 1rem;
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #475569;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .kicker-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10B981;
+      box-shadow: 0 0 8px #10B981;
+    }
+
+    .outro-title {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 2.75rem;
+      font-weight: 900;
+      color: #0F172A;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+    }
+
+    .outro-grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .outro-left-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.2rem;
+    }
+
+    .paper-cite-box {
+      background: linear-gradient(135deg, #F0F9FF 0%, #FFFFFF 100%);
+      border: 1.5px solid #BAE6FD;
+      border-radius: 24px;
+      padding: 1.6rem 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+    .paper-cite-kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: #0284C7;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .paper-cite-apa {
+      font-size: 1.02rem;
+      line-height: 1.58;
+      color: #1E293B;
+    }
+    .paper-cite-doi {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #0369A1;
+      text-decoration: none;
+    }
+
+    .hub-bottom-row {
+      display: flex;
+      align-items: center;
+      gap: 1.35rem;
+      background: #F8FAFC;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 22px;
+      padding: 1.25rem 1.5rem;
+    }
+    .hub-qr-img {
+      width: 112px;
+      height: 112px;
+      border-radius: 14px;
+      background: #FFFFFF;
+      padding: 6px;
+      border: 1px solid #E2E8F0;
+      object-fit: contain;
+    }
+
+    /* Masterclass Right Card */
+    .masterclass-card {
+      background: linear-gradient(145deg, #0F172A 0%, #1E293B 100%);
+      color: #FFFFFF;
+      border-radius: 28px;
+      padding: 1.9rem 2.1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 24px 50px -15px rgba(15, 23, 42, 0.35);
+    }
+
+    .mc-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.85rem;
+    }
+    .mc-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #FDBA74;
+      letter-spacing: 0.1em;
+    }
+    .mc-badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #F97316;
+      box-shadow: 0 0 8px #F97316;
+    }
+    .mc-capacity-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(249, 115, 22, 0.18);
+      color: #FED7AA;
+      border: 1px solid rgba(249, 115, 22, 0.35);
+    }
+
+    .mc-main-title {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 2.05rem;
+      font-weight: 900;
+      line-height: 1.08;
+      color: #FFFFFF;
+      margin-bottom: 0.35rem;
+    }
+    .mc-subtitle {
+      font-size: 1.02rem;
+      color: #FDBA74;
+      font-weight: 600;
+      font-style: italic;
+    }
+
+    .mc-specs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+      margin: 1rem 0;
+    }
+    .mc-spec-item {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 0.8rem 1rem;
+    }
+    .mc-spec-label {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      color: #94A3B8;
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+    .mc-spec-val {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #F8FAFC;
+      line-height: 1.35;
+    }
+
+    .mc-syllabus-box {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin-bottom: 1rem;
+    }
+    .mc-day-line {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      font-size: 0.86rem;
+      color: #CBD5E1;
+      line-height: 1.4;
+    }
+    .day-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      background: rgba(14, 165, 233, 0.2);
+      color: #7DD3FC;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .mc-footer-action {
+      display: flex;
+      align-items: center;
+      gap: 1.15rem;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 18px;
+      padding: 0.9rem 1.1rem;
+    }
+    .mc-qr-img {
+      width: 96px;
+      height: 96px;
+      border-radius: 12px;
+      background: #FFFFFF;
+      padding: 5px;
+      object-fit: contain;
+    }
+    .mc-url-code {
+      display: inline-block;
+      margin-top: 0.35rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      color: #7DD3FC;
+    }
+
+    /* ============================================================
+       NAVIGATION DOCK (UNIFI SIGNATURE)
+       ============================================================ */
+    .deck-dock {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 1.15rem;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1.5px solid rgba(255, 255, 255, 0.96);
+      box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.14);
+      padding: 0.6rem 1.35rem;
+      border-radius: 999px;
+      z-index: 50;
+    }
+
+    .dock-separator {
+      width: 1.5px;
+      height: 24px;
+      background: rgba(15, 23, 42, 0.12);
+      margin: 0 0.1rem;
+      border-radius: 999px;
+    }
+
+    .dock-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      background: #FFFFFF;
+      color: #0F172A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.15rem;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+      transition: all 0.2s ease;
+    }
+    .dock-btn:hover {
+      background: #0F172A;
+      color: #FFFFFF;
+      transform: scale(1.06);
+    }
+
+    .dots-container {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(15, 23, 42, 0.18);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .dot.active {
+      width: 26px;
+      border-radius: 999px;
+      background: #0F172A;
+    }
+
+    .dock-counter {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #475569;
+      min-width: 64px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="deck-viewport">
+    <div class="slide-stage" id="slideStage">
+      <div class="ambient-sphere sphere-1"></div>
+      <div class="ambient-sphere sphere-2"></div>
+      <div class="ambient-sphere sphere-3"></div>
+
+      <div class="slides-wrapper">
+
+        <!-- ==========================================================
+             SLIDE 00 — INTRO / COVER
+             ========================================================== -->
+        <section class="slide title-slide active" data-slide="0">
+          <div class="hero-center-card" id="heroTitleCard" title="Clicca per iniziare">
+            <div class="hero-bg-glow"></div>
+            <div class="hero-badge">
+              <span class="hero-badge-dot"></span>
+              <span>AIAS ETS MILANO &bull; GIOCHI E TERAPIA: PROSPETTIVE ED EVOLUZIONI</span>
+            </div>
+            <img src="assets/am_logo_glassmorphic.png" alt="Logo Alan Mattiassi" class="hero-logo-img" />
+            <div class="hero-title-group">
+              <h1 class="hero-title-main">ARCHITETTURA PSICOLOGICA <span>DEL GIOCO</span></h1>
+              <p class="hero-title-sub">Verso un framework unificato</p>
+            </div>
+            <div class="hero-speaker-line" style="margin-bottom: 0;">
+              <span class="speaker-name">Alan D. A. Mattiassi, Ph.D.</span>
+              <span class="speaker-sep">|</span>
+              <span class="speaker-role">Psicologo del Gioco</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================================
+             SLIDE — SEMANTICA DEL GIOCO (EXCURSUS DAL CAP. 1)
+             ========================================================== -->
+        <section class="slide title-right">
+          <div class="title-col">
+            <div class="title-topbar">
+              <div class="title-category"><span class="category-indicator"></span>SEMANTICA E CONFINI</div>
+            </div>
+            <h2 class="main-title">UNA PAROLA, UNA SEMANTICA ETEROGENEA.</h2>
+            <p class="subtitle-text">
+              In italiano la radice <em>gioc-</em> (dal latino <em>iocus</em>: scherzo, burla) racchiude fenomeni che altre lingue separano. Qui ci concentriamo sul <strong>game</strong> (<em>playing a game</em> → <em>gameful</em>): un sistema strutturato con regole, obiettivo ed efficacia d'azione.
+            </p>
+            <div class="note-pill">
+              <span><strong class="lens-tag">LENTE:</strong> Come una «fotografia sfocata» (Wittgenstein, 1953), <em>gioco</em> ha confini fluidi — ma il <strong>game</strong> ha un core psicologico preciso.</span>
+            </div>
+          </div>
+          <div class="glass-card-col">
+            <div class="card-inner-stage">
+              <div class="sem-wrap">
+                <div class="sem-root-banner">
+                  <div class="sem-root-word">GIOCO / GIOCARE</div>
+                  <span style="font-family:'JetBrains Mono',monospace; font-size:0.76rem; color:#7DD3FC; font-weight:700;">1 RADICE → 4 DOMINI</span>
+                </div>
+
+                <div class="sem-grid">
+                  <div class="sem-card">
+                    <div>
+                      <div class="sem-card-head">
+                        <span class="sem-word">PLAY</span>
+                        <span class="sem-tag">Playful</span>
+                      </div>
+                      <div class="sem-desc">Attività libera ed esplorativa, priva di obiettivo formale o criteri di efficienza (Bruner, 1960).</div>
+                    </div>
+                  </div>
+                  <div class="sem-card">
+                    <div>
+                      <div class="sem-card-head">
+                        <span class="sem-word">TOY</span>
+                        <span class="sem-tag">Giocattolo</span>
+                      </div>
+                      <div class="sem-desc">Artefatto materiale aperto all'esplorazione, privo di un sistema vincolante di regole e condizioni di fine.</div>
+                    </div>
+                  </div>
+                  <div class="sem-card">
+                    <div>
+                      <div class="sem-card-head">
+                        <span class="sem-word">GAMBLING</span>
+                        <span class="sem-tag">Azzardo</span>
+                      </div>
+                      <div class="sem-desc">Scommessa aleatoria centrata sulla posta esterna.</div>
+                    </div>
+                  </div>
+                  <div class="sem-card is-focus">
+                    <div>
+                      <div class="sem-card-head">
+                        <span class="sem-word">GAME</span>
+                        <span class="sem-tag">IL NOSTRO FOCUS</span>
+                      </div>
+                      <div class="sem-desc"><strong>Playing a game:</strong> regole, obiettivo lusorio, problem solving ed economia di efficienza (McGonigal, 2015).</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================================
+             SLIDE — LA SITUAZIONE: FRAMMENTAZIONE EPISTEMICA
+             ========================================================== -->
+        <section class="slide title-left">
+          <div class="title-col">
+            <div class="title-topbar">
+              <div class="title-category"><span class="category-indicator"></span>LA SITUAZIONE</div>
+            </div>
+            <h2 class="main-title">FRAMMENTAZIONE EPISTEMICA.</h2>
+            <p class="subtitle-text">
+              Nella letteratura psicologica con <strong>«game»</strong> si indicano attività diverse: <em>Scacchi</em> e <em>Cluedo</em>, <em>Tomb Raider</em> e <em>Dungeons &amp; Dragons</em>, <em>World of Warcraft</em> e <em>Nascondino</em>. Senza una teoria unificante, ogni evidenza resta un caso singolo <strong>non generalizzabile</strong>.
+            </p>
+            <div class="note-pill">
+              <span><strong class="lens-tag">LENTE:</strong> La distinzione classica tra analogico vs digitale, ad esempio, descrive il supporto, non i processi psicologici attivi.</span>
+            </div>
+          </div>
+          <div class="glass-card-col">
+            <div class="card-inner-stage">
+              <div class="stage-header">
+                <div class="stage-kicker">ANALOGICO o DIGITALE?</div>
+                <div style="display:flex; gap:0.5rem;">
+                  <button class="mini-btn" id="quizRevealAll">Svela tutti</button>
+                  <button class="mini-btn" id="quizReset">Reset</button>
+                </div>
+              </div>
+              <div class="quiz-grid" id="quizGrid">
+                <div class="quiz-card" data-type="analog">
+                  <div>
+                    <div class="quiz-tag-num">RISULTATO EMPIRICO</div>
+                    <div class="quiz-finding">«I giochi supportano il comportamento prosociale e aumentano le competenze emotive.»</div>
+                  </div>
+                  <div class="quiz-footer">
+                    <span class="quiz-prompt">Analogico o Digitale? →</span>
+                    <span class="quiz-reveal-badge">ANALOGICO &bull; Giochi da tavolo</span>
+                    <span class="quiz-ref">Cès et al., 2026</span>
+                  </div>
+                </div>
+                <div class="quiz-card" data-type="digital">
+                  <div>
+                    <div class="quiz-tag-num">RISULTATO EMPIRICO</div>
+                    <div class="quiz-finding">«I giochi permettono di esplorare il sé ideale e alterano la percezione di sé.»</div>
+                  </div>
+                  <div class="quiz-footer">
+                    <span class="quiz-prompt">Analogico o Digitale? →</span>
+                    <span class="quiz-reveal-badge">DIGITALE &bull; Videogiochi / MMORPG</span>
+                    <span class="quiz-ref">Bessière et al., 2007; Klimmt et al., 2009</span>
+                  </div>
+                </div>
+                <div class="quiz-card" data-type="analog">
+                  <div>
+                    <div class="quiz-tag-num">RISULTATO EMPIRICO</div>
+                    <div class="quiz-finding">«I giochi promuovono empatia e <em>perspective-taking</em>.»</div>
+                  </div>
+                  <div class="quiz-footer">
+                    <span class="quiz-prompt">Analogico o Digitale? →</span>
+                    <span class="quiz-reveal-badge">ANALOGICO &bull; GDR da tavolo</span>
+                    <span class="quiz-ref">Bowman, 2010; Yuliawati et al., 2024</span>
+                  </div>
+                </div>
+                <div class="quiz-card" data-type="digital">
+                  <div>
+                    <div class="quiz-tag-num">RISULTATO EMPIRICO</div>
+                    <div class="quiz-finding">«I giochi favoriscono la regolazione emotiva e le strategie di coping.»</div>
+                  </div>
+                  <div class="quiz-footer">
+                    <span class="quiz-prompt">Analogico o Digitale? →</span>
+                    <span class="quiz-reveal-badge">DIGITALE &bull; Videogiochi</span>
+                    <span class="quiz-ref">Villani et al., 2018</span>
+                  </div>
+                </div>
+                <div class="quiz-card" data-type="digital">
+                  <div>
+                    <div class="quiz-tag-num">RISULTATO EMPIRICO</div>
+                    <div class="quiz-finding">«I giochi potenziano attenzione, controllo esecutivo e trasferimento di abilità.»</div>
+                  </div>
+                  <div class="quiz-footer">
+                    <span class="quiz-prompt">Analogico o Digitale? →</span>
+                    <span class="quiz-reveal-badge">DIGITALE &bull; Videogiochi competitivi</span>
+                    <span class="quiz-ref">Boot et al., 2008; Zhong et al., 2025</span>
+                  </div>
+                </div>
+                <div class="quiz-card" data-type="analog">
+                  <div>
+                    <div class="quiz-tag-num">RISULTATO EMPIRICO</div>
+                    <div class="quiz-finding">«I giochi facilitano la co-costruzione narrativa e la regolazione emotiva in gruppo.»</div>
+                  </div>
+                  <div class="quiz-footer">
+                    <span class="quiz-prompt">Analogico o Digitale? →</span>
+                    <span class="quiz-reveal-badge">ANALOGICO &bull; GDR fantasy</span>
+                    <span class="quiz-ref">Hendricks, 2014</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================================
+             SLIDE STORICA A — CULTURA, SVILUPPO E PLAY
+             ========================================================== -->
+        <section class="slide title-right">
+          <div class="title-col">
+            <div class="title-topbar">
+              <div class="title-category"><span class="category-indicator"></span>PROSPETTIVA STORICA</div>
+            </div>
+            <h2 class="main-title" id="historyTitleClassic">LE BASI DEGLI STUDI SUL GIOCO: CULTURA E SVILUPPO.</h2>
+            <p class="subtitle-text" id="historySubtitleClassic">
+              Per quasi un secolo il gioco è stato letto da antropologi, filosofi e psicologi dello sviluppo sotto l'ombrello ampio del <strong>play</strong>: contributi fondamentali, ma con lessici e oggetti di studio differenti.
+            </p>
+            <div class="note-pill">
+              <span><strong class="lens-tag">LENTE:</strong> Ricchezza teorica enorme, ma nessun consenso su cosa costituisca i fondamenti psicologici dei <em>games</em>.</span>
+            </div>
+          </div>
+          <div class="glass-card-col">
+            <div class="card-inner-stage">
+              <div class="stage-header">
+                <div class="stage-kicker">I CLASSICI DEL PLAY</div>
+                <span class="stage-badge">1934 – 1978</span>
+              </div>
+              <div class="history-wrap">
+                <div class="history-grid" id="historyGridClassic">
+                  <div class="author-card" data-hist="huizinga">
+                    <div>
+                      <div class="author-top">
+                        <div class="author-name">Johan Huizinga</div>
+                        <span class="author-year">1938</span>
+                      </div>
+                      <div class="author-field">Storia &amp; Cultura</div>
+                    </div>
+                    <div class="author-claim"><em>Homo Ludens</em>: il gioco come atto libero, volontario e fondativo della cultura umana.</div>
+                  </div>
+                  <div class="author-card" data-hist="piaget">
+                    <div>
+                      <div class="author-top">
+                        <div class="author-name">Jean Piaget</div>
+                        <span class="author-year">1945 / 1951</span>
+                      </div>
+                      <div class="author-field">Psicologia dello Sviluppo</div>
+                    </div>
+                    <div class="author-claim">Il gioco come meccanismo di sviluppo cognitivo, assimilazione e formazione dello schema simbolico.</div>
+                  </div>
+                  <div class="author-card" data-hist="bateson">
+                    <div>
+                      <div class="author-top">
+                        <div class="author-name">Gregory Bateson</div>
+                        <span class="author-year">1955</span>
+                      </div>
+                      <div class="author-field">Comunicazione &amp; Sistemica</div>
+                    </div>
+                    <div class="author-claim">Il gioco come metamessaggio relazionale («questo è un gioco») che risignifica i gesti.</div>
+                  </div>
+                  <div class="author-card" data-hist="caillois">
+                    <div>
+                      <div class="author-top">
+                        <div class="author-name">Roger Caillois</div>
+                        <span class="author-year">1958</span>
+                      </div>
+                      <div class="author-field">Sociologia &amp; Tassonomia</div>
+                    </div>
+                    <div class="author-claim">Dal <em>paidia</em> (gioco libero) al <em>ludus</em> (vincoli formali): agon, alea, mimicry, ilinx.</div>
+                  </div>
+                  <div class="author-card" data-hist="bruner">
+                    <div>
+                      <div class="author-top">
+                        <div class="author-name">Jerome Bruner</div>
+                        <span class="author-year">1973</span>
+                      </div>
+                      <div class="author-field">Psicologia Cognitiva</div>
+                    </div>
+                    <div class="author-claim">Il gioco come strumento di <em>meaning-making</em> e combinazione flessibile di mezzi e fini.</div>
+                  </div>
+                  <div class="author-card" data-hist="vygotsky">
+                    <div>
+                      <div class="author-top">
+                        <div class="author-name">Lev Vygotskij</div>
+                        <span class="author-year">1934 / 1978</span>
+                      </div>
+                      <div class="author-field">Psicologia Storico-Culturale</div>
+                    </div>
+                    <div class="author-claim">Ruolo sociale del gioco simbolico nello sviluppo delle funzioni psicologiche superiori e dell'autoregolazione.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================================
+             SLIDE STORICA B — I GIGANTI DELLA PSICOLOGIA MODERNA
+             ========================================================== -->
+        <section class="slide title-left">
+          <div class="title-col">
+            <div class="title-topbar">
+              <div class="title-category"><span class="category-indicator"></span>PROSPETTIVA STORICA</div>
+            </div>
+            <h2 class="main-title" id="historyTitleModern">I GIGANTI DELLA PSICOLOGIA MODERNA.</h2>
+            <p class="subtitle-text" id="historySubtitleModern">
+              Etologia, motivazione, neuroscienze e psicologia cognitiva hanno prodotto svolte decisive. Eppure fino a oggi quasi tutte queste teorie hanno osservato il <strong>play</strong> o singoli stati, lasciando i <strong>games</strong> frammentati.
+            </p>
+            <div class="note-pill">
+              <span><strong class="lens-tag">LENTE:</strong> Il cambio di paradigma evolutivo e cognitivo è maturo: serve un'architettura che lo traduca nei <em>games</em>.</span>
+            </div>
+          </div>
+          <div class="glass-card-col">
+            <div class="card-inner-stage">
+              <div class="stage-header">
+                <div class="stage-kicker">SULLE SPALLE DEI GIGANTI</div>
+                <span class="stage-badge">1978 – 2025</span>
+              </div>
+              <div class="history-wrap">
+                <div class="history-grid" id="historyGridModern">
+                  <div class="author-card" data-hist="csikszentmihalyi">
+                    <div>
+                      <div class="author-top">
+                        <div class="author-name">Mihály Csíkszentmihályi</div>
+                        <span class="author-year">1990</span>
+                      </div>
+                      <div class="author-field">Teoria del Flusso (Flow)</div>
+                    </div>
+                    <div class="author-claim">Esperienza ottimale nel bilanciamento tra sfide e abilità: il riferimento più citato in psicologia del gioco.</div>
+                  </div>
+                  <div class="author-card" data-hist="burghardt">
+                    <div>
+                      <div class="author-top">
+                        <div class="author-name">Gordon M. Burghardt</div>
+                        <span class="author-year">2005 / 2010</span>
+                      </div>
+                      <div class="author-field">Etologia &amp; Psicologia Comparata</div>
+                    </div>
+                    <div class="author-claim">Il gioco precede l'uomo: crea un ambiente di apprendimento <em>safe</em>, privo di rischio letale, prima che divertimento.</div>
+                  </div>
+                  <div class="author-card" data-hist="sdt">
+                    <div>
+                      <div class="author-top">
+                        <div class="author-name">Deci &amp; Ryan / Bandura</div>
+                        <span class="author-year">1977 / 2000</span>
+                      </div>
+                      <div class="author-field">Motivazione &amp; Autoefficacia</div>
+                    </div>
+                    <div class="author-claim">Autodeterminazione (autonomia, competenza, relazione) e percezione di efficacia nella padronanza della sfida.</div>
+                  </div>
+                  <div class="author-card" data-hist="panksepp">
+                    <div>
+                      <div class="author-top">
+                        <div class="author-name">Jaak Panksepp</div>
+                        <span class="author-year">1998</span>
+                      </div>
+                      <div class="author-field">Neuroscienze Affettive</div>
+                    </div>
+                    <div class="author-claim">Identifica nei mammiferi un circuito neurale subcorticale primario specificamente dedicato al <em>PLAY</em>.</div>
+                  </div>
+                  <div class="author-card" data-hist="kahneman">
+                    <div>
+                      <div class="author-top">
+                        <div class="author-name">Daniel Kahneman</div>
+                        <span class="author-year">2011</span>
+                      </div>
+                      <div class="author-field">Psicologia del Pensiero</div>
+                    </div>
+                    <div class="author-claim"><em>Dual Process Theory</em>: il gioco modula continuamente l'alternanza tra Sistema 1 (veloce) e Sistema 2 (deliberato).</div>
+                  </div>
+                  <div class="author-card warm-accent" data-hist="svolta">
+                    <div>
+                      <div class="author-top">
+                        <div class="author-name">Suits → Landers → Nguyen</div>
+                        <span class="author-year">1978 – 2025</span>
+                      </div>
+                      <div class="author-field">La Svolta verso i Games</div>
+                    </div>
+                    <div class="author-claim">Obiettivi lusori (Suits), <em>gamefulness</em> esperienziale (McGonigal, Landers) e giochi come medium dell'<em>agency</em> (Nguyen).</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================================
+             SLIDE — OLTRE PLAY E GAMING
+             ========================================================== -->
+        <section class="slide title-right">
+          <div class="title-col">
+            <div class="title-topbar">
+              <div class="title-category"><span class="category-indicator"></span>OLTRE PLAY E GAMING</div>
+            </div>
+            <h2 class="main-title">TROPPO LARGO, TROPPO STRETTO.</h2>
+            <p class="subtitle-text">
+              La psicologia ha guardato storicamente al <strong>play</strong> (troppo ampio) o recentemente al <strong>gaming</strong> (ristretto al digitale). Il costrutto di <em>gamefulness</em> indica la svolta: studiare i giochi come <strong>sistemi psicologici</strong>.
+            </p>
+            <div class="note-pill">
+              <span><strong class="lens-tag">LENTE:</strong> Riconosciamo un gioco prima di tutto dall'esperienza strutturata che evoca (Calvillo Gámez et al., 2009).</span>
+            </div>
+          </div>
+          <div class="glass-card-col">
+            <div class="card-inner-stage">
+              <div class="stage-header">
+                <div class="stage-kicker">LIVELLI DI ANALISI</div>
+                <span class="stage-badge">Mattiassi, 2026</span>
+              </div>
+              <div class="scope-stage">
+                <div class="concentric-wrap">
+                  <div class="ring ring-play" data-scope="play">
+                    <div class="ring-label">PLAY</div>
+                    <div class="ring-sub">Psicologia dello sviluppo &bull; Playfulness</div>
+                    <div class="ring ring-games selected" data-scope="games">
+                      <div class="ring-label">GAMES &bull; GAMEFULNESS</div>
+                      <div class="ring-sub">Sistemi psicologici strutturati (Focus del Framework)</div>
+                      <div class="ring ring-gaming" data-scope="gaming">
+                        <div class="ring-label">GAMING</div>
+                        <div class="ring-sub">Media Psychology &bull; Digitale</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="scope-info-box" id="scopeInfoBox">
+                  <div class="scope-info-title">🎯 GAMES &amp; GAMEFULNESS — Il livello mancante</div>
+                  <div class="scope-info-desc">
+                    Coinvolgimento focalizzato e orientato a un obiettivo (Landers et al., 2019; McGonigal, 2015). Consente di descrivere i giochi come <strong>sistemi psicologici</strong> trasversali a board game, GDR, sport e videogiochi.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================================
+             SLIDE — PROSPETTIVA EVOLUZIONISTICA: FUNZIONE DI APPRENDIMENTO
+             ========================================================== -->
+        <section class="slide title-left">
+          <div class="title-col">
+            <div class="title-topbar">
+              <div class="title-category"><span class="category-indicator"></span>PROSPETTIVA EVOLUZIONISTICA</div>
+            </div>
+            <h2 class="main-title">LA FUNZIONE ORIGINARIA: APPRENDERE.</h2>
+            <p class="subtitle-text">
+              Il gioco non nasce come divertimento né come invenzione umana: compare nell'evoluzione di molte specie come <strong>contesto di apprendimento</strong>. Se togliamo l'infrastruttura accessoria, vediamo la funzione di base — e capiamo cosa aggiunge il <strong>game</strong>.
+            </p>
+            <div class="note-pill">
+              <span><strong class="lens-tag">LENTE:</strong> Tutto ciò che la nostra specie ha aggiunto al <em>play</em> per farne un <em>game</em> amplifica una funzione radicata nell'apprendimento.</span>
+            </div>
+          </div>
+          <div class="glass-card-col">
+            <div class="card-inner-stage">
+              <div class="stage-header">
+                <div class="stage-kicker">DAL PLAY ANIMALE AL GAME UMANO</div>
+                <span class="stage-badge">Funzione Adattiva</span>
+              </div>
+              <div class="evo-stack">
+                <div class="evo-step">
+                  <div class="evo-badge-num">01</div>
+                  <div>
+                    <div class="evo-kicker">SOTTRAZIONE &bull; TOGLIERE L'INFRASTRUTTURA</div>
+                    <div class="evo-title">Oltre estetica, narrativa e sovrastrutture</div>
+                    <div class="evo-desc">Spogliando i giochi di tutto ciò che non riguarda l'apprendimento, emerge il tratto condiviso con le altre specie animali.</div>
+                  </div>
+                </div>
+
+                <div class="evo-connector">↓</div>
+
+                <div class="evo-step core">
+                  <div class="evo-badge-num">02</div>
+                  <div>
+                    <div class="evo-kicker">FUNZIONE BIOLOGICA &bull; PLAY</div>
+                    <div class="evo-title">Contesto di apprendimento sicuro (<em>safe</em>)</div>
+                    <div class="evo-desc">Ambiente a basso rischio vitale in cui sperimentare, stressare la propria gamma comportamentale e affinare abilità motorie, cognitive e sociali.</div>
+                  </div>
+                </div>
+
+                <div class="evo-connector">↓</div>
+
+                <div class="evo-step return">
+                  <div class="evo-badge-num">03</div>
+                  <div>
+                    <div class="evo-kicker">RITORNO AL GAME &bull; AMPLIFICAZIONE UMANA</div>
+                    <div class="evo-title">Codifica culturale al servizio dell'apprendimento</div>
+                    <div class="evo-desc">Regole formali, ruoli e obiettivi lusori non cambiano la funzione originaria: la rendono più complessa, strutturata e trasmissibile.</div>
+                  </div>
+                </div>
+
+                <div class="citation-strip" style="margin-top:0.25rem;">
+                  <span class="cite-chip">Burghardt (2005)</span>
+                  <span class="cite-chip">Graham &amp; Burghardt (2010)</span>
+                  <span class="cite-chip">Bateson &amp; Martin (2013)</span>
+                  <span class="cite-chip">Caillois (1958)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================================
+             SLIDE — RADICI EVOLUTIVE E SOGLIA DELL'AGENCY
+             ========================================================== -->
+        <section class="slide title-right">
+          <div class="title-col">
+            <div class="title-topbar">
+              <div class="title-category"><span class="category-indicator"></span>RADICI E SOGLIA</div>
+            </div>
+            <h2 class="main-title">PALESTRA SICURA E AGENCY.</h2>
+            <p class="subtitle-text">
+              I giochi ereditano dal <em>play</em> la funzione evolutiva di <strong>apprendimento a basso rischio</strong> (Graham &amp; Burghardt, 2010), amplificata da vincoli formali. La loro firma distintiva è l'<strong>agency</strong> (Nguyen, 2025): percepirsi origine di azione e conseguenze.
+            </p>
+            <div class="note-pill">
+              <span><strong class="lens-tag">LENTE:</strong> L'autonomia è continua; l'agency è una soglia senza cui il gioco cessa di essere tale.</span>
+            </div>
+          </div>
+          <div class="glass-card-col">
+            <div class="card-inner-stage">
+              <div class="stage-header">
+                <div class="stage-kicker">SIMULATORE CONCETTUALE &bull; AUTONOMIA VS AGENCY</div>
+                <span class="stage-badge">Nguyen, 2025 &bull; Deci &amp; Ryan, 2000</span>
+              </div>
+              <div class="dual-lab">
+                <div class="lab-panel">
+                  <div class="lab-panel-head">
+                    <div class="lab-title">1. Autonomia (Variabile Continua)</div>
+                    <span class="lab-tag" id="autonomyValTag">Alta (80%)</span>
+                  </div>
+                  <input type="range" min="10" max="100" value="80" class="range-slider" id="autonomySlider" />
+                  <div class="slider-labels">
+                    <span>Contesto obbligatorio (es. aula)</span>
+                    <span>Spinta sociale / mista</span>
+                    <span>Scelta pienamente volontaria</span>
+                  </div>
+                </div>
+
+                <div class="lab-panel">
+                  <div class="lab-panel-head">
+                    <div class="lab-title">2. Agency (Condizione Soglia)</div>
+                    <span class="lab-tag warm" id="agencyValTag">SOPRA SOGLIA</span>
+                  </div>
+                  <div class="agency-threshold-row">
+                    <button class="threshold-btn" id="btnAgencyLow">
+                      <div class="threshold-btn-title">Sotto Soglia</div>
+                      <div class="threshold-btn-sub">Nessuna scelta significativa sull'esito (es. puro lancio del dado nel Gioco dell'Oca).</div>
+                    </button>
+                    <button class="threshold-btn active-high" id="btnAgencyHigh">
+                      <div class="threshold-btn-title">Sopra Soglia</div>
+                      <div class="threshold-btn-sub">Azione intenzionale, locus of control interno, responsabilità anche in presenza di <em>alea</em>.</div>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="lab-readout">
+                  <div class="lab-readout-text" id="dualLabReadout">
+                    <strong>Esperienza gameful piena:</strong> agency sopra soglia e alta autonomia sostengono motivazione intrinseca, senso di padronanza e apprendimento profondo (Gursesli et al., 2024).
+                  </div>
+                  <span class="lab-readout-status" id="dualLabStatus">GIOCO PERCEPITO</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================================
+             SLIDE — LA BASE TEORICA (PAPER A TUTTA PAGINA IN RILIEVO)
+             ========================================================== -->
+        <section class="slide paper-showcase-slide">
+          <div class="paper-showcase-header">
+            <div>
+              <div class="title-category"><span class="category-indicator"></span>LA BASE TEORICA DELL'INTERVENTO</div>
+              <h2 class="paper-showcase-title">IL FRAMEWORK UNIFICATO.</h2>
+            </div>
+            <div class="paper-showcase-meta">
+              <span class="paper-journal-pill">Canadian Journal of Experimental Psychology (2026)</span>
+              <span class="paper-doi-sub">Mattiassi, A. D. A. &bull; DOI: 10.1037/cep0000413</span>
+            </div>
+          </div>
+          <div class="paper-sheet-frame">
+            <img src="assets/paper_cjep_2026.jpg" alt="Redefining the Psychology of Games — Alan D. A. Mattiassi (2026)" class="paper-sheet-img" />
+          </div>
+        </section>
+
+        <!-- ==========================================================
+             SLIDE — LE QUATTRO DIMENSIONI COME SISTEMA
+             ========================================================== -->
+        <section class="slide title-left">
+          <div class="title-col">
+            <div class="title-topbar">
+              <div class="title-category"><span class="category-indicator"></span>IL FRAMEWORK</div>
+            </div>
+            <h2 class="main-title" id="sysTitle">QUATTRO DIMENSIONI, UN SISTEMA.</h2>
+            <p class="subtitle-text" id="sysSubtitle">
+              Non sono «contenitori» rigidi di singoli processi, ma <strong>organizzazioni funzionali</strong>. Le stesse funzioni cognitive (attenzione, pianificazione, <em>perspective-taking</em>) vengono reclutate in modo flessibile lungo il ciclo.
+            </p>
+            <div class="note-pill">
+              <span><strong class="lens-tag">LENTE:</strong> Il profilo psicologico del gioco emerge dall'interdipendenza dinamica tra le quattro dimensioni.</span>
+            </div>
+          </div>
+          <div class="glass-card-col">
+            <div class="card-inner-stage">
+              <div class="stage-header">
+                <div class="stage-kicker">ARCHITETTURA FUNZIONALE</div>
+                <span class="stage-badge">Gamefulness</span>
+              </div>
+              <div class="sys-grid">
+                <div class="sys-nodes" id="sysNodes">
+                  <div class="sys-node" data-dim="0">
+                    <div>
+                      <div class="sys-node-num">DIMENSIONE I</div>
+                      <div class="sys-node-title">Cornice Simbolica Regolata</div>
+                      <div class="sys-node-en">Regulated Symbolic Framing</div>
+                    </div>
+                    <div class="sys-node-arrow">→ Stabilisce vincoli e spazio di significati</div>
+                  </div>
+                  <div class="sys-node" data-dim="1">
+                    <div>
+                      <div class="sys-node-num">DIMENSIONE II</div>
+                      <div class="sys-node-title">Prospettiva di Ruolo Alterata</div>
+                      <div class="sys-node-en">Altered Role Perspective</div>
+                    </div>
+                    <div class="sys-node-arrow">→ Definisce punto di vista e agency</div>
+                  </div>
+                  <div class="sys-node" data-dim="2">
+                    <div>
+                      <div class="sys-node-num">DIMENSIONE III</div>
+                      <div class="sys-node-title">Performance Orientata all'Obiettivo</div>
+                      <div class="sys-node-en">Goal-Organized Performance</div>
+                    </div>
+                    <div class="sys-node-arrow">→ Organizza l'azione verso lo stato-obiettivo</div>
+                  </div>
+                  <div class="sys-node" data-dim="3">
+                    <div>
+                      <div class="sys-node-num">DIMENSIONE IV</div>
+                      <div class="sys-node-title">Monitoraggio Esecutivo Metacognitivo</div>
+                      <div class="sys-node-en">Metacognitive Executive Monitoring</div>
+                    </div>
+                    <div class="sys-node-arrow">→ Integra il feedback e raffina la mossa</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================================
+             SLIDE — DIMENSIONE I: CORNICE SIMBOLICA REGOLATA
+             ========================================================== -->
+        <section class="slide title-right">
+          <div class="title-col">
+            <div class="title-topbar">
+              <div class="title-category"><span class="category-indicator"></span>DIMENSIONE I</div>
+            </div>
+            <h2 class="main-title">CORNICE SIMBOLICA REGOLATA.</h2>
+            <span class="en-subterm">Regulated Symbolic Framing</span>
+            <p class="subtitle-text">
+              Le regole non sono semplici divieti: sono <strong>schemi cognitivi generativi</strong> (Piaget, 1951). Delimitano lo spazio d'azione ma generano nuove possibilità e risignificano oggetti e gesti in simboli condivisi.
+            </p>
+            <div class="note-pill">
+              <span><strong class="lens-tag">LENTE:</strong> Nel poker nessuna regola menziona il bluff, eppure è la struttura delle regole a renderlo possibile.</span>
+            </div>
+          </div>
+          <div class="glass-card-col">
+            <div class="card-inner-stage">
+              <div class="stage-header">
+                <div class="stage-kicker">RISIGNIFICAZIONE SIMBOLICA &amp; GENERATIVITÀ</div>
+                <span class="stage-badge">Schema + Simbolo</span>
+              </div>
+              <div class="dim-visual-body">
+                <div class="transform-cards">
+                  <div class="t-card">
+                    <div class="t-icon">🪵</div>
+                    <div class="t-raw">Un bastone</div>
+                    <div class="t-arrow">↓</div>
+                    <div class="t-sym">Bacchetta magica</div>
+                  </div>
+                  <div class="t-card">
+                    <div class="t-icon">➖</div>
+                    <div class="t-raw">Una linea a terra</div>
+                    <div class="t-arrow">↓</div>
+                    <div class="t-sym">Confine territoriale</div>
+                  </div>
+                  <div class="t-card">
+                    <div class="t-icon">♟️</div>
+                    <div class="t-raw">Pedine su cartone</div>
+                    <div class="t-arrow">↓</div>
+                    <div class="t-sym">Conflitto strategico</div>
+                  </div>
+                </div>
+
+                <div class="flow-chain">
+                  <div class="chain-step">
+                    <div class="chain-kicker">01 &bull; VINCOLO</div>
+                    <div class="chain-title">Sistema di Regole</div>
+                    <div class="chain-desc">Definisce possibilità, divieti e criteri di successo.</div>
+                  </div>
+                  <div class="chain-sep">→</div>
+                  <div class="chain-step">
+                    <div class="chain-kicker">02 &bull; COGNIZIONE</div>
+                    <div class="chain-title">Spazio di Possibilità</div>
+                    <div class="chain-desc">Rappresentazioni multiple coesistono simultaneamente.</div>
+                  </div>
+                  <div class="chain-sep">→</div>
+                  <div class="chain-step highlight">
+                    <div class="chain-kicker">03 &bull; EMERGENZA</div>
+                    <div class="chain-title">Azione Significativa</div>
+                    <div class="chain-desc">Es. il <strong>bluff</strong> nel poker: non scritto, ma reso possibile.</div>
+                  </div>
+                </div>
+
+                <div class="citation-strip">
+                  <span class="cite-chip">Piaget (1951) — Schema</span>
+                  <span class="cite-chip">Vygotsky (1978) — Gioco simbolico</span>
+                  <span class="cite-chip">Bruner (1973) — Meaning-making</span>
+                  <span class="cite-chip">Fein (1981) — Pretend play</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================================
+             SLIDE — DIMENSIONE II: PROSPETTIVA DI RUOLO ALTERATA
+             ========================================================== -->
+        <section class="slide title-left">
+          <div class="title-col">
+            <div class="title-topbar">
+              <div class="title-category"><span class="category-indicator"></span>DIMENSIONE II</div>
+            </div>
+            <h2 class="main-title">PROSPETTIVA DI RUOLO ALTERATA.</h2>
+            <span class="en-subterm">Altered Role Perspective</span>
+            <p class="subtitle-text">
+              Il giocatore abita una funzione o identità che trasforma percezione e decisioni: vive una <strong>prospettiva stratificata</strong>, decidendo come se stesso dentro i vincoli e gli obiettivi di un altro ruolo.
+            </p>
+            <div class="note-pill">
+              <span><strong class="lens-tag">LENTE:</strong> Oscillare tra prospettiva interna ed esterna attiva decentramento, flessibilità cognitiva e intenzionalità condivisa.</span>
+            </div>
+          </div>
+          <div class="glass-card-col">
+            <div class="card-inner-stage">
+              <div class="stage-header">
+                <div class="stage-kicker">PROSPETTIVA STRATIFICATA &bull; SÉ ↔ RUOLO</div>
+                <span class="stage-badge">Individuale &amp; Relazionale</span>
+              </div>
+              <div class="dim-visual-body">
+                <div class="lenses-stage">
+                  <div class="lens-circle lens-self">
+                    <div style="font-family:'JetBrains Mono',monospace; font-size:0.74rem; font-weight:700; color:#0369A1;">OUT-OF-GAME</div>
+                    <div style="font-family:'Cabinet Grotesk',sans-serif; font-size:1.55rem; font-weight:900; color:#0F172A; margin:0.35rem 0;">Il Giocatore</div>
+                    <div style="font-size:0.86rem; color:#475569; line-height:1.45;">Competenze cognitive, valori personali, capacità decisionale.</div>
+                  </div>
+                  <div class="lens-center-arrows">⇄</div>
+                  <div class="lens-circle lens-role">
+                    <div style="font-family:'JetBrains Mono',monospace; font-size:0.74rem; font-weight:700; color:#C2410C;">IN-GAME</div>
+                    <div style="font-family:'Cabinet Grotesk',sans-serif; font-size:1.55rem; font-weight:900; color:#0F172A; margin:0.35rem 0;">Il Ruolo</div>
+                    <div style="font-size:0.86rem; color:#475569; line-height:1.45;">Funzione, vincoli narrativi, obiettivi validi solo nella cornice.</div>
+                  </div>
+                  <div class="lens-center-pill">⇄ OSCILLAZIONE ATTIVA</div>
+                </div>
+
+                <div class="meta-loop-grid">
+                  <div class="meta-box online">
+                    <div style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; font-weight:700; color:#0284C7; margin-bottom:0.3rem;">LIVELLO INTRAPSICHICO</div>
+                    <div style="font-size:0.94rem; color:#334155; line-height:1.45;">
+                      <strong>Perspective-taking &amp; esplorazione identitaria:</strong> proiezione, empatia e flessibilità cognitiva (Bowman, 2010; Goldstein &amp; Winner, 2012).
+                    </div>
+                  </div>
+                  <div class="meta-box offline">
+                    <div style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; font-weight:700; color:#4F46E5; margin-bottom:0.3rem;">LIVELLO RELAZIONALE</div>
+                    <div style="font-size:0.94rem; color:#334155; line-height:1.45;">
+                      <strong>Ruoli in rete:</strong> coordinazione, negoziazione e <em>shared intentionality</em> tra più agenti (Heesen et al., 2017; Decety &amp; Sommerville, 2003).
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================================
+             SLIDE — DIMENSIONE III: PERFORMANCE ORIENTATA ALL'OBIETTIVO
+             ========================================================== -->
+        <section class="slide title-right">
+          <div class="title-col">
+            <div class="title-topbar">
+              <div class="title-category"><span class="category-indicator"></span>DIMENSIONE III</div>
+            </div>
+            <h2 class="main-title">PERFORMANCE ORIENTATA ALL'OBIETTIVO.</h2>
+            <span class="en-subterm">Goal-Organized Performance</span>
+            <p class="subtitle-text">
+              Perseguire l'<strong>obiettivo prelusorio / lusorio</strong> (Suits, 1978) trasforma azioni arbitrarie in condotta strutturata. La sfida attiva problem solving, competenza percepita, autoefficacia e stato di <em>flow</em>.
+            </p>
+            <div class="note-pill">
+              <span><strong class="lens-tag">LENTE:</strong> Anche con premi esterni, il significato psicologico dell'obiettivo resta ancorato alla cornice simbolica del gioco.</span>
+            </div>
+          </div>
+          <div class="glass-card-col">
+            <div class="card-inner-stage">
+              <div class="stage-header">
+                <div class="stage-kicker">DALL'AZIONE ARBITRARIA ALLA TRAIETTORIA INTENZIONALE</div>
+                <span class="stage-badge">Suits, 1978 &bull; Bandura, 1977</span>
+              </div>
+              <div class="dim-visual-body">
+                <div style="background:#F8FAFC; border:1.5px solid #E2E8F0; border-radius:22px; padding:1.4rem 1.8rem;">
+                  <svg viewBox="0 0 820 220" width="100%" height="205">
+                    <!-- Left: Scattered actions -->
+                    <rect x="10" y="15" width="240" height="190" rx="18" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+                    <text x="130" y="42" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#64748B">SENZA OBIETTIVO LUSORIO</text>
+                    <circle cx="75" cy="95" r="7" fill="#CBD5E1"/>
+                    <circle cx="145" cy="145" r="7" fill="#CBD5E1"/>
+                    <circle cx="190" cy="88" r="7" fill="#CBD5E1"/>
+                    <circle cx="95" cy="160" r="7" fill="#CBD5E1"/>
+                    <circle cx="135" cy="80" r="7" fill="#CBD5E1"/>
+                    <path d="M75 95 L135 80 L190 88 M95 160 L145 145" stroke="#CBD5E1" stroke-width="1.8" stroke-dasharray="4 4"/>
+                    <text x="130" y="190" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="12" fill="#94A3B8">Azioni disorganizzate</text>
+
+                    <!-- Arrow -->
+                    <path d="M268 110 L318 110" stroke="#0EA5E9" stroke-width="3.5" stroke-linecap="round"/>
+                    <polygon points="318,102 332,110 318,118" fill="#0EA5E9"/>
+
+                    <!-- Right: Structured trajectory -->
+                    <rect x="348" y="15" width="462" height="190" rx="18" fill="#FFFFFF" stroke="#BAE6FD" stroke-width="2"/>
+                    <text x="579" y="42" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#0284C7">CON OBIETTIVO PRELUSORIO / LUSORIO (SUITS, 1978)</text>
+                    <path d="M390 155 Q480 140 535 110 T725 85" fill="none" stroke="#0EA5E9" stroke-width="4" stroke-linecap="round"/>
+                    <circle cx="390" cy="155" r="8" fill="#0EA5E9"/>
+                    <circle cx="535" cy="110" r="8" fill="#0EA5E9"/>
+                    <circle cx="640" cy="95" r="8" fill="#0EA5E9"/>
+                    <circle cx="735" cy="85" r="14" fill="#F97316"/>
+                    <circle cx="735" cy="85" r="22" fill="none" stroke="#F97316" stroke-width="2" opacity="0.45"/>
+                    <text x="735" y="128" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#C2410C">GOAL</text>
+                    <text x="545" y="185" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="12.5" font-weight="600" fill="#334155">Strategia, coordinazione cognitiva ed emotiva</text>
+                  </svg>
+                </div>
+
+                <div class="pillars-grid">
+                  <div class="pillar-card">
+                    <span style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; font-weight:700; color:#0284C7;">01 &bull; SFIDA</span>
+                    <h4>Problem Solving</h4>
+                    <p>Il conflitto integrato nell'obiettivo organizza scelte strategiche o improvvisative (Locke &amp; Latham, 2002).</p>
+                  </div>
+                  <div class="pillar-card">
+                    <span style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; font-weight:700; color:#F97316;">02 &bull; PADRONANZA</span>
+                    <h4>Autoefficacia</h4>
+                    <p>Competenza percepita e motivazione intrinseca rafforzano il senso di efficacia (Bandura, 1977; Rodríguez et al., 2021).</p>
+                  </div>
+                  <div class="pillar-card">
+                    <span style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; font-weight:700; color:#10B981;">03 &bull; EQUILIBRIO</span>
+                    <h4>Stato di Flow</h4>
+                    <p>L'incastro tra difficoltà del compito e abilità fonde attenzione, motivazione e azione (Csíkszentmihályi, 1990).</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================================
+             SLIDE — DIMENSIONE IV: MONITORAGGIO ESECUTIVO METACOGNITIVO
+             ========================================================== -->
+        <section class="slide title-left">
+          <div class="title-col">
+            <div class="title-topbar">
+              <div class="title-category"><span class="category-indicator"></span>DIMENSIONE IV</div>
+            </div>
+            <h2 class="main-title">MONITORAGGIO ESECUTIVO METACOGNITIVO.</h2>
+            <span class="en-subterm">Metacognitive Executive Monitoring</span>
+            <p class="subtitle-text">
+              Giocare non è eseguire un piano, ma <strong>regolarlo a meta-livello</strong>: rilevazione immediata degli errori, riflessione strategica, mentalizzazione degli altri e inibizione degli script relazionali esterni.
+            </p>
+            <div class="note-pill">
+              <span><strong class="lens-tag">LENTE:</strong> Per giocare davvero dobbiamo inibire affetto, gerarchia e obblighi sociali out-of-game.</span>
+            </div>
+          </div>
+          <div class="glass-card-col">
+            <div class="card-inner-stage">
+              <div class="stage-header">
+                <div class="stage-kicker">DOPPIO LOOP DI CONTROLLO &amp; FILTRO INIBITORIO</div>
+                <span class="stage-badge">Diamond, 2013 &bull; Flavell, 1979</span>
+              </div>
+              <div class="dim-visual-body">
+                <div class="meta-loop-grid">
+                  <div class="meta-box online">
+                    <div style="font-family:'JetBrains Mono',monospace; font-size:0.74rem; font-weight:700; color:#0284C7; margin-bottom:0.35rem;">LOOP 1 &bull; ONLINE MONITORING</div>
+                    <div style="font-family:'Cabinet Grotesk',sans-serif; font-size:1.35rem; font-weight:800; color:#0F172A; margin-bottom:0.4rem;">Controllo in Tempo Reale</div>
+                    <div style="font-size:0.9rem; color:#475569; line-height:1.45;">
+                      Rilevazione immediata di errori e discrepanze tra esito atteso e reale (Botvinick et al., 2001). Gestione attentiva sotto pressione temporale.
+                    </div>
+                  </div>
+                  <div class="meta-box offline">
+                    <div style="font-family:'JetBrains Mono',monospace; font-size:0.74rem; font-weight:700; color:#4F46E5; margin-bottom:0.35rem;">LOOP 2 &bull; OFFLINE REFLECTION</div>
+                    <div style="font-family:'Cabinet Grotesk',sans-serif; font-size:1.35rem; font-weight:800; color:#0F172A; margin-bottom:0.4rem;">Valutazione &amp; Raffinamento</div>
+                    <div style="font-size:0.9rem; color:#475569; line-height:1.45;">
+                      Analisi <em>post hoc</em> di strategie e credenze (Zimmerman, 2000; Efklides, 2008) + mentalizzazione delle intenzioni altrui (Frith &amp; Frith, 2006).
+                    </div>
+                  </div>
+                </div>
+
+                <div class="inhib-box">
+                  <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <div style="font-family:'Cabinet Grotesk',sans-serif; font-size:1.35rem; font-weight:900; color:#0F172A;">
+                      🛡️ Filtro di Inibizione degli Script Out-of-Game
+                    </div>
+                    <span style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; font-weight:700; color:#C2410C;">EXECUTIVE CONTROL</span>
+                  </div>
+                  <div style="font-size:0.95rem; color:#334155; line-height:1.45;">
+                    Richiede il coordinamento di <strong>flessibilità cognitiva</strong>, <strong>working memory</strong> e <strong>controllo inibitorio</strong> per evitare che dinamiche esterne invadano la cornice di gioco:
+                  </div>
+                  <div class="script-pills">
+                    <span class="script-blocked">Affetto personale</span>
+                    <span class="script-blocked">Gerarchia aziendale / sociale</span>
+                    <span class="script-blocked">Obbligo relazionale esterno</span>
+                  </div>
+                </div>
+
+                <div class="citation-strip">
+                  <span class="cite-chip">Norman &amp; Shallice (1986)</span>
+                  <span class="cite-chip">Decety &amp; Lamm (2007)</span>
+                  <span class="cite-chip">Lee et al. (2021) — Mind perception</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================================
+             SLIDE — STRESS TEST LIVE: COSA SUCCEDE SE NE TOGLI UNA?
+             ========================================================== -->
+        <section class="slide title-right">
+          <div class="title-col">
+            <div class="title-topbar">
+              <div class="title-category"><span class="category-indicator"></span>STRESS TEST</div>
+            </div>
+            <h2 class="main-title" style="font-size: 2.9rem;">COSA SUCCEDE SE UNA DIMENSIONE NON VIENE ATTIVATA?</h2>
+            <p class="subtitle-text">
+              Le quattro dimensioni sono <strong>condizioni minime necessarie</strong>. Spegnendone anche una sola, la configurazione psicologica del <em>gamefulness</em> collassa in un'esperienza diversa.
+            </p>
+            <div class="note-pill">
+              <span><strong class="lens-tag">LENTE:</strong> L'interazione sociale non è una quinta dimensione: è una proprietà emergente quando più agenti condividono il sistema.</span>
+            </div>
+          </div>
+          <div class="glass-card-col">
+            <div class="card-inner-stage">
+              <div class="stage-header">
+                <div class="stage-kicker">INTERDIPENDENZA SISTEMICA</div>
+                <button class="mini-btn" id="stressResetBtn">Ripristina 4/4</button>
+              </div>
+              <div class="stress-wrap">
+                <div class="switch-grid" id="stressGrid">
+                  <div class="dim-toggle" data-key="framing">
+                    <div>
+                      <div class="toggle-info-title">I. Cornice Simbolica Regolata</div>
+                      <div class="toggle-info-sub">Regulated Symbolic Framing</div>
+                    </div>
+                    <div class="toggle-pill"></div>
+                  </div>
+                  <div class="dim-toggle" data-key="role">
+                    <div>
+                      <div class="toggle-info-title">II. Prospettiva di Ruolo Alterata</div>
+                      <div class="toggle-info-sub">Altered Role Perspective</div>
+                    </div>
+                    <div class="toggle-pill"></div>
+                  </div>
+                  <div class="dim-toggle" data-key="goal">
+                    <div>
+                      <div class="toggle-info-title">III. Performance Orientata all'Obiettivo</div>
+                      <div class="toggle-info-sub">Goal-Organized Performance</div>
+                    </div>
+                    <div class="toggle-pill"></div>
+                  </div>
+                  <div class="dim-toggle" data-key="meta">
+                    <div>
+                      <div class="toggle-info-title">IV. Monitoraggio Esecutivo Metacognitivo</div>
+                      <div class="toggle-info-sub">Metacognitive Executive Monitoring</div>
+                    </div>
+                    <div class="toggle-pill"></div>
+                  </div>
+                </div>
+
+                <div class="stress-result-card" id="stressResultCard">
+                  <div class="stress-status-kicker" id="stressKicker">CONFIGURAZIONE COMPLETA (4/4 ATTIVE)</div>
+                  <div class="stress-status-title" id="stressTitle">Sistema Gameful Auto-Sostenuto</div>
+                  <div class="stress-status-desc" id="stressDesc">
+                    I vincoli simbolici abilitano l'agency di ruolo; l'agency orienta la performance verso l'obiettivo; la performance genera feedback integrato dal monitoraggio metacognitivo.
+                  </div>
+                </div>
+
+                <div class="emergent-footer">
+                  <span class="emergent-tag">PROPRIETÀ EMERGENTE</span>
+                  <span>Cooperazione, competizione e negoziazione non sono una 5ª dimensione: emergono quando il sistema a 4 dimensioni è distribuito tra più giocatori.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================================
+             SLIDE — DIMENSIONAL WEIGHTING (RADAR + BARRE)
+             ========================================================== -->
+        <section class="slide title-left">
+          <div class="title-col">
+            <div class="title-topbar">
+              <div class="title-category"><span class="category-indicator"></span>DIMENSIONAL WEIGHTING</div>
+            </div>
+            <h2 class="main-title">UNA NUOVA TASSONOMIA.</h2>
+            <p class="subtitle-text">
+              Tutte e quattro le dimensioni sono sempre presenti, ma con <strong>salienza differenziale</strong> (Figure 1 del paper). Possiamo confrontare i giochi per <strong>profilo psicologico</strong> anziché per genere o supporto.
+            </p>
+            <div class="note-pill">
+              <span><strong class="lens-tag">LENTE:</strong> La stessa lente permette di mappare e progettare configurazioni esperienziali radicalmente diverse.</span>
+            </div>
+          </div>
+          <div class="glass-card-col">
+            <div class="card-inner-stage">
+              <div class="stage-header">
+                <div class="stage-kicker">PROFILO PSICOLOGICO</div>
+                <span class="stage-badge">Figure 1 &bull; Salienza Differenziale</span>
+              </div>
+              <div class="weight-presets" id="weightPresets">
+                <button class="mini-btn active" data-preset="chess">Scacchi / Go</button>
+                <button class="mini-btn" data-preset="dnd">D&amp;D / GDR</button>
+                <button class="mini-btn" data-preset="action">Action Videogame</button>
+                <button class="mini-btn" data-preset="dixit">Dixit</button>
+              </div>
+              <div class="weight-body">
+                <div class="radar-wrap">
+                  <svg id="radarSvg" viewBox="0 0 360 360" width="330" height="330">
+                    <!-- Grid diamonds -->
+                    <polygon points="180,45 315,180 180,315 45,180" fill="none" stroke="#E2E8F0" stroke-width="1.5"/>
+                    <polygon points="180,79 281,180 180,281 79,180" fill="none" stroke="#E2E8F0" stroke-width="1.2" stroke-dasharray="4 4"/>
+                    <polygon points="180,112 248,180 180,248 112,180" fill="none" stroke="#E2E8F0" stroke-width="1.2"/>
+                    <polygon points="180,146 214,180 180,214 146,180" fill="none" stroke="#E2E8F0" stroke-width="1"/>
+                    <!-- Axes -->
+                    <line x1="180" y1="45" x2="180" y2="315" stroke="#CBD5E1" stroke-width="1.2"/>
+                    <line x1="45" y1="180" x2="315" y2="180" stroke="#CBD5E1" stroke-width="1.2"/>
+                    <!-- Dynamic Polygon -->
+                    <polygon id="radarPoly" points="180,55 245,180 180,295 55,180" fill="rgba(14, 165, 233, 0.24)" stroke="#0EA5E9" stroke-width="3" stroke-linejoin="round"/>
+                    <!-- Axis Labels -->
+                    <text x="180" y="26" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#0F172A">CORNICE</text>
+                    <text x="334" y="184" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#0F172A">RUOLO</text>
+                    <text x="180" y="342" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#0F172A">GOAL</text>
+                    <text x="24" y="184" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#0F172A">META</text>
+                  </svg>
+                </div>
+                <div class="bars-wrap">
+                  <div class="w-bar-item">
+                    <div class="w-bar-head"><span>I. Cornice Simbolica Regolata</span><span class="w-bar-val" id="valFraming">95%</span></div>
+                    <div class="w-bar-track"><div class="w-bar-fill" id="barFraming" style="width:95%; background:#0EA5E9;"></div></div>
+                  </div>
+                  <div class="w-bar-item">
+                    <div class="w-bar-head"><span>II. Prospettiva di Ruolo Alterata</span><span class="w-bar-val" id="valRole">45%</span></div>
+                    <div class="w-bar-track"><div class="w-bar-fill" id="barRole" style="width:45%; background:#F97316;"></div></div>
+                  </div>
+                  <div class="w-bar-item">
+                    <div class="w-bar-head"><span>III. Performance Orientata all'Obiettivo</span><span class="w-bar-val" id="valGoal">85%</span></div>
+                    <div class="w-bar-track"><div class="w-bar-fill" id="barGoal" style="width:85%; background:#10B981;"></div></div>
+                  </div>
+                  <div class="w-bar-item">
+                    <div class="w-bar-head"><span>IV. Monitoraggio Esecutivo Metacognitivo</span><span class="w-bar-val" id="valMeta">95%</span></div>
+                    <div class="w-bar-track"><div class="w-bar-fill" id="barMeta" style="width:95%; background:#6366F1;"></div></div>
+                  </div>
+                  <div class="weight-note" id="weightNote">
+                    <strong>Giochi astratti / rule-intensive:</strong> foreground su cornice regolata e controllo esecutivo (<em>systems thinking</em>, riconoscimento di pattern, ragionamento astratto).
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================================
+             SLIDE — DAL CONCETTO ALL'ESPERIMENTO (TABLE 1 & H1-H7)
+             ========================================================== -->
+        <section class="slide title-right">
+          <div class="title-col">
+            <div class="title-topbar">
+              <div class="title-category"><span class="category-indicator"></span>RICERCA E DESIGN</div>
+            </div>
+            <h2 class="main-title">DAL CONCETTO ALL'ESPERIMENTO.</h2>
+            <p class="subtitle-text">
+              Il framework rende il gioco un <strong>sistema parametrabile</strong>: consente di isolare e manipolare singole dimensioni (Table 1) e testare effetti di interazione (H1–H7), in modo complementare a SDT e Flow.
+            </p>
+            <div class="note-pill">
+              <span><strong class="lens-tag">LENTE:</strong> Non più «cosa fa il gioco?», ma «quale configurazione dimensionale genera quale effetto?».</span>
+            </div>
+          </div>
+          <div class="glass-card-col">
+            <div class="card-inner-stage">
+              <div class="stage-header">
+                <div class="stage-kicker">OPERAZIONALIZZAZIONE SPERIMENTALE</div>
+                <div class="exp-tabs">
+                  <button class="mini-btn active" data-exptab="table1">Table 1 (Mappa)</button>
+                  <button class="mini-btn" data-exptab="hyp">Ipotesi H1–H7</button>
+                </div>
+              </div>
+
+              <!-- TAB 1: TABLE 1 -->
+              <div class="exp-panel active" id="expPanelTable1">
+                <div class="t1-row">
+                  <div class="t1-dim">I. Cornice Simbolica Regolata</div>
+                  <div>
+                    <div class="t1-col-label">Manipolazione</div>
+                    <div class="t1-col-val">Complessità, ambiguità o trasparenza delle regole; aggiunta/rimozione vincoli.</div>
+                  </div>
+                  <div>
+                    <div class="t1-col-label">Indicatori &amp; Paradigmi</div>
+                    <div class="t1-col-val">Rule-learning, task-switching, violazioni, esplorazione.</div>
+                  </div>
+                </div>
+                <div class="t1-row">
+                  <div class="t1-dim">II. Prospettiva di Ruolo Alterata</div>
+                  <div>
+                    <div class="t1-col-label">Manipolazione</div>
+                    <div class="t1-col-val">Identità dell'avatar, framing narrativo, assegnazione di ruolo.</div>
+                  </div>
+                  <div>
+                    <div class="t1-col-label">Indicatori &amp; Paradigmi</div>
+                    <div class="t1-col-val">Scale di identificazione, dilemmi morali, scelte coerenti col ruolo.</div>
+                  </div>
+                </div>
+                <div class="t1-row">
+                  <div class="t1-dim">III. Performance Orientata all'Obiettivo</div>
+                  <div>
+                    <div class="t1-col-label">Manipolazione</div>
+                    <div class="t1-col-val">Chiarezza dell'obiettivo, difficoltà, struttura delle ricompense.</div>
+                  </div>
+                  <div>
+                    <div class="t1-col-label">Indicatori &amp; Paradigmi</div>
+                    <div class="t1-col-val">Persistenza, tempi di reazione, accuratezza, ottimizzazione.</div>
+                  </div>
+                </div>
+                <div class="t1-row">
+                  <div class="t1-dim">IV. Monitoraggio Esecutivo Metacognitivo</div>
+                  <div>
+                    <div class="t1-col-label">Manipolazione</div>
+                    <div class="t1-col-val">Disponibilità di feedback, incertezza, carico cognitivo.</div>
+                  </div>
+                  <div>
+                    <div class="t1-col-label">Indicatori &amp; Paradigmi</div>
+                    <div class="t1-col-val">Error-monitoring, calibrazione della confidenza, think-aloud.</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- TAB 2: HYPOTHESES H1-H7 -->
+              <div class="exp-panel" id="expPanelHyp">
+                <div class="hyp-grid">
+                  <div class="hyp-card base">
+                    <span class="hyp-id">H1 &bull; BASELINE</span>
+                    <div class="hyp-text">Aumentare la <strong>chiarezza dell'obiettivo</strong> potenzia persistenza e performance.</div>
+                  </div>
+                  <div class="hyp-card base">
+                    <span class="hyp-id">H2 &bull; BASELINE</span>
+                    <div class="hyp-text">Manipolare la <strong>prospettiva di ruolo</strong> (avatar/framing) modifica i pattern decisionali.</div>
+                  </div>
+                  <div class="hyp-card sys">
+                    <span class="hyp-id">H3 &bull; INTERAZIONE</span>
+                    <div class="hyp-text">L'effetto della chiarezza dell'obiettivo è moderato dal <strong>monitoraggio metacognitivo</strong>.</div>
+                  </div>
+                  <div class="hyp-card sys">
+                    <span class="hyp-id">H4 &bull; INTERAZIONE</span>
+                    <div class="hyp-text">L'impatto del ruolo sulle decisioni si amplifica in <strong>contesti multi-agente</strong>.</div>
+                  </div>
+                  <div class="hyp-card sys">
+                    <span class="hyp-id">H5 &bull; INTERAZIONE</span>
+                    <div class="hyp-text">Regole più complesse riducono inizialmente la performance ma, con adeguata <strong>metacognizione</strong>, potenziano esplorazione e apprendimento.</div>
+                  </div>
+                  <div class="hyp-card sys">
+                    <span class="hyp-id">H6 &amp; H7 &bull; CONFIGURAZIONE</span>
+                    <div class="hyp-text">Pesi diversi generano profili distinti (H6); l'esperienza gameful ottimale nasce da una <strong>configurazione bilanciata</strong> delle 4 dimensioni (H7).</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================================
+             SLIDE — IL MANUALE: PSICOLOGIA DEL GIOCO (HOGREFE, 2026)
+             ========================================================== -->
+        <section class="slide title-left">
+          <div class="title-col">
+            <div class="title-topbar">
+              <div class="title-category"><span class="category-indicator"></span>IL MANUALE DI RIFERIMENTO</div>
+            </div>
+            <h2 class="main-title">PSICOLOGIA DEL GIOCO.</h2>
+            <p class="subtitle-text">
+              Il primo manuale di psicologia dedicato al gioco (<strong>Hogrefe Editore, 2026</strong>): 13 capitoli per ricomporre la frammentazione tra etologia, cognizione, neuroscienze, psicologia sociale e applicazioni.
+            </p>
+            <div class="note-pill">
+              <span><strong class="lens-tag">LENTE:</strong> Un manuale <strong>di</strong> psicologia, non solo <strong>per</strong> psicologi: rigoroso nelle basi, accessibile a chi progetta, educa e ricerca.</span>
+            </div>
+          </div>
+          <div class="glass-card-col">
+            <div class="card-inner-stage">
+              <div class="stage-header">
+                <div class="stage-kicker">A. MATTIASSI (A CURA DI) &bull; FONDAMENTI TEORICI E APPLICAZIONI</div>
+                <span class="stage-badge">Hogrefe Editore, 2026</span>
+              </div>
+              <div class="book-clean-stage">
+                <img src="assets/hogrefe_cover.jpg" alt="Psicologia del gioco — Hogrefe Editore" class="book-cover-clean" />
+                <div class="book-clean-meta">ISBN 979-12-81075-46-7 &bull; 13 Capitoli</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================================
+             SLIDE 12 — OUTRO / CHIUSURA & RIFERIMENTI
+             ========================================================== -->
+        <section class="slide outro-slide" data-slide="12">
+          <div class="outro-card">
+            <div class="outro-header">
+              <div>
+                <div class="outro-kicker-badge"><span class="kicker-dot"></span>CHIUSURA &bull; Q&amp;A APERTO</div>
+                <h2 class="outro-title">Un linguaggio comune per studiare il gioco.</h2>
+              </div>
+              <img src="assets/am_logo_glassmorphic.png" alt="Logo AM" style="width:68px; height:68px; object-fit:contain;" />
+            </div>
+
+            <div class="outro-grid">
+              <!-- LEFT: PAPER APA + CONTATTI + QR -->
+              <div class="outro-left-col">
+                <div class="paper-cite-box">
+                  <span class="paper-cite-kicker">RIFERIMENTO SCIENTIFICO PRIMARIO (APA 7TH)</span>
+                  <div class="paper-cite-apa">
+                    Mattiassi, A. D. A. (2026). Redefining the psychology of games: A unifying framework beyond play and gaming. <em>Canadian Journal of Experimental Psychology / Revue canadienne de psychologie expérimentale</em>. Advance online publication.
+                  </div>
+                  <a class="paper-cite-doi" href="https://doi.org/10.1037/cep0000413" target="_blank" rel="noopener noreferrer">
+                    https://doi.org/10.1037/cep0000413
+                  </a>
+                </div>
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.85rem;">
+                  <div style="background:#F8FAFC; border:1.5px solid #E2E8F0; border-radius:18px; padding:1rem 1.2rem;">
+                    <div style="font-family:'JetBrains Mono',monospace; font-size:0.7rem; font-weight:700; color:#64748B;">EMAIL</div>
+                    <div style="font-weight:700; font-size:0.94rem; color:#0F172A; margin-top:0.2rem;">alan.mattiassi@gmail.com</div>
+                  </div>
+                  <div style="background:#F8FAFC; border:1.5px solid #E2E8F0; border-radius:18px; padding:1rem 1.2rem;">
+                    <div style="font-family:'JetBrains Mono',monospace; font-size:0.7rem; font-weight:700; color:#64748B;">SITO WEB</div>
+                    <div style="font-weight:700; font-size:0.94rem; color:#0284C7; margin-top:0.2rem;">alanmattiassi.com</div>
+                  </div>
+                </div>
+
+                <div class="hub-bottom-row">
+                  <img src="assets/qr_website.png" alt="QR Sito Web" class="hub-qr-img" />
+                  <div>
+                    <div style="font-family:'Cabinet Grotesk',sans-serif; font-size:1.2rem; font-weight:800; color:#0F172A;">Paper, pubblicazioni &amp; risorse</div>
+                    <div style="font-size:0.88rem; color:#475569; line-height:1.45; margin-top:0.2rem;">
+                      Inquadra per accedere al sito personale, agli articoli scientifici e ai materiali divulgativi.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- RIGHT: MASTERCLASS CARD (RULE 5 COMPLIANT) -->
+              <div class="masterclass-card">
+                <div>
+                  <div class="mc-topbar">
+                    <div class="mc-badge"><span class="mc-badge-dot"></span><span>FORMAZIONE INTENSIVA IN PRESENZA</span></div>
+                    <span class="mc-capacity-pill">MAX 18 PARTECIPANTI</span>
+                  </div>
+                  <h3 class="mc-main-title">Masterclass in Psicologia del Gioco</h3>
+                  <p class="mc-subtitle">Capire e Progettare Ambienti, Scelte e Apprendimento Profondo</p>
+                </div>
+
+                <div class="mc-specs-grid">
+                  <div class="mc-spec-item">
+                    <span class="mc-spec-label">Quando e Dove</span>
+                    <span class="mc-spec-val">23–24 Gennaio 2027<br>Friuli (In presenza)</span>
+                  </div>
+                  <div class="mc-spec-item">
+                    <span class="mc-spec-label">Formula Didattica</span>
+                    <span class="mc-spec-val">Full Weekend (2 Giornate)<br>Sabato &amp; Domenica full-day</span>
+                  </div>
+                </div>
+
+                <div class="mc-syllabus-box">
+                  <div class="mc-day-line">
+                    <span class="day-tag">SABATO</span>
+                    <span><strong>Modelli neurocognitivi &amp; architettura delle scelte:</strong> processi decisionali e decodifica ecologica dei giochi.</span>
+                  </div>
+                  <div class="mc-day-line">
+                    <span class="day-tag">DOMENICA</span>
+                    <span><strong>Laboratorio intensivo di co-design 1-a-1:</strong> applicazione chirurgica e supervisione diretta sui progetti reali.</span>
+                  </div>
+                </div>
+
+                <div class="mc-footer-action">
+                  <img src="assets/qr_masterclass.png" alt="QR Masterclass" class="mc-qr-img" />
+                  <div>
+                    <div style="font-weight:800; font-size:0.98rem; color:#FFFFFF;">Programma completo &amp; candidature</div>
+                    <div style="font-size:0.84rem; color:#CBD5E1; margin-top:0.15rem;">Inquadra il QR per dettagli e iscrizioni</div>
+                    <span class="mc-url-code">alanmattiassi.com/masterclass-psicologia-del-gioco</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- NAVIGATION DOCK -->
+      <div class="deck-dock">
+        <button class="dock-btn" id="btnPrev" title="Precedente (←)">←</button>
+        <div class="dots-container" id="dotsContainer"></div>
+        <button class="dock-btn" id="btnNext" title="Successiva (→ o Spazio)">→</button>
+        <div class="dock-separator"></div>
+        <button class="dock-btn" id="btnFullscreen" title="Schermo Intero (F)">
+          <svg class="fs-icon-enter" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+          </svg>
+          <svg class="fs-icon-exit" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+            <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- RESPONSIVE 1920x1080 STAGE SCALING ---
+    function scaleStage() {
+      const stage = document.getElementById('slideStage');
+      const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+      stage.style.transform = `scale(${scale})`;
+    }
+    window.addEventListener('resize', scaleStage);
+    scaleStage();
+
+    // --- DECK NAVIGATION (CON SUPPORTO SUB-STEP PER SLIDE STORICHE) ---
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const dotsContainer = document.getElementById('dotsContainer');
+    const slideStepControllers = new Map();
+    let currentSlide = 0;
+
+    slides.forEach((_, idx) => {
+      const dot = document.createElement('div');
+      dot.className = 'dot' + (idx === 0 ? ' active' : '');
+      dot.addEventListener('click', () => goToSlide(idx, 'start'));
+      dotsContainer.appendChild(dot);
+    });
+    const dots = document.querySelectorAll('.dot');
+
+    function goToSlide(index, entry = 'start') {
+      if (index < 0 || index >= totalSlides) return;
+      slides[currentSlide].classList.remove('active');
+      dots[currentSlide].classList.remove('active');
+      currentSlide = index;
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+
+      const ctrl = slideStepControllers.get(slides[currentSlide]);
+      if (ctrl) {
+        ctrl.setStep(entry === 'end' ? ctrl.maxStep : 0, true);
+      }
+    }
+
+    function stepForward() {
+      const ctrl = slideStepControllers.get(slides[currentSlide]);
+      if (ctrl && ctrl.currentStep < ctrl.maxStep) {
+        ctrl.setStep(ctrl.currentStep + 1, false);
+        return;
+      }
+      goToSlide((currentSlide + 1) % totalSlides, 'start');
+    }
+
+    function stepBackward() {
+      const ctrl = slideStepControllers.get(slides[currentSlide]);
+      if (ctrl && ctrl.currentStep > 0) {
+        ctrl.setStep(ctrl.currentStep - 1, false);
+        return;
+      }
+      goToSlide((currentSlide - 1 + totalSlides) % totalSlides, 'end');
+    }
+
+    document.getElementById('heroTitleCard').addEventListener('click', () => goToSlide(1, 'start'));
+    document.getElementById('btnNext').addEventListener('click', stepForward);
+    document.getElementById('btnPrev').addEventListener('click', stepBackward);
+
+    const btnFullscreen = document.getElementById('btnFullscreen');
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {});
+      else document.exitFullscreen().catch(() => {});
+    }
+    btnFullscreen.addEventListener('click', toggleFullscreen);
+    document.addEventListener('fullscreenchange', () => {
+      const isFs = !!document.fullscreenElement;
+      document.querySelectorAll('.fs-icon-enter').forEach(el => el.style.display = isFs ? 'none' : 'block');
+      document.querySelectorAll('.fs-icon-exit').forEach(el => el.style.display = isFs ? 'block' : 'none');
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT') return;
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        stepForward();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        stepBackward();
+      } else if (e.key.toLowerCase() === 'f') {
+        toggleFullscreen();
+      }
+    });
+
+    // --- SLIDE 01: QUIZ ANALOGICO O DIGITALE ---
+    const quizCards = document.querySelectorAll('.quiz-card');
+    quizCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const t = card.dataset.type;
+        card.classList.toggle(t === 'analog' ? 'revealed-analog' : 'revealed-digital');
+      });
+    });
+    document.getElementById('quizRevealAll').addEventListener('click', () => {
+      quizCards.forEach(c => c.classList.add(c.dataset.type === 'analog' ? 'revealed-analog' : 'revealed-digital'));
+    });
+    document.getElementById('quizReset').addEventListener('click', () => {
+      quizCards.forEach(c => c.classList.remove('revealed-analog', 'revealed-digital'));
+    });
+
+    // --- SLIDES STORICHE: INTERATTIVITÀ AUTORI ---
+    const historyDetails = {
+      huizinga: {
+        title: 'JOHAN HUIZINGA.',
+        kicker: '1938 • CONTRIBUTO E LIMITE',
+        text: 'Colloca il gioco alle radici della cultura e ne evidenzia volontarietà e cornice separata. Tuttavia tratta un dominio amplissimo (<em>play</em>) senza isolare i processi psicologici specifici dei giochi regolati.'
+      },
+      piaget: {
+        title: 'JEAN PIAGET.',
+        kicker: '1945 / 1951 • CONTRIBUTO E LIMITE',
+        text: 'Interpreta il gioco come motore dello sviluppo cognitivo e della formazione dello schema simbolico (base della nostra Dimensione I), ma resta ancorato alla psicologia evolutiva infantile.'
+      },
+      bateson: {
+        title: 'GREGORY BATESON.',
+        kicker: '1955 • CONTRIBUTO E LIMITE',
+        text: 'Introduce il metamessaggio comunicativo («questo è un gioco») che distingue la lotta ritualizzata da quella reale, ma non formalizza la struttura regolativa e performativa dei <em>games</em>.'
+      },
+      caillois: {
+        title: 'ROGER CAILLOIS.',
+        kicker: '1958 • CONTRIBUTO E LIMITE',
+        text: 'Distingue il gioco spontaneo (<em>paidia</em>) da quello codificato (<em>ludus</em>) e classifica le spinte ludiche (inclusa l\'<em>alea</em>), ma propone una tassonomia sociologico-descrittiva, non un modello cognitivo.'
+      },
+      bruner: {
+        title: 'JEROME BRUNER.',
+        kicker: '1973 • CONTRIBUTO E LIMITE',
+        text: 'Legge il gioco come laboratorio di <em>meaning-making</em> e combinazione creativa di mezzi e fini nella crescita cognitiva, ancora dentro l\'orizzonte generale del <em>play</em>.'
+      },
+      vygotsky: {
+        title: 'LEV VYGOTSKIJ.',
+        kicker: '1934 / 1978 • CONTRIBUTO E LIMITE',
+        text: 'Mostra il valore sociale del gioco simbolico nello sviluppo delle funzioni superiori e dell\'autoregolazione tramite regole immaginarie, senza però costruire una teoria sperimentale trasversale dei <em>games</em>.'
+      },
+      csikszentmihalyi: {
+        title: 'MIHÁLY CSÍKSZENTMIHÁLYI.',
+        kicker: '1990 • CONTRIBUTO E LIMITE',
+        text: 'Spiega mirabilmente lo stato fenomenologico ottimale spesso associato al gioco, ma il <em>flow</em> non è esclusivo dei giochi né sempre presente: descrive uno stato, non l\'architettura funzionale del giocare.'
+      },
+      burghardt: {
+        title: 'GORDON M. BURGHARDT.',
+        kicker: '2005 / 2010 • CAMBIO DI PARADIGMA',
+        text: 'L\'etologia ribalta lo stereotipo: il gioco precede l\'essere umano e nasce per creare apprendimento <em>safe</em> (a basso rischio vitale) prima ancora del divertimento. I <em>games</em> ereditano questa funzione biologica.'
+      },
+      sdt: {
+        title: 'DECI & RYAN / BANDURA.',
+        kicker: '1977 / 2000 • CONTRIBUTO E LIMITE',
+        text: 'Spiegano perché i giochi motivano (autonomia, competenza, autoefficacia), ma operano a livello motivazionale: sono complementari a un\'architettura dei processi costitutivi del gioco.'
+      },
+      panksepp: {
+        title: 'JAAK PANKSEPP.',
+        kicker: '1998 • NEUROSCIENZE AFFETTIVE',
+        text: 'Individua nei mammiferi un sistema neurale subcorticale primario dedicato al <em>PLAY</em>, confermando il radicamento biologico del fenomeno — ma resta sul piano del <em>play</em>, non ancora del <em>game</em> codificato.'
+      },
+      kahneman: {
+        title: 'DANIEL KAHNEMAN.',
+        kicker: '2011 • DUAL PROCESS THEORY',
+        text: 'Il game design modula continuamente l\'alternanza tra Sistema 1 (intuitivo, rapido) e Sistema 2 (deliberato, faticoso), aprendo il dialogo tra psicologia del pensiero e studio dei giochi.'
+      },
+      svolta: {
+        title: 'SUITS → LANDERS → NGUYEN.',
+        kicker: '1978 – 2025 • LA SVOLTA VERSO I GAMES',
+        text: 'Gli <strong>obiettivi lusori</strong> (Suits), il costrutto esperienziale di <strong>gamefulness</strong> (McGonigal, Landers) e l\'<strong>agency</strong> (Nguyen) forniscono i mattoni concettuali per un framework psicologico unificato dei <em>games</em>.'
+      }
+    };
+
+    function bindHistoryGrid(gridId, titleId, subtitleId) {
+      const grid = document.getElementById(gridId);
+      const titleEl = document.getElementById(titleId);
+      const subtitleEl = document.getElementById(subtitleId);
+      if (!grid || !titleEl || !subtitleEl) return;
+      const slideEl = grid.closest('.slide');
+      const defaultTitle = titleEl.innerHTML;
+      const defaultHtml = subtitleEl.innerHTML;
+      const cards = Array.from(grid.querySelectorAll('.author-card'));
+      let animTimer = null;
+
+      const controller = {
+        currentStep: 0,
+        maxStep: cards.length,
+        setStep(step, immediate) {
+          const clamped = Math.max(0, Math.min(cards.length, step));
+          controller.currentStep = clamped;
+          cards.forEach((c, idx) => c.classList.toggle('selected', idx === clamped - 1));
+
+          const targetTitle = clamped === 0 ? defaultTitle : historyDetails[cards[clamped - 1].dataset.hist].title;
+          const targetHtml = clamped === 0
+            ? defaultHtml
+            : `<span class="author-inline-kicker">${historyDetails[cards[clamped - 1].dataset.hist].kicker}</span><br>${historyDetails[cards[clamped - 1].dataset.hist].text}`;
+
+          clearTimeout(animTimer);
+          if (immediate) {
+            titleEl.classList.remove('is-updating');
+            subtitleEl.classList.remove('is-updating');
+            titleEl.innerHTML = targetTitle;
+            subtitleEl.innerHTML = targetHtml;
+          } else {
+            titleEl.classList.add('is-updating');
+            subtitleEl.classList.add('is-updating');
+            animTimer = setTimeout(() => {
+              titleEl.innerHTML = targetTitle;
+              subtitleEl.innerHTML = targetHtml;
+              titleEl.classList.remove('is-updating');
+              subtitleEl.classList.remove('is-updating');
+            }, 110);
+          }
+        }
+      };
+
+      if (slideEl) {
+        slideStepControllers.set(slideEl, controller);
+      }
+
+      cards.forEach((card, idx) => {
+        card.addEventListener('click', () => {
+          const targetStep = controller.currentStep === idx + 1 ? 0 : idx + 1;
+          controller.setStep(targetStep, false);
+        });
+      });
+    }
+    bindHistoryGrid('historyGridClassic', 'historyTitleClassic', 'historySubtitleClassic');
+    bindHistoryGrid('historyGridModern', 'historyTitleModern', 'historySubtitleModern');
+
+    // --- SLIDE 02: CONCENTRIC RINGS ---
+    const scopeData = {
+      play: {
+        title: '🌐 PLAY — Dominio troppo ampio',
+        desc: 'Studiato dalla psicologia dello sviluppo (Piaget, 1951; Vygotsky, 1978; Bruner, 1973; Bateson, 1955; Csíkszentmihályi, 1990). Ricchissimo, ma privo di confini operativi per isolare le meccaniche specifiche dei giochi.'
+      },
+      games: {
+        title: '🎯 GAMES & GAMEFULNESS — Il livello mancante',
+        desc: 'Coinvolgimento focalizzato e orientato a un obiettivo (Landers et al., 2019; McGonigal, 2015). Consente di descrivere i giochi come sistemi psicologici trasversali a board game, GDR, sport e videogiochi.'
+      },
+      gaming: {
+        title: '🎮 GAMING — Dominio troppo ristretto',
+        desc: 'Dominio della media psychology focalizzato sul supporto digitale e sull\'investimento del giocatore (Kowert, 2014; King et al., 2019; Kuss & Griffiths, 2012). Taglia fuori i giochi analogici e non generalizza.'
+      }
+    };
+    const rings = document.querySelectorAll('.ring');
+    const scopeInfoBox = document.getElementById('scopeInfoBox');
+    rings.forEach(r => {
+      r.addEventListener('click', (e) => {
+        e.stopPropagation();
+        rings.forEach(el => el.classList.remove('selected'));
+        r.classList.add('selected');
+        const d = scopeData[r.dataset.scope];
+        scopeInfoBox.innerHTML = `<div class="scope-info-title">${d.title}</div><div class="scope-info-desc">${d.desc}</div>`;
+      });
+    });
+
+    // --- SLIDE 03: AUTONOMIA VS AGENCY ---
+    const autonomySlider = document.getElementById('autonomySlider');
+    const autonomyValTag = document.getElementById('autonomyValTag');
+    const agencyValTag = document.getElementById('agencyValTag');
+    const btnAgencyLow = document.getElementById('btnAgencyLow');
+    const btnAgencyHigh = document.getElementById('btnAgencyHigh');
+    const dualLabReadout = document.getElementById('dualLabReadout');
+    const dualLabStatus = document.getElementById('dualLabStatus');
+    let agencyHigh = true;
+
+    function updateDualLab() {
+      const val = parseInt(autonomySlider.value, 10);
+      autonomyValTag.textContent = val < 40 ? `Bassa (${val}%)` : (val < 75 ? `Media (${val}%)` : `Alta (${val}%)`);
+      agencyValTag.textContent = agencyHigh ? 'SOPRA SOGLIA' : 'SOTTO SOGLIA';
+
+      if (!agencyHigh) {
+        dualLabReadout.innerHTML = '<strong>Soglia di agency non raggiunta:</strong> anche con alta libertà formale, senza capacità di incidere intenzionalmente sull\'esito l\'esperienza non è percepita come un gioco (es. <em>Gioco dell\'Oca</em>).';
+        dualLabStatus.textContent = 'NON È UN GIOCO';
+        dualLabStatus.classList.add('off');
+      } else if (val < 40) {
+        dualLabReadout.innerHTML = '<strong>Gioco in contesto obbligatorio:</strong> la natura autotelica regge comunque il gioco (es. uso didattico in aula), ma la ridotta autonomia modula negativamente motivazione intrinseca e coinvolgimento (Rodríguez-Aflecht et al., 2017).';
+        dualLabStatus.textContent = 'GIOCO (MOTIVAZIONE RIDOTTA)';
+        dualLabStatus.classList.remove('off');
+      } else {
+        dualLabReadout.innerHTML = '<strong>Esperienza gameful piena:</strong> agency sopra soglia e autonomia sostenuta alimentano motivazione intrinseca, senso di padronanza e apprendimento sicuro (Gursesli et al., 2024).';
+        dualLabStatus.textContent = 'GIOCO PERCEPITO';
+        dualLabStatus.classList.remove('off');
+      }
+    }
+    autonomySlider.addEventListener('input', updateDualLab);
+    btnAgencyLow.addEventListener('click', () => {
+      agencyHigh = false;
+      btnAgencyLow.classList.add('active-low');
+      btnAgencyHigh.classList.remove('active-high');
+      updateDualLab();
+    });
+    btnAgencyHigh.addEventListener('click', () => {
+      agencyHigh = true;
+      btnAgencyHigh.classList.add('active-high');
+      btnAgencyLow.classList.remove('active-low');
+      updateDualLab();
+    });
+
+    // --- SLIDE 04: 4 NODES SYSTEM (SUB-STEP + TITOLO/SOTTOTITOLO DINAMICI) ---
+    const sysDetails = [
+      {
+        title: 'CORNICE SIMBOLICA REGOLATA.',
+        kicker: 'DIMENSIONE I • REGULATED SYMBOLIC FRAMING',
+        text: 'Istituisce uno spazio vincolato di possibilità e significati condivisi, abilitando l\'assunzione di ruolo e fissando i criteri su cui si orientano performance e monitoraggio.'
+      },
+      {
+        title: 'PROSPETTIVA DI RUOLO ALTERATA.',
+        kicker: 'DIMENSIONE II • ALTERED ROLE PERSPECTIVE',
+        text: 'Definisce il punto di vista e l\'agency del giocatore dentro la cornice simbolica, generando obiettivi specifici che richiedono monitoraggio tra identità in-game e out-of-game.'
+      },
+      {
+        title: 'PERFORMANCE ORIENTATA ALL\'OBIETTIVO.',
+        kicker: 'DIMENSIONE III • GOAL-ORGANIZED PERFORMANCE',
+        text: 'Coordina scelte strategiche, sforzo cognitivo ed emotivo verso l\'obiettivo lusorio, producendo feedback continuo sulle proprie azioni.'
+      },
+      {
+        title: 'MONITORAGGIO ESECUTIVO METACOGNITIVO.',
+        kicker: 'DIMENSIONE IV • METACOGNITIVE EXECUTIVE MONITORING',
+        text: 'Valuta le discrepanze tra esito atteso e reale, inibisce gli script relazionali esterni e raffina continuamente l\'azione futura nel ciclo di gioco.'
+      }
+    ];
+    (function initSysNodesSteps() {
+      const grid = document.getElementById('sysNodes');
+      const titleEl = document.getElementById('sysTitle');
+      const subtitleEl = document.getElementById('sysSubtitle');
+      if (!grid || !titleEl || !subtitleEl) return;
+      const slideEl = grid.closest('.slide');
+      const defaultTitle = titleEl.innerHTML;
+      const defaultHtml = subtitleEl.innerHTML;
+      const nodes = Array.from(grid.querySelectorAll('.sys-node'));
+      let animTimer = null;
+
+      const controller = {
+        currentStep: 0,
+        maxStep: nodes.length,
+        setStep(step, immediate) {
+          const clamped = Math.max(0, Math.min(nodes.length, step));
+          controller.currentStep = clamped;
+          nodes.forEach((n, idx) => n.classList.toggle('active', idx === clamped - 1));
+
+          const targetTitle = clamped === 0 ? defaultTitle : sysDetails[clamped - 1].title;
+          const targetHtml = clamped === 0
+            ? defaultHtml
+            : `<span class="author-inline-kicker">${sysDetails[clamped - 1].kicker}</span><br>${sysDetails[clamped - 1].text}`;
+
+          clearTimeout(animTimer);
+          if (immediate) {
+            titleEl.classList.remove('is-updating');
+            subtitleEl.classList.remove('is-updating');
+            titleEl.innerHTML = targetTitle;
+            subtitleEl.innerHTML = targetHtml;
+          } else {
+            titleEl.classList.add('is-updating');
+            subtitleEl.classList.add('is-updating');
+            animTimer = setTimeout(() => {
+              titleEl.innerHTML = targetTitle;
+              subtitleEl.innerHTML = targetHtml;
+              titleEl.classList.remove('is-updating');
+              subtitleEl.classList.remove('is-updating');
+            }, 110);
+          }
+        }
+      };
+
+      if (slideEl) {
+        slideStepControllers.set(slideEl, controller);
+      }
+
+      nodes.forEach((node, idx) => {
+        node.addEventListener('click', () => {
+          const targetStep = controller.currentStep === idx + 1 ? 0 : idx + 1;
+          controller.setStep(targetStep, false);
+        });
+      });
+    })();
+
+    // --- SLIDE 09: STRESS TEST ON/OFF ---
+    const stressState = { framing: true, role: true, goal: true, meta: true };
+    const stressToggles = document.querySelectorAll('.dim-toggle');
+    const stressCard = document.getElementById('stressResultCard');
+    const stressKicker = document.getElementById('stressKicker');
+    const stressTitle = document.getElementById('stressTitle');
+    const stressDesc = document.getElementById('stressDesc');
+
+    function updateStressView() {
+      const offKeys = Object.keys(stressState).filter(k => !stressState[k]);
+      if (offKeys.length === 0) {
+        stressCard.classList.remove('collapsed');
+        stressKicker.textContent = 'CONFIGURAZIONE COMPLETA (4/4 ATTIVE)';
+        stressTitle.textContent = 'Sistema Gameful Auto-Sostenuto';
+        stressDesc.textContent = 'I vincoli simbolici abilitano l\'agency di ruolo; l\'agency orienta la performance verso l\'obiettivo; la performance genera feedback integrato dal monitoraggio metacognitivo.';
+      } else if (offKeys.length > 1) {
+        stressCard.classList.add('collapsed');
+        stressKicker.textContent = `COLLASSO MULTIPLO (${4 - offKeys.length}/4 ATTIVE)`;
+        stressTitle.textContent = 'Esperienza Non-Gameful';
+        stressDesc.textContent = 'Venendo meno più condizioni minime necessarie contemporaneamente, il sistema psicologico del gioco si dissolve del tutto.';
+      } else {
+        stressCard.classList.add('collapsed');
+        const missing = offKeys[0];
+        if (missing === 'framing') {
+          stressKicker.textContent = 'SENZA CORNICE SIMBOLICA REGOLATA';
+          stressTitle.textContent = 'Gioco Libero (Free Play) / Arte Espressiva';
+          stressDesc.textContent = 'Senza vincoli condivisi l\'esperienza diventa non regolata o priva di criteri formali di successo: restiamo nel play aperto o nell\'espressione arbitraria.';
+        } else if (missing === 'role') {
+          stressKicker.textContent = 'SENZA PROSPETTIVA DI RUOLO ALTERATA';
+          stressTitle.textContent = 'Mondo Reale Non Protetto';
+          stressDesc.textContent = 'Senza decentramento di ruolo, l\'azione impatta direttamente la realtà out-of-game in cui risiede il Sé inalterato: come in guerra, politica o corteggiamento.';
+        } else if (missing === 'goal') {
+          stressKicker.textContent = 'SENZA PERFORMANCE ORIENTATA ALL\'OBIETTIVO';
+          stressTitle.textContent = 'Attività Passiva (es. Gioco dell\'Oca / Puzzle singolo)';
+          stressDesc.textContent = 'Collassano intenzionalità e spazio di scelta performativa. Un puzzle singolo diventa gameful solo se sfidi un avversario con due set identici a completarlo per primo.';
+        } else if (missing === 'meta') {
+          stressKicker.textContent = 'SENZA MONITORAGGIO ESECUTIVO METACOGNITIVO';
+          stressTitle.textContent = 'Caos e Condotta Disorganizzata';
+          stressDesc.textContent = 'Falliscono l\'integrazione del feedback, l\'autoregolazione e l\'inibizione degli script relazionali esterni: il comportamento diventa incoerente.';
+        }
+      }
+    }
+
+    stressToggles.forEach(t => {
+      t.addEventListener('click', () => {
+        const k = t.dataset.key;
+        stressState[k] = !stressState[k];
+        t.classList.toggle('is-off', !stressState[k]);
+        updateStressView();
+      });
+    });
+
+    document.getElementById('stressResetBtn').addEventListener('click', () => {
+      Object.keys(stressState).forEach(k => stressState[k] = true);
+      stressToggles.forEach(t => t.classList.remove('is-off'));
+      updateStressView();
+    });
+
+    // --- SLIDE 10: DIMENSIONAL WEIGHTING RADAR + BARS ---
+    const presets = {
+      chess: {
+        vals: [50, 45, 100, 100],
+        note: '<strong>Giochi astratti / rule-intensive (Scacchi, Go):</strong> massima salienza su controllo esecutivo e performance (<em>systems thinking</em>, riconoscimento di pattern, ragionamento astratto).'
+      },
+      dnd: {
+        vals: [75, 100, 30, 65],
+        note: '<strong>Giochi narrativi e di ruolo (D&amp;D, TTRPG):</strong> picco sulla prospettiva di ruolo alterata (immersione, mentalizzazione, empatia e co-costruzione di significati).'
+      },
+      action: {
+        vals: [70, 55, 95, 100],
+        note: '<strong>Videogiochi competitivi / action:</strong> forte enfasi su performance orientata all\'obiettivo e monitoraggio online sotto pressione temporale (ottimizzazione, inibizione, tempi di reazione).'
+      },
+      dixit: {
+        vals: [100, 30, 30, 70],
+        note: '<strong>Dixit (associativo / simbolico):</strong> massima salienza sulla cornice simbolica regolata e mentalizzazione degli altri giocatori (risignificazione metaforica, calibrazione dell\'indizio, Theory of Mind), con bassa pressione performativa.'
+      }
+    };
+
+    function applyWeightPreset(key) {
+      const p = presets[key];
+      const [f, r, g, m] = p.vals;
+      document.getElementById('valFraming').textContent = f + '%';
+      document.getElementById('valRole').textContent = r + '%';
+      document.getElementById('valGoal').textContent = g + '%';
+      document.getElementById('valMeta').textContent = m + '%';
+      document.getElementById('barFraming').style.width = f + '%';
+      document.getElementById('barRole').style.width = r + '%';
+      document.getElementById('barGoal').style.width = g + '%';
+      document.getElementById('barMeta').style.width = m + '%';
+      document.getElementById('weightNote').innerHTML = p.note;
+
+      // Update SVG Radar Polygon (center 180,180, radius 135)
+      const cx = 180, cy = 180, R = 135;
+      const topY = cy - (f / 100) * R;
+      const rightX = cx + (r / 100) * R;
+      const botY = cy + (g / 100) * R;
+      const leftX = cx - (m / 100) * R;
+      document.getElementById('radarPoly').setAttribute('points', `${cx},${topY.toFixed(1)} ${rightX.toFixed(1)},${cy} ${cx},${botY.toFixed(1)} ${leftX.toFixed(1)},${cy}`);
+    }
+
+    const presetBtns = document.querySelectorAll('#weightPresets .mini-btn');
+    presetBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        presetBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        applyWeightPreset(btn.dataset.preset);
+      });
+    });
+    applyWeightPreset('chess');
+
+    // --- SLIDE 11: EXPERIMENT TABS ---
+    const expTabBtns = document.querySelectorAll('[data-exptab]');
+    expTabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        expTabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const target = btn.dataset.exptab;
+        document.getElementById('expPanelTable1').classList.toggle('active', target === 'table1');
+        document.getElementById('expPanelHyp').classList.toggle('active', target === 'hyp');
+      });
+    });
+  </script>
+</body>
+</html>

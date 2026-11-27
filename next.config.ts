@@ -31,6 +31,14 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async rewrites() {
+    return [
+      {
+        source: "/aias",
+        destination: "/aias/index.html",
+      },
+    ];
+  },
 };
 
 export default nextConfig;
